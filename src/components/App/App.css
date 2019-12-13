@@ -1,3 +1,24 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant|Playfair+Display+SC&display=swap');
+
+:root {
+  --font-main: 'Cormorant', serif;
+  --font-title: 'Playfair Display SC', serif;
+}
+
 body {
   height: 200vh;
+  background-color: black;
+}
+
+.sec-info {
+  min-height: 512px;
+  width: 100vw;
+  background-color: burlywood;
+  margin: 64px 0;
+  padding: 
+}
+
+h1 {
+  font-family: var(--font-title);
+  font-weight: normal;
 }

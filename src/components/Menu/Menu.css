@@ -1,12 +1,17 @@
 header {
-  background-color: brown;
+  background-color: rgba(165, 42, 42, .7);
   line-height: 64px;
   height: 64px;
   width: 100vw;
   position: fixed;
   top: 0;
   left: 0; 
+  padding-left: 16px;
+  z-index: 10;
+  backdrop-filter: blur(16px);
+  font-family: var(--font-title);
 }
+
 nav ul {
   list-style: none;
   margin: 0;
