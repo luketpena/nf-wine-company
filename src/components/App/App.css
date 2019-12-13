@@ -10,15 +10,23 @@ body {
   background-color: black;
 }
 
-.sec-info {
+.sec-default {
   min-height: 512px;
-  width: 100vw;
-  background-color: burlywood;
-  margin: 64px 0;
-  padding: 
+  background-color: white;
+  padding: 16px 10%;
 }
 
-h1 {
+h1, h2 {
   font-family: var(--font-title);
   font-weight: normal;
+  text-align: center;
+}
+
+.divider {
+  border-bottom: 2px dashed #CCC;
+}
+
+p {
+  font-family: var(--font-main);
+  text-indent: 32px;
 }
