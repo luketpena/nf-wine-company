@@ -1,0 +1,136 @@
+.managerBox {
+  height: 100vh;
+  width: 100%;
+  background-color: rgb(248, 245, 238);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.section-box {
+  background-color: white;
+  box-shadow: 0 4px 8px -2px rgba(0,0,0,.5);
+  padding: 16px 10%;
+  margin: 16px 16px;}
+
+.managerApp {
+  position: relative;
+  width: 100%;
+}
+
+#newEventBox {
+  background-color: white;
+  display: grid;
+  grid-template-areas: "upload form";
+  grid-template-columns: 272px 1fr;
+  align-items: center;
+}
+
+#eventLandingBox {
+  min-width: 320px;
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+#imageUpload {
+  background: #EEE;
+  width: 256px;
+  height: 256px;
+  grid-area: upload;
+}
+
+#eventInputBox {
+  grid-area: form;
+}
+
+.eventWidget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 2px dotted #EEE;
+}
+
+.eventWidget ul {
+  padding: 0;
+}
+
+.eventWidget li {
+  display: inline;
+  margin-right: 32px;
+  font-weight: bold;
+}
+
+.eventWidget p {
+  font-style: italic;
+}
+
+.eventWidget button {
+  margin-right: 4px;
+}
+
+.eventWidget-img {
+  width: 64px;
+  height: 64px;
+  background-color: #EEE;
+  margin-right: 32px;
+}
+
+.btn-back {
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+#in-eventName {
+  display: block;
+  width: 100%;
+  background: none;
+  border: none;
+  border-bottom: 1px solid black;
+  outline: none;
+}
+
+#in-description {
+  display: block;
+  width: 100%;
+  height: 256px;
+  resize: none;
+}
+
+/* Main Manager Menu */
+.managerMenuBox {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;}
+.managerMenuItem {
+  width: 256px;
+  height: 256px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--col-primary);
+  background-color: rgba(255,255,255,.2);
+  transition: all .2s;
+  box-shadow: 0 0 0px -2px rgba(0,0,0,0);}
+.managerMenuItem:hover {
+  background-color: rgba(255,255,255,.8);
+  box-shadow: 0 16px 16px -16px rgba(0,0,0,.5);
+  color: var(--col-primary-light);
+  cursor: pointer;}
+
+
+
+.manager-button {
+  background: none;
+  background-color: var(--col-primary);
+  border: 1px solid var(--col-primary);
+  border-radius: 4px;
+  padding: 8px 16px;
+  color: white;
+  transition: all .2s;
+  font-size: 16px;
+  box-shadow: 0 4px 4px -2px rgba(0,0,0,.5);}
+.manager-button:hover {
+  background-color: var(--col-primary-light);
+  box-shadow: 0 10px 8px -4px rgba(0,0,0,.3);
+  cursor: pointer;}

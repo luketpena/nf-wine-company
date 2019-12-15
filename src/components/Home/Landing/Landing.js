@@ -1,6 +1,5 @@
 import React, {Component} from 'react';
 import './Landing.css';
-import { Parallax, Background } from 'react-parallax';
 
 class Landing extends Component {
   render() {

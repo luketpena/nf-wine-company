@@ -3,10 +3,11 @@
 :root {
   --font-main: 'Cormorant', serif;
   --font-title: 'Playfair Display SC', serif;
+  --col-primary: brown;
+  --col-primary-light: hsl(0, 65%, 50%);
 }
 
 body {
-  height: 200vh;
   background-color: black;
 }
 
@@ -29,4 +30,9 @@ h1, h2 {
 p {
   font-family: var(--font-main);
   text-indent: 32px;
+}
+
+.center-block {
+  display: block;
+  margin: 0 auto;
 }

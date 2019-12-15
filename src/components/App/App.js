@@ -1,13 +1,21 @@
 import React from 'react';
 import './App.css';
-import Menu from '../Menu/Menu';
-import Home from '../Home/Home';
+import Manager from '../Manager/Manager';
+
+import { HashRouter as Router, Route} from 'react-router-dom';
+import { Switch } from 'react-router';
 
 function App() {
   return (
     <div>
-      <Menu />
-      <Home />
+      <Router>
+        <Switch>
+          <Route path="/manager" component={Manager}/>
+        </Switch>
+        
+
+      </Router>
+      
     </div>
   );
 }
