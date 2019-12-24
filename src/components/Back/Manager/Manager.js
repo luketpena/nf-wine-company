@@ -5,8 +5,9 @@ import {Route} from 'react-router-dom';
 
 //>> Importing Page Components <<\\
 import ManagerMenu from './ManagerMenu';
-import ManagerEvents from './ManagerEvents';
-import EventNew from './EventNew';
+import ManagerEvents from './0-Events/ManagerEvents';
+import EventNew from './0-Events/EventNew';
+import ProducerNew from './2-Producers/ProducerNew';
 
 class Manager extends Component {
   render () {
@@ -16,6 +17,9 @@ class Manager extends Component {
             <Route exact path="/manager" component={ManagerMenu}/>
             <Route exact path="/manager/events" component={ManagerEvents}/>
             <Route exact path="/manager/events/new" component={EventNew} />
+
+            <Route exact path="/manager/producers/new" component={ProducerNew} />
+
           </Switch>
       </div>
     )

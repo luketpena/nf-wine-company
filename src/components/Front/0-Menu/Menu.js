@@ -9,9 +9,9 @@ class Menu extends Component {
           <ul>
             <li>NF</li>
             <li>About</li>
+            <li>Events</li>
             <li>Suppliers</li>
             <li>Producer</li>
-            <li>Events</li>
             <li>Contact</li>
           </ul>
         </nav>

@@ -1,16 +1,16 @@
 .sec-landing {
   height: 100vh;
   width: 100vw;
-  background: url('../../../images/background.jpg');
+  background: url('background.jpg');
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
   display: flex;
   align-items: center;
   text-align: center;
-
 }
 
+/* The titleBox holds the title text and sub text */
 .titleBox {
   width: 100vw;
   text-align: center;
