@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
-import Axios from 'axios';
+import axios from 'axios';
 import EventWidget from './EventWidget';
 
 class EventLanding extends Component {
@@ -17,13 +17,23 @@ class EventLanding extends Component {
     console.log(dateEvent>dateNow);
     
   }
-  //Get all of the events from the database
+  //Server routes for events
   getEvents = ()=> {
-    Axios.get('/events').then(response=>{   
+    axios.get('/events').then(response=>{   
       this.storeEvents(response.data)
     }).catch(error=>{
       console.log(error);      
     });
+  }
+  deleteEvent = (id)=> {
+    let q = window.confirm('Do you want to remove this event?');
+    if (q) {
+      axios.delete('events/'+id).then(response=>{
+        this.getEvents();
+      }).catch(error=>{
+        console.log('Error routing event delete request:',error);      
+      })
+    }
   }
   //Push those events into the state
   storeEvents = (array)=> {
@@ -31,7 +41,6 @@ class EventLanding extends Component {
       events: [...array]
     })
   }
-  
   //Render all upcoming events in state to the DOM
   renderUpcomingEvents = ()=> {
     console.log(this.state.events);
@@ -59,7 +68,7 @@ class EventLanding extends Component {
       let eventDate = new Date(event.date)
       //...and only render if it is ahead of today
       if (eventDate<dateNow) {
-        return <EventWidget key={event.id} event={event} />
+        return <EventWidget key={event.id} event={event} deleteEvent={this.deleteEvent}/>
       }
       return false;
     });

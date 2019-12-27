@@ -47,9 +47,11 @@ p {
 }
 
 .button-primary, .button-secondary, .button-default {
+  height: 40px;
   background: none;
   border: none;
   border-radius: 8px;
+  outline: none;
   padding: 8px 16px;
   color: white;
   transition: all .2s;

@@ -1,7 +1,8 @@
 import React, {Component} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
-import Axios from 'axios';
+import axios from 'axios';
 import { withRouter } from 'react-router-dom';
+import {connect} from 'react-redux';
 
 class EventNew extends Component {
 
@@ -9,8 +10,8 @@ class EventNew extends Component {
     name: '',
     description: '',
     img: '',
-    country: '',
-    region: '',
+    country: 'Select a country',
+    region: 'Select a region',
     website: ''
   }
 
@@ -20,13 +21,21 @@ class EventNew extends Component {
     });
   }
 
+  updateCountry = (event,prop)=> {
+    this.handleChange(event,prop);
+    this.props.dispatch({type: 'GET_REGIONS', payload: event.target.value});
+    this.setState({
+      region: 'Select a region'
+    })
+  }
+
   handleSubmit = (event)=> {
     //Set up
     event.preventDefault();
     let newEvent = this.state;
 
     //Making a post request to the server
-    Axios.post('/events',newEvent).then(response=>{
+    axios.post('/events',newEvent).then(response=>{
       alert('Event created!');
       this.returnToEventLanding();
     }).catch(error=>{
@@ -34,6 +43,20 @@ class EventNew extends Component {
       console.log(error);
       
     })
+  }
+
+  populateCountrySelect = ()=> {
+    let list = this.props.countries.map( (country,i)=> {
+      return <option key={i}>{country.name}</option>
+    })
+    return list;
+  }
+
+  populateRegionSelect = ()=> {
+    let list = this.props.regions.map( (region,i)=> {
+      return <option key={i}>{region.name}</option>
+    })
+    return list;
   }
 
   returnToEventLanding = ()=> {
@@ -51,26 +74,13 @@ class EventNew extends Component {
   }
 
   componentDidMount () {
-    Axios({
-      "method":"GET",
-      "url":"https://wft-geo-db.p.rapidapi.com/v1/geo/countries/FR/regions",
-      "headers":{
-      "content-type":"application/octet-stream",
-      "x-rapidapi-host":"wft-geo-db.p.rapidapi.com",
-      "x-rapidapi-key":"1404608969msh64ce4d6ea908ecfp106397jsn8b9c3677b40e"
-      }
-      })
-      .then((response)=>{
-        console.log(response)
-      })
-      .catch((error)=>{
-        console.log(error)
-      })
+    this.props.dispatch({type: 'GET_COUNTRIES'})
   }
 
   render () {
     return (
       <div>
+        {JSON.stringify(this.props.regions)}
         <h2>Add New Producer</h2>
         <TravelButton target="/manager/events" text="Back" propClass="manager-button"/>
         <div id="newEventBox">
@@ -80,11 +90,17 @@ class EventNew extends Component {
             <input required id="in-producerName" type="text" placeholder="Producer Name" value={this.state.name} onChange={(event)=>this.handleChange(event,'name')}></input>
             <label>
               Country:
-              <input required type="date" value={this.state.date} onChange={(event)=>this.handleChange(event,'date')}></input>
+              <select onChange={(event)=>this.updateCountry(event,'country')} value={this.state.country}>
+                <option disabled>Select a country</option>
+                {this.populateCountrySelect()}
+              </select>
             </label>
             <label>
-              Time:
-              <input required type="time" value={this.state.time} onChange={(event)=>this.handleChange(event,'time')}></input>
+              Region:
+              <select onChange={(event)=>this.handleChange(event,'region')} value={this.state.region}>
+                <option disabled>Select a region</option>
+                {this.populateRegionSelect()}
+              </select>
             </label>
             <label>
               Admission price:
@@ -102,4 +118,7 @@ class EventNew extends Component {
   }
 }
 
-export default withRouter(EventNew);
+export default withRouter(connect(reduxState=>({
+  countries: reduxState.placesReducer.countries,
+  regions: reduxState.placesReducer.regions
+}))(EventNew));

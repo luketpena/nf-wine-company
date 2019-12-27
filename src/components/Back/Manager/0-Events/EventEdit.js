@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
-import Axios from 'axios';
+import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 
-class EventNew extends Component {
+class EventEdit extends Component {
 
   state = {
     name: '',
@@ -11,7 +11,7 @@ class EventNew extends Component {
     img: '',
     date: '',
     time: '',
-    price: '0'
+    price: ''
   }
 
   handleChange = (event,prop)=> {
@@ -26,13 +26,12 @@ class EventNew extends Component {
     let newEvent = this.state;
 
     //Making a post request to the server
-    Axios.post('/events',newEvent).then(response=>{
+    axios.post('/events',newEvent).then(response=>{
       alert('Event created!');
       this.returnToEventLanding();
     }).catch(error=>{
       alert('Unable to create an event right now. Try again later.')
       console.log(error);
-      
     })
   }
 
@@ -53,38 +52,35 @@ class EventNew extends Component {
   render () {
     return (
       <div>
-
-        <div className="inputTitle">
-          <TravelButton target="/manager/events" text="Back" propClass="button-default"/>
-          <h2>Create New Event</h2>
-        </div> 
-
-        <form className="inputBox" onSubmit={this.handleSubmit}>
-          <div className="in-image"></div>
-          <input required className="in-name" type="text" placeholder="Event Name" value={this.state.name} onChange={(event)=>this.handleChange(event,'name')}></input>
-          <div className="inputLine">
+        <h2>Edit Event</h2>
+        <TravelButton target="/manager/events" text="Back" propClass="button-default"/>
+        <div id="newEventBox">
+          
+          <div id="imageUpload"></div>
+          <form id="eventInputBox" onSubmit={this.handleSubmit}>
+            <input required id="in-eventName" type="text" placeholder="Event Name" value={this.state.name} onChange={(event)=>this.handleChange(event,'name')}></input>
             <label>
-              <span className="inputName">Date:</span>
+              Date:
               <input required type="date" value={this.state.date} onChange={(event)=>this.handleChange(event,'date')}></input>
             </label>
             <label>
-              <span className="inputName">Time:</span>
+              Time:
               <input required type="time" value={this.state.time} onChange={(event)=>this.handleChange(event,'time')}></input>
             </label>
             <label>
-              <span className="inputName">$</span>
-              <input required className="in-price" type="number" value={this.state.price} onChange={(event)=>this.handleChange(event,'price')}></input>
+              Admission price:
+              <input required type="number" value={this.state.price} onChange={(event)=>this.handleChange(event,'price')}></input>
             </label>
-          </div>
-          <textarea required className="in-description" placeholder="Event Decription" value={this.state.description} onChange={(event)=>this.handleChange(event,'description')}/>
-          <button className="inputButton button-secondary center-block">Create Event</button>
-        </form>
+            <textarea required id="in-description" placeholder="Event Decription" value={this.state.description} onChange={(event)=>this.handleChange(event,'description')}/>
+            <button className="button-secondary center-block">Create Event</button>
+          </form>
 
-          {/*<button onClick={this.dummyData}>Dummy Data</button>*/}
-        
+          <button onClick={this.dummyData}>Dummy Data</button>
+          
+        </div>
       </div>
     )
   }
 }
 
-export default withRouter(EventNew);
+export default withRouter(EventEdit);

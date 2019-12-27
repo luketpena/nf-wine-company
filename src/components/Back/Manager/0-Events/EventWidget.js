@@ -1,9 +1,17 @@
 import React, {Component} from 'react';
+import TravelButton from '../../../GenUse/TravelButton/TravelButton';
 
+
+//, img from the extraction of props.event
 class EventWidget extends Component {
+
+  clickEdit = ()=> {
+    console.log('EDIT');
+  }
+
   render () {
 
-    let {name, description, img, date, time, price} = this.props.event;   
+    let {name, description, date, time, price, id} = this.props.event;   
 
     return (
       <div className="eventWidget">
@@ -18,8 +26,8 @@ class EventWidget extends Component {
           <p>{description}</p>
         </div>
         <div>
-          <button className="button-default">Edit</button>
-          <button className="button-primary">Delete</button>
+          <TravelButton target="/manager/events/edit" text="Edit" propClass='button-default'/>
+          <button className="button-primary" onClick={()=>this.props.deleteEvent(id)}>Delete</button>
         </div>
       </div>
     )
