@@ -158,6 +158,11 @@
   grid-area: imageUpload;
 }
 
+select {
+  width: 128px;
+}
+
+
 .inputForm {
   grid-area: form;
 }

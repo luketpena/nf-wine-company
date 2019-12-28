@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './components/App/App';
-import * as serviceWorker from './serviceWorker';
 
 //Redux + Saga
 import {createStore, combineReducers, applyMiddleware} from 'redux';
@@ -24,6 +23,7 @@ function * getCountries (action) {
     yield put({type: 'SET_COUNTRIES', payload: response.data});
 }
 
+//Retrieves all of the regions within a given country
 function * getRegions (action) {
   const response = yield axios.get('/places/regions/'+action.payload);
   yield put({type: 'SET_REGIONS', payload: response.data});
@@ -52,8 +52,3 @@ const storeInstance = createStore (
 sagaMiddlware.run(rootSaga);
 
 ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
-
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
