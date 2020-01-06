@@ -82,7 +82,7 @@ class EventLanding extends Component {
         <h1>Events</h1>
         <TravelButton target="/manager" text="Back" propClass='button-default'/>
         <section className="section-box">
-          <TravelButton target="/manager/events/new" text="Create New Event" propClass="button-secondary center-block"/>
+          <TravelButton target="/manager/events/update/new" text="Create New Event" propClass="button-secondary center-block"/>
         </section>
         <section className="section-box">
           <h2>Upcoming Events</h2>

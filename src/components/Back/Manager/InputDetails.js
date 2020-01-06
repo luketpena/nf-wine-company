@@ -14,16 +14,19 @@ class InputDetails extends Component {
     region: 'Select a region',
   }
 
+  //Triggers an update for the countries reducer
   componentDidMount () {
     this.props.dispatch({type: 'GET_COUNTRIES'})
   }
 
+  //Handles updates to the input state
   handleChange = (event,prop)=> {
     this.setState({
       [prop]: event.target.value
     });
   }
 
+  //Fills the country select with options from the country list
   populateCountrySelect = ()=> {
     let list = this.props.countries.map( (country,i)=> {
       return <option key={i}>{country.name}</option>
@@ -31,6 +34,15 @@ class InputDetails extends Component {
     return list;
   }
 
+  //Fills the region select with options from the region list
+  populateRegionSelect = ()=> {
+    let list = this.props.regions.map( (region,i)=> {
+      return <option key={i}>{region.name}</option>
+    })
+    return list;
+  }
+
+  //When the country changes, trigger the region reducer to fill from the DB
   updateCountry = (event,prop)=> {
     this.handleChange(event,prop);
     this.props.dispatch({type: 'GET_REGIONS', payload: event.target.value});
@@ -39,30 +51,24 @@ class InputDetails extends Component {
     })
   }
 
-  populateRegionSelect = ()=> {
-    let list = this.props.regions.map( (region,i)=> {
-      return <option key={i}>{region.name}</option>
-    })
-    return list;
-  }
-
   renderInputs = ()=> {
     switch(this.props.type) {
       case 'events':
         return <>
           <label>
             <span className="inputName">Date:</span>
-            <input required type="date" value={this.state.date} onChange={(event)=>this.handleChange(event,'date')}></input>
+            <input required type="date" value={this.props.details.date} onChange={(event)=>this.props.handleChange(event,'date')}></input>
           </label>
           <label>
             <span className="inputName">Time:</span>
-            <input required type="time" value={this.state.time} onChange={(event)=>this.handleChange(event,'time')}></input>
+            <input required type="time" value={this.props.details.time} onChange={(event)=>this.props.handleChange(event,'time')}></input>
           </label>
           <label>
             <span className="inputName">$</span>
-            <input required className="in-price" type="number" value={this.state.price} onChange={(event)=>this.handleChange(event,'price')}></input>
+            <input required className="in-price" type="number" value={this.props.details.price} onChange={(event)=>this.props.handleChange(event,'price')}></input>
           </label>
         </>
+
       case 'producers':
       case 'suppliers':
         return <>

@@ -14,19 +14,34 @@ class EventNew extends Component {
     },
     name: '',
     description: '',
-    img: '',
-    details: {}
+    img: '',    
+    
   }
 
   componentDidMount () {
     const {type, action} = this.props.match.params;
+    //Set the current kind of form needed
     this.setState({
       current: {
         type: type,
         action: action
       }
     })
-    console.log(type,action);
+    //Add in unique parameters for the type
+    switch(type) {
+      case 'events':
+        this.setState({
+          time: '',
+          price: ''
+        })
+        break;
+      default:
+        this.setState({
+          country: 'Select a country',
+          region: 'Select a region'
+        })
+        break;          
+    }
   }
 
   //Turns the route in the url into a useful word for placeholders
@@ -102,7 +117,7 @@ class EventNew extends Component {
         
         <form className="inputBox" onSubmit={this.handleSubmit}>
           <div className="in-image"></div>
-          <InputDetails details={this.state.details} type={this.state.current.type}/>
+          <InputDetails details={this.state} type={this.state.current.type} handleChange={this.handleChange}/>
           <input required className="in-name" type="text" placeholder={`${this.type[this.props.match.params.type]} Name`} value={this.state.name} onChange={(event)=>this.handleChange(event,'name')} />
           <textarea required className="in-description" placeholder={`${this.type[this.props.match.params.type]} Description`}  value={this.state.description} onChange={(event)=>this.handleChange(event,'description')}/>
           <button className="inputButton button-secondary center-block">Submit</button>
