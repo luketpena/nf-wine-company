@@ -6,14 +6,6 @@ import {connect} from 'react-redux';
 
 class InputDetails extends Component {
 
-  state = {
-    date: '',
-    time: '',
-    price: '',
-    country: 'Select a country',
-    region: 'Select a region',
-  }
-
   //Triggers an update for the countries reducer
   componentDidMount () {
     this.props.dispatch({type: 'GET_COUNTRIES'})
@@ -81,9 +73,10 @@ class InputDetails extends Component {
           </label>
           <label>
             <span className="inputName">Website:</span>
-            <input required type="text" value={this.props.details.website} onChange={(event)=>this.props.handleChange(event,'website')}/>
+            <input type="text" value={this.props.details.website} onChange={(event)=>this.props.handleChange(event,'website')}/>
           </label>
         </>
+      default: return <></> 
     }
   }
 

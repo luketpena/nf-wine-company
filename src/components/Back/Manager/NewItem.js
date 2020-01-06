@@ -4,6 +4,7 @@ import { withRouter } from 'react-router-dom';
 
 //-----< Component Imports >-----\\
 import InputDetails from './InputDetails';
+import BackButton from '../../GenUse/BackButton/BackButton';
 
 class EventNew extends Component {
 
@@ -31,6 +32,7 @@ class EventNew extends Component {
     switch(type) {
       case 'events':
         this.setState({
+          date: '',
           time: '',
           price: ''
         })
@@ -116,6 +118,7 @@ class EventNew extends Component {
       <div>
         <div>
           <h1>{this.titleText()}</h1>
+          <BackButton text='Back' propClass='button-default' />
         </div> 
         {JSON.stringify(this.state)}
         
