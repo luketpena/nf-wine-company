@@ -7,8 +7,6 @@ import {Route} from 'react-router-dom';
 import ManagerMenu from './ManagerMenu';
 import ManagerEvents from './0-Events/ManagerEvents';
 import NewItem from './NewItem';
-import EventEdit from './0-Events/EventEdit';
-import ProducerNew from './2-Producers/ProducerNew';
 
 class Manager extends Component {
   render () {
@@ -17,7 +15,6 @@ class Manager extends Component {
           <Switch>
             <Route exact path="/manager" component={ManagerMenu}/>
             <Route exact path="/manager/events" component={ManagerEvents}/>
-            <Route path="/manager/events/edit" component={EventEdit} />
 
             <Route path="/manager/:type/update/:action" component={NewItem} />
 

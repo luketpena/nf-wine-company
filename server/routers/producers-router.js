@@ -18,8 +18,7 @@ router.get('/',(req,res)=>{
 
 
 router.post('/',(req,res)=>{
-  const {name,description,img,date,time,price} = req.body;
-  
+  const {name,description,img,country,region,website} = req.body;
   let queryString = 'INSERT INTO producers (name, description, img, country, region, website) VALUES ($1,$2,$3,$4,$5,$6);';
   pool.query(queryString,[name,description,img,country,region,website]).then(result=>{
     res.sendStatus(201);

@@ -19,13 +19,6 @@ class InputDetails extends Component {
     this.props.dispatch({type: 'GET_COUNTRIES'})
   }
 
-  //Handles updates to the input state
-  handleChange = (event,prop)=> {
-    this.setState({
-      [prop]: event.target.value
-    });
-  }
-
   //Fills the country select with options from the country list
   populateCountrySelect = ()=> {
     let list = this.props.countries.map( (country,i)=> {
@@ -44,7 +37,7 @@ class InputDetails extends Component {
 
   //When the country changes, trigger the region reducer to fill from the DB
   updateCountry = (event,prop)=> {
-    this.handleChange(event,prop);
+    this.props.handleChange(event,prop);
     this.props.dispatch({type: 'GET_REGIONS', payload: event.target.value});
     this.setState({
       region: 'Select a region'
@@ -74,17 +67,21 @@ class InputDetails extends Component {
         return <>
           <label className="selectLabel">
             <span className="inputName">Country:</span>
-            <select onChange={(event)=>this.updateCountry(event,'country')} value={this.state.country}>
+            <select onChange={(event)=>this.updateCountry(event,'country')} value={this.props.details.country}>
                 <option disabled>Select a country</option>
                 {this.populateCountrySelect()}
               </select>
           </label>
           <label className="selectLabel">
             <span className="inputName">Region:</span>
-            <select onChange={(event)=>this.handleChange(event,'region')} value={this.state.region}>
+            <select onChange={(event)=>this.props.handleChange(event,'region')} value={this.props.details.region}>
                 <option disabled>Select a region</option>
                 {this.populateRegionSelect()}
               </select>
+          </label>
+          <label>
+            <span className="inputName">Website:</span>
+            <input required type="text" value={this.props.details.website} onChange={(event)=>this.props.handleChange(event,'website')}/>
           </label>
         </>
     }

@@ -38,7 +38,8 @@ class EventNew extends Component {
       default:
         this.setState({
           country: 'Select a country',
-          region: 'Select a region'
+          region: 'Select a region',
+          website: ''
         })
         break;          
     }
@@ -80,16 +81,19 @@ class EventNew extends Component {
   handleSubmit = (event)=> {
     //Set up
     event.preventDefault();
-    let newEvent = this.state;
+    let newItem = this.state;
+    console.log('New Items:',newItem);
+    let route = `/${this.state.current.type}`;
+    console.log('Server route:',route);
+    
 
     //Making a post request to the server
-    axios.post('/events',newEvent).then(response=>{
-      alert('Event created!');
-      this.returnToEventLanding();
+    axios.post(route,newItem).then(response=>{
+      alert(`${this.type[this.state.current.type]} added!`);
+      //this.returnToEventLanding();
     }).catch(error=>{
       alert('Unable to create an event right now. Try again later.')
       console.log(error);
-      
     })
   }
 
