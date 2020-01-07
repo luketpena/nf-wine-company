@@ -7,12 +7,11 @@ import {connect} from 'react-redux';
 class EventWidget extends Component {
 
   clickEdit = ()=> {
-    let editInfo = this.props.event
-    this.props.dispatch({type: 'SET_EDIT', payload: editInfo})
+    this.props.dispatch({type: 'SET_EDIT', payload: this.props.event})
   }
 
-  clickDelete = ()=> {
-    
+  clickDelete = (id)=> {
+    this.props.dispatch({type: 'DELETE_EVENT', payload: {id}})
   }
 
   render () {
