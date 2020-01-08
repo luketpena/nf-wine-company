@@ -15,6 +15,7 @@ function startState (params,edit) {
   this.date = (params.action==='edit' && edit.date)? edit.date.split('T')[0] : '';
   this.time = (params.action==='edit' && edit.time)? edit.time : '';
   this.price = (params.action==='edit' && edit.price)? edit.price : '';
+  
 }
 
 class EventNew extends Component {
