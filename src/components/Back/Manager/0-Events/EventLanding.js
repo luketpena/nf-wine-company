@@ -1,74 +1,22 @@
 import React, {Component} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
-import axios from 'axios';
 import EventWidget from './EventWidget';
+
+import {connect} from 'react-redux';
 
 class EventLanding extends Component {
 
-  state = {
-    events: []
-  }
-
-  //Retrieve events on mount
-  componentDidMount() {
-    this.getEvents();
-    let dateNow = new Date();
-    let dateEvent = new Date('2020-01,03');
-    console.log(dateEvent>dateNow);
-    
-  }
-  //Server routes for events
-  getEvents = ()=> {
-    axios.get('/events').then(response=>{   
-      this.storeEvents(response.data)
-    }).catch(error=>{
-      console.log(error);      
-    });
-  }
-  deleteEvent = (id)=> {
-    let q = window.confirm('Do you want to remove this event?');
-    if (q) {
-      axios.delete('events/'+id).then(response=>{
-        this.getEvents();
-      }).catch(error=>{
-        console.log('Error routing event delete request:',error);      
-      })
-    }
-  }
-  //Push those events into the state
-  storeEvents = (array)=> {
-    this.setState({
-      events: [...array]
-    })
-  }
-  //Render all upcoming events in state to the DOM
-  renderUpcomingEvents = ()=> {
-    console.log(this.state.events);
+  //Renders events to the DOM based on whether they are 'upcoming' or 'past' (stored in timing arg)
+  renderEvents = (timing)=> {
     //Get today's date
     let dateNow = new Date();
-    let events = this.state.events.map( event => {
-      //Get the date of the event...
-      let eventDate = new Date(event.date)
-      //...and only render if it is ahead of today
-      if (eventDate>dateNow) {
-        return <EventWidget key={event.id} event={event} />
-      }
-      return false;
-    });
-    return events;
-  }
 
-  //Render all upcoming events in state to the DOM
-  renderPastEvents = ()=> {
-    console.log(this.state.events);
-    //Get today's date
-    let dateNow = new Date();
-    let events = this.state.events.map( event => {
+    let events = this.props.events.map( (event,i) => {
       //Get the date of the event...
       let eventDate = new Date(event.date)
-      //...and only render if it is ahead of today
-      if (eventDate<dateNow) {
-        return <EventWidget key={event.id} event={event} deleteEvent={this.deleteEvent}/>
+      //...and only render if it meets requirements
+      if ( (eventDate<dateNow && timing==='past') || (eventDate>dateNow && timing==='upcoming') ) {
+        return <EventWidget key={event.id} event={event} index={i}/>
       }
       return false;
     });
@@ -78,7 +26,6 @@ class EventLanding extends Component {
   render () {
     return (
       <div id="eventLandingBox">
-        
         <h1>Events</h1>
         <TravelButton target="/manager" text="Back" propClass='button-default'/>
         <section className="section-box">
@@ -86,15 +33,15 @@ class EventLanding extends Component {
         </section>
         <section className="section-box">
           <h2>Upcoming Events</h2>
-          {this.renderUpcomingEvents()}
+          {this.renderEvents('upcoming')}
         </section>
         <section className="section-box">
           <h2>Past Events</h2>
-          {this.renderPastEvents()}
+          {this.renderEvents('past')}
         </section>
       </div>
     )
   }
 }
 
-export default EventLanding;
+export default connect(reduxState=>({events: reduxState.eventReducer}))(EventLanding);

@@ -1,12 +1,17 @@
 import React, {Component} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
+import {connect} from 'react-redux';
 
 
 //, img from the extraction of props.event
 class EventWidget extends Component {
 
   clickEdit = ()=> {
-    console.log('EDIT');
+    this.props.dispatch({type: 'SET_EDIT', payload: this.props.event})
+  }
+
+  clickDelete = (id)=> {
+    this.props.dispatch({type: 'DELETE_EVENT', payload: {id}})
   }
 
   render () {
@@ -26,12 +31,12 @@ class EventWidget extends Component {
           <p>{description}</p>
         </div>
         <div>
-          <TravelButton target="/manager/events/edit" text="Edit" propClass='button-default'/>
-          <button className="button-primary" onClick={()=>this.props.deleteEvent(id)}>Delete</button>
+          <TravelButton target={`events/update/edit`} text="Edit" propClass='button-default' clickAction={this.clickEdit}/>
+          <button className="button-primary" onClick={()=>this.clickDelete(id)}>Delete</button>
         </div>
       </div>
     )
   }
 }
 
-export default EventWidget;
+export default connect()(EventWidget);
