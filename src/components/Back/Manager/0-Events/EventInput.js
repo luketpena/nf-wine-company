@@ -1,26 +1,18 @@
 import React, {Component} from 'react';
-import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import {connect} from 'react-redux';
 
 //-----< Component Imports >-----\\
 import BackButton from '../../../GenUse/BackButton/BackButton';
 
-//Turns the route in the url into a useful words for placeholders
-const typeName = {
-  events: 'Event',
-  producers: 'Producer',
-  suppliers: 'Supplier'
-}
-
 function startState (params,edit) { 
   this.action = params.action || '';
-  this.name = (params.action==='edit')? edit.name || '' : '';
-  this.description = (params.action==='edit')? edit.description || '' : '';
-  this.img = (params.action==='edit')? edit.img || '' : '';
-  this.date = (params.action==='edit')? edit.date || '' : '';
-  this.time = (params.action==='edit')? edit.time || '' : '';
-  this.price = (params.action==='edit')? edit.price || '' : '';
+  this.name = (params.action==='edit' && edit.name)? edit.name : '';
+  this.description = (params.action==='edit' && edit.description)? edit.description : '';
+  this.img = (params.action==='edit' && edit.img)? edit.img : '';
+  this.date = (params.action==='edit' && edit.date)? edit.date.split('T')[0] : '';
+  this.time = (params.action==='edit' && edit.time)? edit.time : '';
+  this.price = (params.action==='edit' && edit.price)? edit.price : '';
 }
 
 class EventNew extends Component {
@@ -36,15 +28,9 @@ class EventNew extends Component {
 
   //Handles submission of the data to the server
   handleSubmit = (event)=> {
-    //Set up
     event.preventDefault();
-    //Making a post request to the server
-    axios.post('/events',this.state).then(response=>{
-      alert(`${typeName[this.state.type]} added!`);
-    }).catch(error=>{
-      alert('Unable to create an event right now. Try again later.')
-      console.log(error);
-    })
+    this.props.dispatch({type: 'NEW_EVENT', payload: this.state});
+    this.props.history.push('/manager/events')
   }
 
   render () {

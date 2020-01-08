@@ -1,47 +1,21 @@
 import React, {Component} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
-import axios from 'axios';
 import EventWidget from './EventWidget';
 
 import {connect} from 'react-redux';
 
 class EventLanding extends Component {
 
-  state = {
-    events: []
-  }
-
-  //Push those events into the state
-  storeEvents = (array)=> {
-    this.setState({
-      events: [...array]
-    })
-  }
-  //Render all upcoming events in state to the DOM
-  renderUpcomingEvents = ()=> {
+  //Renders events to the DOM based on whether they are 'upcoming' or 'past' (stored in timing arg)
+  renderEvents = (timing)=> {
     //Get today's date
     let dateNow = new Date();
+
     let events = this.props.events.map( (event,i) => {
       //Get the date of the event...
       let eventDate = new Date(event.date)
-      //...and only render if it is ahead of today
-      if (eventDate>dateNow) {
-        return <EventWidget key={event.id} event={event} index={i}/>
-      }
-      return false;
-    });
-    return events;
-  }
-
-  //Render all upcoming events in state to the DOM
-  renderPastEvents = ()=> {
-    //Get today's date
-    let dateNow = new Date();
-    let events = this.props.events.map( (event,i) => {
-      //Get the date of the event...
-      let eventDate = new Date(event.date)
-      //...and only render if it is ahead of today
-      if (eventDate<dateNow) {
+      //...and only render if it meets requirements
+      if ( (eventDate<dateNow && timing==='past') || (eventDate>dateNow && timing==='upcoming') ) {
         return <EventWidget key={event.id} event={event} index={i}/>
       }
       return false;
@@ -59,11 +33,11 @@ class EventLanding extends Component {
         </section>
         <section className="section-box">
           <h2>Upcoming Events</h2>
-          {this.renderUpcomingEvents()}
+          {this.renderEvents('upcoming')}
         </section>
         <section className="section-box">
           <h2>Past Events</h2>
-          {this.renderPastEvents()}
+          {this.renderEvents('past')}
         </section>
       </div>
     )
