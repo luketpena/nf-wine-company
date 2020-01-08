@@ -12,20 +12,11 @@ Inputs for events:
   - public / trade partner
 */
 
-
-
-
 class ManagerEvents extends Component {
-
-  
-
   render () {
-    
-    
     return (
       <div className="managerApp">
         <EventLanding />
-        
       </div>
     )
   }

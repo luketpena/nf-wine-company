@@ -5,19 +5,25 @@ import {Route} from 'react-router-dom';
 
 //>> Importing Page Components <<\\
 import ManagerMenu from './ManagerMenu';
-import ManagerEvents from './0-Events/ManagerEvents';
-import NewItem from './NewItem';
+import EventLanding from './0-Events/EventLanding';
+
+import EventInput from './0-Events/EventInput';
+
+
 
 class Manager extends Component {
+
+  setEditInfo = (newEditInfo)=>{
+    this.setState({editInfo: newEditInfo})
+  }
+
   render () {
     return (
       <div className="managerBox">
           <Switch>
             <Route exact path="/manager" component={ManagerMenu}/>
-            <Route exact path="/manager/events" component={ManagerEvents}/>
-
-            <Route path="/manager/:type/update/:action" component={NewItem} />
-
+            <Route exact path="/manager/events" component={EventLanding} />
+            <Route path="/manager/events/update/:action" component={EventInput} />
           </Switch>
       </div>
     )
