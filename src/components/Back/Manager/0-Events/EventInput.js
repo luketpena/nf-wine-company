@@ -5,8 +5,10 @@ import {connect} from 'react-redux';
 //-----< Component Imports >-----\\
 import BackButton from '../../../GenUse/BackButton/BackButton';
 
-function startState (params,edit) { 
-  this.action = params.action || '';
+function startState (params,edit) {
+  if (params.action==='edit' && edit.id) {
+    this.id = edit.id;
+  }
   this.name = (params.action==='edit' && edit.name)? edit.name : '';
   this.description = (params.action==='edit' && edit.description)? edit.description : '';
   this.img = (params.action==='edit' && edit.img)? edit.img : '';
@@ -29,7 +31,16 @@ class EventNew extends Component {
   //Handles submission of the data to the server
   handleSubmit = (event)=> {
     event.preventDefault();
-    this.props.dispatch({type: 'NEW_EVENT', payload: this.state});
+    switch(this.props.match.params.action) {
+      case 'new':
+        this.props.dispatch({type: 'NEW_EVENT', payload: this.state});
+        break;
+      case 'edit':
+        this.props.dispatch({type: 'EDIT_EVENT', payload: this.state});
+        break;
+      default:
+    }
+    
     this.props.history.push('/manager/events')
   }
 

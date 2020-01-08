@@ -17,7 +17,8 @@ function * rootSaga () {
   yield takeEvery('GET_REGIONS', getRegions);
   yield takeEvery('GET_EVENTS', getEvents);
   yield takeEvery('DELETE_EVENT', deleteEvent);
-  yield takeEvery ('NEW_EVENT', newEvent);
+  yield takeEvery('NEW_EVENT', newEvent);
+  yield takeEvery('EDIT_EVENT', editEvent);
 }
 
 //Retrieves list of countries from the database
@@ -43,8 +44,13 @@ function * deleteEvent (action) {
 }
 
 function * newEvent (action) {
-  yield axios.post('/events',action.payload);
+  yield axios.post('/events', action.payload);
   yield put({type: 'GET_EVENTS'})
+}
+
+function * editEvent (action) {
+  yield axios.put('/events/edit', action.payload);
+  yield put({type: 'GET_EVENTS'});
 }
 
 //-----< REDUCERS >-----\\
