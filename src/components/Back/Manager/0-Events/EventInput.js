@@ -47,12 +47,10 @@ class EventNew extends Component {
   render () {
     return (
       <div>
-        {JSON.stringify(this.state)}
         <div>
           <h1>{(this.props.match.params.action==='edit')? 'Edit Event' : 'Create New Event'}</h1>
           <BackButton text='Back' propClass='button-default' />
         </div> 
-        {JSON.stringify(this.props.edit)}
         
         <form className="inputBox" onSubmit={this.handleSubmit}>
 
