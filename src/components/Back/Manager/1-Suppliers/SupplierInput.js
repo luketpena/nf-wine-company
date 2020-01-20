@@ -21,9 +21,9 @@ export default function SupplierInput(props) {
   let [name,setName] = useState( (action==='edit' && edit.name)? edit.name : '' );
   let [description,setDescription] = useState( (action==='edit' && edit.description)? edit.description : '' );
   let [img,setImg] = useState( (action==='edit' && edit.img)? edit.img : '' );
-  let [country,setCountry] = useState( (action==='edit' && edit.country)? edit.country : 'Select a country' );
-  let [region,setRegion] = useState( (action==='edit' && edit.region)? edit.region : 'Select a region' );
-  let [website,setWebsite] = useState( (action==='edit' && edit.website)? edit.website : '');
+  let [country,setCountry] = useState( (action==='edit' && edit.country_id)? edit.country_id : 'Select a country' );
+  let [region,setRegion] = useState( (action==='edit' && edit.region_id)? edit.region_id : 'Select a region' );
+  let [website,setWebsite] = useState( (action==='edit' && edit.website_url)? edit.website_url : '');
 
   //>> Submits the new or edited event to the server
   function handleSubmit(event) {
