@@ -9,12 +9,14 @@ import ManagerMenu from './ManagerMenu';
 import EventLanding from './0-Events/EventLanding';
 import SupplierLanding from './1-Suppliers/SupplierLanding';
 import EventInput from './0-Events/EventInput';
+import SupplierInput from './1-Suppliers/SupplierInput';
 
 //-----< Styling >-----\\
 const Container = styled.div`
   min-height: 100vh;
-  width: 100%;
+  width: 100vw;
   background-color: rgb(248, 245, 238);
+
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,7 +30,9 @@ export default function Manager () {
           <Route exact path="/manager" component={ManagerMenu}/>
           <Route exact path="/manager/events" component={EventLanding} />
           <Route exact path="/manager/suppliers" component={SupplierLanding} />
-          <Route path="/manager/events/update/:action" component={EventInput} />
+          
+          <Route path="/manager/events/:action" component={EventInput} />
+          <Route path="/manager/suppliers/:action" component={SupplierInput} />
         </Switch>
     </Container>
   )
