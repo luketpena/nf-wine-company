@@ -14,6 +14,7 @@ class App extends Component {
 
   componentDidMount() {
     this.props.dispatch({type: 'GET_EVENTS'});
+    this.props.dispatch({type: 'GET_SUPPLIERS'});
   }
 
   render () {

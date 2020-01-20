@@ -15,10 +15,13 @@ import {put,takeEvery} from 'redux-saga/effects';
 function * rootSaga () {
   yield takeEvery('GET_COUNTRIES', getCountries);
   yield takeEvery('GET_REGIONS', getRegions);
+
   yield takeEvery('GET_EVENTS', getEvents);
   yield takeEvery('DELETE_EVENT', deleteEvent);
   yield takeEvery('NEW_EVENT', newEvent);
   yield takeEvery('EDIT_EVENT', editEvent);
+
+  yield takeEvery('GET_SUPPLIERS',getSuppliers);
 }
 
 //Retrieves list of countries from the database
@@ -53,6 +56,11 @@ function * editEvent (action) {
   yield put({type: 'GET_EVENTS'});
 }
 
+function * getSuppliers (action) {
+  const response = yield axios.get('/suppliers');
+  yield put({type: 'SET_SUPPLIERS', payload: response.data})
+}
+
 //-----< REDUCERS >-----\\
 const editReducer = (state={ editInfo: {} }, action)=> {
   switch(action.type) {
@@ -64,6 +72,13 @@ const editReducer = (state={ editInfo: {} }, action)=> {
 const eventReducer = (state=[],action)=> {
   switch(action.type) {
     case 'SET_EVENTS': return action.payload;
+    default: return state;
+  }
+}
+
+const supplierReducer = (state=[],action)=> {
+  switch(action.type) {
+    case 'SET_SUPPLIERS': return action.payload;
     default: return state;
   }
 }
@@ -86,7 +101,8 @@ const storeInstance = createStore (
   combineReducers({
     editReducer,
     placesReducer,
-    eventReducer
+    eventReducer,
+    supplierReducer
   }),
   applyMiddleware(sagaMiddlware, logger)
 )

@@ -25,7 +25,7 @@ class EventLanding extends Component {
 
   render () {
     return (
-      <div id="eventLandingBox">
+      <div className="landingBox">
         <h1>Events</h1>
         <TravelButton target="/manager" text="Back" propClass='button-default'/>
         <section className="section-box">
