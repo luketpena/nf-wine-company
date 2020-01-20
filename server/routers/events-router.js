@@ -31,13 +31,13 @@ router.post('/',(req,res)=>{
 
 router.put('/edit',(req,res)=>{
   const {id,name,description,img,date,time,price} = req.body;
-
+  
   let queryString = `
     UPDATE events 
     SET name=$2, description=$3, img=$4, date=$5, time=$6, price=$7
     WHERE id=$1;`;
   
-    pool.query(queryString,[id,name,description,img,date,time,price]).then(result=>{
+    pool.query(queryString,[id,name,description,img,date,time,price]).then(result=>{      
       res.sendStatus(200);
     }).catch(error=>{
       console.log('Error editing the event on the database:',error);
