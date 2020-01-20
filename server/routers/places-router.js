@@ -20,7 +20,7 @@ router.get('/countries',(req,res)=>{
 router.get('/regions/:country',(req,res)=>{
   let queryString = `
     SELECT c.name, r.name FROM country c 
-    JOIN region r on c.code=r.country
+    JOIN region r ON c.id=r.country_id
     WHERE c.name=$1
     ORDER BY r.name ASC;`
   pool.query(queryString, [req.params.country]).then(result=>{
