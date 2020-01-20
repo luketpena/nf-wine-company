@@ -18,7 +18,7 @@ export default function EventInput(props) {
   //>> Creating state
   let [name,setName] = useState( (action==='edit' && edit.name)? edit.name : '' );
   let [description,setDescription] = useState( (action==='edit' && edit.description)? edit.description : '' );
-  let [img,setImg] = useState( (action==='edit' && edit.img)? edit.img : '' );
+  let [img] = useState( (action==='edit' && edit.img)? edit.img : '' );
   let [date,setDate] = useState( (action==='edit' && edit.date)? edit.date.split('T')[0] : '' );
   let [time,setTime] = useState( (action==='edit' && edit.time)? edit.time : '' );
   let [price,setPrice] = useState( (action==='edit' && edit.price)? edit.price : '');
