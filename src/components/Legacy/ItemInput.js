@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 //-----< Component Imports >-----\\
 import InputDetails from './ItemInputDetails';
-import BackButton from '../../GenUse/BackButton/BackButton';
+import BackButton from '../GenUse/BackButton/BackButton';
 
 //Turns the route in the url into a useful words for placeholders
 const typeName = {
