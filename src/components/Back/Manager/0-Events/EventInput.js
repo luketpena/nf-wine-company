@@ -7,7 +7,7 @@ import BackButton from '../../../GenUse/BackButton/BackButton';
 
 export default function SupplierInput(props) {
 
-  let edit = useSelector(state=>state.editReducer.editInfo)
+  let edit = useSelector(state=>state.edit.editInfo)
   const history = useHistory();
   const dispatch = useDispatch();
 

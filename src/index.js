@@ -4,12 +4,14 @@ import './index.css';
 import App from './components/App/App';
 
 //Redux + Saga
-import {createStore, combineReducers, applyMiddleware} from 'redux';
+import {createStore, applyMiddleware} from 'redux';
 import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import axios from 'axios';
 import {put,takeEvery, takeLatest} from 'redux-saga/effects';
+
+import rootReducer from './redux/reducers';
 
 //-----< SAGAS >-----\\
 function * rootSaga () {
@@ -68,54 +70,13 @@ function * getSuppliers (action) {
   yield put({type: 'SET_SUPPLIERS', payload: response.data})
 }
 
-//-----< REDUCERS >-----\\
-const editReducer = (state={ editInfo: {
-
-  }, ready: false }, action)=> {
-  switch(action.type) {
-    case 'SET_EDIT_READY': return {...state, ready: action.payload };
-    case 'SET_EDIT_INFO': return { ...state, editInfo: action.payload };
-    default: return state;
-  }
-}
-
-const eventReducer = (state=[],action)=> {
-  switch(action.type) {
-    case 'SET_EVENTS': return action.payload;
-    default: return state;
-  }
-}
-
-const supplierReducer = (state=[],action)=> {
-  switch(action.type) {
-    case 'SET_SUPPLIERS': return action.payload;
-    default: return state;
-  }
-}
-
-const placesReducer = (state={
-  countries: [],
-  regions: []
-}, action) => {
-  switch(action.type) {
-    case 'SET_COUNTRIES': return {...state, countries: action.payload}
-    case 'SET_REGIONS': return {...state, regions: action.payload}
-    default: return state;
-  }
-}
-
 
 //-----< STORE + MIDDLEWARE >-----\\
 const sagaMiddlware = createSagaMiddleware();
-const storeInstance = createStore (
-  combineReducers({
-    editReducer,
-    placesReducer,
-    eventReducer,
-    supplierReducer
-  }),
+const store = createStore (
+  rootReducer,
   applyMiddleware(sagaMiddlware, logger)
 )
 sagaMiddlware.run(rootSaga);
 
-ReactDOM.render(<Provider store={storeInstance}><App /></Provider>, document.getElementById('root'));
+ReactDOM.render(<Provider store={store}><App /></Provider>, document.getElementById('root'));

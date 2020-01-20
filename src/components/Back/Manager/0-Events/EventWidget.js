@@ -42,7 +42,7 @@ export default function EventWidget(props) {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  let editReady = useSelector(state=>state.editReducer.ready);
+  let editReady = useSelector(state=>state.edit.ready);
 
   let [ready,setReady] = useState(false);
 

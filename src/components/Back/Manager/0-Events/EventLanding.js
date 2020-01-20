@@ -7,7 +7,7 @@ import { useSelector } from 'react-redux';
 
 export default function EventLanding() {
 
-  let events = useSelector(state=>state.eventReducer);
+  let events = useSelector(state=>state.event);
   
   //Renders events to the DOM based on whether they are 'upcoming' or 'past' (stored in timing arg)
   function renderEvents(timing) {
