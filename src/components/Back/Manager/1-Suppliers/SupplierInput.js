@@ -25,33 +25,23 @@ export default function SupplierInput(props) {
   //Handles submission of the data to the server
   function handleSubmit(event) {
     event.preventDefault();
-
-    const newEvent = {
-      name,
-      description,
-      img,
-      date,
-      time,
-      price
-    }
-
     switch(action) {
       case 'new':
-        dispatch({type: 'NEW_EVENT', payload: newEvent});
+        dispatch({type: 'NEW_SUPPLIER', payload: this.state});
         break;
       case 'edit':
-        dispatch({type: 'EDIT_EVENT', payload: newEvent});
+        dispatch({type: 'EDIT_SUPPLIER', payload: this.state});
         break;
       default:
     }
     
-    history.push('/manager/events')
+    history.push('/manager/suppliers')
   }
 
   return (
     <div>
       <div>
-        <h1>{(action==='edit')? 'Edit Event' : 'Create New Event'}</h1>
+        <h1>{(action==='edit')? 'Edit Supplier' : 'Add New Supplier'}</h1>
         <BackButton text='Back' propClass='button-default' />
       </div> 
       
@@ -59,7 +49,7 @@ export default function SupplierInput(props) {
 
         <div className="in-image"></div>
 
-        <input required className="in-name" type="text" placeholder="Event Name" value={name} onChange={(event)=>setName(event.target.value)} />
+        <input required className="in-name" type="text" placeholder="Supplier Name" value={name} onChange={(event)=>setName(event.target.value)} />
 
         <div className="inputLine">
           <label>
