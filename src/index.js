@@ -9,7 +9,7 @@ import {Provider} from 'react-redux';
 import logger from 'redux-logger';
 import createSagaMiddleware from 'redux-saga';
 import axios from 'axios';
-import {put,takeEvery} from 'redux-saga/effects';
+import {put,takeEvery, takeLatest} from 'redux-saga/effects';
 
 //-----< SAGAS >-----\\
 function * rootSaga () {
@@ -22,6 +22,13 @@ function * rootSaga () {
   yield takeEvery('EDIT_EVENT', editEvent);
 
   yield takeEvery('GET_SUPPLIERS',getSuppliers);
+
+  yield takeLatest('TRIGGER_SET_EDIT_INFO', triggerEdit);
+}
+
+function * triggerEdit (action) {
+  yield put({type: 'SET_EDIT_INFO', payload: action.payload});
+  yield put({type: 'SET_EDIT_READY', payload: true})
 }
 
 //Retrieves list of countries from the database
@@ -62,9 +69,12 @@ function * getSuppliers (action) {
 }
 
 //-----< REDUCERS >-----\\
-const editReducer = (state={ editInfo: {} }, action)=> {
+const editReducer = (state={ editInfo: {
+
+  }, ready: false }, action)=> {
   switch(action.type) {
-    case 'SET_EDIT': return { editInfo: action.payload };
+    case 'SET_EDIT_READY': return {...state, ready: action.payload };
+    case 'SET_EDIT_INFO': return { ...state, editInfo: action.payload };
     default: return state;
   }
 }
