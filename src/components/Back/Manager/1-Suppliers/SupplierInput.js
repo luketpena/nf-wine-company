@@ -92,16 +92,16 @@ export default function SupplierInput(props) {
           <label className="selectLabel">
             <span className="inputName">Country:</span>
             <select onChange={(event)=>updateCountry(event)} value={country}>
-                <option disabled>Select a country</option>
-                {populateCountrySelect()}
-              </select>
+              <option disabled>Select a country</option>
+              {populateCountrySelect()}
+            </select>
           </label>
           <label className="selectLabel">
             <span className="inputName">Region:</span>
             <select onChange={(event)=>setRegion(event.target.value)} value={region}>
-                <option disabled>Select a region</option>
-                {populateRegionSelect()}
-              </select>
+              <option disabled>Select a region</option>
+              {populateRegionSelect()}
+            </select>
           </label>
           <label>
             <span className="inputName">Website:</span>

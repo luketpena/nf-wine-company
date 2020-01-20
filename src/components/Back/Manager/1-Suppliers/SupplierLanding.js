@@ -27,6 +27,8 @@ export default function SupplierLanding() {
 
   const dispatch = useDispatch();
   let supplier = useSelector(state=>state.supplier);
+  let countries = useSelector(state=>state.places.countries);
+  let regions = useSelector(state=>state.places.regions);
 
   let [search, setSearch] = useState('');
   let [countryFilter, setCountryFilter] = useState('');
@@ -46,6 +48,27 @@ export default function SupplierLanding() {
     dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter}})
   }
 
+  function updateCountry(event) {
+    setCountryFilter(event.target.value);
+    dispatch({type: 'GET_REGIONS', payload: event.target.value});
+    setRegionFilter('');
+  }
+
+  function populateCountrySelect() {
+    let list = countries.map( (country,i)=> {
+      return <option key={i} value={country.id}>{country.name}</option>
+    })
+    return list;
+  }
+
+  //Fills the region select with options from the region list
+  function populateRegionSelect() {
+    let list = regions.map( (region,i)=> {
+      return <option key={i} value={region.id}>{region.name}</option>
+    })
+    return list;
+  }
+
   return (
     <div className="landingBox">
 
@@ -61,12 +84,19 @@ export default function SupplierLanding() {
           <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search"/>
           <label>
             Filter:
-            <select>
-              <option disabled>Country</option>
+
+            <select onChange={(event)=>updateCountry(event)} value={countryFilter}>
+              <option></option>
+              {populateCountrySelect()}
             </select>
-            <select>
-              <option disabled>Region</option>
+
+            <select onChange={(event)=>setRegionFilter(event.target.value)} value={regionFilter}>
+              <option ></option>
+              {populateRegionSelect()}
             </select>
+
+            
+
           </label>
           
           <button>Submit</button>
