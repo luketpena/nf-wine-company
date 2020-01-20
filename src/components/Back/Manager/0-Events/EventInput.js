@@ -29,6 +29,7 @@ export default function SupplierInput(props) {
   function handleSubmit(event) {
     event.preventDefault();
     const newEvent = {
+      id: edit.id,
       name,
       description,
       img,
@@ -46,7 +47,6 @@ export default function SupplierInput(props) {
         break;
       default:
     }
-    
     history.push('/manager/events')
   }
 
