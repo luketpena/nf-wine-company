@@ -42,8 +42,8 @@ export default function EventWidget(props) {
 
   const dispatch = useDispatch();
   const history = useHistory();
-  let editReady = useSelector(state=>state.edit.ready);
 
+  let editReady = useSelector(state=>state.edit.ready);
   let [ready,setReady] = useState(false);
 
   function clickEdit() {
@@ -57,7 +57,6 @@ export default function EventWidget(props) {
     }
   });
   
-
   function clickDelete() {
     dispatch({type: 'DELETE_EVENT', payload: {id}})
   }

@@ -31,6 +31,21 @@ router.post('/',(req,res)=>{
   })
 });
 
+router.put('/edit',(req,res)=>{
+  const {name,description,img,country,region,website,id} = req.body;
+  let queryString = `
+    UPDATE suppliers
+    SET name=$1, description=$2, img_url=$3, country_id=$4, region_id=$5, website_url=$6
+    WHERE id=$7;
+  `;
+  pool.query(queryString,[name,description,img,country,region,website,id]).then(result=>{   
+    res.sendStatus(201);
+  }).catch(error=>{
+    console.log('Error posting supplier to database:',error);
+    res.sendStatus(400);
+  })
+});
+
 router.delete('/:id',(req,res)=>{
   let queryString = `
     DELETE FROM suppliers
