@@ -20,7 +20,7 @@ export default function SupplierInput(props) {
   //>> Creating state
   let [name,setName] = useState( (action==='edit' && edit.name)? edit.name : '' );
   let [description,setDescription] = useState( (action==='edit' && edit.description)? edit.description : '' );
-  let [img,setImg] = useState( (action==='edit' && edit.img)? edit.img : '' );
+  let [img] = useState( (action==='edit' && edit.img)? edit.img : '' );
   let [country,setCountry] = useState( (action==='edit' && edit.country_id)? edit.country_id : 'Select a country' );
   let [region,setRegion] = useState( (action==='edit' && edit.region_id)? edit.region_id : 'Select a region' );
   let [website,setWebsite] = useState( (action==='edit' && edit.website_url)? edit.website_url : '');

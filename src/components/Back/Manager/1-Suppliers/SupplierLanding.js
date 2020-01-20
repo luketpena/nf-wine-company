@@ -1,11 +1,11 @@
-import React, {Component} from 'react';
+import React, {useState} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
 import styled from 'styled-components';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 
 import SupplierWidget from './SupplierWidget';
 
-const SupplierTable = styled.div`
+const SupplierTable = styled.table`
   border-collapse: collapse;
   width: 100%;
   thead {
@@ -25,14 +25,25 @@ const SupplierTable = styled.div`
 
 export default function SupplierLanding() {
 
+  const dispatch = useDispatch();
   let supplier = useSelector(state=>state.supplier);
 
+  let [search, setSearch] = useState('');
+  let [countryFilter, setCountryFilter] = useState('');
+  let [regionFilter, setRegionFilter] = useState('');
+
   function renderSuppliers() {
-    return supplier.map( (item,i)=> {
+    return supplier.supplierList.map( (item,i)=> {
       return (
         <SupplierWidget supplier={item} key={i}/>
       )
     })
+  }
+
+  function submitSearch(event) {
+    event.preventDefault();
+    console.log('Search value:',search);
+    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter}})
   }
 
   return (
@@ -46,8 +57,8 @@ export default function SupplierLanding() {
       </section>
 
       <section className="section-box">
-        <form>
-          <input type="text" placeholder="Search"/>
+        <form onSubmit={submitSearch}>
+          <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search"/>
           <label>
             Filter:
             <select>
