@@ -1,35 +1,24 @@
-import React, {Component} from 'react';
+import React from 'react';
 import './Manager.css';
 import { Switch } from 'react-router'; 
-import {Route} from 'react-router-dom';
+import { Route } from 'react-router-dom';
 
-//>> Importing Page Components <<\\
+//-----< Component Imports >-----\\
 import ManagerMenu from './ManagerMenu';
 import EventLanding from './0-Events/EventLanding';
 import SupplierLanding from './1-Suppliers/SupplierLanding';
-
 import EventInput from './0-Events/EventInput';
 
-
-
-class Manager extends Component {
-
-  setEditInfo = (newEditInfo)=>{
-    this.setState({editInfo: newEditInfo})
-  }
-
-  render () {
-    return (
-      <div className="managerBox">
-          <Switch>
-            <Route exact path="/manager" component={ManagerMenu}/>
-            <Route exact path="/manager/events" component={EventLanding} />
-            <Route exact path="/manager/suppliers" component={SupplierLanding} />
-            <Route path="/manager/events/update/:action" component={EventInput} />
-          </Switch>
-      </div>
-    )
-  }
+//-----< Component Function >-----\\
+export default function Manager () {
+  return (
+    <div className="managerBox">
+        <Switch>
+          <Route exact path="/manager" component={ManagerMenu}/>
+          <Route exact path="/manager/events" component={EventLanding} />
+          <Route exact path="/manager/suppliers" component={SupplierLanding} />
+          <Route path="/manager/events/update/:action" component={EventInput} />
+        </Switch>
+    </div>
+  )
 }
-
-export default Manager;

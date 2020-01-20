@@ -41,8 +41,8 @@ export default function ManagerMenu () {
       <h1>Manager</h1>
       <MenuBox>
         <MenuBox>
-          <MenuItem className="managerMenuItem" onClick={()=>this.clickMenuItem('events')}> <h2>Events</h2> </MenuItem>
-          <MenuItem className="managerMenuItem" onClick={()=>this.clickMenuItem('suppliers')}> <h2>Suppliers</h2> </MenuItem>
+          <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('events')}> <h2>Events</h2> </MenuItem>
+          <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('suppliers')}> <h2>Suppliers</h2> </MenuItem>
         </MenuBox>
         <MenuBox>
           <MenuItem className="managerMenuItem"> <h2>Producers</h2> </MenuItem>
