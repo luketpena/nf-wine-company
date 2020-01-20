@@ -1,18 +1,21 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
 //-----< Component Imports >-----\\
 import BackButton from '../../../GenUse/BackButton/BackButton';
 
-export default function SupplierInput(props) {
+export default function EventInput(props) {
 
+  //>> Setup the tools
   let edit = useSelector(state=>state.edit.editInfo)
   const history = useHistory();
   const dispatch = useDispatch();
 
+  //>> Save the action for future use
   let action = props.match.params.action;
 
+  //>> Creating state
   let [name,setName] = useState( (action==='edit' && edit.name)? edit.name : '' );
   let [description,setDescription] = useState( (action==='edit' && edit.description)? edit.description : '' );
   let [img,setImg] = useState( (action==='edit' && edit.img)? edit.img : '' );
@@ -20,13 +23,9 @@ export default function SupplierInput(props) {
   let [time,setTime] = useState( (action==='edit' && edit.time)? edit.time : '' );
   let [price,setPrice] = useState( (action==='edit' && edit.price)? edit.price : '');
 
-  let [mount,setMount] = useState(false);
-  
-  //state = new startState(props.match.params,edit);  
-  
-  
-  //Handles submission of the data to the server
+  //>> Submits the new or edited event to the server
   function handleSubmit(event) {
+
     event.preventDefault();
     const newEvent = {
       id: edit.id,

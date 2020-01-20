@@ -23,10 +23,10 @@ const SupplierTable = styled.div`
 
 export default function SupplierLanding() {
 
-  let suppliers = useSelector(state=>state.supplierReducer);
+  let supplier = useSelector(state=>state.supplier);
 
   function renderSuppliers() {
-    return suppliers.map( (item,i)=> {
+    return supplier.map( (item,i)=> {
       return (
         <tr key={i}>
           <td>{item.name}</td>

@@ -15,6 +15,7 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'GET_EVENTS'});
     this.props.dispatch({type: 'GET_SUPPLIERS'});
+    this.props.dispatch({type: 'GET_COUNTRIES'});
   }
 
   render () {
