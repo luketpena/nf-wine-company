@@ -54,7 +54,7 @@ export default function SupplierInput(props) {
   //Fills the country select with options from the country list
   function populateCountrySelect() {
     let list = countries.map( (country,i)=> {
-      return <option key={i}>{country.name}</option>
+      return <option key={i} value={country.id}>{country.name}</option>
     })
     return list;
   }
@@ -62,7 +62,7 @@ export default function SupplierInput(props) {
   //Fills the region select with options from the region list
   function populateRegionSelect() {
     let list = regions.map( (region,i)=> {
-      return <option key={i}>{region.name}</option>
+      return <option key={i} value={region.id}>{region.name}</option>
     })
     return list;
   }

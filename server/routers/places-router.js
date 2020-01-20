@@ -1,9 +1,6 @@
-// REQUIRES
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool.js');
-
-// ROUTES
 
 //Gets all of the countries
 router.get('/countries',(req,res)=>{
@@ -19,9 +16,8 @@ router.get('/countries',(req,res)=>{
 //Gets all of the regions of a country
 router.get('/regions/:country',(req,res)=>{
   let queryString = `
-    SELECT c.name, r.name FROM country c 
-    JOIN region r ON c.id=r.country_id
-    WHERE c.name=$1
+    SELECT * FROM region r
+    WHERE r.country_id=$1
     ORDER BY r.name ASC;`
   pool.query(queryString, [req.params.country]).then(result=>{
     res.send(result.rows);
@@ -31,6 +27,4 @@ router.get('/regions/:country',(req,res)=>{
   })
 })
 
-
-// EXPORT THE ROUTES
 module.exports = router;
