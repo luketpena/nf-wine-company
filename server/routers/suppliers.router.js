@@ -19,17 +19,30 @@ router.get('/',(req,res)=>{
     res.sendStatus(400);
   })
 })
-/*
+
 router.post('/',(req,res)=>{
   const {name,description,img,country,region,website} = req.body;
-  let queryString = 'INSERT INTO producers (name, description, img, country, region, website) VALUES ($1,$2,$3,$4,$5,$6);';
-  pool.query(queryString,[name,description,img,country,region,website]).then(result=>{
+  let queryString = 'INSERT INTO suppliers (name, description, img_url, country_id, region_id, website_url) VALUES ($1,$2,$3,$4,$5,$6);';
+  pool.query(queryString,[name,description,img,country,region,website]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
-    console.log(error);
+    console.log('Error posting supplier to database:',error);
     res.sendStatus(400);
   })
-})*/
+});
+
+router.delete('/:id',(req,res)=>{
+  let queryString = `
+    DELETE FROM suppliers
+    WHERE id=$1;
+  `;
+  pool.query(queryString,[req.params.id]).then(result=>{
+    res.sendStatus(200);
+  }).catch(error=>{
+    console.log('Erorr deleting supplier from database:',error);
+    res.sendStatus(400);
+  })
+})
 
 // EXPORT THE ROUTES
 module.exports = router;

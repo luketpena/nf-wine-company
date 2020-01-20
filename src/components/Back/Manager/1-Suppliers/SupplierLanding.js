@@ -3,6 +3,8 @@ import TravelButton from '../../../GenUse/TravelButton/TravelButton';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
+import SupplierWidget from './SupplierWidget';
+
 const SupplierTable = styled.div`
   border-collapse: collapse;
   width: 100%;
@@ -28,15 +30,7 @@ export default function SupplierLanding() {
   function renderSuppliers() {
     return supplier.map( (item,i)=> {
       return (
-        <tr key={i}>
-          <td>{item.name}</td>
-          <td>{item.country_name}</td>
-          <td>{item.region_name}</td>
-          <td>{item.website_url}</td>
-          <td><button>Details</button></td>
-          <td><button>Edit</button></td>
-          <td><button>Delete</button></td>
-        </tr>
+        <SupplierWidget supplier={item} key={i}/>
       )
     })
   }
