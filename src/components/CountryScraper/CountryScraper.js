@@ -297,13 +297,13 @@ class CountryScraper extends Component {
   }
 
   createRegionQuery = ()=> {
-    let queryString = '';
+    let queryString = 'INSERT INTO region ("name","country_id","region_code") VALUES ';
 
     for (let i=0; i<countryList.length; i++) {
       let arr = regionList[countryList[i].code]
       console.log(arr);
       for (let j=0; j<arr.length; j++) {
-        queryString += `('${countryList[i].code}', '${arr[j].name.replace("'","''")}', '${arr[j].isocode}'),`;      
+        queryString += `('${arr[j].name.replace("'","''")}', '${i+1}', '${arr[j].isocode}'),`;      
       }
     }
     return queryString;
@@ -358,29 +358,26 @@ class CountryScraper extends Component {
     })
   }
 
+  createCountryQuery = ()=> {
+    let queryString = 'INSERT INTO countries ("name","country_code") VALUES ';
+
+    for (let i=0; i<countryList.length; i++) {
+      queryString += `('${countryList[i].code}', '${countryList[i].name.replace("'","''")}'),`;   
+    }
+
+    return queryString;
+  }
+
   
 
   render () {
     return (
       <div className="sec-default">
         <h1>Country Scraper</h1>
-        <ul>
-          {"const countryList = ["}
-          {this.state.countries.map( (country,i)=>{
-          return <li key={i}>{'{'}name: '{country.name}', code: '{country.code}'{'},'}</li>
-          })}
-          {"]"}
-        </ul>
-        <h1>Country DB Maker</h1>
-        <p>INSERT INTO "country" ("name", "code") VALUES</p>
-        <ul>
-          {/*{countryList.map( (country,i)=>{
-            return <span key={i}>('{country.name}','{country.code}'),</span>
-          })}*/}
-        </ul>
+
+        {this.createCountryQuery()}
 
         <h2>Region Scraper</h2>
-        <p>INSERT INTO region ("country","name","code") VALUES</p>
         {this.createRegionQuery()}
       </div>
     )

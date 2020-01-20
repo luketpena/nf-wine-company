@@ -1,32 +1,54 @@
-import React, {Component} from 'react';
-import { withRouter } from 'react-router-dom';
+import React from 'react';
+import { useHistory } from 'react-router-dom';
+import styled from 'styled-components';
 
-class ManagerMenu extends Component {
+//-----< Styling >-----\\
+const MenuBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`;
 
-  //This will eventually switch between different manager pages depending on the button
-  clickMenuItem = ()=> {
-    console.log('CLICK');
-    this.props.history.push('/manager/events')
+const MenuItem = styled.div`
+  width: 256px;
+  height: 256px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--col-primary);
+  background-color: rgba(255,255,255,.2);
+  transition: all .2s;
+  box-shadow: 0 0 0px -2px rgba(0,0,0,0);}
+  &:hover {
+    background-color: rgba(255,255,255,.8);
+    box-shadow: 0 16px 16px -16px rgba(0,0,0,.5);
+    color: var(--col-primary-light);
+    cursor: pointer;
+  }
+`;
+
+//-----< Component Function >-----\\
+export default function ManagerMenu () {
+
+  const history = useHistory();
+
+  function clickMenuItem (target) {
+    history.push('/manager/' + target);
   }
 
-  render () {
-    return (
-      <div>
-        <h1>Manager</h1>
-        <div className="managerMenuBox">
-          <div className="managerMenuBox">
-            <div className="managerMenuItem" onClick={this.clickMenuItem}> <h2>Events</h2> </div>
-            <div className="managerMenuItem"> <h2>Suppliers</h2> </div>
-          </div>
-          <div className="managerMenuBox">
-            <div className="managerMenuItem"> <h2>Producers</h2> </div>
-            <div className="managerMenuItem"> <h2>Customers</h2> </div>     
-          </div>     
-        </div>
-        
-      </div>
-    )
-  }
+  return (
+    <div>
+      <h1>Manager</h1>
+      <MenuBox>
+        <MenuBox>
+          <MenuItem className="managerMenuItem" onClick={()=>this.clickMenuItem('events')}> <h2>Events</h2> </MenuItem>
+          <MenuItem className="managerMenuItem" onClick={()=>this.clickMenuItem('suppliers')}> <h2>Suppliers</h2> </MenuItem>
+        </MenuBox>
+        <MenuBox>
+          <MenuItem className="managerMenuItem"> <h2>Producers</h2> </MenuItem>
+          <MenuItem className="managerMenuItem"> <h2>Customers</h2> </MenuItem>     
+        </MenuBox>     
+      </MenuBox>
+    </div>
+  )
 }
-
-export default withRouter(ManagerMenu);

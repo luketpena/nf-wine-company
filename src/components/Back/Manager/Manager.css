@@ -10,6 +10,7 @@
 .section-box {
   background-color: white;
   box-shadow: 0 4px 8px -2px rgba(0,0,0,.5);
+  border-radius: 8px;
   padding: 16px 10%;
   margin: 16px 16px;}
 
@@ -17,9 +18,10 @@
   position: relative;
 }
 
-#eventLandingBox {
+.landingBox {
   min-width: 320px;
-  max-width: 100%;
+  max-width: 1000px;
+  width: 100%;
   margin: 0 auto;
 }
 
@@ -168,25 +170,22 @@ select {
 }
 
 /* Main Manager Menu */
-.managerMenuBox {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;}
-.managerMenuItem {
-  width: 256px;
-  height: 256px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--col-primary);
-  background-color: rgba(255,255,255,.2);
-  transition: all .2s;
-  box-shadow: 0 0 0px -2px rgba(0,0,0,0);}
-.managerMenuItem:hover {
-  background-color: rgba(255,255,255,.8);
-  box-shadow: 0 16px 16px -16px rgba(0,0,0,.5);
-  color: var(--col-primary-light);
-  cursor: pointer;}
 
 
+.supplierTable {
+  border-collapse: collapse;
+  width: 100%;
+}
 
+.supplierTable thead {
+  background-color: var(--col-primary);
+  color: white;
+}
+
+.supplierTable tbody tr {
+  border-bottom: 2px dotted #EEE;
+}
+
+.supplierTable tr {
+  height: 32px;
+}

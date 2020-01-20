@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 5000;
 const eventsRouter = require('./routers/events-router');
 const producersRouter = require('./routers/producers-router');
 const placesRouter = require('./routers/places-router');
+const suppliersRouter = require('./routers/suppliers.router');
 
 /* ---------- MIDDLEWARE ---------- */
 app.use(bodyParser.json()); // needed for angular requests
@@ -15,6 +16,7 @@ app.use(express.static('build'));
 app.use('/events', eventsRouter);
 app.use('/producers', producersRouter);
 app.use('/places',placesRouter);
+app.use('/suppliers',suppliersRouter);
 
 
 /** ---------- START SERVER ---------- **/
