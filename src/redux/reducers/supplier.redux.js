@@ -1,8 +1,6 @@
-const supplierReducer = (state={
-    supplierList: []
-  },action)=> {
+const supplierReducer = (state=[],action)=> {
   switch(action.type) {
-    case 'SET_SUPPLIERS': return {...state, supplierList: action.payload};
+    case 'SET_SUPPLIERS': return action.payload;
     default: return state;
   }
 }

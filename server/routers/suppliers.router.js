@@ -64,7 +64,7 @@ router.get('/',(req,res)=>{
     res.sendStatus(400);
   })
 })
-/*
+
 router.post('/',(req,res)=>{
   const {name,description,img,country,region,website} = req.body;
   let queryString = 'INSERT INTO suppliers (name, description, img_url, country_id, region_id, website_url) VALUES ($1,$2,$3,$4,$5,$6);';
@@ -102,7 +102,7 @@ router.delete('/:id',(req,res)=>{
     console.log('Erorr deleting supplier from database:',error);
     res.sendStatus(400);
   })
-})*/
+})
 
 // EXPORT THE ROUTES
 module.exports = router;

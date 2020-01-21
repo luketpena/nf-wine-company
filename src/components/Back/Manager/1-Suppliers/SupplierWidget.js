@@ -1,6 +1,21 @@
 import React, {useState, useEffect} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
+import styled from 'styled-components';
+
+const Container = styled.tr`
+
+`;
+
+const Data = styled.td`
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  text-align: center;
+  font-size: 12px;
+  padding: 12px 4px;
+  border-bottom: 1px dotted #DDD;
+`;
 
 export default function SupplierWidget(props) {
 
@@ -26,14 +41,14 @@ export default function SupplierWidget(props) {
   }
 
   return (
-    <tr>
-      <td>{props.supplier.name}</td>
-      <td>{props.supplier.country_name}</td>
-      <td>{props.supplier.region_name}</td>
-      <td>{props.supplier.website_url}</td>
-      <td><button>Details</button></td>
-      <td><button onClick={clickEdit}>Edit</button></td>
-      <td><button onClick={deleteSupplier}>Delete</button></td>
-    </tr>
+    <Container>
+      <Data>{props.supplier.name}</Data>
+      <Data>{props.supplier.country_name}</Data>
+      <Data>{props.supplier.region_name}</Data>
+      <Data>{props.supplier.website_url}</Data>
+      <Data><button>Details</button></Data>
+      <Data><button onClick={clickEdit}>Edit</button></Data>
+      <Data><button onClick={deleteSupplier}>Delete</button></Data>
+    </Container>
   )
 }
