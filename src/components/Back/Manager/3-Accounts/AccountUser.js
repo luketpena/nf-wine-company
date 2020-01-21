@@ -27,7 +27,7 @@ export default function AccountInfo() {
       setMount(true);
       dispatch({type: 'GET_USER_INFO'});
     }
-  })
+  },[mount,dispatch])
 
   return (
     <Container>
