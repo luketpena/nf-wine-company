@@ -40,13 +40,24 @@ export default function SupplierLanding() {
   let [countryFilter, setCountryFilter] = useState('');
   let [regionFilter, setRegionFilter] = useState('');
   let [sort, setSort] = useState('name');
+  let [order,setOrder] = useState('ASC');
 
   function renderSuppliers() {
-    return supplier.supplierList.map( (item,i)=> {
-      return (
-        <SupplierWidget supplier={item} key={i}/>
-      )
-    })
+    if (order==='ASC') {
+      return supplier.supplierList.map( (item,i)=> {
+        return (
+          <SupplierWidget supplier={item} key={i}/>
+        )
+      })
+    } else {
+      console.log('REVERSE');
+      
+      return supplier.supplierList.map( (item,i)=> {
+        return (
+          <SupplierWidget supplier={item} key={i}/>
+        )
+      }).reverse();
+    }
   }
 
   function submitSearch(event) {
@@ -129,7 +140,7 @@ export default function SupplierLanding() {
               <th>Website</th>
               <th>&nbsp;</th>
               <th>&nbsp;</th>
-              <th>&nbsp;</th>
+              <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? '^' : 'v')}</SortText></th>
             </tr>
           </thead>
           <tbody>
