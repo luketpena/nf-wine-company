@@ -28,7 +28,7 @@ export default function AccountInfo() {
 
   const user = useSelector(state=>state.user)
 
-  let [edit, setEdit] = useState('password');
+  let [edit, setEdit] = useState('display');
   let [username, setUsername] = useState(user.username)
   let [email, setEmail] = useState(user.email);
   let [password, setPassword] = useState('');
@@ -52,21 +52,26 @@ export default function AccountInfo() {
     }
   }
 
-  function toggleEdit() {
-    setEdit(true);
-    setUsername(user.username);
-    setEmail(user.email);
+  function toggleEdit(target) {
+    setEdit(target);
+    if (target==='edit') {
+      setUsername(user.username);
+      setEmail(user.email);
+    }
   }
 
   function renderDetails() {
     switch(edit) {
       case 'edit':
         return (
-          <form onSubmit={submitNewInfo}>
-            <input type="text" value={username} onChange={(event)=>setUsername(event.target.value)}/>
-            <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
-            <button>Confirm Changes</button>
-          </form>
+          <div>
+            <form onSubmit={submitNewInfo}>
+              <input type="text" value={username} onChange={(event)=>setUsername(event.target.value)}/>
+              <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
+              <button>Confirm Changes</button>
+            </form>
+            <button onClick={()=>setEdit('display')}>Cancel</button>
+          </div>
         )
         break;
       case 'display':
@@ -75,24 +80,27 @@ export default function AccountInfo() {
             <Name>{user.username}</Name>
             <Email>{user.email}</Email>
             <Access>Access: {user.access}</Access>
-            <button onClick={toggleEdit}>Update Settings</button>
-            <button>Change Password</button>
+            <button onClick={()=>toggleEdit('edit')}>Update Settings</button>
+            <button onClick={()=>toggleEdit('password')}>Change Password</button>
           </>
         )
         break;
       case 'password':
         return (
-          <form onSubmit={submitNewPassword}>
-            <label>
-              <span>New Password:</span>
-              <input type="password" value={password} onChange={(event)=>setPassword(event.target.value)} />
-            </label>
-            <label>
-              <span>Retype Password:</span>
-              <input type="password" value={passwordCheck} onChange={(event)=>setPasswordCheck(event.target.value)} />
-            </label>
-            <button>Confirm Changes</button>
-          </form>
+          <div>
+            <form onSubmit={submitNewPassword}>
+              <label>
+                <span>New Password:</span>
+                <input type="password" value={password} onChange={(event)=>setPassword(event.target.value)} />
+              </label>
+              <label>
+                <span>Retype Password:</span>
+                <input type="password" value={passwordCheck} onChange={(event)=>setPasswordCheck(event.target.value)} />
+              </label>
+              <button>Confirm Changes</button>
+            </form>
+            <button onClick={()=>setEdit('display')}>Cancel</button>
+          </div>
         )
         break;
       default: return <></>;
