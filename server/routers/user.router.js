@@ -25,12 +25,26 @@ router.get('/info', rejectUnauthenticated, (req,res)=> {
 
 router.put('/update', rejectUnauthenticated, (req,res)=> {
 
-
+  
   if (req.user.id === req.body.id) {
-    pool.query('UPDATE "user" SET username=$1, email=$2 WHERE id=$3',[req.body.username, req.body.email, req.body.id]).then(()=>{
+    pool.query('UPDATE "user" SET username=$1, email=$2 WHERE id=$3',[req.body.username, req.body.email, req.user.id]).then(()=>{
       res.sendStatus(200);
     }).catch(error=>{
-      console.log('Error updating user information:',errpr);
+      console.log('Error updating user password:',error);
+      res.sendStatus(400);
+    });
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+router.put('/password', rejectUnauthenticated, (req,res)=> {
+  const password = encryptLib.encryptPassword(req.body.password);
+  if (req.user.id === req.body.id) {
+    pool.query('UPDATE "user" SET password=$1 WHERE id=$2',[password, req.user.id]).then(()=>{
+      res.sendStatus(200);
+    }).catch(error=>{
+      console.log('Error updating user information:',error);
       res.sendStatus(400);
     });
   } else {
