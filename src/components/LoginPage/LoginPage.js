@@ -1,13 +1,10 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
-
-import AvatarSelect from '../AvatarSelect/AvatarSelect';
 import LoginErrorBar from './LoginErrorBar';
 import LoginInput from './LoginInput';
 
 const InputBox = styled.div`
-  background-color: var(--color-bkg-light);
   position: relative;
   overflow: hidden;
   grid-area: main;
@@ -16,31 +13,19 @@ const InputBox = styled.div`
   margin: 0 auto;
   border-radius: 16px;
   padding: 32px;
-  box-shadow: 0 32px 16px -2px var(--color-shadow-main);
+  background-color: #DDD;
 `;
 
 const Container = styled.div`
-  background-color: var(--color-bkg-main);
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 20 20'%3E%3Cg %3E%3Cpolygon fill='%231c2024' points='20 10 10 0 0 0 20 20'/%3E%3Cpolygon fill='%231c2024' points='0 10 0 20 10 20'/%3E%3C/g%3E%3C/svg%3E");
-
-  
   width: 100vw;
   height: 100vh;
   padding: 64px;
-  /* animation: scroll 5s infinite linear; */
-  box-sizing: border-box;
-  @keyframes scroll{
-  100%{
-    background-position:0px 160px;
-  }
 `;
 
 const Box = styled.div`
   display: grid;
   width: 80%;
   margin: 0 auto;
-  grid-template-areas: ${props=>(props.loginMode==='login'? '"main"' : '"avatar main"')};
-  grid-template-columns: ${props=>(props.loginMode==='login'? '1fr' : '256px 1fr')};
 `;
 
 const SwitchButton = styled.button`
@@ -54,14 +39,6 @@ export default function RegisterPage() {
   let errors = useSelector(state=>state.errors);
   let loginMode = useSelector(state=>state.loginMode);
   
-
-  
-
-  function renderAvatarSelect() {
-    if (loginMode==='register') {
-      return <AvatarSelect />
-    }
-  }
 
   function renderSwitchButton() {
     if (loginMode==='login') {
@@ -99,8 +76,6 @@ export default function RegisterPage() {
     <Container>
       
       <Box loginMode={loginMode}>
-        {renderAvatarSelect()}
-
         <InputBox>
           {renderErrorBar()}
 

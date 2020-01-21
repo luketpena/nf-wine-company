@@ -6,10 +6,14 @@ import styled from 'styled-components';
 
 //-----< Component Imports >-----\\
 import ManagerMenu from './ManagerMenu';
+
 import EventLanding from './0-Events/EventLanding';
 import SupplierLanding from './1-Suppliers/SupplierLanding';
+import CustomerLanding from './3-Customers/CustomerLanding';
+
 import EventInput from './0-Events/EventInput';
 import SupplierInput from './1-Suppliers/SupplierInput';
+
 
 //-----< Styling >-----\\
 const Container = styled.div`
@@ -28,8 +32,10 @@ export default function Manager () {
     <Container>
         <Switch>
           <Route exact path="/manager" component={ManagerMenu}/>
+
           <Route exact path="/manager/events" component={EventLanding} />
           <Route exact path="/manager/suppliers" component={SupplierLanding} />
+          <Route exact path="/manager/customers" component={CustomerLanding} />
           
           <Route path="/manager/events/:action" component={EventInput} />
           <Route path="/manager/suppliers/:action" component={SupplierInput} />
