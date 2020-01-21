@@ -28,14 +28,28 @@ export default function AccountInfo() {
 
   const user = useSelector(state=>state.user)
 
-  let [edit, setEdit] = useState(true);
+  let [edit, setEdit] = useState('password');
   let [username, setUsername] = useState(user.username)
   let [email, setEmail] = useState(user.email);
+  let [password, setPassword] = useState('');
+  let [passwordCheck, setPasswordCheck] = useState('');
   
   function submitNewInfo(event) {
     event.preventDefault();
     dispatch({type: 'UPDATE_USER_INFO', payload: {id: user.id, username, email}})
-    setEdit(false);
+    setEdit('display');
+  }
+
+  function submitNewPassword(event) {
+    event.preventDefault();
+    if (password===passwordCheck) {
+      dispatch({type: 'UPDATE_PASSWORD', payload: {id: user.id, password}});
+      setEdit('display');
+      setPassword('');
+      setPasswordCheck('');
+    } else {
+      alert('The passwords you entered do not match! Please try again.');
+    }
   }
 
   function toggleEdit() {
@@ -45,23 +59,43 @@ export default function AccountInfo() {
   }
 
   function renderDetails() {
-    if (edit) {
-      return (
-        <form onSubmit={submitNewInfo}>
-          <input type="text" value={username} onChange={(event)=>setUsername(event.target.value)}/>
-          <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
-          <button>Confirm Changes</button>
-        </form>
-      )
-    } else {
-      return (
-        <>
-          <Name>{user.username}</Name>
-          <Email>{user.email}</Email>
-          <Access>Access: {user.access}</Access>
-          <button onClick={toggleEdit}>Update Settings</button>
-        </>
-      )
+    switch(edit) {
+      case 'edit':
+        return (
+          <form onSubmit={submitNewInfo}>
+            <input type="text" value={username} onChange={(event)=>setUsername(event.target.value)}/>
+            <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
+            <button>Confirm Changes</button>
+          </form>
+        )
+        break;
+      case 'display':
+        return (
+          <>
+            <Name>{user.username}</Name>
+            <Email>{user.email}</Email>
+            <Access>Access: {user.access}</Access>
+            <button onClick={toggleEdit}>Update Settings</button>
+            <button>Change Password</button>
+          </>
+        )
+        break;
+      case 'password':
+        return (
+          <form onSubmit={submitNewPassword}>
+            <label>
+              <span>New Password:</span>
+              <input type="password" value={password} onChange={(event)=>setPassword(event.target.value)} />
+            </label>
+            <label>
+              <span>Retype Password:</span>
+              <input type="password" value={passwordCheck} onChange={(event)=>setPasswordCheck(event.target.value)} />
+            </label>
+            <button>Confirm Changes</button>
+          </form>
+        )
+        break;
+      default: return <></>;
     }
   }
 
