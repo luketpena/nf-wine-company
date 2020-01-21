@@ -1,6 +1,7 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import LogOutButton from '../../LogOutButton/LogOutButton';
 
 //-----< Styling >-----\\
 const MenuBox = styled.div`
@@ -39,6 +40,7 @@ export default function ManagerMenu () {
   return (
     <div>
       <h1>Manager</h1>
+      <LogOutButton/>
       <MenuBox>
         <MenuBox>
           <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('events')}> <h2>Events</h2> </MenuItem>
@@ -46,7 +48,7 @@ export default function ManagerMenu () {
         </MenuBox>
         <MenuBox>
           <MenuItem className="managerMenuItem"> <h2>Producers</h2> </MenuItem>
-          <MenuItem className="managerMenuItem"> <h2>Customers</h2> </MenuItem>     
+          <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('accounts')}> <h2>Accounts</h2> </MenuItem>     
         </MenuBox>     
       </MenuBox>
     </div>

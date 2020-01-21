@@ -4,9 +4,7 @@ import styled from 'styled-components';
 
 const Label = styled.label`
   display: block;
-  color: var(--color-text-light);
   margin-bottom: 8px;
-  font-family: var(--font-input);
   input {
     display: block;
     margin: 4px auto;
@@ -19,7 +17,6 @@ const Label = styled.label`
 `;
 
 const Container = styled.div`
-  border: 2px dashed var(--color-confirm-dark);
   max-width: 256px;
   padding: 16px;
   margin: 0 auto;
@@ -33,27 +30,20 @@ export default function LoginInput() {
 
   const dispatch = useDispatch();
   let loginMode = useSelector(state=>state.loginMode);
-  let avatar = useSelector(state=>state.register.avatar)
+
+  let [username, setUsername] = useState('');
+  let [password, setPassword] = useState('');
+  let [email, setEmail] = useState('');
+  let [access, setAccess] = useState('customer')
 
   function registerUser(event) {
     event.preventDefault();
 
-    if (username && password && avatar) {
+    if (username && password) {
       dispatch({
         type: 'REGISTER',
-        payload: {
-          username: username,
-          password: password,
-          avatar: avatar
-        },
+        payload: { username, password, email, access },
       });
-    } else {
-      if (!avatar) {
-        dispatch({type: 'REGISTRATION_AVATAR_ERROR'});
-      } else {
-        dispatch({type: 'REGISTRATION_INPUT_ERROR'});
-      }
-      
     }
   } // end registerUser
 
@@ -73,13 +63,13 @@ export default function LoginInput() {
     }
   } // end login
 
-  let [username, setUsername] = useState('');
-  let [password, setPassword] = useState('');
+  
 
   function handleSubmit(event) {
     switch(loginMode) {
       case 'login': login(event); break;
       case 'register': registerUser(event); break;
+      default: break;
     }
   }
 
@@ -107,6 +97,25 @@ export default function LoginInput() {
               value={password}
               onChange={(event)=>setPassword(event.target.value)}
             />
+          </Label>
+
+          <Label htmlFor="email">
+            Email:
+            <input
+              type="email"
+              name="email"
+              value={email}
+              onChange={(event)=>setEmail(event.target.value)}
+            />
+          </Label>
+
+          <Label htmlFor="access">
+            Access Level:
+            <select name="access" value={access} onChange={(event)=>setAccess(event.target.value)}>
+              <option value="customer">Customer</option>
+              <option value="admin">Admin</option>
+              <option value="master">Master</option>
+            </select>
           </Label>
 
           <Submit className="button-confirm">Submit</Submit>
