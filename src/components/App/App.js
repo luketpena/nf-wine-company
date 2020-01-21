@@ -10,12 +10,15 @@ import Manager from '../Back/Manager/Manager';
 import Home from '../Front/1-Home/Home';
 import CountryScraper from '../CountryScraper/CountryScraper';
 
+import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
+
 class App extends Component {
 
   componentDidMount() {
     this.props.dispatch({type: 'GET_EVENTS'});
     this.props.dispatch({type: 'GET_SUPPLIERS'});
     this.props.dispatch({type: 'GET_COUNTRIES'});
+    this.props.dispatch({type: 'FETCH_USER'})  
   }
 
   render () {
@@ -24,7 +27,7 @@ class App extends Component {
         <Router>
           <Switch>
             <Route exact path="/" component={Home}/>
-            <Route path="/manager" component={Manager}/>
+            <ProtectedRoute path="/manager" component={Manager}/>
             <Route path="/scraper" component={CountryScraper}/>
           </Switch>
         </Router>
