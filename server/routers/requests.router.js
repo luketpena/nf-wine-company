@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool.js');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 //Gets all of the countries
 router.get('/',(req,res)=>{
@@ -12,5 +13,14 @@ router.get('/',(req,res)=>{
     res.sendStatus(400);
   })
 })
+
+router.delete('/:id', rejectUnauthenticated, (req,res)=>{
+  pool.query('DELETE FROM requests WHERE id=$1',[req.params.id]).then(()=>{
+    res.sendStatus(200);
+  }).catch(error=>{
+    console.log('Error removing request:',error);
+    res.sendStatus(400);
+  });
+});
 
 module.exports = router;
