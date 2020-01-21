@@ -51,9 +51,9 @@ router.get('/',(req,res)=>{
 
   if (req.query.sort) {
     switch(req.query.sort) {
-      case 'name': queryString += `ORDER BY s.name DESC`; break;
-      case 'country': queryString += `ORDER BY country_name DESC`; break;
-      case 'region': queryString += `ORDER BY region_name DESC`; break;
+      case 'name': queryString += `ORDER BY LOWER(s.name) ASC`; break;
+      case 'country': queryString += `ORDER BY country_name ASC`; break;
+      case 'region': queryString += `ORDER BY region_name ASC`; break;
     }
   }
 
