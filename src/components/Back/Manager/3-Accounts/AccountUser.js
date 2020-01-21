@@ -8,6 +8,10 @@ const Container = styled.div`
   background-color: purple;
   height: 250px;
   width: 250px;
+  button {
+    display: block;
+    margin: 0 auto;
+  }
 `;
 
 export default function AccountInfo() {
@@ -28,6 +32,8 @@ export default function AccountInfo() {
   return (
     <Container>
       {JSON.stringify(userInfo)}
+      <p>{(userInfo.length===1? 'There is 1 account.' : `There are ${userInfo.length} accounts.`)}.</p>
+      <button>Modify Accounts</button>
     </Container>
   )
 }

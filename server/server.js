@@ -11,6 +11,7 @@ const producersRouter = require('./routers/producers-router');
 const placesRouter = require('./routers/places-router');
 const suppliersRouter = require('./routers/suppliers.router');
 const userRouter = require('./routers/user.router');
+const requestsRouter = require('./routers/requests.router');
 
 /* ---------- MIDDLEWARE ---------- */
 app.use(bodyParser.json()); // needed for angular requests
@@ -27,6 +28,7 @@ app.use('/producers', producersRouter);
 app.use('/places', placesRouter);
 app.use('/suppliers', suppliersRouter);
 app.use('/api/user', userRouter);
+app.use('/api/requests',requestsRouter)
 
 
 /** ---------- START SERVER ---------- **/
