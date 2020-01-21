@@ -49,6 +49,14 @@ router.get('/',(req,res)=>{
     queryString += prefix + `s.region_id=$${queryParams.length}`
   }
 
+  if (req.query.sort) {
+    switch(req.query.sort) {
+      case 'name': queryString += `ORDER BY s.name DESC`; break;
+      case 'country': queryString += `ORDER BY country_name DESC`; break;
+      case 'region': queryString += `ORDER BY region_name DESC`; break;
+    }
+  }
+
   pool.query(queryString, queryParams).then(result=>{
     res.send(result.rows);
   }).catch(error=>{
