@@ -4,11 +4,18 @@ import eventSaga from './event.saga';
 import placesSaga from './places.saga';
 import supplierSaga from './supplier.saga';
 
+import loginSaga from './loginSaga';
+import registrationSaga from './registrationSaga';
+import userSaga from './userSaga';
+
 export default function* rootSaga() {
   yield all([
     eventSaga(),
     editSaga(),
     placesSaga(),
-    supplierSaga()
+    supplierSaga(),
+    loginSaga(),
+    registrationSaga(),
+    userSaga()
   ]);
 }
