@@ -7,6 +7,7 @@ import supplierSaga from './supplier.saga';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
+import userInfoSaga from './userInfo.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     supplierSaga(),
     loginSaga(),
     registrationSaga(),
-    userSaga()
+    userSaga(),
+    userInfoSaga(),
   ]);
 }
