@@ -6,6 +6,7 @@ import supplier from './supplier.redux';
 import user from './user.redux';
 import errors from './errors.redux';
 import loginMode from './loginMode.redux';
+import userInfo from './useInfo.redux';
 
 const rootReducer = combineReducers({
   edit,
@@ -15,6 +16,7 @@ const rootReducer = combineReducers({
   user,
   errors,
   loginMode,
+  userInfo,
 });
 
 export default rootReducer;

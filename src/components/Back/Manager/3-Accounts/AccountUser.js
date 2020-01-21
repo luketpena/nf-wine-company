@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 
 
@@ -11,11 +12,22 @@ const Container = styled.div`
 
 export default function AccountInfo() {
 
-  
+  const dispatch = useDispatch();
+
+  let [mount,setMount] = useState(false);
+
+  const userInfo = useSelector(state=>state.userInfo);
+
+  useEffect(()=>{
+    if (!mount) {
+      setMount(true);
+      dispatch({type: 'GET_USER_INFO'});
+    }
+  })
 
   return (
     <Container>
-      
+      {JSON.stringify(userInfo)}
     </Container>
   )
 }
