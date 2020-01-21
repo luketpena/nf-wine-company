@@ -7,7 +7,7 @@ function * getSuppliers (action) {
 }
 
 function * getSuppliersFilter (action) {
-  const response = yield axios.get(`/suppliers/?search=${action.payload.search}&country=${action.payload.countryFilter}&region=${action.payload.regionFilter}`);
+  const response = yield axios.get(`/suppliers/?search=${action.payload.search}&country=${action.payload.countryFilter}&region=${action.payload.regionFilter}&sort=${action.payload.sort}`);
   yield put({type: 'SET_SUPPLIERS', payload: response.data})
 }
 

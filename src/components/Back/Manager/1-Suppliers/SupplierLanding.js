@@ -33,6 +33,7 @@ export default function SupplierLanding() {
   let [search, setSearch] = useState('');
   let [countryFilter, setCountryFilter] = useState('');
   let [regionFilter, setRegionFilter] = useState('');
+  let [sort, setSort] = useState('name');
 
   function renderSuppliers() {
     return supplier.supplierList.map( (item,i)=> {
@@ -45,12 +46,16 @@ export default function SupplierLanding() {
   function submitSearch(event) {
     event.preventDefault();
     console.log('Search value:',search);
-    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter}})
+    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
   }
 
   function updateCountry(event) {
     setCountryFilter(event.target.value);
-    dispatch({type: 'GET_REGIONS', payload: event.target.value});
+    if (event.target.value) {
+      dispatch({type: 'GET_REGIONS', payload: event.target.value});
+    } else {
+      dispatch({type: 'SET_REGIONS', payload: []});
+    }
     setRegionFilter('');
   }
 
