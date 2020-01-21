@@ -4,6 +4,8 @@ import event from './event.redux';
 import places from './places.redux';
 import supplier from './supplier.redux';
 import user from './user.redux';
+import errors from './errors.redux';
+import loginMode from './loginMode.redux';
 
 const rootReducer = combineReducers({
   edit,
@@ -11,6 +13,8 @@ const rootReducer = combineReducers({
   places,
   supplier,
   user,
+  errors,
+  loginMode,
 });
 
 export default rootReducer;
