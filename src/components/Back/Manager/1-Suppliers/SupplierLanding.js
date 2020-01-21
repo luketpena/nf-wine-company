@@ -23,6 +23,12 @@ const SupplierTable = styled.table`
   }
 `;
 
+const SortText = styled.span`
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
 export default function SupplierLanding() {
 
   const dispatch = useDispatch();
@@ -45,7 +51,6 @@ export default function SupplierLanding() {
 
   function submitSearch(event) {
     event.preventDefault();
-    console.log('Search value:',search);
     dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
   }
 
@@ -72,6 +77,11 @@ export default function SupplierLanding() {
       return <option key={i} value={region.id}>{region.name}</option>
     })
     return list;
+  }
+
+  function triggerSort(target) {
+    setSort(target);
+    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter,sort: target}});
   }
 
   return (
@@ -113,9 +123,9 @@ export default function SupplierLanding() {
         <SupplierTable>
           <thead>
             <tr>
-              <th>Supplier</th>
-              <th>Country</th>
-              <th>Region</th>
+              <th><SortText onClick={()=>triggerSort('name')}>Supplier</SortText></th>
+              <th><SortText onClick={()=>triggerSort('country')}>Country</SortText></th>
+              <th><SortText onClick={()=>triggerSort('region')}>Region</SortText></th>
               <th>Website</th>
               <th>&nbsp;</th>
               <th>&nbsp;</th>
