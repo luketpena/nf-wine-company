@@ -13,13 +13,15 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 });
 
 router.get('/info', rejectUnauthenticated, (req,res)=> {
-  pool.query('SELECT * FROM user_info WHERE user_id = $1', [req.user.id]).then(result=>{
-    res.send(result.rows);
-  }).catch(error=>{
-    console.log('Could not get user data',error);
-    res.sendStatus(400);
-  })
-});
+  if (req.user.access==='master' || req.user.access==='admin') {
+    pool.query(`SELECT u.id, u.username, u.email, u.access FROM "user" u;`).then(result=>{
+      res.send(result.rows);
+    }).catch(error=>{
+      console.log('Error getting user information:',error);
+      res.sendStatus(400);
+    })
+  }
+})
 
 // Handles POST request with new user data
 // The only thing different from this and every other post we've seen
@@ -27,7 +29,6 @@ router.get('/info', rejectUnauthenticated, (req,res)=> {
 router.post('/register', async (req, res) => {  
   const {username, email, access} = req.body;
   const password = encryptLib.encryptPassword(req.body.password);
-  const avatar = req.body.avatar
 
   const client = await pool.connect();
   try {
@@ -41,7 +42,6 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     client.query('ROLLBACK');
     console.log('Error registering user:',error);
-    
     res.sendStatus(400);
   } finally {
     client.release();
