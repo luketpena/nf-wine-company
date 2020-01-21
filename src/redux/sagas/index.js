@@ -8,6 +8,7 @@ import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import userInfoSaga from './userInfo.saga';
+import requestSaga from './requests.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -19,5 +20,6 @@ export default function* rootSaga() {
     registrationSaga(),
     userSaga(),
     userInfoSaga(),
+    requestSaga(),
   ]);
 }
