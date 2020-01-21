@@ -48,7 +48,7 @@ export default function ManagerMenu () {
         </MenuBox>
         <MenuBox>
           <MenuItem className="managerMenuItem"> <h2>Producers</h2> </MenuItem>
-          <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('customers')}> <h2>Customers</h2> </MenuItem>     
+          <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('accounts')}> <h2>Accounts</h2> </MenuItem>     
         </MenuBox>     
       </MenuBox>
     </div>

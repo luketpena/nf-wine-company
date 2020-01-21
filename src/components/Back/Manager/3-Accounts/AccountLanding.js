@@ -5,10 +5,10 @@ const Container = styled.div`
 
 `;
 
-export default function CustomerLanding() {
+export default function AccountLanding() {
   return (
     <Container>
-
+      
     </Container>
   )
 }
