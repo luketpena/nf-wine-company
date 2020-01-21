@@ -3,6 +3,9 @@ import TravelButton from '../../../GenUse/TravelButton/TravelButton';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
+
 import SupplierWidget from './SupplierWidget';
 
 const SupplierTable = styled.table`
@@ -130,7 +133,8 @@ export default function SupplierLanding() {
       </section>
 
       <section className="section-box">
-        <h2>Suppliers</h2>
+        <h2>Suppliers </h2>
+        
         <SupplierTable>
           <thead>
             <tr>
@@ -140,7 +144,7 @@ export default function SupplierLanding() {
               <th>Website</th>
               <th>&nbsp;</th>
               <th>&nbsp;</th>
-              <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? '^' : 'v')}</SortText></th>
+              <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
             </tr>
           </thead>
           <tbody>
