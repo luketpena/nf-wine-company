@@ -14,6 +14,8 @@ import AccountLanding from './3-Accounts/AccountLanding';
 import EventInput from './0-Events/EventInput';
 import SupplierInput from './1-Suppliers/SupplierInput';
 
+import ModifyAccounts from './3-Accounts/ModifyAccounts';
+
 
 //-----< Styling >-----\\
 const Container = styled.div`
@@ -36,6 +38,8 @@ export default function Manager () {
           <Route exact path="/manager/events" component={EventLanding} />
           <Route exact path="/manager/suppliers" component={SupplierLanding} />
           <Route exact path="/manager/accounts" component={AccountLanding} />
+
+          <Route exact path="/manager/accounts/modify" component={ModifyAccounts} />
           
           <Route path="/manager/events/:action" component={EventInput} />
           <Route path="/manager/suppliers/:action" component={SupplierInput} />
