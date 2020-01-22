@@ -6,12 +6,19 @@ function * getRequests (action) {
   yield put({type: 'SET_REQUESTS', payload: response.data});
 }
 
-function * rejectAccessRequest(action) {
+function * removeRequest(action) {
   yield axios.delete('/api/requests/'+action.payload)
+  yield put({type: 'GET_REQUESTS'});
+}
+
+function * approveAccessRequest(action) {
+  yield axios.post('/api/mail',action.payload);
+  yield put({type: 'REMOVE_REQUEST', payload: action.payload.id});
   yield put({type: 'GET_REQUESTS'});
 }
 
 export default function * requestSaga() {
   yield takeLatest('GET_REQUESTS', getRequests);
-  yield takeLatest('REJECT_ACCESS_REQUEST', rejectAccessRequest);
+  yield takeLatest('REMOVE_REQUEST', removeRequest);
+  yield takeLatest('APPROVE_ACCESS_REQUEST', approveAccessRequest);
 }
