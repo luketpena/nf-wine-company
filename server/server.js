@@ -13,6 +13,9 @@ const suppliersRouter = require('./routers/suppliers.router');
 const userRouter = require('./routers/user.router');
 const requestsRouter = require('./routers/requests.router');
 
+const mailRouter = require('./routers/mail.router');
+
+
 /* ---------- MIDDLEWARE ---------- */
 app.use(bodyParser.json()); // needed for angular requests
 app.use(bodyParser.urlencoded({extended: true}));
@@ -28,10 +31,11 @@ app.use('/producers', producersRouter);
 app.use('/places', placesRouter);
 app.use('/suppliers', suppliersRouter);
 app.use('/api/user', userRouter);
-app.use('/api/requests',requestsRouter)
+app.use('/api/requests',requestsRouter);
+app.use('/api/mail',mailRouter);
 
 
 /** ---------- START SERVER ---------- **/
 app.listen(PORT, () => {
-    console.log('Hey, listen!', PORT);
+    console.log('Hey, listen!', PORT);    
 });

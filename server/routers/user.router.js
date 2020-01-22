@@ -14,12 +14,44 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 
 router.get('/info', rejectUnauthenticated, (req,res)=> {
   if (req.user.access==='master' || req.user.access==='admin') {
-    pool.query(`SELECT u.id, u.username, u.email, u.access FROM "user" u;`).then(result=>{
+    const queryString = `
+      SELECT id, username, email, "access" FROM "user"
+      ORDER BY CASE 
+        WHEN "access" = 'master' THEN '1'
+        WHEN "access" = 'admin' THEN '2'
+        ELSE "access" END;
+    `
+    pool.query(queryString).then(result=>{
       res.send(result.rows);
     }).catch(error=>{
       console.log('Error getting user information:',error);
       res.sendStatus(400);
     })
+  }
+})
+
+router.delete('/:id', rejectUnauthenticated, async (req,res)=> {
+  if (req.user.access==='master' || req.user.access==='admin') {
+    const client = await pool.connect();
+    try {
+      await client.query(`BEGIN`);
+      let result = await client.query('SELECT "access" FROM "user" WHERE id=$1',[req.params.id]);    
+      
+      if (result.rows[0].access!=='master') {
+        await client.query('DELETE FROM "user" WHERE id=$1',[req.params.id]);
+        await client.query('COMMIT');
+        res.sendStatus(200);
+      } else {
+        console.log('Cannot delete MASTER accounts.');
+        res.sendStatus(403);
+      }
+    } catch (error) {
+      client.query('ROLLBACK');
+      console.log('Error deleting user:',error);
+      res.sendStatus(400);
+    } finally {
+      client.release();
+    }
   }
 })
 

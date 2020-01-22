@@ -5,7 +5,26 @@ import RequestRow from './RequestRow';
 
 const Container = styled.div`
   grid-area: request;
-  background-color: yellow;
+  padding: 32px;
+  box-sizing: border-box;
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  th {
+    background-color: var(--col-primary);
+    color: white;
+    height: 48px;
+  }
+  td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    text-align: center;
+    font-size: 12px;
+    padding: 12px 4px;
+    border-bottom: 1px dotted #DDD;
+  }
 `;
 
 export default function AccountRequest() {
