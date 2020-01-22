@@ -8,13 +8,7 @@ const Container = styled.tr`
 `;
 
 const Data = styled.td`
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  text-align: center;
-  font-size: 12px;
-  padding: 12px 4px;
-  border-bottom: 1px dotted #DDD;
+  
 `;
 
 export default function SupplierWidget(props) {

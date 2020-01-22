@@ -26,7 +26,7 @@ export default function EventLanding() {
   }
 
   return (
-    <div className="landingBox">
+    <div>
       <h1>Events</h1>
       <TravelButton target="/manager" text="Back" propClass='button-default'/>
       <section className="section-box">

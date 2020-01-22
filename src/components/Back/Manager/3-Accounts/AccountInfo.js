@@ -4,11 +4,28 @@ import {useSelector, useDispatch} from 'react-redux';
 
 const Container = styled.div`
   grid-area: info;
-  background-color: red;
   width: 250px;
   height: 250px;
+  border: 2px dashed #CCC;
+  margin: 4px;
+  box-sizing: border-box;
   button {
     display: block;
+    margin: 0 auto;
+    width: 80%;
+    margin: 4px auto;
+  }
+
+  input {
+    display: block;
+    width: 80%;
+    margin: 4px auto;
+    text-align: center;
+  }
+
+  label p {
+    display: block;
+    text-align: center;
     margin: 0 auto;
   }
 `;
@@ -90,11 +107,11 @@ export default function AccountInfo() {
           <div>
             <form onSubmit={submitNewPassword}>
               <label>
-                <span>New Password:</span>
+                <p>New Password:</p>
                 <input type="password" value={password} onChange={(event)=>setPassword(event.target.value)} />
               </label>
               <label>
-                <span>Retype Password:</span>
+                <p>Retype Password:</p>
                 <input type="password" value={passwordCheck} onChange={(event)=>setPasswordCheck(event.target.value)} />
               </label>
               <button>Confirm Changes</button>
@@ -109,7 +126,7 @@ export default function AccountInfo() {
 
   return (
     <Container>
-      <h2>Account Details</h2>
+      <h2>Details</h2>
       {renderDetails()}
     </Container>
   )
