@@ -33,9 +33,15 @@ function * fetchUserInfo() {
   }
 }
 
+function * deleteUser(action) {
+  yield axios.delete('/api/user/'+action.payload);
+  yield put({type: 'GET_USER_INFO'});
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_INFO',fetchUserInfo);
+  yield takeLatest('DELETE_USER',deleteUser);
 }
 
 export default userSaga;

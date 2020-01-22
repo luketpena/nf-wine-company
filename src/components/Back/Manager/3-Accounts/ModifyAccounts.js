@@ -100,7 +100,6 @@ export default function ModifyAccounts() {
   return (
     <Container>
       <h1>Modify Accounts</h1>
-      {access}
       <CreateAccountBox className="section-box">
       <h2>Create New Account</h2>
         <form onSubmit={submitNewUser}>
@@ -128,7 +127,6 @@ export default function ModifyAccounts() {
       </CreateAccountBox>
 
       <AccountBox className="section-box">
-        {JSON.stringify(userInfo)}
         <h2>Accounts</h2>
         <table>
           <thead>
