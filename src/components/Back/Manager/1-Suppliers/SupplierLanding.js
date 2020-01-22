@@ -11,14 +11,7 @@ import SupplierWidget from './SupplierWidget';
 
 //-----< Styling >-----\\
 const SupplierTable = styled.table`
-  border-collapse: collapse;
-  table-layout: fixed;
-  max-width: 800px;
-  width: 100%;
-  thead {
-    background-color: var(--col-primary);
-    color: #DDD;
-  }
+  
 `;
 
 const SortHeader = styled.th`

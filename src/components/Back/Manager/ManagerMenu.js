@@ -4,6 +4,14 @@ import styled from 'styled-components';
 import LogOutButton from '../../LogOutButton/LogOutButton';
 
 //-----< Styling >-----\\
+const Container = styled.div`
+  box-sizing: border-box;
+  padding: 10% 0;
+  h1 {
+    margin: 0 autp;
+  }
+`;
+
 const MenuBox = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -16,13 +24,13 @@ const MenuItem = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  color: var(--col-primary);
+  color: white;
   background-color: rgba(255,255,255,.2);
   transition: all .2s;
   box-shadow: 0 0 0px -2px rgba(0,0,0,0);}
   &:hover {
     background-color: rgba(255,255,255,.8);
-    box-shadow: 0 16px 16px -16px rgba(0,0,0,.5);
+    box-shadow: 0 0 16px 0 rgba(0,0,0,.5);
     color: var(--col-primary-light);
     cursor: pointer;
   }
@@ -38,9 +46,9 @@ export default function ManagerMenu () {
   }
 
   return (
-    <div>
+    <Container>
       <h1>Manager</h1>
-      <LogOutButton/>
+      
       <MenuBox>
         <MenuBox>
           <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('events')}> <h2>Events</h2> </MenuItem>
@@ -51,6 +59,7 @@ export default function ManagerMenu () {
           <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('accounts')}> <h2>Accounts</h2> </MenuItem>     
         </MenuBox>     
       </MenuBox>
-    </div>
+      <LogOutButton/>
+    </Container>
   )
 }

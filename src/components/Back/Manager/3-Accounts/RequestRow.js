@@ -3,7 +3,6 @@ import styled from 'styled-components';
 import {useDispatch} from 'react-redux';
 
 const Container = styled.tr`
-  background-color: orange;
 `;
 
 export default function RequestRow(props) {
