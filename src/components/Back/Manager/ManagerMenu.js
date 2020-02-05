@@ -10,6 +10,10 @@ const Container = styled.div`
   h1 {
     margin: 0 autp;
   }
+  button {
+    display: block;
+    margin: 32px auto;
+  }
 `;
 
 const MenuBox = styled.div`
@@ -59,7 +63,7 @@ export default function ManagerMenu () {
           <MenuItem className="managerMenuItem" onClick={()=>clickMenuItem('accounts')}> <h2>Accounts</h2> </MenuItem>     
         </MenuBox>     
       </MenuBox>
-      <LogOutButton/>
+      <LogOutButton className="button-primary"/>
     </Container>
   )
 }

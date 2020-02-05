@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 import AccountRow from './AccountRow';
 
+import ManagerTitle from '../ManagerTitle';
+
 const Container = styled.div`
 `;
 
@@ -99,7 +101,7 @@ export default function ModifyAccounts() {
 
   return (
     <Container>
-      <h1>Modify Accounts</h1>
+      <ManagerTitle title="Modify Accounts" target="/manager/accounts"/>
       <CreateAccountBox className="section-box">
       <h2>Create New Account</h2>
         <form onSubmit={submitNewUser}>
@@ -122,7 +124,7 @@ export default function ModifyAccounts() {
               </select>
             </InputColumn>
           </InputBox>
-          <button>Submit</button>
+          <button className="button-approve-mini">Submit</button>
         </form>
       </CreateAccountBox>
 

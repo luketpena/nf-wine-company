@@ -5,6 +5,8 @@ import AccountInfo from './AccountInfo';
 import AccountUser from './AccountUser';
 import AccountRequest from './AccountRequest';
 
+import ManagerTitle from '../ManagerTitle';
+
 const Container = styled.div`
   
 `;
@@ -24,7 +26,7 @@ const AccountBox = styled.div`
 export default function AccountLanding() {
   return (
     <Container className="landingBox">
-      <h1>Accounts</h1>
+      <ManagerTitle title="Accounts" target="/manager"/>
       <AccountBox className="section-box">
         <AccountInfo />
         <AccountUser />

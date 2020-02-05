@@ -29,7 +29,7 @@ const Container = styled.div`
   background-size: cover;
   background-position: center;
   background-attachment: fixed;
-
+  padding-bottom: 128px;
 `;
 
 //-----< Component Function >-----\\

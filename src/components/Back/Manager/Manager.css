@@ -9,6 +9,29 @@
   box-sizing: border-box;
 }
 
+.header-bar {
+  width: 90%;
+  margin: 0 auto;
+}
+
+.button-default-mini, .button-primary-mini, .button-reject-mini, .button-approve-mini {
+  border-radius: 4px;
+  border: none;
+  color: black;
+  background-color: #DDD;
+  transition: all .1s;
+  box-shadow: 0 2px 2px -1px rgba(0,0,0,.5);
+  font-size: 1em;
+}
+
+.button-default-mini:hover {background-color: #EEE; color: #444; }
+
+.button-approve-mini       {background-color: var(--col-approve-dark);  color: white; }
+.button-approve-mini:hover {background-color: var(--col-approve);}
+
+.button-reject-mini {background-color: var(--col-primary); color: white; }
+.button-reject-mini:hover {background-color: var(--col-primary-light); }
+
 table {
   border-collapse: collapse;
   table-layout: fixed;
@@ -27,7 +50,6 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
   text-align: center;
-  font-size: 12px;
   padding: 12px 4px;
   border-bottom: 1px dotted #DDD;
 }
@@ -166,16 +188,9 @@ h1 {
   grid-area: imageUpload;
 }
 
-select {
-  width: 128px;
-}
-
-
 .inputForm {
   grid-area: form;
 }
-
-/* Main Manager Menu */
 
 
 
