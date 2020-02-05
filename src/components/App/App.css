@@ -10,6 +10,8 @@
   --col-secondary-light: hsl(203, 81%, 44%);
   --col-default: hsl(0, 0%, 50%);
   --col-default-light: hsl(0, 0%, 60%);
+  --col-approve: seagreen;
+  --col-approve-dark: darkgreen;
 }
 
 /* Basic Element Styling */
@@ -46,6 +48,10 @@ p {
   margin: 0 auto;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .button-primary, .button-secondary, .button-default {
   height: 40px;
   background: none;
@@ -56,10 +62,12 @@ p {
   color: white;
   transition: all .2s;
   font-size: 16px;
-  box-shadow: 0 4px 4px -2px rgba(0,0,0,.5);}
-.button-primary:hover, .button-secondary, .button-default {
+  box-shadow: 0 4px 4px -2px rgba(0,0,0,.5);
+}
+.button-primary:hover, .button-secondary:hover, .button-default:hover {
   box-shadow: 0 10px 8px -4px rgba(0,0,0,.3);
-  cursor: pointer;}
+  cursor: pointer;
+}
 
 .button-primary {background-color: var(--col-primary);}
 .button-primary:hover {background-color: var(--col-primary-light);}

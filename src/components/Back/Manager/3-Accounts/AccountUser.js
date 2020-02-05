@@ -43,7 +43,7 @@ export default function AccountInfo() {
     <Container>
       <h2>Accounts</h2>
       <p>{(userInfo.length===1? 'There is 1 account.' : `There are ${userInfo.length} accounts.`)}.</p>
-      <button onClick={clickModify}>Modify Accounts</button>
+      <button className="button-default-mini" onClick={clickModify}>Modify Accounts</button>
     </Container>
   )
 }

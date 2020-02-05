@@ -25,6 +25,7 @@ const NavBox = styled.div`
     color: #CCC;
     margin-right: 16px;
     transition: color .2s;
+    font-size: 1em;
     &:hover {
       color: white;
       cursor: pointer;
@@ -37,6 +38,20 @@ const ControlBox = styled.div`
   padding: 0 8px;
   display: flex;
   align-items: center;
+  
+  button {
+    color: #CCC;
+    margin-right: 16px;
+    transition: color .2s;
+    background: none;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    &:hover {
+      color: white;
+      cursor: pointer;
+    }
+  }
 `;
 
 export default function ManagerBar(props) {
@@ -54,8 +69,8 @@ export default function ManagerBar(props) {
         <ul>
           <li></li>
           <li onClick={()=>clickNav('/manager/events')}>Events</li>
-          <li onClick={()=>clickNav('/manager/producers')}>Producers</li>
           <li onClick={()=>clickNav('/manager/suppliers')}>Suppliers</li>
+          <li onClick={()=>clickNav('/manager/producers')}>Producers</li>
           <li onClick={()=>clickNav('/manager/accounts')}>Accounts</li>
         </ul>
       </NavBox>

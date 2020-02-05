@@ -2,8 +2,9 @@ import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
+
 //-----< Component Imports >-----\\
-import BackButton from '../../../GenUse/BackButton/BackButton';
+import ManagerTitle from '../ManagerTitle';
 
 export default function EventInput(props) {
 
@@ -52,13 +53,9 @@ export default function EventInput(props) {
   return (
     <div>
       
-      <div>
-        <h1>{(action==='edit')? 'Edit Event' : 'Create New Event'}</h1>
-        {action}
-        <BackButton text='Back' propClass='button-default' />
-      </div> 
+      <ManagerTitle title={(action==='edit')? 'Edit Event' : 'Create New Event'} target='/manager/events'/>
       
-      <form className="inputBox" onSubmit={handleSubmit}>
+      <form className="inputBox section-box" onSubmit={handleSubmit}>
 
         <div className="in-image"></div>
 

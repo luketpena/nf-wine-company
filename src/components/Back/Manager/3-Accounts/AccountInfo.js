@@ -85,9 +85,9 @@ export default function AccountInfo() {
             <form onSubmit={submitNewInfo}>
               <input type="text" value={username} onChange={(event)=>setUsername(event.target.value)}/>
               <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
-              <button>Confirm Changes</button>
+              <button className="button-approve-mini">Confirm Changes</button>
             </form>
-            <button onClick={()=>setEdit('display')}>Cancel</button>
+            <button className="button-default-mini" onClick={()=>setEdit('display')}>Cancel</button>
           </div>
         )
         break;
@@ -97,8 +97,8 @@ export default function AccountInfo() {
             <Name>{user.username}</Name>
             <Email>{user.email}</Email>
             <Access>Access: {user.access}</Access>
-            <button onClick={()=>toggleEdit('edit')}>Update Settings</button>
-            <button onClick={()=>toggleEdit('password')}>Change Password</button>
+            <button className="button-default-mini" onClick={()=>toggleEdit('edit')}>Update Settings</button>
+            <button className="button-default-mini" onClick={()=>toggleEdit('password')}>Change Password</button>
           </>
         )
         break;
@@ -114,9 +114,9 @@ export default function AccountInfo() {
                 <p>Retype Password:</p>
                 <input type="password" value={passwordCheck} onChange={(event)=>setPasswordCheck(event.target.value)} />
               </label>
-              <button>Confirm Changes</button>
+              <button className="button-approve-mini">Confirm Changes</button>
             </form>
-            <button onClick={()=>setEdit('display')}>Cancel</button>
+            <button className="button-default-mini" onClick={()=>setEdit('display')}>Cancel</button>
           </div>
         )
         break;

@@ -3,7 +3,7 @@ import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
 //-----< Component Imports >-----\\
-import BackButton from '../../../GenUse/BackButton/BackButton';
+import ManagerTitle from '../ManagerTitle';
 
 export default function SupplierInput(props) {
 
@@ -76,13 +76,9 @@ export default function SupplierInput(props) {
   
   return (
     <div>
+      <ManagerTitle title={(action==='edit')? 'Edit Supplier' : 'Create New Supplier'} target="/manager/suppliers"/>
       
-      <div>
-        <h1>{(action==='edit')? 'Edit Supplier' : 'Create New Supplier'}</h1>
-        <BackButton text='Back' propClass='button-default' />
-      </div> 
-      
-      <form className="inputBox" onSubmit={handleSubmit}>
+      <form className="inputBox section-box" onSubmit={handleSubmit}>
 
         <div className="in-image"></div>
 

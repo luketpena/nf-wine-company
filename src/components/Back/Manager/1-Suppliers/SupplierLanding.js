@@ -8,6 +8,7 @@ import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 //-----< Component Imports >-----\\
 import SupplierWidget from './SupplierWidget';
+import ManagerTitle from '../ManagerTitle';
 
 //-----< Styling >-----\\
 const SupplierTable = styled.table`
@@ -161,9 +162,8 @@ export default function SupplierLanding() {
   return (
     <div className="landingBox">
 
-      <h1>Suppliers</h1>
+      <ManagerTitle title="Suppliers" target="/manager" />
       
-      <TravelButton target="/manager" text="Back" propClass='button-default'/>
       <section className="section-box">
         <TravelButton target="/manager/suppliers/new" text="Add Supplier" propClass="button-secondary center-block"/>
       </section>

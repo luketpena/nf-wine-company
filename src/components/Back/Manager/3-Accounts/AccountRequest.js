@@ -21,7 +21,6 @@ const Container = styled.div`
     overflow: hidden;
     text-overflow: ellipsis;
     text-align: center;
-    font-size: 12px;
     padding: 12px 4px;
     border-bottom: 1px dotted #DDD;
   }

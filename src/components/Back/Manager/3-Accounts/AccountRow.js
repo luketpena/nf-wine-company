@@ -19,8 +19,8 @@ export default function AccountRow(props) {
       <td>{props.account.username}</td>
       <td>{props.account.email}</td>
       <td>{props.account.access}</td>
-      <td>{(props.account.access==='customer'? <button>Modify</button> : <>&nbsp;</> )}</td>
-      <td>{(props.account.access!=='master'? <button onClick={removeAccount}>Remove</button> : <>&nbsp;</> )}</td>
+      <td>{(props.account.access==='customer'? <button className="button-default-mini">Modify</button> : <>&nbsp;</> )}</td>
+      <td>{(props.account.access!=='master'? <button className="button-reject-mini" onClick={removeAccount}>Remove</button> : <>&nbsp;</> )}</td>
     </Container>
   )
 }
