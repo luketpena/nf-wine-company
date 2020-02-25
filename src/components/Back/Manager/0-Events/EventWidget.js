@@ -40,6 +40,8 @@ const EventImage = styled.div`
 //, img from the extraction of props.event
 export default function EventWidget(props) {
 
+  let {name, description, date, time, price, link_url, link_text, id} = props.event;   
+
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -61,8 +63,21 @@ export default function EventWidget(props) {
     dispatch({type: 'DELETE_EVENT', payload: {id}})
   }
 
+  function renderLinkButton() {
+    if (link_url!=='' && link_url!==null) {
+      return  (
+        <a href={link_url} target="_blank" rel="noopener noreferrer">
+          <button className="button-default"> 
+            {( (link_text!=='' && link_text!==null)? link_text : 'Event Link')}
+          </button>
+        </a>
+      )
+    } else {
+      return <p>No link url provided</p>
+    }
+  }
 
-  let {name, description, date, time, price, link_url, link_text, id} = props.event;   
+  
 
   return (
     <Container>
@@ -75,7 +90,7 @@ export default function EventWidget(props) {
           <li>${price}</li>
         </ul>
         <p>{description}</p>
-        <button>{link_text}</button>
+        {renderLinkButton()}
       </div>
       <div>
         <button className='button-default' onClick={clickEdit}>Edit</button>
