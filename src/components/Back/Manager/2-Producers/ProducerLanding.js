@@ -86,7 +86,7 @@ export default function SupplierLanding() {
   let [order,setOrder] = useState('ASC');
 
   let [displayStart,setDisplayStart] = useState(0);
-  let [displayUnit] = useState(2);
+  let [displayUnit] = useState(50);
   let [displaySelect,setDisplaySelect] = useState(1);
 
   //Renders all available suppliers to the list
@@ -162,16 +162,16 @@ export default function SupplierLanding() {
   return (
     <div className="landingBox">
 
-      <ManagerTitle title="Suppliers" target="/manager" />
+      <ManagerTitle title="Producers" target="/manager" />
       
       <section className="section-box">
-        <TravelButton target="/manager/suppliers/new" text="Add Supplier" propClass="button-secondary center-block"/>
+        <TravelButton target="/manager/producers/new" text="Add Producer" propClass="button-secondary center-block"/>
       </section>
 
       <SearchBar className="section-box">
         <form onSubmit={submitSearch}>
 
-          <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for supplier"/>
+          <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for producer"/>
 
             <label>
               <span>Country:</span>
@@ -194,14 +194,14 @@ export default function SupplierLanding() {
       </SearchBar>
 
       <section className="section-box">
-        <h2>Suppliers </h2>
+        <h2>Producers</h2>
         <DisplaySelectBox>
           {renderDisplaySelect()}
         </DisplaySelectBox>
         <SupplierTable>
           <thead>
             <tr>
-              <SortHeader><SortText onClick={()=>triggerFilter('name')}>Supplier</SortText></SortHeader>
+              <SortHeader><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></SortHeader>
               <SortHeader><SortText onClick={()=>triggerFilter('country')}>Country</SortText></SortHeader>
               <SortHeader><SortText onClick={()=>triggerFilter('region')}>Region</SortText></SortHeader>
               <th>Website</th>
