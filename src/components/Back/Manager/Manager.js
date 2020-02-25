@@ -14,6 +14,7 @@ import AccountLanding from './3-Accounts/AccountLanding';
 
 import EventInput from './0-Events/EventInput';
 import SupplierInput from './1-Suppliers/SupplierInput';
+import ProducerInput from './2-Producers/ProducerInput';
 
 import ModifyAccounts from './3-Accounts/ModifyAccounts';
 
@@ -58,6 +59,7 @@ export default function Manager (props) {
           
           <Route path="/manager/events/:action" component={EventInput} />
           <Route path="/manager/suppliers/:action" component={SupplierInput} />
+          <Route path="/manager/producers/:action" component={ProducerInput} />
         </Switch>
     </Container>
   )
