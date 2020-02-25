@@ -18,10 +18,14 @@ router.get('/',(req,res)=>{
 
 //Add a new event to the DB
 router.post('/',(req,res)=>{
-  const {name,description,img,date,time,price} = req.body;
+  const {name,description,img,date,time,price,link_url,link_text,trade} = req.body;
+  const queryParams = [name,description,img,date,time,price,link_url,link_text,trade];
+
+  console.log('Incoming event:',req.body);
   
-  let queryString = 'INSERT INTO events (name, description, img, date, time, price) VALUES ($1,$2,$3,$4,$5,$6);';
-  pool.query(queryString,[name,description,img,date,time,price]).then(result=>{
+  
+  let queryString = 'INSERT INTO events (name, description, img, date, time, price, link_url, link_text, trade) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);';
+  pool.query(queryString,queryParams).then(result=>{
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error adding event to database:',error);
