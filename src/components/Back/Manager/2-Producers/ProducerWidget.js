@@ -26,7 +26,7 @@ export default function SupplierWidget(props) {
 
   useEffect(()=>{
     if (ready && editReady) {
-      history.push('/manager/suppliers/edit');
+      history.push('/manager/producers/edit');
     }
   });
 

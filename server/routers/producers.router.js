@@ -6,8 +6,7 @@ const pool = require('../modules/pool.js');
 // ROUTES
 
 router.get('/',(req,res)=>{
-  console.log('IN PRODUCER GET');
-  
+
   let queryString = `
     SELECT p.*, c.name AS country_name, r.name AS region_name FROM producers p
     JOIN country c ON p.country_id = c.id
@@ -42,8 +41,6 @@ router.get('/',(req,res)=>{
     }
   }
 
-  console.log('PRODUCER QUERY:',queryString);
-  
 
   pool.query(queryString, queryParams).then(result=>{
     res.send(result.rows);
@@ -56,6 +53,8 @@ router.get('/',(req,res)=>{
 router.post('/',(req,res)=>{
   const {name,description,img,country,region,website} = req.body;
   let queryString = 'INSERT INTO producers (name, description, img_url, country_id, region_id, website_url) VALUES ($1,$2,$3,$4,$5,$6);';
+  console.log('Posting new producer:',req.body);
+  
   pool.query(queryString,[name,description,img,country,region,website]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{

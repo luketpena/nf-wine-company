@@ -31,8 +31,8 @@ function * editProducer (action) {
 
 export default function * eventSaga() {
   yield takeLatest('GET_PRODUCERS', getProducers);
-  // yield takeLatest('GET_PRODUCERS_FILTER', getProducersFilter);
-  // yield takeLatest('DELETE_PRODUCER', deleteProducer);
-  // yield takeLatest('NEW_PRODUCER', newProducer);
-  // yield takeLatest('EDIT_PRODUCER', editProducer);
+  yield takeLatest('GET_PRODUCERS_FILTER', getProducersFilter);
+  yield takeLatest('DELETE_PRODUCER', deleteProducer);
+  yield takeLatest('NEW_PRODUCER', newProducer);
+  yield takeLatest('EDIT_PRODUCER', editProducer);
 }
