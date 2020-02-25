@@ -19,8 +19,6 @@ router.get('/',(req,res)=>{
       case 'name': queryString += `ORDER BY name ASC`; break;
     }
   }
-  console.log('Incoming search:',queryString);
-  
 
   pool.query(queryString, queryParams).then(result=>{
     res.send(result.rows);
@@ -46,8 +44,10 @@ router.put('/edit',(req,res)=>{
   let queryString = `
     UPDATE suppliers
     SET name=$1, description=$2, img_url=$3, website_url=$4
-    WHERE id=$7;
+    WHERE id=$5;
   `;
+  console.log('Incoming edit:',req.body);
+  
   pool.query(queryString,[name,description,img,website,id]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
