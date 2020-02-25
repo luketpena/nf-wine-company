@@ -62,7 +62,7 @@ export default function EventWidget(props) {
   }
 
 
-  let {name, description, date, time, price, id} = props.event;   
+  let {name, description, date, time, price, link_url, link_text, id} = props.event;   
 
   return (
     <Container>
@@ -75,6 +75,7 @@ export default function EventWidget(props) {
           <li>${price}</li>
         </ul>
         <p>{description}</p>
+        <button>{link_text}</button>
       </div>
       <div>
         <button className='button-default' onClick={clickEdit}>Edit</button>
