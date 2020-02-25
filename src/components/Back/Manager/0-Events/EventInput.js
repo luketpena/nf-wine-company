@@ -85,18 +85,18 @@ export default function EventInput(props) {
 
           <label>
             <span className="inputName">Link URL:</span>
-            <input required type="text" value={link_url} onChange={(event)=>setLink_url(event.target.value)}/>
+            <input type="text" value={link_url} onChange={(event)=>setLink_url(event.target.value)}/>
           </label>
 
           <label>
             <span className="inputName">Link text:</span>
-            <input required type="text" value={link_text} onChange={(event)=>setLink_text(event.target.value)}/>
+            <input type="text" value={link_text} onChange={(event)=>setLink_text(event.target.value)}/>
 
           </label>
 
           <label>
             <span className="inputName">Trade Event:</span>
-            <input required type="checkbox" checked={trade} onChange={event=>setTrade(event.target.checked)}/>
+            <input type="checkbox" checked={trade} onChange={event=>setTrade(event.target.checked)}/>
           </label>
         </div>
 

@@ -9,6 +9,8 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-evenly;
   border-bottom: 2px dotted #EEE;
+  padding: 8px;
+  box-sizing: border-box;
 
   ul {
     padding: 0;
@@ -40,7 +42,7 @@ const EventImage = styled.div`
 //, img from the extraction of props.event
 export default function EventWidget(props) {
 
-  let {name, description, date, time, price, link_url, link_text, id} = props.event;   
+  let {name, description, date, time, price, link_url, link_text, trade, id} = props.event;   
 
   const dispatch = useDispatch();
   const history = useHistory();
@@ -88,6 +90,7 @@ export default function EventWidget(props) {
           <li>{date.split('T')[0]}</li>
           <li>{time.substr(0,5)}</li>
           <li>${price}</li>
+          <li>{(trade? 'Trade Event' : 'Public Event')}</li>
         </ul>
         <p>{description}</p>
         {renderLinkButton()}
