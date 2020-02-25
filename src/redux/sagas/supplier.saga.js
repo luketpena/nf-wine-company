@@ -22,6 +22,8 @@ function * newSupplier (action) {
 }
 
 function * editSupplier (action) {
+  console.log('Now editing supplier!');
+  
   yield axios.put('/suppliers/edit', action.payload);
   yield put({type: 'GET_SUPPLIERS'});
 }
