@@ -25,6 +25,7 @@ export default function EventInput(props) {
   let [price,setPrice] = useState( (action==='edit' && edit.price)? edit.price : '');
   let [link_url, setLink_url] = useState( (action==='edit' && edit.link_url)? edit.link_url : '');
   let [link_text, setLink_text] = useState( (action==='edit' && edit.link_text)? edit.link_text : '');
+  let [trade, setTrade] = useState( (action==='edit' && edit.trade)? edit.trade : false );
 
   //>> Submits the new or edited event to the server
   function handleSubmit(event) {
@@ -37,7 +38,10 @@ export default function EventInput(props) {
       img,
       date,
       time,
-      price
+      price,
+      link_url,
+      link_text,
+      trade,
     }
 
     switch(action) {
@@ -66,27 +70,33 @@ export default function EventInput(props) {
         <div className="inputLine">
           <label>
             <span className="inputName">Date:</span>
-            <input required type="date" value={date} onChange={(event)=>setDate(event.target.value)}></input>
+            <input required type="date" value={date} onChange={(event)=>setDate(event.target.value)}/>
           </label>
 
           <label>
             <span className="inputName">Time:</span>
-            <input required type="time" value={time} onChange={(event)=>setTime(event.target.value)}></input>
+            <input required type="time" value={time} onChange={(event)=>setTime(event.target.value)}/>
           </label>
 
           <label>
             <span className="inputName">$</span>
-            <input required className="in-price" type="number" value={price} onChange={(event)=>setPrice(event.target.value)}></input>
+            <input required className="in-price" type="number" value={price} onChange={(event)=>setPrice(event.target.value)}/>
           </label>
 
           <label>
             <span className="inputName">Link URL:</span>
-            <input required type="text" value={link_url} onChange={(event)=>setLink_url(event.target.value)}></input>
+            <input required type="text" value={link_url} onChange={(event)=>setLink_url(event.target.value)}/>
           </label>
 
           <label>
             <span className="inputName">Link text:</span>
-            <input required type="text" value={link_text} onChange={(event)=>setLink_text(event.target.value)}></input>
+            <input required type="text" value={link_text} onChange={(event)=>setLink_text(event.target.value)}/>
+
+          </label>
+
+          <label>
+            <span className="inputName">Trade Event:</span>
+            <input required type="checkbox" checked={trade} onChange={event=>setTrade(event.target.checked)}/>
           </label>
         </div>
 
