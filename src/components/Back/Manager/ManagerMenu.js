@@ -51,7 +51,7 @@ export default function ManagerMenu () {
 
   return (
     <Container>
-      <h1>Manager</h1>
+      <h1>The New France Wine Company</h1>
       
       <MenuBox>
         <MenuBox>
