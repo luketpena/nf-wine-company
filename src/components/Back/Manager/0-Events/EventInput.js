@@ -23,6 +23,8 @@ export default function EventInput(props) {
   let [date,setDate] = useState( (action==='edit' && edit.date)? edit.date.split('T')[0] : '' );
   let [time,setTime] = useState( (action==='edit' && edit.time)? edit.time : '' );
   let [price,setPrice] = useState( (action==='edit' && edit.price)? edit.price : '');
+  let [link_url, setLink_url] = useState( (action==='edit' && edit.link_url)? edit.link_url : '');
+  let [link_text, setLink_text] = useState( (action==='edit' && edit.link_text)? edit.link_text : '');
 
   //>> Submits the new or edited event to the server
   function handleSubmit(event) {
@@ -75,6 +77,16 @@ export default function EventInput(props) {
           <label>
             <span className="inputName">$</span>
             <input required className="in-price" type="number" value={price} onChange={(event)=>setPrice(event.target.value)}></input>
+          </label>
+
+          <label>
+            <span className="inputName">Link URL:</span>
+            <input required type="text" value={link_url} onChange={(event)=>setLink_url(event.target.value)}></input>
+          </label>
+
+          <label>
+            <span className="inputName">Link text:</span>
+            <input required type="text" value={link_text} onChange={(event)=>setLink_text(event.target.value)}></input>
           </label>
         </div>
 
