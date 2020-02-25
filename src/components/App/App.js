@@ -17,6 +17,7 @@ class App extends Component {
   componentDidMount() {
     this.props.dispatch({type: 'GET_EVENTS'});
     this.props.dispatch({type: 'GET_SUPPLIERS'});
+    this.props.dispatch({type: 'GET_PRODUCERS'});
     this.props.dispatch({type: 'GET_COUNTRIES'});
     this.props.dispatch({type: 'FETCH_USER'})  
   }

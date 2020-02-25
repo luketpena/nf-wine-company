@@ -3,6 +3,7 @@ import edit from './edit.redux';
 import event from './event.redux';
 import places from './places.redux';
 import supplier from './supplier.redux';
+import producer from './producer.redux';
 import user from './user.redux';
 import errors from './errors.redux';
 import loginMode from './loginMode.redux';
@@ -14,6 +15,7 @@ const rootReducer = combineReducers({
   event,
   places,
   supplier,
+  producer,
   user,
   errors,
   loginMode,

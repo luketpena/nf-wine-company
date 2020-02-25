@@ -7,9 +7,9 @@ const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
 const eventsRouter = require('./routers/events-router');
-const producersRouter = require('./routers/producers-router');
 const placesRouter = require('./routers/places-router');
 const suppliersRouter = require('./routers/suppliers.router');
+const producersRouter = require('./routers/producers.router');
 const userRouter = require('./routers/user.router');
 const requestsRouter = require('./routers/requests.router');
 
@@ -30,6 +30,7 @@ app.use('/events', eventsRouter);
 app.use('/producers', producersRouter);
 app.use('/places', placesRouter);
 app.use('/suppliers', suppliersRouter);
+app.use('/producers', producersRouter);
 app.use('/api/user', userRouter);
 app.use('/api/requests',requestsRouter);
 app.use('/api/mail',mailRouter);
