@@ -29,7 +29,7 @@ export default function SupplierInput(props) {
   function handleSubmit(event) {
 
     event.preventDefault();
-    const newEvent = {
+    const inputs = {
       id: edit.id,
       name,
       description,
@@ -41,14 +41,14 @@ export default function SupplierInput(props) {
 
     switch(action) {
       case 'new':
-        dispatch({type: 'NEW_SUPPLIER', payload: newEvent});
+        dispatch({type: 'NEW_PRODUCER', payload: inputs});
         break;
       case 'edit':
-        dispatch({type: 'EDIT_SUPPLIER', payload: newEvent});
+        dispatch({type: 'EDIT_PRODUCER', payload: inputs});
         break;
       default:
     }
-    history.push('/manager/suppliers')
+    history.push('/manager/producers')
   }
 
   //Fills the country select with options from the country list
@@ -76,13 +76,13 @@ export default function SupplierInput(props) {
   
   return (
     <div>
-      <ManagerTitle title={(action==='edit')? 'Edit Supplier' : 'Create New Supplier'} target="/manager/suppliers"/>
+      <ManagerTitle title={(action==='edit')? 'Edit Producer' : 'Add New Producer'} target="/manager/suppliers"/>
       
       <form className="inputBox section-box" onSubmit={handleSubmit}>
 
         <div className="in-image"></div>
 
-        <input required className="in-name" type="text" placeholder="Supplier Name" value={name} onChange={(event)=>setName(event.target.value)} />
+        <input required className="in-name" type="text" placeholder="Producer Name" value={name} onChange={(event)=>setName(event.target.value)} />
 
         <div className="inputLine">
           <label className="selectLabel">
@@ -105,7 +105,7 @@ export default function SupplierInput(props) {
           </label>
         </div>
 
-        <textarea required className="in-description" placeholder="Supplier Bio"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
+        <textarea required className="in-description" placeholder="Producer Bio"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
         
         <button className="inputButton button-secondary center-block">Submit</button>
 
