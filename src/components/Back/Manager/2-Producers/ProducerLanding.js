@@ -7,7 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 //-----< Component Imports >-----\\
-import SupplierWidget from './SupplierWidget';
+import SupplierWidget from './ProducerWidget';
 import ManagerTitle from '../ManagerTitle';
 
 //-----< Styling >-----\\
@@ -80,11 +80,13 @@ export default function SupplierLanding() {
   let regions = useSelector(state=>state.places.regions);
   //>> Creating state
   let [search, setSearch] = useState('');
+  let [countryFilter, setCountryFilter] = useState('');
+  let [regionFilter, setRegionFilter] = useState('');
   let [sort, setSort] = useState('name');
   let [order,setOrder] = useState('ASC');
 
   let [displayStart,setDisplayStart] = useState(0);
-  let [displayUnit] = useState(50);
+  let [displayUnit] = useState(2);
   let [displaySelect,setDisplaySelect] = useState(1);
 
   //Renders all available suppliers to the list
@@ -107,13 +109,40 @@ export default function SupplierLanding() {
   //Sends the search parameters to the saga for getting the filtered supplier list
   function submitSearch(event) {
     event.preventDefault();
-    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,sort}})
+    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
   }
 
   //Triggers a filtered search of suppliers with the current search parameters
   function triggerFilter(target) {
     setSort(target);
-    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,sort: target}});
+    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter,sort: target}});
+  }
+
+  //Dispatches the call to get regions for a country OR empties the regions
+  function updateCountry(event) {
+    setCountryFilter(event.target.value);
+    if (event.target.value) {
+      dispatch({type: 'GET_REGIONS', payload: event.target.value});
+    } else {
+      dispatch({type: 'SET_REGIONS', payload: []});
+    }
+    setRegionFilter('');
+  }
+
+  //Fills the select list for countries
+  function populateCountrySelect() {
+    let list = countries.map( (country,i)=> {
+      return <option key={i} value={country.id}>{country.name}</option>
+    })
+    return list;
+  }
+
+  //Fills select list for regions of a country
+  function populateRegionSelect() {
+    let list = regions.map( (region,i)=> {
+      return <option key={i} value={region.id}>{region.name}</option>
+    })
+    return list;
   }
 
   function renderDisplaySelect() {
@@ -141,7 +170,25 @@ export default function SupplierLanding() {
 
       <SearchBar className="section-box">
         <form onSubmit={submitSearch}>
-          <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for supplier"/>         
+
+          <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for supplier"/>
+
+            <label>
+              <span>Country:</span>
+              <select onChange={(event)=>updateCountry(event)} value={countryFilter}>
+                <option></option>
+                {populateCountrySelect()}
+              </select>
+            </label>
+
+            <label>
+              <span>Region:</span>
+              <select onChange={(event)=>setRegionFilter(event.target.value)} value={regionFilter}>
+                <option ></option>
+                {populateRegionSelect()}
+              </select>
+            </label>
+          
           <button>Submit</button>
         </form>
       </SearchBar>
@@ -155,6 +202,8 @@ export default function SupplierLanding() {
           <thead>
             <tr>
               <SortHeader><SortText onClick={()=>triggerFilter('name')}>Supplier</SortText></SortHeader>
+              <SortHeader><SortText onClick={()=>triggerFilter('country')}>Country</SortText></SortHeader>
+              <SortHeader><SortText onClick={()=>triggerFilter('region')}>Region</SortText></SortHeader>
               <th>Website</th>
               <ButtonHeader>&nbsp;</ButtonHeader>
               <ButtonHeader>&nbsp;</ButtonHeader>
