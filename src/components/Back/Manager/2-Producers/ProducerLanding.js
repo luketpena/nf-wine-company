@@ -75,7 +75,7 @@ export default function SupplierLanding() {
   //>> Set up
   const dispatch = useDispatch();
   //>> Accessing reducers
-  let supplier = useSelector(state=>state.supplier);
+  let producer = useSelector(state=>state.producer);
   let countries = useSelector(state=>state.places.countries);
   let regions = useSelector(state=>state.places.regions);
   //>> Creating state
@@ -90,11 +90,11 @@ export default function SupplierLanding() {
   let [displaySelect,setDisplaySelect] = useState(1);
 
   //Renders all available suppliers to the list
-  function renderSuppliers() {
-    let copyArray = [...supplier];
+  function renderProducers() {
+    let copyArray = [...producer];
     if (order==='DESC') {copyArray.reverse()}
     let returnArray = [];
-      console.log(supplier.length);
+      console.log(producer.length);
       for (let i=displayStart; i<Math.min(copyArray.length,displayStart+displayUnit); i++) {
         let current = copyArray[i].name;
         console.log('Current supplier:',current);
@@ -109,13 +109,13 @@ export default function SupplierLanding() {
   //Sends the search parameters to the saga for getting the filtered supplier list
   function submitSearch(event) {
     event.preventDefault();
-    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
   }
 
   //Triggers a filtered search of suppliers with the current search parameters
   function triggerFilter(target) {
     setSort(target);
-    dispatch({type: 'GET_SUPPLIERS_FILTER', payload: {search,countryFilter,regionFilter,sort: target}});
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort: target}});
   }
 
   //Dispatches the call to get regions for a country OR empties the regions
@@ -146,7 +146,7 @@ export default function SupplierLanding() {
   }
 
   function renderDisplaySelect() {
-    const num = supplier.length/displayUnit;
+    const num = producer.length/displayUnit;
     let arr = [];
     for (let i=0; i<num; i++) {
       arr.push(<DisplaySelect key={i} displaySelect={displaySelect} index={i+1} onClick={()=>selectDisplay(i)}>{i+1}</DisplaySelect>);
@@ -211,7 +211,7 @@ export default function SupplierLanding() {
             </tr>
           </thead>
           <tbody>
-            {renderSuppliers()}
+            {renderProducers()}
           </tbody>
         </SupplierTable>
       </section>

@@ -3,6 +3,7 @@ import editSaga from './edit.saga';
 import eventSaga from './event.saga';
 import placesSaga from './places.saga';
 import supplierSaga from './supplier.saga';
+import producerSaga from './producer.saga';
 
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
@@ -16,6 +17,7 @@ export default function* rootSaga() {
     editSaga(),
     placesSaga(),
     supplierSaga(),
+    producerSaga(),
     loginSaga(),
     registrationSaga(),
     userSaga(),
