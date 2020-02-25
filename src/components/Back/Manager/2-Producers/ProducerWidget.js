@@ -37,6 +37,8 @@ export default function SupplierWidget(props) {
   return (
     <Container>
       <Data>{props.supplier.name}</Data>
+      <Data>{props.supplier.country_name}</Data>
+      <Data>{props.supplier.region_name}</Data>
       <Data>{props.supplier.website_url}</Data>
       <Data><button>Details</button></Data>
       <Data><button onClick={clickEdit}>Edit</button></Data>
