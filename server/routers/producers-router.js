@@ -7,7 +7,7 @@ const pool = require('../modules/pool.js');
 
 //Gets all of the events ordered by date
 router.get('/',(req,res)=>{
-  let queryString = 'SELECT * FROM producers ORDER BY date, time ASC';
+  let queryString = 'SELECT * FROM producers;';
   pool.query(queryString).then(result=>{
     res.send(result.rows);
   }).catch(error=>{

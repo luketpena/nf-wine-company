@@ -9,6 +9,7 @@ import ManagerMenu from './ManagerMenu';
 
 import EventLanding from './0-Events/EventLanding';
 import SupplierLanding from './1-Suppliers/SupplierLanding';
+import ProducerLanding from './2-Producers/ProducerLanding';
 import AccountLanding from './3-Accounts/AccountLanding';
 
 import EventInput from './0-Events/EventInput';
@@ -50,6 +51,7 @@ export default function Manager (props) {
 
           <Route exact path="/manager/events" component={EventLanding} />
           <Route exact path="/manager/suppliers" component={SupplierLanding} />
+          <Route exact path="/manager/producers" component={ProducerLanding} />
           <Route exact path="/manager/accounts" component={AccountLanding} />
 
           <Route exact path="/manager/accounts/modify" component={ModifyAccounts} />
