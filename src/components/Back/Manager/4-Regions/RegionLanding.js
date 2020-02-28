@@ -64,7 +64,12 @@ export default function RegionLanding() {
     event.preventDefault();
     // Only submit a region if a country is selected
     if (country!=='') {
-      
+      const newRegion = {
+        country_id: country,
+        name: region,
+        region_code: (regionCode!==''? regionCode : null)
+      }
+      dispatch({type: 'ADD_REGION', payload: newRegion});
     } else {
       //Reject without country
       alert('Please select a country to add to.');
