@@ -23,6 +23,11 @@ const ButtonBox = styled.div`
 
 const InfoBox = styled.div`
   grid-area: info;
+  display: flex;
+  align-items: center;
+  .code-in {
+    width: 48px;
+  }
 `;
 
 export default function RegionWidget(props) {
@@ -66,11 +71,22 @@ export default function RegionWidget(props) {
     }
   }
 
+  function renderInputs() {
+    if (edit) {
+      return <div>
+        <input require type="text" value={name_in} onChange={event=>setName_in(event.target.value)} placeholder="Region name"/>
+        <input require type="text" className="code-in" value={code_in} onChange={event=>setCode_in(event.target.value)} placeholder="Region code"/>
+      </div>
+    } else {
+      return <p>{name} - {region_code}</p>;
+    }
+  }
+
   return (
     <Container>
 
       <InfoBox>
-        <p>{name} - {region_code} </p>
+        {renderInputs()}
       </InfoBox>
 
       <ButtonBox>
