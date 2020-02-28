@@ -10,6 +10,14 @@ const Container = styled.div``;
 const RegionList = styled.div`
   min-width: max-content;
   max-width: 500px;
+  text-align: center;
+
+  h2 {
+    margin-bottom: 0;
+  }
+  p {
+    margin-top: 0;
+  }
 `;
 
 const InputBox = styled.div`
@@ -97,6 +105,7 @@ export default function RegionLanding() {
       </InputBox>
       <RegionList className="section-box">
          <h2>Region List</h2>
+         <p>Number of regions: {regions.length}</p>
          {renderRegions()}
       </RegionList>
     </Container>
