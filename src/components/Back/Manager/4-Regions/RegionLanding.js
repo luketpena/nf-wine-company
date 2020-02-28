@@ -32,12 +32,14 @@ export default function RegionLanding() {
   let countries = useSelector(state=>state.places.countries);
   let regions = useSelector(state=>state.places.regions);
 
-  let [countryFilter, setCountryFilter] = useState('');
+  let [country, setCountry] = useState('');
+  let [region, setRegion] = useState('');
+  let [regionCode, setRegionCode] = useState('');
 
 
   //Dispatches the call to get regions for a country OR empties the regions
   function updateCountry(event) {
-    setCountryFilter(event.target.value);
+    setCountry(event.target.value);
     if (event.target.value) {
       dispatch({type: 'GET_REGIONS', payload: event.target.value});
     } else {
@@ -58,20 +60,32 @@ export default function RegionLanding() {
     })
   }
 
+  function submitRegion(event) {
+    event.preventDefault();
+    // Only submit a region if a country is selected
+    if (country!=='') {
+      
+    } else {
+      //Reject without country
+      alert('Please select a country to add to.');
+    }
+  }
+
   return (
     <Container>
       <ManagerTitle title="Regions" target="/manager"/>
       <InputBox className="section-box">
 
         <h2>Select a Country</h2>
-        <select onChange={(event)=>updateCountry(event)} value={countryFilter}>
+        <select onChange={(event)=>updateCountry(event)} value={country}>
           <option></option>
           {populateCountrySelect()}
         </select>
 
         <h2>Add a Region</h2>
-        <form>
-          <input type="text" placeholder="Region Name"/>
+        <form onSubmit={submitRegion}>
+          <input required type="text" placeholder="Region Name" value={region} onChange={event=>setRegion(event.target.value)}/>
+          <input type="text" placeholder="Region Code" value={regionCode} onChange={event=>setRegionCode(event.target.value)}/>
           <button>Submit</button>
         </form>
 
