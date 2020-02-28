@@ -37,14 +37,23 @@ export default function RegionWidget(props) {
 
   let [edit, setEdit] = useState(false);
   let [name_in, setName_in] = useState(name);
-  let [code_in, setCode_in] = useState(region_code);
+  let [code_in, setCode_in] = useState((region_code===null? '' : region_code));
 
   function deleteRegion() {
     dispatch({type: 'DELETE_REGION', payload: {region_id: id, country_id}});
   }
 
   function submitEdit() {
-
+    const payload = {
+      country_id,
+      region_id: id,
+      updatePackage: {
+        name: name_in,
+        region_code: code_in
+      }
+    }
+    dispatch({type: 'UPDATE_REGION', payload});
+    setEdit(false);
   }
 
   function cancelEdit() {
@@ -74,8 +83,8 @@ export default function RegionWidget(props) {
   function renderInputs() {
     if (edit) {
       return <div>
-        <input require type="text" value={name_in} onChange={event=>setName_in(event.target.value)} placeholder="Region name"/>
-        <input require type="text" className="code-in" value={code_in} onChange={event=>setCode_in(event.target.value)} placeholder="Region code"/>
+        <input required type="text" value={name_in} onChange={event=>setName_in(event.target.value)} placeholder="Region name"/>
+        <input required type="text" className="code-in" value={code_in} onChange={event=>setCode_in(event.target.value)} placeholder="Code"/>
       </div>
     } else {
       return <p>{name} - {region_code}</p>;
