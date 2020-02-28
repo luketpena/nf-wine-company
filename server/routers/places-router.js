@@ -50,4 +50,15 @@ router.delete('/regions/:id', (req,res)=>{
   })
 })
 
+router.put('/regions/:id', (req,res)=>{
+  let queryString = `UPDATE region SET name=$2, region_code=$3 WHERE id=$1;`;
+
+  pool.query(queryString, [req.params.id, req.body.name, req.body.region_code]).then(result=>{
+    res.sendStatus(201);
+  }).catch(error=>{
+    console.log('Error updating region:',error);
+    res.sendStatus(400);
+  })
+});
+
 module.exports = router;
