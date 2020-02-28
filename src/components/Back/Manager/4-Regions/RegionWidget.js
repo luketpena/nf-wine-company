@@ -9,6 +9,12 @@ const Container = styled.div`
   grid-template-columns: 1fr auto; 
   padding: 4px;
   box-sizing: border-box;
+
+  @media only screen and (max-width: 600px) {
+    grid-template-areas: "info" "buttons";
+    grid-template-columns: 1fr;
+    justify-content: center;
+  }
 `;
 
 const ButtonBox = styled.div`
@@ -16,6 +22,7 @@ const ButtonBox = styled.div`
   display: flex;
   flex-wrap: wrap;
   align-items: center;
+  justify-content: center;
   button {
     margin-left: 4px;
   }
@@ -25,14 +32,31 @@ const InfoBox = styled.div`
   grid-area: info;
   display: flex;
   align-items: center;
+  
   .code-in {
     width: 48px;
+  }
+  .info-text {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    @media only screen and (max-width: 600px) {
+      align-items: center;
+    }
+  }
+
+  .info-title {
+    font-weight: bold;
+  }
+  .info-count {
+    color: ${props=>(props.count===0? 'gray' : 'var(--col-approve)')};
   }
 `;
 
 export default function RegionWidget(props) {
 
-  const {id, name, region_code, country_id} = props.region;
+  const {id, name, region_code, country_id, producer_count} = props.region;
   const dispatch = useDispatch();
 
   let [edit, setEdit] = useState(false);
@@ -87,14 +111,17 @@ export default function RegionWidget(props) {
         <input required type="text" className="code-in" value={code_in} onChange={event=>setCode_in(event.target.value)} placeholder="Code"/>
       </div>
     } else {
-      return <p>{name} - {region_code}</p>;
+      return <div className="info-text">
+        <p className="info-title">{name} - {region_code}</p>
+        <p className="info-count">{(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}</p>
+      </div>
     }
   }
 
   return (
     <Container>
 
-      <InfoBox>
+      <InfoBox count={Number(producer_count)}>
         {renderInputs()}
       </InfoBox>
 

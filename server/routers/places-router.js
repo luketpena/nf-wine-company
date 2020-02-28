@@ -16,8 +16,10 @@ router.get('/countries',(req,res)=>{
 //Gets all of the regions of a country
 router.get('/regions/:country',(req,res)=>{
   let queryString = `
-    SELECT * FROM region r
+    SELECT r.*, COUNT(p.region_id) as producer_count FROM region r
+    LEFT JOIN producers p ON r.id=p.region_id
     WHERE r.country_id=$1
+    GROUP BY r.id
     ORDER BY LOWER(r.name) ASC;`
   pool.query(queryString, [req.params.country]).then(result=>{
     res.send(result.rows);
