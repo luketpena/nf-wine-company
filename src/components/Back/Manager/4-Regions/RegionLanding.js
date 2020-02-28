@@ -25,11 +25,12 @@ const InputBox = styled.div`
   flex-direction: column;
   select {
     width: max-content;
+    max-width: 100%;
     margin: 0 auto;
   }
   form {
     display: block;
-    margin: 0 auto;
+    margin: 0 auto; 
   }
 `;
 
