@@ -64,7 +64,11 @@ export default function RegionWidget(props) {
   let [code_in, setCode_in] = useState((region_code===null? '' : region_code));
 
   function deleteRegion() {
-    dispatch({type: 'DELETE_REGION', payload: {region_id: id, country_id}});
+    if (Number(producer_count)===0) {
+      dispatch({type: 'DELETE_REGION', payload: {region_id: id, country_id}});
+    } else {
+      alert('This region has producers associated with it. Consider updating the region information instead, or remove those producers from this region before deleting.');
+    }
   }
 
   function submitEdit() {
