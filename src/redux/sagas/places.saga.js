@@ -16,8 +16,14 @@ function * addRegion (action) {
   yield put({type: 'GET_REGIONS', payload: action.payload.country_id});
 }
 
+function * deleteRegion (action) {
+  yield axios.delete('/places/regions/'+action.payload.region_id);
+  yield put({type: 'GET_REGIONS', payload: action.payload.country_id});
+}
+
 export default function * placesSaga() {
   yield takeLatest('GET_COUNTRIES', getCountries);
   yield takeLatest('GET_REGIONS', getRegions);
   yield takeLatest('ADD_REGION', addRegion);
+  yield takeLatest('DELETE_REGION', deleteRegion);
 }

@@ -1,4 +1,5 @@
 import React from 'react';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -27,6 +28,11 @@ const InfoBox = styled.div`
 export default function RegionWidget(props) {
 
   const {id, name, region_code, country_id} = props.region;
+  const dispatch = useDispatch();
+
+  function deleteRegion() {
+    dispatch({type: 'DELETE_REGION', payload: {region_id: id, country_id}});
+  }
 
   return (
     <Container>
@@ -37,7 +43,7 @@ export default function RegionWidget(props) {
 
       <ButtonBox>
         <button className="button-default">Edit</button>
-        <button className="button-primary">Delete</button>
+        <button className="button-primary" onClick={deleteRegion}>Delete</button>
       </ButtonBox>
 
     </Container>
