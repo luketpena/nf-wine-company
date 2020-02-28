@@ -26,13 +26,13 @@ const InfoBox = styled.div`
 
 export default function RegionWidget(props) {
 
-  const {id, name, country_id} = props.region;
+  const {id, name, region_code, country_id} = props.region;
 
   return (
     <Container>
 
       <InfoBox>
-        <p>{name}</p>
+        <p>{name} - {region_code} </p>
       </InfoBox>
 
       <ButtonBox>
