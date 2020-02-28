@@ -42,7 +42,7 @@ router.post('/regions', (req,res)=>{
 router.delete('/regions/:id', (req,res)=>{
   let queryString = `DELETE FROM region WHERE id=$1;`;
   
-  pool.query(queryString, req.params.id).then(result=>{
+  pool.query(queryString, [req.params.id]).then(result=>{
     res.sendStatus(200);
   }).catch(error=>{
     console.log('Error deleting region from database:',error);
