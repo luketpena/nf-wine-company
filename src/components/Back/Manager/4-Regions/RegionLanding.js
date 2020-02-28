@@ -7,6 +7,24 @@ import RegionWidget from './RegionWidget';
 
 const Container = styled.div``;
 
+const RegionList = styled.div`
+  min-width: max-content;
+  max-width: 500px;
+`;
+
+const InputBox = styled.div`
+  display: flex;
+  flex-direction: column;
+  select {
+    width: max-content;
+    margin: 0 auto;
+  }
+  form {
+    display: block;
+    margin: 0 auto;
+  }
+`;
+
 export default function RegionLanding() {
 
   const dispatch = useDispatch();
@@ -43,17 +61,25 @@ export default function RegionLanding() {
   return (
     <Container>
       <ManagerTitle title="Regions" target="/manager"/>
-      <div className="section-box">
+      <InputBox className="section-box">
+
         <h2>Select a Country</h2>
         <select onChange={(event)=>updateCountry(event)} value={countryFilter}>
           <option></option>
           {populateCountrySelect()}
         </select>
-      </div>
-      <div className="section-box">
+
+        <h2>Add a Region</h2>
+        <form>
+          <input type="text" placeholder="Region Name"/>
+          <button>Submit</button>
+        </form>
+
+      </InputBox>
+      <RegionList className="section-box">
          <h2>Region List</h2>
          {renderRegions()}
-      </div>
+      </RegionList>
     </Container>
   )
 }
