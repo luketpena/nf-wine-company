@@ -4,6 +4,7 @@ import styled from 'styled-components';
 
 import ManagerTitle from '../ManagerTitle';
 import RegionWidget from './RegionWidget';
+import Modal from '../../../GenUse/Modal/Modal';
 
 const Container = styled.div``;
 
@@ -129,6 +130,10 @@ export default function RegionLanding() {
         <p>Number of regions: {regions.length}</p>
         {renderRegions()}
       </RegionList>
+
+      <Modal open={true}>
+        <h2>Hello</h2>
+      </Modal>
     </Container>
   )
 }
