@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 
 import Modal from '../../../GenUse/Modal/Modal';
@@ -66,6 +66,8 @@ export default function RegionWidget(props) {
 
   let [subregion_in, setSubregion_in] = useState('');
 
+  const subregions = useSelector(state=>state.places.subregions);
+
   function deleteRegion() {
     if (Number(producer_count)===0) {
       dispatch({type: 'DELETE_REGION', payload: {region_id: id, country_id}});
@@ -74,23 +76,47 @@ export default function RegionWidget(props) {
     }
   }
 
-  function submitEdit() {
-    const payload = {
-      country_id,
-      region_id: id,
-      updatePackage: {
-        name: name_in,
-      }
+
+  function handleClose() {
+    setEdit(false);
+    dispatch({type: 'SET_SUBREGIONS', payload: []});
+  }
+
+  function toggleEdt() {
+    setEdit(true);
+    dispatch({type: 'GET_SUBREGIONS', payload: id});
+  }
+
+  function deleteSubregion(subregion_id) {
+    dispatch({type: 'DELETE_SUBREGION', payload: {id: subregion_id, region_id: id}});
+  }
+
+  function renderSubregions() {
+    if (subregions && subregions.length>0) {
+      return (
+        <ul>
+          {
+            subregions.map((item,i)=>{
+              return (
+                <li key={i}>
+                  {item.name}
+                  <button onClick={()=>deleteSubregion(item.id)}>Remove</button>
+                </li>
+              )
+            })
+          }
+        </ul>
+      )
+    } else {
+      return <p>There are no subregions listed for this region.</p>
     }
-    dispatch({type: 'UPDATE_REGION', payload});
-    setEdit(false);
   }
 
-  function cancelEdit() {
-    setName_in(name);
-    setEdit(false);
+  function submitSubregion(event) {
+    event.preventDefault();
+    dispatch({type: 'ADD_SUBREGION', payload: {region_id: id, name: subregion_in}});
+    setSubregion_in('');
   }
-
 
 
   return (
@@ -104,16 +130,18 @@ export default function RegionWidget(props) {
       </InfoBox>
 
       <ButtonBox>
-        <button className="button-default" onClick={()=>setEdit(true)}>Edit</button>
+        <button className="button-default" onClick={toggleEdt}>Edit</button>
         <button className="button-primary" onClick={deleteRegion}>Delete</button>
       </ButtonBox>
 
-      <Modal open={edit} handleClose={()=>setEdit(false)}>
+      <Modal open={(edit && subregions)} handleClose={handleClose}>
         <h2>{name}</h2>
-        <form>
+        <form onSubmit={event=>submitSubregion(event)}>
           <input type="text" value={subregion_in} onChange={event=>setSubregion_in(event.target.value)}/> 
           <button>Add Subregion</button>
         </form>
+
+        {renderSubregions()}
       </Modal>
 
     </Container>

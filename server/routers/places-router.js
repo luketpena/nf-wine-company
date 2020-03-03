@@ -63,6 +63,18 @@ router.post('/regions', (req,res)=>{
   })
 });
 
+router.post('/subregions', (req,res)=>{
+  let queryString = `INSERT INTO subregions (region_id, name) VALUES ($1,$2);`;
+  let queryParams = [req.body.region_id, req.body.name];
+  
+  pool.query(queryString,queryParams).then(result=>{
+    res.sendStatus(201);
+  }).catch(error=>{
+    console.log('Error posting new subregion:',error);
+    res.sendStatus(400);
+  })
+});
+
 router.delete('/regions/:id', (req,res)=>{
   let queryString = `DELETE FROM region WHERE id=$1;`;
   
@@ -94,5 +106,16 @@ router.get('/subregions/:id', (req,res)=>{
     res.sendStatus(400);
   })
 });
+
+router.delete('/subregions/:id', (req,res)=>{
+  let queryString = `DELETE FROM subregions WHERE id=$1;`;
+  
+  pool.query(queryString, [req.params.id]).then(result=>{
+    res.sendStatus(200);
+  }).catch(error=>{
+    console.log('Error deleting region from database:',error);
+    res.sendStatus(400);
+  })
+})
 
 module.exports = router;
