@@ -13,6 +13,17 @@ router.get('/countries',(req,res)=>{
   })
 })
 
+//Gets only favorited countries
+router.get('/countries/favorite',(req,res)=>{
+  let queryString = 'SELECT * FROM country WHERE favorite=true ORDER BY name ASC';
+  pool.query(queryString).then(result=>{
+    res.send(result.rows);
+  }).catch(error=>{
+    console.log(error);
+    res.sendStatus(400);
+  })
+})
+
 //Gets all of the regions of a country
 router.get('/regions/:country',(req,res)=>{
   let queryString = `

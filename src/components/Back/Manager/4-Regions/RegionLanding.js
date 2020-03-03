@@ -43,7 +43,8 @@ export default function RegionLanding() {
 
   let [country, setCountry] = useState('');
   let [region, setRegion] = useState('');
-  let [regionCode, setRegionCode] = useState('');
+  let [favoritesOnly, setFavoritesOnly] = useState(true);
+  
 
 
   //Dispatches the call to get regions for a country OR empties the regions
@@ -76,12 +77,20 @@ export default function RegionLanding() {
       const newRegion = {
         country_id: country,
         name: region,
-        region_code: (regionCode!==''? regionCode : null)
       }
       dispatch({type: 'ADD_REGION', payload: newRegion});
     } else {
       //Reject without country
       alert('Please select a country to add to.');
+    }
+  }
+
+  function getCountries(event) {
+    setFavoritesOnly(event.target.checked);
+    if (event.target.checked) {
+      dispatch({type: 'GET_COUNTRIES_FAVORITE'});
+    } else {
+      dispatch({type: 'GET_COUNTRIES'});
     }
   }
 
@@ -96,10 +105,14 @@ export default function RegionLanding() {
           {populateCountrySelect()}
         </select>
 
+        <label>
+          <input type="checkbox" value={favoritesOnly} onChange={event=>getCountries(event)}/>
+          Show Favorites Only
+        </label>
+
         <h2>Add a Region</h2>
         <form onSubmit={submitRegion}>
           <input required type="text" placeholder="Region Name" value={region} onChange={event=>setRegion(event.target.value)}/>
-          <input type="text" placeholder="Region Code" value={regionCode} onChange={event=>setRegionCode(event.target.value)}/>
           <button>Submit</button>
         </form>
 
