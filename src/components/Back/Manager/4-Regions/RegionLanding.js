@@ -46,6 +46,7 @@ export default function RegionLanding() {
   let [countryIndex, setCountryIndex] = useState(-1);
   let [region, setRegion] = useState('');
   let [favoritesOnly, setFavoritesOnly] = useState(true);
+  let [editActive, setEditActive] = useState(true);
 
   useEffect(()=>{
     if (favoritesOnly) {
@@ -99,6 +100,16 @@ export default function RegionLanding() {
     }
   }
 
+  function renderFavoriteButton() {
+    if (countryIndex>-1) {
+      if (countries[countryIndex].favorite) {
+        return <button>Remove from Favorites</button>
+      } else {
+        return <button>Add to Favorites</button>
+      }
+    }
+  }
+
 
   return (
     <Container>
@@ -125,13 +136,14 @@ export default function RegionLanding() {
       </InputBox>
       <RegionList className="section-box">
         <h2>{(countryIndex>-1? countries[countryIndex].name : 'Select a Country')}</h2>
+        {renderFavoriteButton()}
         <h3>Region List</h3>
          
         <p>Number of regions: {regions.length}</p>
         {renderRegions()}
       </RegionList>
 
-      <Modal open={true}>
+      <Modal open={editActive} handleClose={()=>setEditActive(false)}>
         <h2>Hello</h2>
       </Modal>
     </Container>
