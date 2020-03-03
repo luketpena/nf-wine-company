@@ -56,6 +56,19 @@ const InfoBox = styled.div`
   }
 `;
 
+const SubregionList = styled.ul`
+  padding: 0;
+  li {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    text-align: left;
+    padding: 4px;
+  }
+  li:nth-child(even) {
+    background-color: #EEE;
+  }
+`;
+
 export default function RegionWidget(props) {
 
   const {id, name, country_id, producer_count, subregion_count} = props.region;
@@ -94,18 +107,21 @@ export default function RegionWidget(props) {
   function renderSubregions() {
     if (subregions && subregions.length>0) {
       return (
-        <ul>
-          {
-            subregions.map((item,i)=>{
-              return (
-                <li key={i}>
-                  {item.name}
-                  <button onClick={()=>deleteSubregion(item.id)}>Remove</button>
-                </li>
-              )
-            })
-          }
-        </ul>
+        <div>
+          <p>Subregions:</p>
+          <SubregionList>
+            {
+              subregions.map((item,i)=>{
+                return (
+                  <li key={i}>
+                    {item.name}
+                    <button onClick={()=>deleteSubregion(item.id)}>Remove</button>
+                  </li>
+                )
+              })
+            }
+          </SubregionList>
+        </div>
       )
     } else {
       return <p>There are no subregions listed for this region.</p>
