@@ -18,14 +18,29 @@ function * getRegions (action) {
   yield put({type: 'SET_REGIONS', payload: response.data});
 }
 
+function * getSubregions (action) {
+  const response = yield axios.get('/places/subregions/'+action.payload);
+  yield put({type: 'SET_SUBREGIONS', payload: response.data});
+}
+
 function * addRegion (action) {
   yield axios.post('/places/regions', action.payload);
   yield put({type: 'GET_REGIONS', payload: action.payload.country_id});
 }
 
+function * addSubregion (action) {
+  yield axios.post('/places/subregions', action.payload);
+  yield put({type: 'GET_SUBREGIONS', payload: action.payload.region_id});
+}
+
 function * deleteRegion (action) {
   yield axios.delete('/places/regions/'+action.payload.region_id);
   yield put({type: 'GET_REGIONS', payload: action.payload.country_id});
+}
+
+function * deleteSubregion (action) {
+  yield axios.delete('/places/subregions/'+action.payload.id);
+  yield put({type: 'GET_SUBREGIONS', payload: action.payload.region_id});
 }
 
 function * updateRegion (action) {
@@ -37,7 +52,10 @@ export default function * placesSaga() {
   yield takeLatest('GET_COUNTRIES', getCountries);
   yield takeLatest('GET_COUNTRIES_FAVORITE', getCountriesFavorite);
   yield takeLatest('GET_REGIONS', getRegions);
+  yield takeLatest('GET_SUBREGIONS', getSubregions);
   yield takeLatest('ADD_REGION', addRegion);
+  yield takeLatest('ADD_SUBREGION', addSubregion);
   yield takeLatest('DELETE_REGION', deleteRegion);
+  yield takeLatest('DELETE_SUBREGION', deleteSubregion);
   yield takeLatest('UPDATE_REGION', updateRegion);
 }
