@@ -31,6 +31,7 @@ function * addRegion (action) {
 function * addSubregion (action) {
   yield axios.post('/places/subregions', action.payload);
   yield put({type: 'GET_SUBREGIONS', payload: action.payload.region_id});
+  yield put({type: 'GET_REGIONS', payload: action.payload.country_id});
 }
 
 function * deleteRegion (action) {
@@ -41,6 +42,7 @@ function * deleteRegion (action) {
 function * deleteSubregion (action) {
   yield axios.delete('/places/subregions/'+action.payload.id);
   yield put({type: 'GET_SUBREGIONS', payload: action.payload.region_id});
+  yield put({type: 'GET_REGIONS', payload: action.payload.country_id});
 }
 
 function * updateRegion (action) {

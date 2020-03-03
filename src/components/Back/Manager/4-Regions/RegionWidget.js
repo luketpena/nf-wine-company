@@ -58,7 +58,7 @@ const InfoBox = styled.div`
 
 export default function RegionWidget(props) {
 
-  const {id, name, country_id, producer_count} = props.region;
+  const {id, name, country_id, producer_count, subregion_count} = props.region;
   const dispatch = useDispatch();
 
   let [edit, setEdit] = useState(false);
@@ -88,7 +88,7 @@ export default function RegionWidget(props) {
   }
 
   function deleteSubregion(subregion_id) {
-    dispatch({type: 'DELETE_SUBREGION', payload: {id: subregion_id, region_id: id}});
+    dispatch({type: 'DELETE_SUBREGION', payload: {id: subregion_id, region_id: id, country_id}});
   }
 
   function renderSubregions() {
@@ -114,7 +114,7 @@ export default function RegionWidget(props) {
 
   function submitSubregion(event) {
     event.preventDefault();
-    dispatch({type: 'ADD_SUBREGION', payload: {region_id: id, name: subregion_in}});
+    dispatch({type: 'ADD_SUBREGION', payload: {region_id: id, name: subregion_in, country_id}});
     setSubregion_in('');
   }
 
@@ -125,7 +125,12 @@ export default function RegionWidget(props) {
       <InfoBox count={Number(producer_count)}>
         <div className="info-text">
           <p className="info-title">{name}</p>
-          <p className="info-count">{(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}</p>
+          <p className="info-count">
+            {(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}
+          </p>
+          <p className="info-count">
+            {(Number(subregion_count)===1? '1 Subregion' : `${subregion_count} Subregions`)}
+          </p>
         </div>
       </InfoBox>
 
