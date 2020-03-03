@@ -58,11 +58,13 @@ const InfoBox = styled.div`
 
 export default function RegionWidget(props) {
 
-  const {id, name, region_code, country_id, producer_count} = props.region;
+  const {id, name, country_id, producer_count} = props.region;
   const dispatch = useDispatch();
 
   let [edit, setEdit] = useState(false);
   let [name_in, setName_in] = useState(name);
+
+  let [subregion_in, setSubregion_in] = useState('');
 
   function deleteRegion() {
     if (Number(producer_count)===0) {
@@ -107,7 +109,11 @@ export default function RegionWidget(props) {
       </ButtonBox>
 
       <Modal open={edit} handleClose={()=>setEdit(false)}>
-        
+        <h2>{name}</h2>
+        <form>
+          <input type="text" value={subregion_in} onChange={event=>setSubregion_in(event.target.value)}/> 
+          <button>Add Subregion</button>
+        </form>
       </Modal>
 
     </Container>

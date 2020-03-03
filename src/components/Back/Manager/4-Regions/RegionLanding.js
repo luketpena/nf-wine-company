@@ -44,7 +44,6 @@ export default function RegionLanding() {
   let country_details = useSelector(state=>state.places.country_details);
 
   let [country, setCountry] = useState('');
-  let [countryIndex, setCountryIndex] = useState(-1);
   let [region, setRegion] = useState('');
   let [favoritesOnly, setFavoritesOnly] = useState(true);
 
@@ -61,9 +60,7 @@ export default function RegionLanding() {
   //Dispatches the call to get regions for a country OR empties the regions
   function updateCountry(event) {
     setCountry(countries[event.target.value].id);
-    setCountryIndex(event.target.value);
-    console.log(event.target.value);
-    
+      
     if (event.target.value) {
       dispatch({type: 'GET_REGIONS', payload: countries[event.target.value].id});
     } else {

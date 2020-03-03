@@ -85,4 +85,14 @@ router.put('/regions/:id', (req,res)=>{
   })
 });
 
+router.get('/subregions/:id', (req,res)=>{
+  let queryString = `SELECT * FROM subregions WHERE region_id=$1`;
+  pool.query(queryString, [req.params.id]).then(result=>{
+    res.send(result.rows);
+  }).catch(error=>{
+    console.log('Error getting subregions from database:',error);
+    res.sendStatus(400);
+  })
+});
+
 module.exports = router;
