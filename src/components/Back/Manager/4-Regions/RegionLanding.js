@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
@@ -42,16 +42,28 @@ export default function RegionLanding() {
   let regions = useSelector(state=>state.places.regions);
 
   let [country, setCountry] = useState('');
+  let [countryIndex, setCountryIndex] = useState(-1);
   let [region, setRegion] = useState('');
   let [favoritesOnly, setFavoritesOnly] = useState(true);
+
+  useEffect(()=>{
+    if (favoritesOnly) {
+      dispatch({type: 'GET_COUNTRIES_FAVORITE'});
+    } else {
+      dispatch({type: 'GET_COUNTRIES'});
+    }
+  },[dispatch,favoritesOnly])
   
 
 
   //Dispatches the call to get regions for a country OR empties the regions
   function updateCountry(event) {
-    setCountry(event.target.value);
+    setCountry(countries[event.target.value].id);
+    setCountryIndex(event.target.value);
+    console.log(event.target.value);
+    
     if (event.target.value) {
-      dispatch({type: 'GET_REGIONS', payload: event.target.value});
+      dispatch({type: 'GET_REGIONS', payload: countries[event.target.value].id});
     } else {
       dispatch({type: 'SET_REGIONS', payload: []});
     }
@@ -60,7 +72,7 @@ export default function RegionLanding() {
   //Fills the select list for countries
   function populateCountrySelect() {
     return countries.map( (country,i)=> {
-      return <option key={i} value={country.id}>{country.name}</option>
+      return <option key={i} value={i}>{country.name}</option>
     })
   }
 
@@ -79,20 +91,13 @@ export default function RegionLanding() {
         name: region,
       }
       dispatch({type: 'ADD_REGION', payload: newRegion});
+      setRegion('');
     } else {
       //Reject without country
       alert('Please select a country to add to.');
     }
   }
 
-  function getCountries(event) {
-    setFavoritesOnly(event.target.checked);
-    if (event.target.checked) {
-      dispatch({type: 'GET_COUNTRIES_FAVORITE'});
-    } else {
-      dispatch({type: 'GET_COUNTRIES'});
-    }
-  }
 
   return (
     <Container>
@@ -106,7 +111,7 @@ export default function RegionLanding() {
         </select>
 
         <label>
-          <input type="checkbox" value={favoritesOnly} onChange={event=>getCountries(event)}/>
+          <input type="checkbox" checked={favoritesOnly} onChange={event=>setFavoritesOnly(event.target.checked)}/>
           Show Favorites Only
         </label>
 
@@ -118,9 +123,11 @@ export default function RegionLanding() {
 
       </InputBox>
       <RegionList className="section-box">
-         <h2>Region List</h2>
-         <p>Number of regions: {regions.length}</p>
-         {renderRegions()}
+        <h2>{(countryIndex>-1? countries[countryIndex].name : 'Select a Country')}</h2>
+        <h3>Region List</h3>
+         
+        <p>Number of regions: {regions.length}</p>
+        {renderRegions()}
       </RegionList>
     </Container>
   )

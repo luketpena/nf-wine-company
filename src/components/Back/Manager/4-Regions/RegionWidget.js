@@ -61,7 +61,6 @@ export default function RegionWidget(props) {
 
   let [edit, setEdit] = useState(false);
   let [name_in, setName_in] = useState(name);
-  let [code_in, setCode_in] = useState((region_code===null? '' : region_code));
 
   function deleteRegion() {
     if (Number(producer_count)===0) {
@@ -77,7 +76,6 @@ export default function RegionWidget(props) {
       region_id: id,
       updatePackage: {
         name: name_in,
-        region_code: code_in
       }
     }
     dispatch({type: 'UPDATE_REGION', payload});
@@ -86,7 +84,6 @@ export default function RegionWidget(props) {
 
   function cancelEdit() {
     setName_in(name);
-    setCode_in(region_code);
     setEdit(false);
   }
 
@@ -112,11 +109,10 @@ export default function RegionWidget(props) {
     if (edit) {
       return <div>
         <input required type="text" value={name_in} onChange={event=>setName_in(event.target.value)} placeholder="Region name"/>
-        <input required type="text" className="code-in" value={code_in} onChange={event=>setCode_in(event.target.value)} placeholder="Code"/>
       </div>
     } else {
       return <div className="info-text">
-        <p className="info-title">{name} - {region_code}</p>
+        <p className="info-title">{name}</p>
         <p className="info-count">{(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}</p>
       </div>
     }
