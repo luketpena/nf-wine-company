@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
+import Modal from '../../../GenUse/Modal/Modal';
+
 const Container = styled.div`
   border-bottom: 1px dotted #DDD;
   display: grid;
@@ -87,47 +89,26 @@ export default function RegionWidget(props) {
     setEdit(false);
   }
 
-  function renderButtons() {
-    if (edit) {
-      return (
-        <>
-          <button className="button-confirm" onClick={submitEdit}>Submit</button>
-          <button className="button-default" onClick={cancelEdit}>Cancel</button>
-        </>
-      )
-    } else {
-      return (
-        <>
-          <button className="button-default" onClick={()=>setEdit(true)}>Edit</button>
-          <button className="button-primary" onClick={deleteRegion}>Delete</button>
-        </>
-      )
-    }
-  }
 
-  function renderInputs() {
-    if (edit) {
-      return <div>
-        <input required type="text" value={name_in} onChange={event=>setName_in(event.target.value)} placeholder="Region name"/>
-      </div>
-    } else {
-      return <div className="info-text">
-        <p className="info-title">{name}</p>
-        <p className="info-count">{(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}</p>
-      </div>
-    }
-  }
 
   return (
     <Container>
 
       <InfoBox count={Number(producer_count)}>
-        {renderInputs()}
+        <div className="info-text">
+          <p className="info-title">{name}</p>
+          <p className="info-count">{(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}</p>
+        </div>
       </InfoBox>
 
       <ButtonBox>
-        {renderButtons()}
+        <button className="button-default" onClick={()=>setEdit(true)}>Edit</button>
+        <button className="button-primary" onClick={deleteRegion}>Delete</button>
       </ButtonBox>
+
+      <Modal open={edit} handleClose={()=>setEdit(false)}>
+        
+      </Modal>
 
     </Container>
   )

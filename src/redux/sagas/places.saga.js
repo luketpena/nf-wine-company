@@ -13,6 +13,8 @@ function * getCountriesFavorite (action) {
 
 function * getRegions (action) {
   const response = yield axios.get('/places/regions/'+action.payload);
+  const details = yield axios.get('/places/country_details/'+action.payload);
+  yield put ({type: 'SET_COUNTRY_DETAILS', payload: details.data[0]})
   yield put({type: 'SET_REGIONS', payload: response.data});
 }
 

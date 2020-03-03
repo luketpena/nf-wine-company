@@ -11,7 +11,18 @@ router.get('/countries',(req,res)=>{
     console.log(error);
     res.sendStatus(400);
   })
-})
+});
+
+//Gets the name of a particular country
+router.get('/country_details/:id',(req,res)=>{
+  let queryString = 'SELECT * FROM country WHERE id=$1';
+  pool.query(queryString,[req.params.id]).then(result=>{
+    res.send(result.rows);
+  }).catch(error=>{
+    console.log(error);
+    res.sendStatus(400);
+  })
+});
 
 //Gets only favorited countries
 router.get('/countries/favorite',(req,res)=>{
