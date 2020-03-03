@@ -38,7 +38,8 @@ router.get('/countries/favorite',(req,res)=>{
 //Gets all of the regions of a country
 router.get('/regions/:country',(req,res)=>{
   let queryString = `
-    SELECT r.*, COUNT(p.region_id) as producer_count FROM region r
+    SELECT r.*, COUNT(p.region_id) as producer_count, COUNT(s.region_id) as subregion_count FROM region r
+    LEFT JOIN subregions s ON r.id=s.region_id
     LEFT JOIN producers p ON r.id=p.region_id
     WHERE r.country_id=$1
     GROUP BY r.id
