@@ -6,6 +6,11 @@ function * getCountries (action) {
   yield put({type: 'SET_COUNTRIES', payload: response.data});
 }
 
+function * getCountriesFavorite (action) {
+  const response = yield axios.get('/places/countries/favorite');
+  yield put({type: 'SET_COUNTRIES', payload: response.data});
+}
+
 function * getRegions (action) {
   const response = yield axios.get('/places/regions/'+action.payload);
   yield put({type: 'SET_REGIONS', payload: response.data});
@@ -28,6 +33,7 @@ function * updateRegion (action) {
 
 export default function * placesSaga() {
   yield takeLatest('GET_COUNTRIES', getCountries);
+  yield takeLatest('GET_COUNTRIES_FAVORITE', getCountriesFavorite);
   yield takeLatest('GET_REGIONS', getRegions);
   yield takeLatest('ADD_REGION', addRegion);
   yield takeLatest('DELETE_REGION', deleteRegion);
