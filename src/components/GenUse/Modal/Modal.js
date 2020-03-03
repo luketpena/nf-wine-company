@@ -33,11 +33,17 @@ const TextBox = styled.div`
 
 export default function Modal(props) {
 
+  function handleClose() {
+    if (props.handleClose) {
+      props.handleClose();
+    }
+  }
+
   function renderModal() {
     if (props.open) {
       return (
         <Container>
-          <Background/>
+          <Background onClick={handleClose}/>
           <TextBox>
             {props.children}
           </TextBox>
