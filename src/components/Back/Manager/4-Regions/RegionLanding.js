@@ -41,6 +41,7 @@ export default function RegionLanding() {
 
   let countries = useSelector(state=>state.places.countries);
   let regions = useSelector(state=>state.places.regions);
+  let country_details = useSelector(state=>state.places.country_details);
 
   let [country, setCountry] = useState('');
   let [countryIndex, setCountryIndex] = useState(-1);
@@ -100,8 +101,8 @@ export default function RegionLanding() {
   }
 
   function renderFavoriteButton() {
-    if (countryIndex>-1) {
-      if (countries[countryIndex].favorite) {
+    if (country_details) {
+      if (country_details.favorite) {
         return <button className="button-primary">Remove from Favorites</button>
       } else {
         return <button className="button-confirm">Add to Favorites</button>
@@ -134,7 +135,7 @@ export default function RegionLanding() {
 
       </InputBox>
       <RegionList className="section-box">
-        <h2>{(countryIndex>-1? countries[countryIndex].name : 'Select a Country')}</h2>
+        <h2>{(country_details? country_details.name : 'Select a Country')}</h2>
         {renderFavoriteButton()}        
         <p>Number of regions: {regions.length}</p>
         {renderRegions()}
