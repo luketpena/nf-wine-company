@@ -29,6 +29,7 @@ const TextBox = styled.div`
   border-radius: 16px;
   width: 500px;
   height: 500px;
+  padding: 16px;
 `;
 
 export default function Modal(props) {

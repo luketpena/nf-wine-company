@@ -32,6 +32,10 @@ p {
   font-family: var(--font-main);
 }
 
+* {
+  box-sizing: border-box;
+}
+
 /* Widespread Class Styling */
 .sec-default {
   min-height: 512px;
