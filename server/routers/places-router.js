@@ -113,7 +113,12 @@ router.put('/regions/:id', (req,res)=>{
 });
 
 router.get('/subregions/:id', (req,res)=>{
-  let queryString = `SELECT * FROM subregions WHERE region_id=$1 ORDER BY name ASC`;
+  let queryString = `
+    SELECT s.*, COUNT(p.subregion_id) AS producer_count FROM subregions s
+    LEFT JOIN producers p ON p.subregion_id=s.id
+    WHERE s.region_id=$1 
+    GROUP BY s.id
+    ORDER BY s.name ASC`;
   pool.query(queryString, [req.params.id]).then(result=>{
     res.send(result.rows);
   }).catch(error=>{

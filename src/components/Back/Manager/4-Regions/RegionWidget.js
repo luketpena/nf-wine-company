@@ -60,9 +60,12 @@ const SubregionList = styled.ul`
   padding: 0;
   li {
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr auto auto;
     text-align: left;
     padding: 4px;
+    p {
+      margin: 0 8px;
+    }
   }
   li:nth-child(even) {
     background-color: #EEE;
@@ -114,7 +117,8 @@ export default function RegionWidget(props) {
               subregions.map((item,i)=>{
                 return (
                   <li key={i}>
-                    {item.name}
+                    <p>{item.name}</p>
+                    <p>{(Number(item.producer_count)===0? '' : (Number(item.producer_count)===1? '1 Producer' : `${item.producer_count} Producers`))}</p>
                     <button onClick={()=>deleteSubregion(item.id)}>Remove</button>
                   </li>
                 )
