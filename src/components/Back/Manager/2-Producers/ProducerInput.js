@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import {useSelector, useDispatch} from 'react-redux';
 
@@ -11,6 +11,7 @@ export default function SupplierInput(props) {
   let edit = useSelector(state=>state.edit.editInfo);
   let countries = useSelector(state=>state.places.countries);
   let regions = useSelector(state=>state.places.regions);
+  let subregions = useSelector(state=>state.places.subregions);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -23,7 +24,12 @@ export default function SupplierInput(props) {
   let [img] = useState( (action==='edit' && edit.img)? edit.img : '' );
   let [country,setCountry] = useState( (action==='edit' && edit.country_id)? edit.country_id : 'Select a country' );
   let [region,setRegion] = useState( (action==='edit' && edit.region_id)? edit.region_id : 'Select a region' );
+  let [subregion,setSubregion] = useState( (action==='edit' && edit.subregion_id)? edit.subregion_id : 'Select a subregion' );
   let [website,setWebsite] = useState( (action==='edit' && edit.website_url)? edit.website_url : '');
+
+  useEffect(()=>{
+    dispatch({type: 'GET_COUNTRIES_FAVORITE'})
+  },[]);
 
   //>> Submits the new or edited event to the server
   function handleSubmit(event) {
@@ -36,6 +42,7 @@ export default function SupplierInput(props) {
       img,
       country,
       region,
+      subregion: (subregion==='Select a subregion'? null : subregion),
       website
     }
 
@@ -67,11 +74,25 @@ export default function SupplierInput(props) {
     return list;
   }
 
+  //Fills the subregion select with options from the subregion list
+  function populateSubregionSelect() {
+    let list = subregions.map( (item,i)=> {
+      return <option key={i} value={item.id}>{item.name}</option>
+    })
+    return list;
+  }
+
   //When the country changes, trigger the region reducer to fill from the DB
   function updateCountry(event) {
     setCountry(event.target.value);
     dispatch({type: 'GET_REGIONS', payload: event.target.value});
     setRegion('Select a region');
+  }
+
+  function updateRegion(event) {
+    setRegion(event.target.value);
+    dispatch({type: 'GET_SUBREGIONS', payload: event.target.value});
+    setSubregion('Select a subregion');
   }
   
   return (
@@ -94,11 +115,20 @@ export default function SupplierInput(props) {
           </label>
           <label className="selectLabel">
             <span className="inputName">Region:</span>
-            <select onChange={(event)=>setRegion(event.target.value)} value={region}>
+            <select onChange={(event)=>updateRegion(event)} value={region}>
               <option disabled>Select a region</option>
               {populateRegionSelect()}
             </select>
           </label>
+
+          <label className="selectLabel">
+            <span className="inputName">Subregion:</span>
+            <select onChange={(event)=>setSubregion(event.target.value)} value={subregion}>
+              <option disabled>Select a subregion</option>
+              {populateSubregionSelect()}
+            </select>
+          </label>
+
           <label>
             <span className="inputName">Website:</span>
             <input type="text" value={website} onChange={(event)=>setWebsite(event.target.value)}/>

@@ -36,20 +36,34 @@ router.get('/countries/favorite',(req,res)=>{
 })
 
 //Gets all of the regions of a country
-router.get('/regions/:country',(req,res)=>{
+router.get('/regions/:country', async (req,res)=>{
   let queryString = `
-    SELECT r.*, COUNT(p.region_id) as producer_count, COUNT(s.region_id) as subregion_count FROM region r
-    LEFT JOIN subregions s ON r.id=s.region_id
+    SELECT r.*, COUNT(p.region_id) as producer_count FROM region r
     LEFT JOIN producers p ON r.id=p.region_id
     WHERE r.country_id=$1
     GROUP BY r.id
     ORDER BY LOWER(r.name) ASC;`
-  pool.query(queryString, [req.params.country]).then(result=>{
+  let subregionQuery = `
+    SELECT COUNT(s.region_id) as subregion_count FROM region r
+    LEFT JOIN subregions s ON s.region_id=r.id
+    WHERE r.country_id=$1
+    GROUP BY r.id
+    ORDER BY LOWER(r.name) ASC;
+  `
+
+  try {
+    let result = await pool.query(queryString, [req.params.country]);
+    let subregion_count = await pool.query(subregionQuery, [req.params.country]);
+
+    for (let i=0; i<result.rows.length; i++) {
+      result.rows[i].subregion_count = subregion_count.rows[i].subregion_count;
+    }
+    
     res.send(result.rows);
-  }).catch(error=>{
+  } catch(error) {
     console.log('Error getting regions from database:',error);
     res.sendStatus(400);
-  })
+  }
 })
 
 router.post('/regions', (req,res)=>{
@@ -99,7 +113,7 @@ router.put('/regions/:id', (req,res)=>{
 });
 
 router.get('/subregions/:id', (req,res)=>{
-  let queryString = `SELECT * FROM subregions WHERE region_id=$1`;
+  let queryString = `SELECT * FROM subregions WHERE region_id=$1 ORDER BY name ASC`;
   pool.query(queryString, [req.params.id]).then(result=>{
     res.send(result.rows);
   }).catch(error=>{

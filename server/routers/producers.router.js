@@ -51,11 +51,11 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/',(req,res)=>{
-  const {name,description,img,country,region,website} = req.body;
-  let queryString = 'INSERT INTO producers (name, description, img_url, country_id, region_id, website_url) VALUES ($1,$2,$3,$4,$5,$6);';
+  const {name,description,img,country,region,subregion,website} = req.body;
+  let queryString = 'INSERT INTO producers (name, description, img_url, country_id, region_id, subregion_id, website_url) VALUES ($1,$2,$3,$4,$5,$6,$7);';
   console.log('Posting new producer:',req.body);
   
-  pool.query(queryString,[name,description,img,country,region,website]).then(result=>{   
+  pool.query(queryString,[name,description,img,country,region,subregion,website]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);
@@ -64,13 +64,13 @@ router.post('/',(req,res)=>{
 });
 
 router.put('/edit',(req,res)=>{
-  const {name,description,img,country,region,website,id} = req.body;
+  const {name,description,img,country,region,subregion,website,id} = req.body;
   let queryString = `
     UPDATE producers
-    SET name=$1, description=$2, img_url=$3, country_id=$4, region_id=$5, website_url=$6
-    WHERE id=$7;
+    SET name=$1, description=$2, img_url=$3, country_id=$4, region_id=$5, subregion_id=$6, website_url=$7
+    WHERE id=$8;
   `;
-  pool.query(queryString,[name,description,img,country,region,website,id]).then(result=>{   
+  pool.query(queryString,[name,description,img,country,region,subregion,website,id]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);
