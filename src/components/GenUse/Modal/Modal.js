@@ -14,7 +14,7 @@ const Container = styled.div`
 `;
 
 const Background = styled.div`
-  background-color: rgba(0,0,0,.25);
+  background-color: rgba(0,0,0,.5);
   width: 100%;
   height: 100%;
   position: absolute;
@@ -27,9 +27,22 @@ const TextBox = styled.div`
   z-index: 101;
   background-color: white;
   border-radius: 16px;
-  width: 500px;
-  height: 500px;
+  min-width: 600px;
+  height: max-content;
   padding: 16px;
+`;
+
+const CloseButton = styled.button`
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  outline: none;
+  border: none;
+  color: gray;
+  cursor: pointer;
+  &:hover {
+    color: black;
+  }
 `;
 
 export default function Modal(props) {
@@ -46,6 +59,7 @@ export default function Modal(props) {
         <Container>
           <Background onClick={handleClose}/>
           <TextBox>
+            <CloseButton onClick={handleClose}>Close</CloseButton>
             {props.children}
           </TextBox>
         </Container>
