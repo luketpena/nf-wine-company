@@ -25,8 +25,9 @@ const InputBox = styled.div`
   display: flex;
   flex-direction: column;
   select {
-    width: max-content;
-    max-width: 100%;
+    min-width: max-content;
+    max-width: 250px;
+    width: 100%;
     margin: 0 auto;
   }
   form {
@@ -59,10 +60,10 @@ export default function RegionLanding() {
 
   //Dispatches the call to get regions for a country OR empties the regions
   function updateCountry(event) {
-    setCountry(countries[event.target.value].id);
+    setCountry(event.target.value);
       
     if (event.target.value) {
-      dispatch({type: 'GET_REGIONS', payload: countries[event.target.value].id});
+      dispatch({type: 'GET_REGIONS', payload: event.target.value});
     } else {
       dispatch({type: 'SET_REGIONS', payload: []});
     }
@@ -71,7 +72,7 @@ export default function RegionLanding() {
   //Fills the select list for countries
   function populateCountrySelect() {
     return countries.map( (country,i)=> {
-      return <option key={i} value={i}>{country.name}</option>
+      return <option key={i} value={country.id}>{country.name}</option>
     })
   }
 
