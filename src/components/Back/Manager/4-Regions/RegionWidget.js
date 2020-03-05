@@ -54,9 +54,15 @@ const InfoBox = styled.div`
 
   .info-title {
     font-weight: bold;
+    margin: 2px 0;
   }
-  .info-count {
-    color: ${props=>(props.count===0? 'gray' : 'var(--col-approve)')};
+  .info-producer-count {
+    color: ${props=>(props.producer_count===0? 'gray' : 'var(--col-approve)')};
+    margin: 2px 0;
+  }
+  .info-subregion-count {
+    color: ${props=>(props.subregion_count===0? 'gray' : 'var(--col-approve)')};
+    margin: 2px 0;
   }
 `;
 
@@ -146,13 +152,13 @@ export default function RegionWidget(props) {
   return (
     <Container>
 
-      <InfoBox count={Number(producer_count)}>
+      <InfoBox producer_count={Number(producer_count)} subregion_count={Number(subregion_count)}>
         <div className="info-text">
           <p className="info-title">{name}</p>
-          <p className="info-count">
+          <p className="info-producer-count">
             {(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}
           </p>
-          <p className="info-count">
+          <p className="info-subregion-count">
             {(Number(subregion_count)===1? '1 Subregion' : `${subregion_count} Subregions`)}
           </p>
         </div>
