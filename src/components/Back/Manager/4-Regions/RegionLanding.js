@@ -34,6 +34,12 @@ const InputBox = styled.div`
     display: block;
     margin: 0 auto; 
   }
+
+  .fav-label {
+    width: max-content;
+    margin: 0 auto;
+    cursor: pointer;
+  }
 `;
 
 export default function RegionLanding() {
@@ -126,7 +132,7 @@ export default function RegionLanding() {
           {populateCountrySelect()}
         </select>
 
-        <label>
+        <label className="fav-label">
           <input type="checkbox" checked={favoritesOnly} onChange={event=>setFavoritesOnly(event.target.checked)}/>
           Show Favorites Only
         </label>
