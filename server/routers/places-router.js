@@ -39,7 +39,7 @@ router.put('/countries/favorite/:id',(req,res)=>{
   let queryString = `UPDATE country SET favorite=$2 WHERE id=$1`;
   pool.query(queryString, [req.params.id, req.body.value]).then(result=>{
     res.sendStatus(200);
-  }).then(error=>{
+  }).catch(error=>{
     console.log('Error updating country favorite status:',error);    
   });
 });
@@ -99,15 +99,17 @@ router.post('/subregions', (req,res)=>{
   })
 });
 
-router.delete('/regions/:id', (req,res)=>{
-  let queryString = `DELETE FROM region WHERE id=$1;`;
-  
-  pool.query(queryString, [req.params.id]).then(result=>{
+router.delete('/regions/:id', async (req,res)=>{
+  try {
+    //>> Select and set all references to region to null
+    await pool.query(`UPDATE producers SET region_id=NULL WHERE region_id=$1`,[req.params.id]);
+    //>> Delete the region after removing references
+    await pool.query(`DELETE FROM region WHERE id=$1;`, [req.params.id]);
     res.sendStatus(200);
-  }).catch(error=>{
+  } catch(error) {
     console.log('Error deleting region from database:',error);
     res.sendStatus(400);
-  })
+  }
 })
 
 router.put('/regions/:id', (req,res)=>{
@@ -141,9 +143,9 @@ router.delete('/subregions/:id', async (req,res)=>{
   
   try {
     //>> Select and set all references to subregion to null
-    pool.query(`UPDATE producers SET subregion_id=null WHERE subregion_id=$1`,[req.params.id]);
+    await pool.query(`UPDATE producers SET subregion_id=NULL WHERE subregion_id=$1`,[req.params.id]);
     //>> Delete the subregion after removing references
-    pool.query(queryString, [req.params.id]);
+    await pool.query(queryString, [req.params.id]);
     res.sendStatus(200);
   } catch(error) {
     console.log('Error deleting region from database:',error);
