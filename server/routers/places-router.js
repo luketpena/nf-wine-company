@@ -35,6 +35,15 @@ router.get('/countries/favorite',(req,res)=>{
   })
 })
 
+router.put('/countries/favorite/:id',(req,res)=>{
+  let queryString = `UPDATE country SET favorite=$2 WHERE id=$1`;
+  pool.query(queryString, [req.params.id, req.body.value]).then(result=>{
+    res.sendStatus(200);
+  }).then(error=>{
+    console.log('Error updating country favorite status:',error);    
+  });
+});
+
 //Gets all of the regions of a country
 router.get('/regions/:country', async (req,res)=>{
   let queryString = `
