@@ -97,12 +97,18 @@ export default function RegionLanding() {
     }
   }
 
+  function toggleFavorite() {
+    if (country_details) {
+      dispatch({type: 'TOGGLE_COUNTRY_FAVORITE', payload: {id: country_details.id, value: !country_details.favorite}});
+    }
+  }
+
   function renderFavoriteButton() {
     if (country_details) {
       if (country_details.favorite) {
-        return <button className="button-primary">Remove from Favorites</button>
+        return <button onClick={toggleFavorite} className="button-primary">Remove from Favorites</button>
       } else {
-        return <button className="button-confirm">Add to Favorites</button>
+        return <button onClick={toggleFavorite} className="button-confirm">Add to Favorites</button>
       }
     }
   }

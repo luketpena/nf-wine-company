@@ -17,6 +17,10 @@ const Container = styled.div`
     grid-template-columns: 1fr;
     justify-content: center;
   }
+
+  form {
+    margin-bottom: 24px;
+  }
 `;
 
 const ButtonBox = styled.div`
