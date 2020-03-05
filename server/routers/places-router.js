@@ -136,15 +136,19 @@ router.get('/subregions/:id', (req,res)=>{
   })
 });
 
-router.delete('/subregions/:id', (req,res)=>{
+router.delete('/subregions/:id', async (req,res)=>{
   let queryString = `DELETE FROM subregions WHERE id=$1;`;
   
-  pool.query(queryString, [req.params.id]).then(result=>{
+  try {
+    //>> Select and set all references to subregion to null
+    pool.query(`UPDATE producers SET subregion_id=null WHERE subregion_id=$1`,[req.params.id]);
+    //>> Delete the subregion after removing references
+    pool.query(queryString, [req.params.id]);
     res.sendStatus(200);
-  }).catch(error=>{
+  } catch(error) {
     console.log('Error deleting region from database:',error);
     res.sendStatus(400);
-  })
+  }
 })
 
 module.exports = router;
