@@ -2,24 +2,26 @@ import React, {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 
-const Label = styled.label`
-  display: block;
-  margin-bottom: 8px;
-  input {
-    display: block;
-    margin: 4px auto;
-    width: 128px;
-    border: none;
-    outline: none;
-    border-radius: 4px;
-    text-align: center;
-  }
-`;
 
 const Container = styled.div`
   max-width: 256px;
   padding: 16px;
   margin: 0 auto;
+  form {
+    button {
+      display: block;
+      margin: 0 auto;
+    }
+    input {
+      display: block;
+      margin: 4px auto;
+      width: 128px;
+      border: none;
+      outline: none;
+      border-radius: 4px;
+      text-align: center;
+    }
+  }
 `;
 
 const Submit = styled.button`
@@ -29,24 +31,11 @@ const Submit = styled.button`
 export default function LoginInput() {
 
   const dispatch = useDispatch();
-  let loginMode = useSelector(state=>state.loginMode);
 
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
-  let [email, setEmail] = useState('');
-  let [access, setAccess] = useState('customer')
 
-  function registerUser(event) {
-    event.preventDefault();
-
-    if (username && password) {
-      dispatch({
-        type: 'REGISTER',
-        payload: { username, password, email, access },
-      });
-    }
-  } // end registerUser
-
+ 
   function login(event) {
     event.preventDefault();
 
@@ -61,65 +50,28 @@ export default function LoginInput() {
     } else {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
-  } // end login
-
-  
-
-  function handleSubmit(event) {
-    switch(loginMode) {
-      case 'login': login(event); break;
-      case 'register': registerUser(event); break;
-      default: break;
-    }
-  }
-
-  
+  } // end login 
 
   return (
     <Container>
-      <form onSubmit={(event)=>handleSubmit(event)}>  
+      <form onSubmit={(event)=>login(event)}>  
+        <input
+          type="text"
+          name="username"
+          value={username}
+          placholder="Username"
+          onChange={(event)=>setUsername(event.target.value)}
+        />
 
-          <Label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={username}
-              onChange={(event)=>setUsername(event.target.value)}
-            />
-          </Label>
+        <input
+          type="password"
+          name="password"
+          value={password}
+          placeholder="Password"
+          onChange={(event)=>setPassword(event.target.value)}
+        />
 
-          <Label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={password}
-              onChange={(event)=>setPassword(event.target.value)}
-            />
-          </Label>
-
-          <Label htmlFor="email">
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={(event)=>setEmail(event.target.value)}
-            />
-          </Label>
-
-          <Label htmlFor="access">
-            Access Level:
-            <select name="access" value={access} onChange={(event)=>setAccess(event.target.value)}>
-              <option value="customer">Customer</option>
-              <option value="admin">Admin</option>
-              <option value="master">Master</option>
-            </select>
-          </Label>
-
-          <Submit className="button-confirm">Submit</Submit>
-          
+        <Submit className="button-confirm">Submit</Submit>   
       </form>
     </Container>
   )

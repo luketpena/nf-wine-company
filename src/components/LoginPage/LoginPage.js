@@ -79,10 +79,8 @@ export default function RegisterPage() {
         <InputBox>
           {renderErrorBar()}
 
-          <h1 className="logReg-title">{loginMode}</h1>
+          <h1 className="logReg-title">Login</h1>
           <LoginInput />
-            
-          {renderSwitchButton()}
         </InputBox>
       </Box>
     </Container>
