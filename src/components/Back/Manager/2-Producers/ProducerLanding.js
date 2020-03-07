@@ -184,12 +184,12 @@ export default function SupplierLanding() {
 
             <SelectBox>
               <select onChange={(event)=>updateCountry(event)} value={countryFilter}>
-                <option disabled value="">Select a Country</option>
+                <option value="">All countries</option>
                 {populateCountrySelect()}
               </select>
 
               <select onChange={(event)=>setRegionFilter(event.target.value)} value={regionFilter}>
-                <option disabled value="">Select a Region</option>
+                <option value="">All regions</option>
                 {populateRegionSelect()}
               </select>
             </SelectBox>

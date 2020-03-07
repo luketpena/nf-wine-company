@@ -7,13 +7,13 @@ import Modal from '../../../GenUse/Modal/Modal';
 const Container = styled.div`
   border-bottom: 1px dotted #DDD;
   display: grid;
-  grid-template-areas: "info buttons";
+  grid-template-areas: "title title" "info buttons";
   grid-template-columns: 1fr auto; 
   padding: 4px;
   box-sizing: border-box;
 
   @media only screen and (max-width: 600px) {
-    grid-template-areas: "info" "buttons";
+    grid-template-areas: "title" "info" "buttons";
     grid-template-columns: 1fr;
     justify-content: center;
   }
@@ -32,6 +32,13 @@ const ButtonBox = styled.div`
   button {
     margin-left: 4px;
   }
+`;
+
+const Title = styled.p`
+  grid-area: title;
+  font-weight: bold;
+  font-size: 1.2em;
+  width: 100%;
 `;
 
 const InfoBox = styled.div`
@@ -54,17 +61,15 @@ const InfoBox = styled.div`
 
   .info-title {
     font-weight: bold;
-    margin: 2px 0;
-  }
-  .info-producer-count {
-    color: ${props=>(props.producer_count===0? 'gray' : 'var(--col-approve)')};
-    margin: 2px 0;
-  }
-  .info-subregion-count {
-    color: ${props=>(props.subregion_count===0? 'gray' : 'var(--col-approve)')};
-    margin: 2px 0;
+    font-size: 1.2em;
+    margin: 2px 8px 2px 0;
   }
 `;
+
+const CountText = styled.p`
+  color: ${props=>(props.count===0? '#DDD' : 'var(--col-approve)')};
+  margin: 2px 0;
+`
 
 const SubregionList = styled.ul`
   padding: 0;
@@ -88,8 +93,6 @@ export default function RegionWidget(props) {
   const dispatch = useDispatch();
 
   let [edit, setEdit] = useState(false);
-  let [name_in, setName_in] = useState(name);
-
   let [subregion_in, setSubregion_in] = useState('');
 
   const subregions = useSelector(state=>state.places.subregions);
@@ -97,7 +100,6 @@ export default function RegionWidget(props) {
   function deleteRegion() {
     dispatch({type: 'DELETE_REGION', payload: {region_id: id, country_id}});   
   }
-
 
   function handleClose() {
     setEdit(false);
@@ -148,15 +150,16 @@ export default function RegionWidget(props) {
   return (
     <Container>
 
-      <InfoBox producer_count={Number(producer_count)} subregion_count={Number(subregion_count)}>
+      <Title>{name}</Title>
+      <InfoBox>
         <div className="info-text">
-          <p className="info-title">{name}</p>
-          <p className="info-producer-count">
+          
+          <CountText count={Number(producer_count)}>
             {(Number(producer_count)===1? '1 Producer' : `${producer_count} Producers`)}
-          </p>
-          <p className="info-subregion-count">
+          </CountText>
+          <CountText count={Number(subregion_count)}>
             {(Number(subregion_count)===1? '1 Subregion' : `${subregion_count} Subregions`)}
-          </p>
+          </CountText>
         </div>
       </InfoBox>
 

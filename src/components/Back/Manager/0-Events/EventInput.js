@@ -63,8 +63,6 @@ export default function EventInput(props) {
       
       <form className="inputBox section-box" onSubmit={handleSubmit}>
 
-        <div className="in-image"></div>
-
         <input required className="in-name" type="text" placeholder="Event Name" value={name} onChange={(event)=>setName(event.target.value)} />
 
         <div className="inputLine">
