@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 
@@ -59,7 +59,7 @@ export default function LoginInput() {
           type="text"
           name="username"
           value={username}
-          placholder="Username"
+          placeholder="Username"
           onChange={(event)=>setUsername(event.target.value)}
         />
 
