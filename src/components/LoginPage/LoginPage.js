@@ -30,43 +30,9 @@ const Container = styled.div`
   background-attachment: fixed;
 `;
 
-const SwitchButton = styled.button`
-  width: 128px;
-  margin-top: 64px;
-`;
-
 export default function RegisterPage() {
 
-  const dispatch = useDispatch();
   let errors = useSelector(state=>state.errors);
-  let loginMode = useSelector(state=>state.loginMode);
-  
-
-  function renderSwitchButton() {
-    if (loginMode==='login') {
-      return <SwitchButton
-      type="button"
-      className="link-button"
-      onClick={() => {
-        dispatch({type: 'SET_TO_REGISTER_MODE'});
-        dispatch({type: 'CLEAR_LOGIN_ERROR'});
-      }}
-    >
-      Register
-    </SwitchButton>
-    } else {
-      return <SwitchButton
-      type="button"
-      className="link-button"
-      onClick={() => {
-        dispatch({type: 'SET_TO_LOGIN_MODE'})
-        dispatch({type: 'CLEAR_REGISTRATION_ERROR'})
-      }}
-    >
-      Login
-    </SwitchButton>
-    }
-  }
 
   function renderErrorBar() {
     if (errors.registrationMessage || errors.loginMessage) {
@@ -76,10 +42,8 @@ export default function RegisterPage() {
 
   return (
     <Container className="hello">
-      
       <InputBox>
         {renderErrorBar()}
-
         <h1 className="logReg-title">Login</h1>
         <LoginInput />
       </InputBox>

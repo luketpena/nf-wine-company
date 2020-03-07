@@ -12,6 +12,13 @@ class Home extends Component {
         <Menu/>
         <Landing/>
         <Who />
+        <Who />
+        <Who />
+        <Who />
+        <Who />
+        <Who />
+        <Who />
+        <Who />
       </main>
     )
   }
