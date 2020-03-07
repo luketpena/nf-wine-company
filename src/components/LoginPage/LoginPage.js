@@ -4,6 +4,8 @@ import styled from 'styled-components';
 import LoginErrorBar from './LoginErrorBar';
 import LoginInput from './LoginInput';
 
+import barrels from '../../images/bkg-barrels.jpg';
+
 const InputBox = styled.div`
   position: relative;
   overflow: hidden;
@@ -19,13 +21,13 @@ const InputBox = styled.div`
 const Container = styled.div`
   width: 100vw;
   height: 100vh;
-  padding: 64px;
-`;
-
-const Box = styled.div`
-  display: grid;
-  width: 80%;
-  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${barrels});
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
 `;
 
 const SwitchButton = styled.button`
@@ -73,16 +75,14 @@ export default function RegisterPage() {
   }
 
   return (
-    <Container>
+    <Container className="hello">
       
-      <Box loginMode={loginMode}>
-        <InputBox>
-          {renderErrorBar()}
+      <InputBox>
+        {renderErrorBar()}
 
-          <h1 className="logReg-title">Login</h1>
-          <LoginInput />
-        </InputBox>
-      </Box>
+        <h1 className="logReg-title">Login</h1>
+        <LoginInput />
+      </InputBox>
     </Container>
   );
 }
