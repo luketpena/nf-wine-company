@@ -101,8 +101,6 @@ export default function SupplierInput(props) {
       
       <form className="inputBox section-box" onSubmit={handleSubmit}>
 
-        <div className="in-image"></div>
-
         <input required className="in-name" type="text" placeholder="Producer Name" value={name} onChange={(event)=>setName(event.target.value)} />
 
         <div className="inputLine">

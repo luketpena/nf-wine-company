@@ -39,17 +39,14 @@ const SearchBar = styled.section`
   justify-content: center;
   
   form {
+    max-width: 500px;
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-
     input {
       width: 100%;
-      margin-bottom: 8px;
     }
-    label span {
-      margin-right: 8px;
+    button {
+      display: block;
+      margin: 16px auto;
     }
   }
 `;
@@ -142,7 +139,7 @@ export default function SupplierLanding() {
       <SearchBar className="section-box">
         <form onSubmit={submitSearch}>
           <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for supplier"/>         
-          <button>Submit</button>
+          <button className="button-default">Search</button>
         </form>
       </SearchBar>
 

@@ -9,8 +9,6 @@ export default function SupplierInput(props) {
 
   //>> Setup the tools
   let edit = useSelector(state=>state.edit.editInfo);
-  let countries = useSelector(state=>state.places.countries);
-  let regions = useSelector(state=>state.places.regions);
   const history = useHistory();
   const dispatch = useDispatch();
 
@@ -51,9 +49,7 @@ export default function SupplierInput(props) {
     <div>
       <ManagerTitle title={(action==='edit')? 'Edit Supplier' : 'Create New Supplier'} target="/manager/suppliers"/>
       
-      <form className="inputBox section-box" onSubmit={handleSubmit}>
-
-        <div className="in-image"></div>
+      <form className="section-box" onSubmit={handleSubmit}>
 
         <input required className="in-name" type="text" placeholder="Supplier Name" value={name} onChange={(event)=>setName(event.target.value)} />
 
