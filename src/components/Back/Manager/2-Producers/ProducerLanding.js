@@ -39,19 +39,28 @@ const SearchBar = styled.section`
   justify-content: center;
   
   form {
+    max-width: 500px;
     width: 100%;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
 
     input {
       width: 100%;
       margin-bottom: 8px;
     }
-    label span {
-      margin-right: 8px;
+
+    button {
+      display: block;
+      margin: 16px auto;
     }
   }
+`;
+
+const SelectBox = styled.div`
+  display: flex;
+  flex-wrap: true;
+  select {
+    width: 50%;
+  }
+
 `;
 
 const DisplaySelect = styled.div`
@@ -173,23 +182,19 @@ export default function SupplierLanding() {
 
           <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for producer"/>
 
-            <label>
-              <span>Country:</span>
+            <SelectBox>
               <select onChange={(event)=>updateCountry(event)} value={countryFilter}>
-                <option></option>
+                <option disabled value="">Select a Country</option>
                 {populateCountrySelect()}
               </select>
-            </label>
 
-            <label>
-              <span>Region:</span>
               <select onChange={(event)=>setRegionFilter(event.target.value)} value={regionFilter}>
-                <option ></option>
+                <option disabled value="">Select a Region</option>
                 {populateRegionSelect()}
               </select>
-            </label>
+            </SelectBox>
           
-          <button>Submit</button>
+          <button className="button-default">Search</button>
         </form>
       </SearchBar>
 

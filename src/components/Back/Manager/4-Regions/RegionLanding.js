@@ -49,6 +49,7 @@ export default function RegionLanding() {
   let countries = useSelector(state=>state.places.countries);
   let regions = useSelector(state=>state.places.regions);
   let country_details = useSelector(state=>state.places.country_details);
+  let producers = useSelector(state=>state.producers);
 
   let [country, setCountry] = useState('');
   let [region, setRegion] = useState('');
@@ -60,20 +61,18 @@ export default function RegionLanding() {
     } else {
       dispatch({type: 'GET_COUNTRIES'});
     }
-  },[dispatch,favoritesOnly])
+  },[dispatch,favoritesOnly]);
   
-
-
-  //Dispatches the call to get regions for a country OR empties the regions
-  function updateCountry(event) {
-    setCountry(event.target.value);
-      
-    if (event.target.value) {
-      dispatch({type: 'GET_REGIONS', payload: event.target.value});
+  useEffect(()=>{
+    if (country) {
+      dispatch({type: 'GET_REGIONS', payload: country});
     } else {
       dispatch({type: 'SET_REGIONS', payload: []});
+      dispatch({type: 'SET_COUNTRY_DETAILS', payload: {}})
     }
-  }
+  },[dispatch,country,producers]);
+
+
 
   //Fills the select list for countries
   function populateCountrySelect() {
@@ -86,6 +85,14 @@ export default function RegionLanding() {
     return regions.map( (region,i)=>{
       return <RegionWidget key={i+region.region_code} region={region}/>
     })
+  }
+
+  function renderRegionCount() {
+    if (country && regions) {
+      return <p>Number of regions: {regions.length}</p>
+    } else {
+      return <p>No country selected</p>
+    }
   }
 
   function submitRegion(event) {
@@ -111,7 +118,7 @@ export default function RegionLanding() {
   }
 
   function renderFavoriteButton() {
-    if (country_details) {
+    if (country_details && country) {
       if (country_details.favorite) {
         return <button onClick={toggleFavorite} className="button-primary">Remove from Favorites</button>
       } else {
@@ -127,7 +134,7 @@ export default function RegionLanding() {
       <InputBox className="section-box">
 
         <h2>Select a Country</h2>
-        <select onChange={(event)=>updateCountry(event)} value={country}>
+        <select onChange={(event)=>setCountry(event.target.value)} value={country}>
           <option></option>
           {populateCountrySelect()}
         </select>
@@ -147,7 +154,7 @@ export default function RegionLanding() {
       <RegionList className="section-box">
         <h2>{(country_details? country_details.name : 'Select a Country')}</h2>
         {renderFavoriteButton()}        
-        <p>Number of regions: {regions.length}</p>
+        {renderRegionCount()}
         {renderRegions()}
       </RegionList>
     </Container>
