@@ -12,6 +12,11 @@ const Container = styled.div`
   padding: 8px;
   box-sizing: border-box;
 
+  h3 {
+    font-size: 2em;
+    margin: 0;
+  }
+
   ul {
     padding: 0;
   }
@@ -32,12 +37,6 @@ const Container = styled.div`
   }
 `;
 
-const EventImage = styled.div`
-  width: 64px;
-  height: 64px;
-  background-color: #EEE;
-  margin-right: 32px;
-`;
 
 //, img from the extraction of props.event
 export default function EventWidget(props) {
@@ -83,7 +82,6 @@ export default function EventWidget(props) {
 
   return (
     <Container>
-      <EventImage></EventImage>
       <div>
         <h3>{name}</h3>
         <ul>
