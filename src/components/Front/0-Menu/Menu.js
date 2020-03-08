@@ -53,7 +53,8 @@ const ContainerMobile = styled.nav`
   transition: width .5s;
 
   .icon {
-    color: white;
+    color: ${props=>(props.scrollY>props.point-24? 'var(--col-primary)' : 'white')};
+    transition: color, .2s;
     font-size: 2em;
     margin: 8px;
     position: absolute;
@@ -111,7 +112,11 @@ export default function Menu() {
       )
     } else {
       return (
-        <ContainerMobile active={menuActive}>
+        <ContainerMobile 
+          active={menuActive}
+          scrollY={scrollY} 
+          point={window.innerHeight}
+        >
           <FontAwesomeIcon 
             className="icon" 
             icon={(menuActive? faTimes : faBars)}
