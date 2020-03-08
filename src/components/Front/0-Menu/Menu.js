@@ -53,7 +53,7 @@ const ContainerMobile = styled.nav`
   transition: width .5s;
 
   .icon {
-    color: ${props=>(props.scrollY>props.point-24? 'var(--col-primary)' : 'white')};
+    color: ${props=>( (props.scrollY>props.point-24 && !props.active)? 'var(--col-primary)' : 'white')};
     transition: color, .2s;
     font-size: 2em;
     margin: 8px;
