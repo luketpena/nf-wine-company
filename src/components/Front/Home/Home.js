@@ -5,12 +5,7 @@ import styled from 'styled-components';
 import Landing from './Landing/Landing';
 
 const Section = styled.section`
-  margin-bottom: 64px;
-  p {
-    text-indent: 24px;
-    max-width: 500px;
-    margin: 16px auto;
-  }
+  
 `;
 
 const GoButton = styled.a`

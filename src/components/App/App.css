@@ -40,6 +40,12 @@ p {
 .sec-default {
   background-color: white;
   padding: 16px 48px;
+  margin-bottom: 64px; 
+}
+.sec-default p {
+  text-indent: 24px;
+  max-width: 500px;
+  margin: 16px auto;
 }
 
 .divider {
