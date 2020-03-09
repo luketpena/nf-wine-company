@@ -38,7 +38,6 @@ p {
 
 /* Widespread Class Styling */
 .sec-default {
-  min-height: 512px;
   background-color: white;
   padding: 16px 48px;
 }
