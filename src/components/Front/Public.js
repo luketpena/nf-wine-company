@@ -11,14 +11,36 @@ const Container = styled.div`
 
 `;
 
+const Content = styled.div`
+  display: grid;
+  grid-template-rows: 1fr auto;
+`;
+
+const Footer = styled.footer`
+  background-color: var(--col-primary);
+  color: white;
+  padding: 16px;
+  font-size: 1em;
+  text-align: center;
+  p {
+    margin: 4px;
+  }
+`;
+
 export default function Public() {
   return (
     <Container>
       <Menu/>
-      <Switch>
-        
-        <Route exact path="/" component={Home}/>
-      </Switch>
+      <Content>
+        <Switch>
+          
+          <Route exact path="/" component={Home}/>
+        </Switch>
+
+        <Footer>
+          <p>Copyright © {new Date().getFullYear()} New France Wine Company. All rights reserved.</p>
+        </Footer>
+      </Content>
     </Container>
   )
 }
