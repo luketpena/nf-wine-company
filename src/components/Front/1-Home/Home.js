@@ -48,7 +48,6 @@ class Home extends Component {
           <h2>What We're Doing</h2>
           <p>"We don't just supply wine to x number of business - we also host events for, both here and around the Twin Cities."</p>
           <GoButton>See Upcoming Events</GoButton>
-          <GoButton>View Our Partners</GoButton>
         </Section>
 
         <Section className="sec-default">
