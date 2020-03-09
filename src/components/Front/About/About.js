@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import {faHandshake, faWineBottle, faWineGlassAlt} from '@fortawesome/free-solid-svg-icons';
+
+import ProcessCard from './ProcessCard';
 
 const Container = styled.div`
 `;
@@ -29,12 +32,49 @@ const SecInfo = styled.section`
 
   .info-text {
     grid-area: text;
+    padding: 16px;
   }
 `;
 
+const SecProcess = styled.section`
+  .process-item-box {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    @media only screen and (max-width: 700px) {
+      grid-template-columns: 1fr;
+      grid-template-rows: 1fr 1fr 1fr;
+    }
+  }
+`;
+
+const ProcessList = [
+  {
+    name: 'Collaborate',
+    icon: faHandshake,
+    text: '[working with the best producers and suppliers]'
+  },
+  {
+    name: 'Supply',
+    icon: faWineBottle,
+    text: '[supplying wine to fit the needs of your business]'
+  },
+  {
+    name: 'Build Community',
+    icon: faWineGlassAlt,
+    text: '[host local events and tastings]'
+  }
+]
 
 
 export default function About() {
+
+
+  function renderProcessItems() {
+    return ProcessList.map( (item,i)=>{
+      return <ProcessCard key={i} process={item} />
+    })
+  }
+
   return (
     <Container>
       <Landing>
@@ -53,9 +93,14 @@ export default function About() {
             [Here you can put a big long paragraph about details of the company - where you started from, what you do, what you value. What makes you unique.]
           </p>
         </div>
-
-        
       </SecInfo>
+
+      <SecProcess className="sec-default">
+        <h2>What do we do?</h2>
+        <div className="process-item-box">
+          {renderProcessItems()}
+        </div>
+      </SecProcess>
     </Container>
   )
 }
