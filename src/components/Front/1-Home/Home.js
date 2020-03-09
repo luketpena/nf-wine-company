@@ -8,6 +8,8 @@ const Section = styled.section`
   margin-bottom: 64px;
   p {
     text-indent: 24px;
+    max-width: 500px;
+    margin: 16px auto;
   }
 `;
 
