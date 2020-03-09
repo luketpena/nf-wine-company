@@ -3,6 +3,7 @@ import styled from 'styled-components';
 import {faHandshake, faWineBottle, faWineGlassAlt} from '@fortawesome/free-solid-svg-icons';
 
 import ProcessCard from './ProcessCard';
+import TeamCard from './TeamCard';
 
 const Container = styled.div`
 `;
@@ -47,6 +48,14 @@ const SecProcess = styled.section`
   }
 `;
 
+const SecTeam = styled.section`
+  .team-box {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+  } 
+`;
+
 const ProcessList = [
   {
     name: 'Collaborate',
@@ -65,6 +74,30 @@ const ProcessList = [
   }
 ]
 
+const TeamList = [
+  {
+    name: 'Eric Freeburg',
+    role: '[company role]',
+    img: '',
+  },
+  {
+    name: `Raistland O'Dell`,
+    role: '[company role]',
+    img: '',
+  },
+  {
+    name: 'Marvi Medower',
+    role: '[company role]',
+    img: '',
+  },
+  {
+    name: 'Erin Ungerman',
+    role: '[company role]',
+    img: '',
+  }
+  
+]
+
 
 export default function About() {
 
@@ -72,6 +105,12 @@ export default function About() {
   function renderProcessItems() {
     return ProcessList.map( (item,i)=>{
       return <ProcessCard key={i} process={item} />
+    })
+  }
+
+  function renderTeamItems() {
+    return TeamList.map( (item,i)=>{
+      return <TeamCard key={i} person={item} />
     })
   }
 
@@ -101,6 +140,13 @@ export default function About() {
           {renderProcessItems()}
         </div>
       </SecProcess>
+
+      <SecTeam className="sec-default">
+        <h2>Meet the Team</h2>
+        <div className="team-box">
+          {renderTeamItems()}
+        </div>
+      </SecTeam>
     </Container>
   )
 }
