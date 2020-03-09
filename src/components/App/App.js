@@ -7,7 +7,7 @@ import { HashRouter as Router, Route} from 'react-router-dom';
 import { Switch } from 'react-router';
 //Component imports
 import Manager from '../Back/Manager/Manager';
-import Home from '../Front/1-Home/Home';
+import Public from '../Front/Public';
 import CountryScraper from '../CountryScraper/CountryScraper';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -27,8 +27,8 @@ class App extends Component {
       <div>
         <Router>
           <Switch>
-            <Route exact path="/" component={Home}/>
             <ProtectedRoute path="/manager" component={Manager}/>
+            <Route path="/" component={Public}/>
             <Route path="/scraper" component={CountryScraper}/>
           </Switch>
         </Router>

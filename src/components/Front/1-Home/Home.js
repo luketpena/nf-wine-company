@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import styled from 'styled-components';
 
 import Landing from './Landing/Landing';
-import Menu from '../0-Menu/Menu';
 
 const Section = styled.section`
   margin-bottom: 64px;
@@ -34,7 +33,6 @@ class Home extends Component {
   render() {
     return (
       <main>
-        <Menu/>
         <Landing/>
 
         <Section className="sec-default">
