@@ -51,7 +51,7 @@ p {
   margin: 0 auto;
 }
 
-button:hover {
+button, a {
   cursor: pointer;
 }
 
@@ -69,7 +69,6 @@ button:hover {
 }
 .button-primary:hover, .button-secondary:hover, .button-default:hover, .button_confirm:hover {
   box-shadow: 0 10px 8px -4px rgba(0,0,0,.3);
-  cursor: pointer;
 }
 
 .button-primary {background-color: var(--col-primary);}
