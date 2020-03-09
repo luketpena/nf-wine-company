@@ -67,12 +67,39 @@ const ContainerMobile = styled.nav`
   .menu-list {
     background-color: rgba(165, 42, 42, .9);
     backdrop-filter: blur(16px);
-    height: 100%;
+    height: 100%;  
     position: relative;
     transition: right .5s;
     right: ${props=>(props.active? '0' : '48')}px;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
 `;
+
+const MobileMenuItem = styled.a`
+  display: block;
+  background-color: rgba(255,255,255,.1);
+  position: relative;
+  right: 0;
+  padding: 16px;
+  margin: 4px 0;
+  color: white;
+  font-size: 1.2em;
+  text-align: center;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+`;
+
+const menuList = [
+  {name: 'Home'},
+  {name: 'About'},
+  {name: 'Events'},
+  {name: 'Producers and Suppliers'},
+  {name: 'Contact'},
+]
+
 
 export default function Menu() {
 
@@ -94,18 +121,25 @@ export default function Menu() {
     setScrollY(window.scrollY);
   }
 
+  function renderDesktopMenu() {
+    return menuList.map( (item,i)=>{
+      return <li key={i}>{item.name}</li>
+    })
+  }
+
+  function renderMobileMenu() {
+    return menuList.map( (item,i)=>{
+      return <MobileMenuItem key={i}>{item.name}</MobileMenuItem>
+    })
+  }
+
   function renderMenu() {
     if (screenWidth>500) {
       return (
         <ContainerDesktop id="menu" scrollY={scrollY} point={window.innerHeight*.25}>
           <nav>
             <ul>
-              <li>NF</li>
-              <li>About</li>
-              <li>Events</li>
-              <li>Suppliers</li>
-              <li>Producer</li>
-              <li>Contact</li>
+              {renderDesktopMenu()}
             </ul>
           </nav>
         </ContainerDesktop>
@@ -123,7 +157,7 @@ export default function Menu() {
             onClick={()=>setMenuActive(!menuActive)}
           />
           <div className="menu-list">
-
+            {renderMobileMenu()}
           </div>
         </ContainerMobile>
       )
