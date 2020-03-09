@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
@@ -93,11 +94,11 @@ const MobileMenuItem = styled.a`
 `;
 
 const menuList = [
-  {name: 'Home'},
-  {name: 'About'},
-  {name: 'Events'},
-  {name: 'Producers and Suppliers'},
-  {name: 'Contact'},
+  {name: 'Home', url: '/'},
+  {name: 'About', url: '/about'},
+  {name: 'Events', url: '/events'},
+  {name: 'Producers and Suppliers', url: '/partners'},
+  {name: 'Contact', url: '/contact'},
 ]
 
 
@@ -106,8 +107,9 @@ export default function Menu() {
   let [scrollY, setScrollY] = useState(0);
   let [mount, setMount] = useState(false);
   let [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  
   let [menuActive, setMenuActive] = useState(false);
+
+  const history = useHistory();
 
   useEffect(()=>{
     if (!mount) {
@@ -121,15 +123,19 @@ export default function Menu() {
     setScrollY(window.scrollY);
   }
 
+  function navigate(url) {
+    history.push(url);
+  }
+
   function renderDesktopMenu() {
     return menuList.map( (item,i)=>{
-      return <li key={i}>{item.name}</li>
+      return <li key={i} onClick={()=>navigate(item.url)}>{item.name}</li>
     })
   }
 
   function renderMobileMenu() {
     return menuList.map( (item,i)=>{
-      return <MobileMenuItem key={i}>{item.name}</MobileMenuItem>
+      return <MobileMenuItem key={i} onClick={()=>navigate(item.url)}>{item.name}</MobileMenuItem>
     })
   }
 
