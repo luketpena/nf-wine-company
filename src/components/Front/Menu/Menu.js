@@ -126,6 +126,7 @@ export default function Menu() {
 
   function navigate(url) {
     history.push(url);
+    setMenuActive(false);
     window.scrollTo(0,0);
   }
 
