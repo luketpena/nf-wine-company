@@ -4,7 +4,6 @@ import background from './background.jpg';
 
 const LandingTop = styled.section`
   height: 100vh;
-  width: 100vw;
   background: url(${background});
   background-size: cover;
   background-position: center;
@@ -15,7 +14,6 @@ const LandingTop = styled.section`
 `;
 
 const TitleBox = styled.div`
-  width: 100vw;
   text-align: center;
   color: white;
   font-size: 32px;
