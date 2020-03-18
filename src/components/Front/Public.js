@@ -7,6 +7,7 @@ import styled from 'styled-components';
 import Menu from './Menu/Menu';
 import Home from './Home/Home';
 import About from './About/About';
+import Events from './Events/Events';
 
 
 const Container = styled.div`
@@ -40,6 +41,7 @@ export default function Public() {
           
           <Route exact path="/" component={Home}/>
           <Route exact path="/about" component={About}/>
+          <Route exact path="/events" component={Events}/>
         </Switch>
 
         <Footer>
