@@ -126,6 +126,7 @@ export default function Menu() {
 
   function navigate(url) {
     history.push(url);
+    window.scrollTo(0,0);
   }
 
   function renderDesktopMenu() {
