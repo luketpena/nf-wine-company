@@ -1,6 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import EventItem from './EventItem';
+
 const Container = styled.div`
 
 `;
@@ -29,7 +31,7 @@ export default function Events() {
   function renderEvents(array) {
     if (array.length>0) {
       return eventList.map( (item,i)=>{
-        
+        return <EventItem key={i} event={item}/>
       })
     } else {
       return (
