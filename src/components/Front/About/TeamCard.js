@@ -5,7 +5,6 @@ const Container = styled.div`
   text-align: center;
   margin: 8px;
   p, h3 {
-    text-indent: 0;
     margin: 0 auto;
   }
   img {

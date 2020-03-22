@@ -42,7 +42,6 @@ p {
   margin-bottom: 64px; 
 }
 .sec-default p {
-  text-indent: 24px;
   max-width: 500px;
   margin: 16px auto;
 }
@@ -87,3 +86,27 @@ button, a {
 
 .button-default {background-color: var(--col-default);}
 .button-default:hover {background-color: var(--col-default-light);}
+
+.button-front, .button-front-static {
+  background: none;
+  border: 1px solid var(--col-primary);
+  color: var(--col-primary);
+  border-radius: 4px;
+  padding: 4px 16px;
+  display: block;
+  margin: 8px auto;
+  transition: all .2s;
+  width: max-content;
+  outline: none;
+}
+
+.button-front:hover {
+  background-color: var(--col-primary);
+  color: white;
+  padding: 4px 32px;
+}
+
+.button-front-static:hover {
+  background-color: var(--col-primary);
+  color: white;
+}

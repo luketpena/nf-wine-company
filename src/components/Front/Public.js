@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import { Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import styled from 'styled-components';
@@ -33,6 +34,13 @@ const Footer = styled.footer`
 `;
 
 export default function Public() {
+
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch({type: 'GET_EVENTS'});
+  },[]);
+
   return (
     <Container>
       <Menu/>
