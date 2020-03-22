@@ -9,6 +9,7 @@ import Menu from './Menu/Menu';
 import Home from './Home/Home';
 import About from './About/About';
 import Events from './Events/Events';
+import Contact from './Contact/Contact';
 
 
 const Container = styled.div`
@@ -50,6 +51,8 @@ export default function Public() {
           <Route exact path="/" component={Home}/>
           <Route exact path="/about" component={About}/>
           <Route exact path="/events" component={Events}/>
+          <Route exact path="/contact" component={Contact}/>
+          
         </Switch>
 
         <Footer>
