@@ -27,7 +27,7 @@ const TextBox = styled.div`
   z-index: 101;
   background-color: white;
   border-radius: 16px;
-  min-width: 600px;
+  min-width: 320px;
   height: max-content;
   padding: 16px;
 `;

@@ -8,6 +8,13 @@ const Container = styled.div`
   grid-template-areas: "date point info button";
   grid-template-columns: auto auto 1fr auto;
 
+  @media only screen and (max-width: 500px) {
+    grid-template-areas: "date point info" "image point button";
+    grid-template-columns: auto auto 1fr;
+    grid-template-rows: auto auto;
+    
+  }
+
   min-height: 100px;
   max-width: 500px;
   margin: 0 auto;
@@ -52,7 +59,6 @@ const ModalContent = styled.div`
     border-bottom: 1px solid gray;
   }
 `;
-
 
 const Point = styled.div`
   width: 1em;
