@@ -1,16 +1,24 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled from 'styled-components';
-import background from './background.jpg';
+import background from './vineyard.mp4';
+
+
 
 const LandingTop = styled.section`
   height: 100vh;
-  background: url(${background});
-  background-size: cover;
-  background-position: center;
-  background-attachment: fixed;
   display: flex;
   align-items: center;
   text-align: center;
+  position: relative;
+  overflow: hidden;
+
+  video {
+    z-index: -5;
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+  }
 `;
 
 const TitleBox = styled.div`
@@ -27,9 +35,18 @@ const TitleBox = styled.div`
 
 export default function Landing() {
 
+  useEffect(()=>{
+    document.getElementById('bkg-vid').play();
+  },[]);
+
 
   return (
     <LandingTop>
+      
+      <video autoplay muted loop id="bkg-vid">
+        <source src={background} type="video/mp4" />
+      </video>
+
       <TitleBox>
         <p>Welcome to</p>
         <h1>The New France Wine Company</h1>
