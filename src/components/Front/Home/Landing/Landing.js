@@ -1,8 +1,16 @@
 import React, {useEffect} from 'react';
-import styled from 'styled-components';
+import styled, {keyframes} from 'styled-components';
 import background from './vineyard.mp4';
 
+const fadeIn = keyframes`
+  from {
+    opacity: 0;
+  }
 
+  to {
+    opacity: 1;
+  }
+`;
 
 const LandingTop = styled.section`
   height: 100vh;
@@ -31,6 +39,8 @@ const TitleBox = styled.div`
     margin: 0;
     font-family: var(--font-title);
   }
+  animation-name: ${fadeIn};
+  animation-duration: 4s;
 `;
 
 export default function Landing() {
