@@ -4,6 +4,7 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import styled from 'styled-components';
 
+import background from './background.jpg';
 
 import Menu from './Menu/Menu';
 import Home from './Home/Home';
@@ -21,7 +22,6 @@ const Content = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 100vh;
-  background-color: purple;
 `;
 
 const Footer = styled.footer`
@@ -35,6 +35,17 @@ const Footer = styled.footer`
   }
 `;
 
+const Background = styled.div`
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  z-index: -10;
+  
+  background-image: url(${background});
+  background-position: center;
+  background-size: cover;
+`;
+
 export default function Public() {
 
   const dispatch = useDispatch();
@@ -46,6 +57,9 @@ export default function Public() {
   return (
     <Container>
       <Menu/>
+
+      <Background />
+
       <Content>
         <Switch>
           
