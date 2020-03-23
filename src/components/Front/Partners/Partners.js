@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components';
 
 import WorldMap from './WorldMap';
@@ -26,6 +27,17 @@ const MapList = styled.div`
 
 export default function Partners() {
 
+  const countries = useSelector(state=>state.places.countries);
+
+  function populateCountryList() {
+    
+    
+    return countries.map((item,i)=>{
+      return item.country_code;
+    });
+  }
+
+
   return (
     <Container>
 
@@ -36,7 +48,7 @@ export default function Partners() {
 
       <MapBox>
 
-        <WorldMap />
+        <WorldMap countryList={populateCountryList()}/>
         <MapList>
 
         </MapList>

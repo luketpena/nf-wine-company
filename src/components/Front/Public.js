@@ -52,6 +52,7 @@ export default function Public() {
 
   useEffect(()=>{
     dispatch({type: 'GET_EVENTS'});
+    dispatch({type: 'GET_COUNTRIES_FAVORITE'});
   },[]);
 
   return (
