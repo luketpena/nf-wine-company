@@ -10,6 +10,7 @@ import Home from './Home/Home';
 import About from './About/About';
 import Events from './Events/Events';
 import Contact from './Contact/Contact';
+import Partners from './Partners/Partners';
 
 
 const Container = styled.div`
@@ -52,7 +53,8 @@ export default function Public() {
           <Route exact path="/about" component={About}/>
           <Route exact path="/events" component={Events}/>
           <Route exact path="/contact" component={Contact}/>
-          
+          <Route exact path="/partners" component={Partners}/>}
+
         </Switch>
 
         <Footer>

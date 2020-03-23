@@ -145,7 +145,7 @@ export default function Menu() {
   function renderMenu() {
     if (screenWidth>500) {
       return (
-        <ContainerDesktop id="menu" scrollY={scrollY} point={window.innerHeight*.25}>
+        <ContainerDesktop id="menu" scrollY={scrollY} point={window.innerHeight*.1}>
           <nav>
             <ul>
               {renderDesktopMenu()}

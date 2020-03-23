@@ -18,6 +18,7 @@ const TitleBox = styled.div`
   color: white;
   font-size: 32px;
   text-shadow: 0 0 4px black;
+  width: 100%;
   h1, p {
     margin: 0;
     font-family: var(--font-title);
