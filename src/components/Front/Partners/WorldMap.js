@@ -14,19 +14,20 @@ const Map = styled.svg`
 `;
 
 
-export default function WorldMap() {
+export default function WorldMap(props) {
 
   function renderPaths() {
+    console.log('The list:',props.countryList);
+    
     return MapPaths.GetPaths().map( (item,i)=>{
-      if (item.id==="US") {
-        console.log('Found id:', item.id);
-        
-      }
+      let findIndex = props.countryList.findIndex(country_id=>country_id===item.id);
+      console.log('Found index?',findIndex);   
+      
       return (
         <path
           key={i}
           d={item.d}
-          className={(item.id==="US"? "highlight" : "normal")}
+          className={(findIndex!==-1? "highlight" : "normal")}
         />
       )
     });
