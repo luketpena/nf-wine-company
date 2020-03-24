@@ -1,5 +1,5 @@
-import React from 'react';
-import {useSelector} from 'react-redux';
+import React, {useState} from 'react';
+import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 const Container = styled.div`
@@ -36,9 +36,53 @@ const Container = styled.div`
   }
 `;
 
+const Pagination = styled.div`
+  margin: 8px;
+  text-align: center;
+  color: ${props=>(props.displaySelect===props.index? '#DDD' : 'white')};
+  &:hover {
+    color: white;
+    cursor: pointer;
+  }
+`;
+
+const PaginationBox = styled.div`
+  display: flex;
+  justify-content: center;
+  background-color: var(--col-primary);
+  height: 48px;
+`;
+
 export default function ProducerList() {
 
-  const producers = useSelector(state=>state.producers);
+  const dispatch = useDispatch();
+
+  let paginationUnit = 50;
+
+  let [pageSelect, setPageSelect] = useState(1);
+  let [pageStart,setPageStart] = useState(0);
+
+  const producers = useSelector(state=>state.producer);
+
+  function renderDisplaySelect() {
+    if (producers && producers.length>0) {
+      console.log('The producers are in!');
+      
+      const num = producers.length/paginationUnit;
+      let arr = [];
+      for (let i=0; i<num; i++) {
+        arr.push(<Pagination key={i} displaySelect={pageSelect} index={i+1} onClick={()=>selectPage(i)}>{i+1}</Pagination>);
+      }
+      return arr;
+    } else {
+      dispatch({type: 'GET_PRODUCERS'});
+    }
+  }
+
+  function selectPage(index) {
+    setPageStart(paginationUnit*index);
+    setPageSelect(index+1);
+  }
 
   return (
     <Container className="sec-default">
@@ -52,10 +96,10 @@ export default function ProducerList() {
         </form>
       </div>
 
-      <DisplaySelectBox>
+      <PaginationBox>
         {renderDisplaySelect()}
-      </DisplaySelectBox>
-      <SupplierTable>
+      </PaginationBox>
+      {/* <SupplierTable>
         <thead>
           <tr>
             <SortHeader><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></SortHeader>
@@ -70,7 +114,7 @@ export default function ProducerList() {
         <tbody>
           {renderProducers()}
         </tbody>
-      </SupplierTable>
+      </SupplierTable> */}
     </Container>
   )
 }
