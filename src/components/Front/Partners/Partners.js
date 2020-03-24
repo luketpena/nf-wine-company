@@ -117,6 +117,7 @@ export default function Partners() {
         </MapList> 
       
       </MapBox>
+      
       <ProducerList />
       
     </Container>
