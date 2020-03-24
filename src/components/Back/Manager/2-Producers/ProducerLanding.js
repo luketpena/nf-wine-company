@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import TravelButton from '../../../GenUse/TravelButton/TravelButton';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
@@ -7,13 +7,11 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faCaretUp, faCaretDown } from '@fortawesome/free-solid-svg-icons'
 
 //-----< Component Imports >-----\\
-import SupplierWidget from './ProducerWidget';
+import ProducerWidget from './ProducerWidget';
 import ManagerTitle from '../ManagerTitle';
 
 //-----< Styling >-----\\
-const SupplierTable = styled.table`
-  
-`;
+const ProducerTable = styled.table``;
 
 const SortHeader = styled.th`
   color: #DDD;
@@ -79,7 +77,7 @@ const DisplaySelectBox = styled.div`
 `;
 
 //-----< Component Function >-----\\
-export default function SupplierLanding() {
+export default function ProducerLanding() {
 
   //>> Set up
   const dispatch = useDispatch();
@@ -98,6 +96,10 @@ export default function SupplierLanding() {
   let [displayUnit] = useState(50);
   let [displaySelect,setDisplaySelect] = useState(1);
 
+  useEffect(()=>{
+    dispatch({type: 'GET_COUNTRIES_FAVORITE'});
+  },[dispatch]);
+
   //Renders all available suppliers to the list
   function renderProducers() {
     let copyArray = [...producer];
@@ -108,7 +110,7 @@ export default function SupplierLanding() {
         let current = copyArray[i].name;
         console.log('Current supplier:',current);
         
-        returnArray.push(<SupplierWidget supplier={copyArray[i]} key={i}/>)
+        returnArray.push(<ProducerWidget supplier={copyArray[i]} key={i}/>)
       }
     return returnArray;
   }
@@ -118,13 +120,13 @@ export default function SupplierLanding() {
   //Sends the search parameters to the saga for getting the filtered supplier list
   function submitSearch(event) {
     event.preventDefault();
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter,region: regionFilter,sort}})
   }
 
   //Triggers a filtered search of suppliers with the current search parameters
   function triggerFilter(target) {
     setSort(target);
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort: target}});
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter,region: regionFilter ,sort: target}});
   }
 
   //Dispatches the call to get regions for a country OR empties the regions
@@ -203,7 +205,7 @@ export default function SupplierLanding() {
         <DisplaySelectBox>
           {renderDisplaySelect()}
         </DisplaySelectBox>
-        <SupplierTable>
+        <ProducerTable>
           <thead>
             <tr>
               <SortHeader><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></SortHeader>
@@ -218,7 +220,7 @@ export default function SupplierLanding() {
           <tbody>
             {renderProducers()}
           </tbody>
-        </SupplierTable>
+        </ProducerTable>
       </section>
     </div>
   )

@@ -6,8 +6,8 @@ const PORT = process.env.PORT || 5000;
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
-const eventsRouter = require('./routers/events-router');
-const placesRouter = require('./routers/places-router');
+const eventsRouter = require('./routers/events.router');
+const placesRouter = require('./routers/places.router');
 const suppliersRouter = require('./routers/suppliers.router');
 const producersRouter = require('./routers/producers.router');
 const userRouter = require('./routers/user.router');

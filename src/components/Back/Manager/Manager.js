@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import './Manager.css';
 import { Switch } from 'react-router'; 
 import { Route } from 'react-router-dom';
@@ -37,6 +38,14 @@ const Container = styled.div`
 
 //-----< Component Function >-----\\
 export default function Manager (props) {
+
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch({type: 'GET_EVENTS'});
+    dispatch({type: 'GET_COUNTRIES_FAVORITE'});
+    dispatch({type: 'GET_PRODUCERS'});
+  },[dispatch]);
   
 
   function renderBar() {

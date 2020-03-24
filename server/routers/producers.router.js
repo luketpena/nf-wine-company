@@ -14,7 +14,7 @@ router.get('/',(req,res)=>{
      `;
   let queryParams = [];
 
-
+  //>> Add search parameters as they come in
   if (req.query.search) {
     let prefix = (queryParams.length===0? 'WHERE ' : 'AND ');
     queryParams.push('%'+ req.query.search +'%');
@@ -31,6 +31,12 @@ router.get('/',(req,res)=>{
     let prefix = (queryParams.length===0? 'WHERE ' : 'AND ');
     queryParams.push(req.query.region);
     queryString += prefix + `p.region_id=$${queryParams.length}`
+  }
+
+  if (req.query.subregion) {
+    let prefix = (queryParams.length===0? 'WHERE ' : 'AND ');
+    queryParams.push(req.query.subregion);
+    queryString += prefix + `p.subregion_id=$${queryParams.length}`
   }
 
   if (req.query.sort) {
