@@ -1,5 +1,5 @@
 import React from 'react';
-import {useSelector, useDispatch} from 'react-redux';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components';
 import LoginErrorBar from './LoginErrorBar';
 import LoginInput from './LoginInput';

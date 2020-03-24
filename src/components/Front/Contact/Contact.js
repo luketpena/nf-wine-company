@@ -67,8 +67,8 @@ export default function Contact() {
             required
             type="text"
             placeholder="Subject"
-            value={email}
-            onChange={event=>setEmail(event.target.value)}
+            value={subject}
+            onChange={event=>setSubject(event.target.value)}
             />
           <input
             required
