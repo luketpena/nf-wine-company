@@ -79,7 +79,7 @@ export default function ProducerList(props) {
   let [pageSelect, setPageSelect] = useState(1);
   let [pageStart,setPageStart] = useState(0);
 
-  const {search, setSearch, countryFilter, regionFilter, subregionFilter, setSort, setOrder, order} = props;
+  const {search, setSearch, countryFilter, regionFilter, subregionFilter, setSort, sort, setOrder, order} = props;
 
   const producers = useSelector(state=>state.producer);
 
@@ -109,6 +109,13 @@ export default function ProducerList(props) {
     dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter, region: regionFilter, subregion: subregionFilter, sort: target}});
   }
 
+  function submitSearch(event) {
+    event.preventDefault();
+    console.log('My regionFilter:', countryFilter);
+    
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter, region: regionFilter, subregion: subregionFilter, sort}});
+  }
+
   //Renders all available suppliers to the list
   function renderProducers() {
     let copyArray = [...producers];
@@ -124,7 +131,7 @@ export default function ProducerList(props) {
   return (
     <Container className="sec-default">
       <div className="title-bar">
-        <form>
+        <form onSubmit={event=>submitSearch(event)}>
           <input 
             type="text" 
             placeholder="Search producers"
