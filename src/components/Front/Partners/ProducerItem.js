@@ -11,7 +11,7 @@ export default function ProducerItem(props) {
       <td>{props.producer.name}</td>
       <td>{props.producer.country_name}</td>
       <td>{props.producer.region_name}</td>
-      <td><button>Details</button></td>
+      <td><button className="button-front">Details</button></td>
     </Container>
   )
 }

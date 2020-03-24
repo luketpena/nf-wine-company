@@ -14,10 +14,16 @@ const Container = styled.div`
 `;
 
 const Landing = styled.div`
-  padding: 128px 16px;
+  padding: 128px 0;
   color: white;
   text-align: center;
   text-shadow: 0 0 2px black;
+  div {
+    background-color: rgba(0,0,0,.5);
+    box-sizing: border-box;
+    padding: 16px;
+    backdrop-filter: blur(8px);
+  }
 `;
 
 const MapBox = styled.div`
@@ -87,6 +93,7 @@ export default function Partners() {
 
   let [mode,setMode] = useState('country'); //Used to step between layers of searching
   let [hover,setHover] = useState(''); //Which button or map icon is being hovered over
+  let [countrySelect, setCountrySelect] = useState(''); //Used by the map to determine what country is being viewed
   let [mapHeight, setMapHeight] = useState(0); //Tracks the height of the map to resize the item list
 
   let [search, setSearch] = useState('');
@@ -138,20 +145,18 @@ export default function Partners() {
     });
   }
 
-  function selectCountry(id) {
-    console.log('The Country id:',id);
-    setCountryFilter(id);
+  function selectCountry(country) {
+    setCountryFilter(country.id);
+    setCountrySelect(country.country_code);
     setMode('region');
   }
 
   function selectRegion(id) {
-    console.log('The Region id:',id);
     setRegionFilter(id);
     setMode('subregion');
   }
 
   function selectSubregion(id) {
-    console.log('The Subregion id:',id);
     setSubregionFilter(id);
   }
 
@@ -162,7 +167,7 @@ export default function Partners() {
         return countries.map( (item,i)=>{
           return (
             <MapListItem
-              onClick={()=>selectCountry(item.id)}
+              onClick={()=>selectCountry(item)}
               onMouseEnter={()=>setHover(item.country_code)}
               onMouseLeave={()=>setHover('')}
               key={i}
@@ -210,6 +215,8 @@ export default function Partners() {
         case 'region': 
           setMode('country');
           setCountryFilter('');
+          setCountrySelect('');
+          setHover('');
           break;
         default: /* Keeping React happy */ break;
       }
@@ -230,15 +237,17 @@ export default function Partners() {
     <Container>
 
       <Landing>
-        <h1>Our Partners</h1>
-        <p>Insert a paragraph about the the qualities of the producers you work with.</p>
+        <div>
+          <h1>Our Partners</h1>
+          <p>Insert a paragraph about the the qualities of the producers you work with.</p>
+        </div>
       </Landing>
 
       
       <MapBox className="sec-default">
         
         <div id="world-map">
-          <WorldMap countryList={populateCountryList()} hover={hover}/>   
+          <WorldMap countryList={populateCountryList()} hover={hover} select={countrySelect}/>   
         </div>
 
         <div className="button-box">
