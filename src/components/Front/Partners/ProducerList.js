@@ -74,12 +74,12 @@ export default function ProducerList(props) {
 
   const dispatch = useDispatch();
 
-  let paginationUnit = 1;
+  let paginationUnit = 50;
 
   let [pageSelect, setPageSelect] = useState(1);
   let [pageStart,setPageStart] = useState(0);
 
-  const {search, setSearch, countryFilter, regionFilter, setSort, setOrder, order} = props;
+  const {search, setSearch, countryFilter, regionFilter, subregionFilter, setSort, setOrder, order} = props;
 
   const producers = useSelector(state=>state.producer);
 
@@ -106,7 +106,7 @@ export default function ProducerList(props) {
   //Triggers a filtered search of suppliers with the current search parameters
   function triggerFilter(target) {
     setSort(target);
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter, sort: target}});
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter, region: regionFilter, subregion: subregionFilter, sort: target}});
   }
 
   //Renders all available suppliers to the list

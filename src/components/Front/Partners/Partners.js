@@ -91,15 +91,17 @@ export default function Partners() {
 
   let [search, setSearch] = useState('');
   let [countryFilter, setCountryFilter] = useState('');
-  let [regionFilter] = useState('');
+  let [regionFilter, setRegionFilter] = useState('');
+  let [subregionFilter, setSubegionFilter] = useState('');
 
   let [sort, setSort] = useState('name');
   let [order,setOrder] = useState('ASC');
 
   const countries = useSelector(state=>state.places.countries);
+  const regions = useSelector(state=>state.places.regions);
+  const subregions = useSelector(state=>state.places.subregions);
 
-  //The side bar uses the map to determine its height
-  //It watches the window resizing to adjust this
+  //>> Adjusts the height of the sidebar by watching the window size and reacting to the map height
   useEffect(()=>{
     function handleResize() {
       let target = document.getElementById('world-map');
@@ -107,9 +109,27 @@ export default function Partners() {
         setMapHeight(target.offsetHeight);
       }
     }
-    handleResize();
+    handleResize(); //Used to call it on mount, very inefficient: update later
     window.addEventListener('resize',handleResize);
   });
+
+  //>> This subregion retrieves producers by reacting to search parameters
+  useEffect(()=>{
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search, country: countryFilter, region: regionFilter, subregion: subregionFilter, sort}});
+    //>> Updating regions to match the targeted country
+    if (countryFilter) {
+      dispatch({type: 'GET_REGIONS', payload: countryFilter});
+    } else {
+      dispatch({type: 'SET_REGIONS', payload: []});
+    }
+    //>> Updating subregions to match the targeted region
+    if (subregionFilter) {
+      dispatch({type: 'GET_SUBREGIONS', payload: regionFilter});
+    } else {
+      dispatch({type: 'SET_SUBREGIONS', payload: []});
+    }
+  },[dispatch,countryFilter,regionFilter,subregionFilter,sort]);
+
 
   //Extracting just the country_codes into an array
   function populateCountryList() {
@@ -119,10 +139,20 @@ export default function Partners() {
   }
 
   function selectCountry(id) {
-    console.log('The Country name:',id);
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search, country: id, region: regionFilter, sort}})
+    console.log('The Country id:',id);
     setCountryFilter(id);
     setMode('region');
+  }
+
+  function selectRegion(id) {
+    console.log('The Region id:',id);
+    setRegionFilter(id);
+    setMode('subregion');
+  }
+
+  function selectSubregion(id) {
+    console.log('The Subregion id:',id);
+    setRegionFilter(id);
   }
 
   //This renders the list of selectable countries / regions / subregions
@@ -141,6 +171,28 @@ export default function Partners() {
             </MapListItem>
           )
         });
+      case 'region':
+        return regions.map( (item,i)=>{
+          return (
+            <MapListItem
+              onClick={()=>selectRegion(item.id)}
+              key={i}
+            >
+              {item.name}
+            </MapListItem>
+          )
+        });
+      case 'subregion':
+        return subregions.map( (item,i)=>{
+          return (
+            <MapListItem
+              onClick={()=>selectSubregion(item.id)}
+              key={i}
+            >
+              {item.name}
+            </MapListItem>
+          )
+        });
       default: /* Keeping React happy */ break;
     }
   }
@@ -149,9 +201,13 @@ export default function Partners() {
 
     function clickBack() {
       switch(mode) {
-        case 'subregion': setMode('region'); break;
+        case 'subregion': 
+          setMode('region'); 
+          setRegionFilter('');
+          break;
         case 'region': 
           setMode('country');
+          setCountryFilter('');
           break;
         default: /* Keeping React happy */ break;
       }
