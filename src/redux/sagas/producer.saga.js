@@ -2,13 +2,12 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function * getProducers (action) {
-  console.log('IN PRODUCER SAGA');
   const response = yield axios.get('/producers');
   yield put({type: 'SET_PRODUCERS', payload: response.data})
 }
 
 function * getProducersFilter (action) {
-  const response = yield axios.get(`/producers/?search=${action.payload.search}&country=${action.payload.countryFilter}&region=${action.payload.regionFilter}&sort=${action.payload.sort}`);
+  const response = yield axios.get(`/producers/?search=${action.payload.search}&country=${action.payload.country}&region=${action.payload.region}&sort=${action.payload.sort}`);
   yield put({type: 'SET_PRODUCERS', payload: response.data})
 }
 
@@ -23,8 +22,6 @@ function * newProducer (action) {
 }
 
 function * editProducer (action) {
-  console.log('Now editing supplier!');
-  
   yield axios.put('/producers/edit', action.payload);
   yield put({type: 'GET_PRODUCERS'});
 }

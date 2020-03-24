@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -81,9 +81,11 @@ export default function ProducerList(props) {
 
   const {search, setSearch, countryFilter, regionFilter, setSort, setOrder, order} = props;
 
-  
-
   const producers = useSelector(state=>state.producer);
+
+  useEffect(()=>{
+    dispatch({type: 'GET_PRODUCERS'})
+  },[dispatch]);
 
   function renderDisplaySelect() {
     if (producers && producers.length>0) {     
@@ -93,8 +95,6 @@ export default function ProducerList(props) {
         arr.push(<Pagination key={i} displaySelect={pageSelect} index={i+1} onClick={()=>selectPage(i)}>{i+1}</Pagination>);
       }
       return arr;
-    } else {
-      dispatch({type: 'GET_PRODUCERS'});
     }
   }
 

@@ -85,9 +85,9 @@ export default function Partners() {
 
   const dispatch = useDispatch();
 
-  let [mode,setMode] = useState('subregion');
-  let [hover,setHover] = useState('');
-  let [mapHeight, setMapHeight] = useState(0);
+  let [mode,setMode] = useState('country'); //Used to step between layers of searching
+  let [hover,setHover] = useState(''); //Which button or map icon is being hovered over
+  let [mapHeight, setMapHeight] = useState(0); //Tracks the height of the map to resize the item list
 
   let [search, setSearch] = useState('');
   let [countryFilter, setCountryFilter] = useState('');
@@ -105,7 +105,6 @@ export default function Partners() {
       let target = document.getElementById('world-map');
       if (target) {
         setMapHeight(target.offsetHeight);
-        console.log('Current map height:',target.offsetHeight);
       }
     }
     handleResize();
@@ -119,11 +118,10 @@ export default function Partners() {
     });
   }
 
-  function selectCountry(name) {
-    console.log('The Country name:',name);
-    
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter: name,regionFilter,sort}})
-    setCountryFilter(name);
+  function selectCountry(id) {
+    console.log('The Country name:',id);
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search, country: id, region: regionFilter, sort}})
+    setCountryFilter(id);
     setMode('region');
   }
 
@@ -134,7 +132,7 @@ export default function Partners() {
         return countries.map( (item,i)=>{
           return (
             <MapListItem
-              onClick={()=>selectCountry(item.name)}
+              onClick={()=>selectCountry(item.id)}
               onMouseEnter={()=>setHover(item.country_code)}
               onMouseLeave={()=>setHover('')}
               key={i}
@@ -194,6 +192,12 @@ export default function Partners() {
       
       </MapBox>
 
+      {/* 
+        Both the producer list and the partners page need access to all of the search parameters.
+        Unless... maybe I should share just a search function? Nah, it still needs all of the stuff.
+
+        This is shared so they both can dispatch to get producers.
+      */}
       <ProducerList 
         search={search}
         setSearch={setSearch}
