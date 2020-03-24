@@ -92,7 +92,7 @@ export default function Partners() {
   let [search, setSearch] = useState('');
   let [countryFilter, setCountryFilter] = useState('');
   let [regionFilter, setRegionFilter] = useState('');
-  let [subregionFilter, setSubegionFilter] = useState('');
+  let [subregionFilter, setSubregionFilter] = useState('');
 
   let [sort, setSort] = useState('name');
   let [order,setOrder] = useState('ASC');
@@ -152,7 +152,7 @@ export default function Partners() {
 
   function selectSubregion(id) {
     console.log('The Subregion id:',id);
-    setRegionFilter(id);
+    setSubregionFilter(id);
   }
 
   //This renders the list of selectable countries / regions / subregions
@@ -173,6 +173,8 @@ export default function Partners() {
         });
       case 'region':
         return regions.map( (item,i)=>{
+          console.log(item.id);
+          
           return (
             <MapListItem
               onClick={()=>selectRegion(item.id)}
@@ -259,6 +261,7 @@ export default function Partners() {
         setSearch={setSearch}
         countryFilter={countryFilter} 
         regionFilter={regionFilter} 
+        subregionFilter={subregionFilter}
         setSort={setSort} 
         setOrder={setOrder}
         sort={sort}
