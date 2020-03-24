@@ -1,6 +1,10 @@
 import React, {useState} from 'react';
 import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
+import {faCaretUp, faCaretDown} from '@fortawesome/free-solid-svg-icons';
+
+import ProducerItem from './ProducerItem';
 
 const Container = styled.div`
   margin-top: 0;
@@ -50,7 +54,17 @@ const PaginationBox = styled.div`
   display: flex;
   justify-content: center;
   background-color: var(--col-primary);
-  height: 48px;
+`;
+
+const ProducerTable = styled.table`
+
+`;
+
+const SortText = styled.span`
+  &:hover {
+    cursor: pointer;
+    color: white;
+  }
 `;
 
 export default function ProducerList() {
@@ -62,12 +76,16 @@ export default function ProducerList() {
   let [pageSelect, setPageSelect] = useState(1);
   let [pageStart,setPageStart] = useState(0);
 
+  let [search, setSearch] = useState('');
+  let [countryFilter, setCountryFilter] = useState('');
+  let [regionFilter, setRegionFilter] = useState('');
+  let [sort, setSort] = useState('name');
+  let [order,setOrder] = useState('ASC');
+
   const producers = useSelector(state=>state.producer);
 
   function renderDisplaySelect() {
-    if (producers && producers.length>0) {
-      console.log('The producers are in!');
-      
+    if (producers && producers.length>0) {     
       const num = producers.length/paginationUnit;
       let arr = [];
       for (let i=0; i<num; i++) {
@@ -82,6 +100,30 @@ export default function ProducerList() {
   function selectPage(index) {
     setPageStart(paginationUnit*index);
     setPageSelect(index+1);
+  }
+
+  //Sends the search parameters to the saga for getting the filtered supplier list
+  function submitSearch(event) {
+    event.preventDefault();
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
+  }
+
+  //Triggers a filtered search of suppliers with the current search parameters
+  function triggerFilter(target) {
+    setSort(target);
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort: target}});
+  }
+
+  //Renders all available suppliers to the list
+  function renderProducers() {
+    let copyArray = [...producers];
+    if (order==='DESC') {copyArray.reverse()}
+    let returnArray = [];
+
+      for (let i=pageStart; i<Math.min(copyArray.length,pageStart+paginationUnit); i++) {     
+        returnArray.push(<ProducerItem producer={copyArray[i]} key={i}/>)
+      }
+    return returnArray;
   }
 
   return (
@@ -99,22 +141,20 @@ export default function ProducerList() {
       <PaginationBox>
         {renderDisplaySelect()}
       </PaginationBox>
-      {/* <SupplierTable>
+
+      <ProducerTable>
         <thead>
           <tr>
-            <SortHeader><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></SortHeader>
-            <SortHeader><SortText onClick={()=>triggerFilter('country')}>Country</SortText></SortHeader>
-            <SortHeader><SortText onClick={()=>triggerFilter('region')}>Region</SortText></SortHeader>
-            <th>Website</th>
-            <ButtonHeader>&nbsp;</ButtonHeader>
-            <ButtonHeader>&nbsp;</ButtonHeader>
-            <ButtonHeader><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></ButtonHeader>
+            <th className="sort"><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></th>
+            <th className="sort"><SortText onClick={()=>triggerFilter('country')}>Country</SortText></th>
+            <th className="sort"><SortText onClick={()=>triggerFilter('region')}>Region</SortText></th>
+            <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
           </tr>
         </thead>
         <tbody>
           {renderProducers()}
         </tbody>
-      </SupplierTable> */}
+      </ProducerTable>
     </Container>
   )
 }

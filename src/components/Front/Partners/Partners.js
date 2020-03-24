@@ -5,6 +5,7 @@ import styled from 'styled-components';
 import WorldMap from './WorldMap';
 import ProducerList from './ProducerList';
 
+
 const Container = styled.div`
 
 `;
@@ -117,7 +118,7 @@ export default function Partners() {
         </MapList> 
       
       </MapBox>
-      
+
       <ProducerList />
       
     </Container>
