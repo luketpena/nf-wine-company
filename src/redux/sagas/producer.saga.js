@@ -7,7 +7,7 @@ function * getProducers (action) {
 }
 
 function * getProducersFilter (action) {
-  const response = yield axios.get(`/producers/?search=${action.payload.search}&country=${action.payload.country}&region=${action.payload.region}&sort=${action.payload.sort}`);
+  const response = yield axios.get(`/producers/?search=${action.payload.search}&country=${action.payload.country}&region=${action.payload.region}&subregion=${action.payload.subregion}&sort=${action.payload.sort}`);
   yield put({type: 'SET_PRODUCERS', payload: response.data})
 }
 
