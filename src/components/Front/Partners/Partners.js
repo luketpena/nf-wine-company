@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {useSelector} from 'react-redux';
+import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -83,9 +83,18 @@ const MapListItem = styled.div`
 
 export default function Partners() {
 
-  let [mode,setMode] = useState('country');
+  const dispatch = useDispatch();
+
+  let [mode,setMode] = useState('subregion');
   let [hover,setHover] = useState('');
   let [mapHeight, setMapHeight] = useState(0);
+
+  let [search, setSearch] = useState('');
+  let [countryFilter, setCountryFilter] = useState('');
+  let [regionFilter] = useState('');
+
+  let [sort, setSort] = useState('name');
+  let [order,setOrder] = useState('ASC');
 
   const countries = useSelector(state=>state.places.countries);
 
@@ -110,6 +119,14 @@ export default function Partners() {
     });
   }
 
+  function selectCountry(name) {
+    console.log('The Country name:',name);
+    
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter: name,regionFilter,sort}})
+    setCountryFilter(name);
+    setMode('region');
+  }
+
   //This renders the list of selectable countries / regions / subregions
   function renderMapList() {
     switch(mode) {
@@ -117,6 +134,7 @@ export default function Partners() {
         return countries.map( (item,i)=>{
           return (
             <MapListItem
+              onClick={()=>selectCountry(item.name)}
               onMouseEnter={()=>setHover(item.country_code)}
               onMouseLeave={()=>setHover('')}
               key={i}
@@ -125,17 +143,30 @@ export default function Partners() {
             </MapListItem>
           )
         });
-        break;
+      default: /* Keeping React happy */ break;
     }
   }
 
   function renderBackButton() {
-    return (
-      <button>
-        <FontAwesomeIcon className="icon" icon={faChevronLeft}/>
-        Back
-      </button>
-    )
+
+    function clickBack() {
+      switch(mode) {
+        case 'subregion': setMode('region'); break;
+        case 'region': 
+          setMode('country');
+          break;
+        default: /* Keeping React happy */ break;
+      }
+    }
+
+    if (mode!=='country') {
+      return (
+        <button onClick={clickBack}>
+          <FontAwesomeIcon className="icon" icon={faChevronLeft}/>
+          Back
+        </button>
+      )
+    }
   }
 
 
@@ -163,7 +194,15 @@ export default function Partners() {
       
       </MapBox>
 
-      <ProducerList />
+      <ProducerList 
+        search={search}
+        setSearch={setSearch}
+        countryFilter={countryFilter} 
+        regionFilter={regionFilter} 
+        setSort={setSort} 
+        setOrder={setOrder}
+        sort={sort}
+        order={order}/>
       
     </Container>
   )

@@ -90,7 +90,7 @@ export default function AccountInfo() {
             <button className="button-default-mini" onClick={()=>setEdit('display')}>Cancel</button>
           </div>
         )
-        break;
+
       case 'display':
         return (
           <>
@@ -101,7 +101,7 @@ export default function AccountInfo() {
             <button className="button-default-mini" onClick={()=>toggleEdit('password')}>Change Password</button>
           </>
         )
-        break;
+
       case 'password':
         return (
           <div>
@@ -119,7 +119,7 @@ export default function AccountInfo() {
             <button className="button-default-mini" onClick={()=>setEdit('display')}>Cancel</button>
           </div>
         )
-        break;
+
       default: return <></>;
     }
   }

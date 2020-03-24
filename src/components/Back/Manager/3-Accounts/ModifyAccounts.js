@@ -72,7 +72,7 @@ export default function ModifyAccounts() {
       setMount(true);
       dispatch({type: 'GET_USER_INFO'});
     }
-  },[mount]);
+  },[mount, dispatch]);
 
   function renderAccounts() {
     return userInfo.map( (item,i)=>{

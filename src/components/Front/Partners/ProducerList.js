@@ -70,7 +70,7 @@ const SortText = styled.span`
   }
 `;
 
-export default function ProducerList() {
+export default function ProducerList(props) {
 
   const dispatch = useDispatch();
 
@@ -79,11 +79,9 @@ export default function ProducerList() {
   let [pageSelect, setPageSelect] = useState(1);
   let [pageStart,setPageStart] = useState(0);
 
-  let [search, setSearch] = useState('');
-  let [countryFilter, setCountryFilter] = useState('');
-  let [regionFilter, setRegionFilter] = useState('');
-  let [sort, setSort] = useState('name');
-  let [order,setOrder] = useState('ASC');
+  const {search, setSearch, countryFilter, regionFilter, setSort, setOrder, order} = props;
+
+  
 
   const producers = useSelector(state=>state.producer);
 
@@ -105,16 +103,10 @@ export default function ProducerList() {
     setPageSelect(index+1);
   }
 
-  //Sends the search parameters to the saga for getting the filtered supplier list
-  function submitSearch(event) {
-    event.preventDefault();
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort}})
-  }
-
   //Triggers a filtered search of suppliers with the current search parameters
   function triggerFilter(target) {
     setSort(target);
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter,sort: target}});
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,countryFilter,regionFilter, sort: target}});
   }
 
   //Renders all available suppliers to the list
@@ -136,6 +128,8 @@ export default function ProducerList() {
           <input 
             type="text" 
             placeholder="Search producers"
+            value={search}
+            onChange={event=>setSearch(event.target.value)}
           />
           <button>Go</button>
         </form>

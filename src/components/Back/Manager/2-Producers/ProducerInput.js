@@ -29,7 +29,7 @@ export default function SupplierInput(props) {
 
   useEffect(()=>{
     dispatch({type: 'GET_COUNTRIES_FAVORITE'})
-  },[]);
+  },[dispatch]);
 
   //>> Submits the new or edited event to the server
   function handleSubmit(event) {

@@ -73,8 +73,6 @@ export default function SupplierLanding() {
   const dispatch = useDispatch();
   //>> Accessing reducers
   let supplier = useSelector(state=>state.supplier);
-  let countries = useSelector(state=>state.places.countries);
-  let regions = useSelector(state=>state.places.regions);
   //>> Creating state
   let [search, setSearch] = useState('');
   let [sort, setSort] = useState('name');
