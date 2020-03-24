@@ -43,10 +43,13 @@ const Container = styled.div`
 const Pagination = styled.div`
   margin: 8px;
   text-align: center;
-  color: ${props=>(props.displaySelect===props.index? '#DDD' : 'white')};
+  font-size: 1.2em;
+  color: ${props=>(props.displaySelect===props.index? 'white' : 'var(--col-primary-light)')};
+  transition: all .2s;
   &:hover {
     color: white;
     cursor: pointer;
+    transform: scale(1.2);
   }
 `;
 
@@ -71,7 +74,7 @@ export default function ProducerList() {
 
   const dispatch = useDispatch();
 
-  let paginationUnit = 50;
+  let paginationUnit = 1;
 
   let [pageSelect, setPageSelect] = useState(1);
   let [pageStart,setPageStart] = useState(0);
