@@ -79,6 +79,7 @@ const MapList = styled.div`
   height: ${props=>props.height}px;
   overflow-y: scroll;
   grid-area: list;
+  position: relative;
 `;
 
 const MapListItem = styled.div`
@@ -248,7 +249,7 @@ export default function Partners() {
         text="Here you can place some text about who you work with and the qualities that they have."/>
 
       
-      {/* <MapBox className="sec-default">
+      <MapBox className="sec-default">
         
         <div id="world-map">
           <WorldMap countryList={populateCountryList()} hover={hover} select={countrySelect}/>   
@@ -257,11 +258,12 @@ export default function Partners() {
         <div className="button-box">
           {renderBackButton()}
         </div>
+
         <MapList height={mapHeight}>
           {renderMapList()}
         </MapList> 
       
-      </MapBox> */}
+      </MapBox>
 
       {/* 
         Both the producer list and the partners page need access to all of the search parameters.
@@ -269,7 +271,7 @@ export default function Partners() {
 
         This is shared so they both can dispatch to get producers.
       */}
-      {/* <ProducerList 
+      <ProducerList 
         search={search}
         setSearch={setSearch}
         countryFilter={countryFilter} 
@@ -278,7 +280,7 @@ export default function Partners() {
         setSort={setSort} 
         setOrder={setOrder}
         sort={sort}
-        order={order}/> */}
+        order={order}/>
       
     </Container>
   )

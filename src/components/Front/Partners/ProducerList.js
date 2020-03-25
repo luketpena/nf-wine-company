@@ -5,12 +5,14 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCaretUp, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 
 import ProducerItem from './ProducerItem';
+import ProducerCard from './ProducerCard';
 import Modal from '../../GenUse/Modal/Modal';
 
 const Container = styled.div`
   margin-top: 0;
   .title-bar {
     background-color: #EEE;
+    padding: 16px 5%;
 
     form {
       display: grid;
@@ -19,15 +21,13 @@ const Container = styled.div`
 
       max-width: 500px;
       width: 100%;
-      
-
       margin: 0 auto;
+      
       display: flex;
       justify-content: center;
-      background-color: purple;
 
       input, button {
-        font-size: 1.5em;
+        font-size: 1em;
         outline: none;
         border: none;
         height: 48px;
@@ -36,6 +36,7 @@ const Container = styled.div`
 
       input {
         border-radius: 4px 0 0 4px;
+        width: 100%;
       }
 
       button {
@@ -119,9 +120,14 @@ export default function ProducerList(props) {
     dispatch({type: 'GET_PRODUCERS'})
   },[dispatch]);
 
-  useEffect(()=>{
+  
 
-  },[])
+  useEffect(()=>{
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener('resize',handleResize);
+  });
 
 
   function renderPagination() {
@@ -158,7 +164,6 @@ export default function ProducerList(props) {
     let copyArray = [...producers];
     if (order==='DESC') {copyArray.reverse()}
     let returnArray = [];
-
       for (let i=pageStart; i<Math.min(copyArray.length,pageStart+paginationUnit); i++) {     
         returnArray.push(<ProducerItem producer={copyArray[i]} key={i} setTargetProducer={setTargetProducer} setOpen={setOpen}/>)
       }
@@ -180,6 +185,34 @@ export default function ProducerList(props) {
     )
   }
 
+  function renderProducerList() {
+    if (windowWidth>700) {
+      return (
+        <ProducerTable>
+        <thead>
+          <tr>
+            <th className="sort"><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></th>
+            <th className="sort"><SortText onClick={()=>triggerFilter('country')}>Country</SortText></th>
+            <th className="sort"><SortText onClick={()=>triggerFilter('region')}>Region</SortText></th>
+            <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
+          </tr>
+        </thead>
+        <tbody>
+          {renderProducers()}
+        </tbody>
+      </ProducerTable>
+      )
+    } else {
+      let copyArray = [...producers];
+      if (order==='DESC') {copyArray.reverse()}
+      let returnArray = [];
+        for (let i=pageStart; i<Math.min(copyArray.length,pageStart+paginationUnit); i++) {     
+          returnArray.push(<ProducerCard producer={copyArray[i]} key={i} setTargetProducer={setTargetProducer} setOpen={setOpen}/>)
+        }
+      return returnArray;
+    }
+  }
+
   return (
     <Container className="sec-default">
       <div className="title-bar">
@@ -198,19 +231,7 @@ export default function ProducerList(props) {
         {renderPagination()}
       </PaginationBox>
 
-      {/* <ProducerTable>
-        <thead>
-          <tr>
-            <th className="sort"><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></th>
-            <th className="sort"><SortText onClick={()=>triggerFilter('country')}>Country</SortText></th>
-            <th className="sort"><SortText onClick={()=>triggerFilter('region')}>Region</SortText></th>
-            <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderProducers()}
-        </tbody>
-      </ProducerTable> */}
+      {renderProducerList()}
 
       <Modal open={open} handleClose={()=>setOpen(false)}>
         <ModalContent>
