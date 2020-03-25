@@ -67,7 +67,23 @@ export default function TradeLogin() {
     switch(mode) {
       case 'login':
         return (
-          <></>
+          <Form onSubmit={event=>login(event)}>
+            <input
+              required
+              type="text"
+              value={username}
+              placeholder="Username"
+              onChange={event=>setUsername(event.target.value)}
+              />
+            <input
+              required
+              type="password"
+              value={password}
+              placeholder="Password"
+              onChange={event=>setPassword(event.target.value)}
+              />
+            <button className="button-secondary">Login</button>
+          </Form>
         )
       case 'request':
         return (
@@ -102,23 +118,7 @@ export default function TradeLogin() {
 
       <FrontLanding title="Welcome to the Trade Portal"/>
 
-      <Form onSubmit={event=>login(event)}>
-        <input
-          required
-          type="text"
-          value={username}
-          placeholder="Username"
-          onChange={event=>setUsername(event.target.value)}
-          />
-        <input
-          required
-          type="password"
-          value={password}
-          placeholder="Password"
-          onChange={event=>setPassword(event.target.value)}
-          />
-        <button className="button-secondary">Login</button>
-      </Form>
+      
 
       {renderForm()}
 
