@@ -36,7 +36,7 @@
     "xoauth2": "^1.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "node server/server.js",
     "build": "react-scripts build",
     "client": "react-scripts start",
     "server": "nodemon --watch server server/server.js",
