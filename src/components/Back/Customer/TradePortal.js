@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import background from './background.jpg';
 
 //-----< Component Imports >-----\\
+import TradeBackButton from './TradeBackButton';
 import TradeLogin from './TradeLogin';
 import TradeView from './TradeView';
 import Footer from '../../GenUse/Footer/Footer';
@@ -19,7 +20,7 @@ const Container = styled.div`
   height: max-content;
 
   display: grid;
-  grid-template-rows: 1fr auto;
+  grid-template-rows: auto 1fr auto;
 `;
 
 export default function TradePortal(props) {
@@ -44,6 +45,7 @@ export default function TradePortal(props) {
 
   return (
     <Container>
+      <TradeBackButton />
       {renderContent()}
       <Footer />
     </Container>
