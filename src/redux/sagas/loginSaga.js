@@ -3,9 +3,13 @@ import axios from 'axios';
 
 // worker Saga: will be fired on "LOGIN" actions
 function* loginUser(action) {
+  console.log('Made it to login saga');
+  
   try {
     // clear any existing error on the login page
     yield put({ type: 'CLEAR_LOGIN_ERROR' });
+    console.log('Made it to login error cleaing');
+    
 
     const config = {
       headers: { 'Content-Type': 'application/json' },
@@ -16,10 +20,15 @@ function* loginUser(action) {
     // the config includes credentials which
     // allow the server session to recognize the user
     yield axios.post('/api/user/login', action.payload, config);
+
+    console.log('Made it to login');
+    
     
     // after the user has logged in
     // get the user information from the server
     yield put({type: 'FETCH_USER'});
+    console.log('Made it to fetch user');
+    
   } catch (error) {
     console.log('Error with user login:', error);
     if (error.response.status === 401) {

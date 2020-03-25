@@ -29,8 +29,10 @@ export default function TradePortal(props) {
   const user = useSelector(state=>state.user);
 
   useEffect(()=>{
-    dispatch({type: 'GET_EVENTS_TRADE'});
-  },[]);
+    if (user.id) {
+      dispatch({type: 'GET_EVENTS_TRADE'});
+    }
+  },[user]);
 
   function renderContent() {
     if (user.id) {
