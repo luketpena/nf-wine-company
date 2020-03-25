@@ -36,6 +36,8 @@ const CloseButton = styled.button`
   position: absolute;
   right: 16px;
   top: 16px;
+  padding: 0;
+  margin: 0;
   outline: none;
   border: none;
   color: gray;

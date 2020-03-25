@@ -99,7 +99,7 @@ const menuList = [
   {name: 'Events', url: '/events'},
   {name: 'Producers and Suppliers', url: '/partners'},
   {name: 'Contact', url: '/contact'},
-  {name: 'Trade Portal', url: '/login'}
+  {name: 'Trade Portal', url: '/tradeportal'}
 ]
 
 

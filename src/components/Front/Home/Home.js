@@ -17,7 +17,7 @@ const Filler = styled.div`
   background-image: url(${fillBackground});
   background-attachment: fixed;
   background-size: cover;
-  height: 250px;
+  height: 50px;
 `;
 
 

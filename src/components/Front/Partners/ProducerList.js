@@ -5,20 +5,29 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faCaretUp, faCaretDown} from '@fortawesome/free-solid-svg-icons';
 
 import ProducerItem from './ProducerItem';
+import ProducerCard from './ProducerCard';
 import Modal from '../../GenUse/Modal/Modal';
 
 const Container = styled.div`
   margin-top: 0;
   .title-bar {
     background-color: #EEE;
-    padding: 32px;
+    padding: 16px 5%;
+
     form {
-      display: block;
+      display: grid;
+      grid-template-areas: "input button";
+      grid-template-columns: 1fr auto;
+
+      max-width: 500px;
+      width: 100%;
       margin: 0 auto;
+      
       display: flex;
       justify-content: center;
+
       input, button {
-        font-size: 1.5em;
+        font-size: 1em;
         outline: none;
         border: none;
         height: 48px;
@@ -27,7 +36,9 @@ const Container = styled.div`
 
       input {
         border-radius: 4px 0 0 4px;
+        width: 100%;
       }
+
       button {
         border-radius: 0 4px 4px 0;
         background-color: var(--col-primary);
@@ -90,18 +101,32 @@ const ModalContent = styled.div`
   }
 `;
 
+const CardBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  div {
+    width: 40%;
+  }
+  @media only screen and (max-width: 600px) {
+    div {
+      width: 100%;
+    }
+  }
+`;
+
 export default function ProducerList(props) {
 
   const dispatch = useDispatch();
+  const {search, setSearch, countryFilter, regionFilter, subregionFilter, setSort, sort, setOrder, order} = props;
 
-  let paginationUnit = 50;
+  let paginationUnit = 50; //How many items per page
 
   let [pageSelect, setPageSelect] = useState(1);
   let [pageStart,setPageStart] = useState(0);
   let [open, setOpen] = useState(false);
   let [targetProducer, setTargetProducer] = useState({});
-
-  const {search, setSearch, countryFilter, regionFilter, subregionFilter, setSort, sort, setOrder, order} = props;
+  let [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
   const producers = useSelector(state=>state.producer);
 
@@ -109,7 +134,17 @@ export default function ProducerList(props) {
     dispatch({type: 'GET_PRODUCERS'})
   },[dispatch]);
 
-  function renderDisplaySelect() {
+  
+
+  useEffect(()=>{
+    function handleResize() {
+      setWindowWidth(window.innerWidth);
+    }
+    window.addEventListener('resize',handleResize);
+  });
+
+
+  function renderPagination() {
     if (producers && producers.length>0) {     
       const num = producers.length/paginationUnit;
       let arr = [];
@@ -143,7 +178,6 @@ export default function ProducerList(props) {
     let copyArray = [...producers];
     if (order==='DESC') {copyArray.reverse()}
     let returnArray = [];
-
       for (let i=pageStart; i<Math.min(copyArray.length,pageStart+paginationUnit); i++) {     
         returnArray.push(<ProducerItem producer={copyArray[i]} key={i} setTargetProducer={setTargetProducer} setOpen={setOpen}/>)
       }
@@ -165,6 +199,38 @@ export default function ProducerList(props) {
     )
   }
 
+  function renderProducerList() {
+    if (windowWidth>700) {
+      return (
+        <ProducerTable>
+        <thead>
+          <tr>
+            <th className="sort"><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></th>
+            <th className="sort"><SortText onClick={()=>triggerFilter('country')}>Country</SortText></th>
+            <th className="sort"><SortText onClick={()=>triggerFilter('region')}>Region</SortText></th>
+            <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
+          </tr>
+        </thead>
+        <tbody>
+          {renderProducers()}
+        </tbody>
+      </ProducerTable>
+      )
+    } else {
+      let copyArray = [...producers];
+      if (order==='DESC') {copyArray.reverse()}
+      let returnArray = [];
+        for (let i=pageStart; i<Math.min(copyArray.length,pageStart+paginationUnit); i++) {     
+          returnArray.push(<ProducerCard producer={copyArray[i]} key={i} setTargetProducer={setTargetProducer} setOpen={setOpen}/>)
+        }
+      return (
+        <CardBox>
+          {returnArray}
+        </CardBox>
+      )
+    }
+  }
+
   return (
     <Container className="sec-default">
       <div className="title-bar">
@@ -180,22 +246,10 @@ export default function ProducerList(props) {
       </div>
 
       <PaginationBox>
-        {renderDisplaySelect()}
+        {renderPagination()}
       </PaginationBox>
 
-      <ProducerTable>
-        <thead>
-          <tr>
-            <th className="sort"><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></th>
-            <th className="sort"><SortText onClick={()=>triggerFilter('country')}>Country</SortText></th>
-            <th className="sort"><SortText onClick={()=>triggerFilter('region')}>Region</SortText></th>
-            <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderProducers()}
-        </tbody>
-      </ProducerTable>
+      {renderProducerList()}
 
       <Modal open={open} handleClose={()=>setOpen(false)}>
         <ModalContent>
