@@ -20,7 +20,6 @@ export default function Events() {
       <FrontLanding 
         title="Events" 
         text="Here there can be a paragraph about the kinds of events NF Wine runs and the kind of community they hope to foster."/>
-
       <EventList />
     </Container>
   )

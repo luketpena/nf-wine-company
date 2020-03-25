@@ -1,9 +1,18 @@
 import React from 'react';
+import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
 //-----< Component Imports >-----\\
 import EventItem from './EventItem';
 
+//-----< Styling >-----\\
+const Container = styled.div`
+  .no-events {
+    text-align: center;
+  }
+`;
+
+//-----< Component Function >-----\\
 export default function EventList(props) {
 
   const events = useSelector(state=>state.event);
@@ -35,7 +44,7 @@ export default function EventList(props) {
   }
 
   return (
-    <div>
+    <Container>
       <div className="sec-default">
         <h2>Upcoming Events</h2>
         {renderEvents('upcoming')}
@@ -44,6 +53,6 @@ export default function EventList(props) {
         <h2>Past Events</h2>
         {renderEvents('past')}
       </div>
-    </div>
+    </Container>
   )
 }
