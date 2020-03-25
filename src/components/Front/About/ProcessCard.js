@@ -6,6 +6,10 @@ const Container = styled.div`
   text-align: center;
   .icon {
     font-size: 8em;
+    color: var(--col-primary);
+  }
+  h3 {
+    font-family: var(--font-title);
   }
 `;
 

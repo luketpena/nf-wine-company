@@ -8,6 +8,10 @@ const Container = styled.div`
   padding: 16px;
   margin: 8px;
 
+  @media only screen and (max-width: 600px) {
+    margin: 8px 0;
+  }
+
   text-align: center;
   h3 {
     border-bottom: solid 1px gray;
@@ -25,11 +29,11 @@ const Container = styled.div`
 
 export default function ProducerCard(props) {
 
-  const {name, country_name, region_name, website_url} = props.producer;
+  const {name, country_name, region_name} = props.producer;
 
   return (
     <Container>
-      <h3>{props.producer.name}</h3>
+      <h3>{name}</h3>
       <p>
         {(country_name? <span>{country_name}</span> : <></>)}
         {(country_name && region_name? <span className="divide">-</span> : <></>)}
