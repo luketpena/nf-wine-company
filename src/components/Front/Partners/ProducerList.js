@@ -101,6 +101,20 @@ const ModalContent = styled.div`
   }
 `;
 
+const CardBox = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  div {
+    width: 40%;
+  }
+  @media only screen and (max-width: 600px) {
+    div {
+      width: 80%;
+    }
+  }
+`;
+
 export default function ProducerList(props) {
 
   const dispatch = useDispatch();
@@ -209,7 +223,11 @@ export default function ProducerList(props) {
         for (let i=pageStart; i<Math.min(copyArray.length,pageStart+paginationUnit); i++) {     
           returnArray.push(<ProducerCard producer={copyArray[i]} key={i} setTargetProducer={setTargetProducer} setOpen={setOpen}/>)
         }
-      return returnArray;
+      return (
+        <CardBox>
+          {returnArray}
+        </CardBox>
+      )
     }
   }
 
