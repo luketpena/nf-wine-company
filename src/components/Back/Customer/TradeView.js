@@ -6,7 +6,7 @@ import EventList from '../../GenUse/EventList/EventList';
 import FrontLanding from '../../Front/FrontLanding';
 
 const Container = styled.div`
-  button {
+  .button-box button {
     margin: 16px auto;
     display: block;
   }
@@ -26,8 +26,10 @@ export default function TradeView() {
   return (
     <Container>
       <FrontLanding title={`Hello, ${user.username}`}/>
-      <button className="button-secondary">Download pricing PDF</button>
-      <button className="button-default" onClick={logout}>Logout</button>
+      <div className="button-box">
+        <button className="button-secondary">Download pricing PDF</button>
+        <button className="button-default" onClick={logout}>Logout</button>
+      </div>
       <EventList/>
     </Container>
   )

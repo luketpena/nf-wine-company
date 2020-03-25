@@ -55,7 +55,7 @@ const Container = styled.div`
 const ModalContent = styled.div`
   h3 {
     color: var(--col-primary);
-    margin: 0 16px 16px 16px;
+    margin: 32px 16px 16px 16px;
     border-bottom: 1px solid gray;
   }
 `;
