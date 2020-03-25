@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 import FrontLanding from '../../Front/FrontLanding';
@@ -14,7 +15,7 @@ const Container = styled.div`
   }
 `;
 
-const LoginForm = styled.form`
+const Form = styled.form`
   background-color: white;
   padding: 16px;
   border-radius: 16px;
@@ -36,34 +37,62 @@ const LoginForm = styled.form`
 
 export default function TradeLogin() {
 
+  const dispatch = useDispatch();
+
   let [username, setUsername] = useState('');
   let [password, setPassword] = useState('');
+  let [name, setName] = useState('');
+  let [email, setEmail] = useState('');
+  let [company, setCompany] = useState('');
   let [mode, setMode] = useState('login');
+
+  function login(event) {
+    event.preventDefault();
+
+    if (username && password) {
+      dispatch({type: 'GET_EVENTS_PUBLIC'})
+      dispatch({
+        type: 'LOGIN',
+        payload: {
+          username: username,
+          password: password,
+        },
+      });
+    } else {
+      dispatch({ type: 'LOGIN_INPUT_ERROR' });
+    }
+  }
 
   function renderForm() {
     switch(mode) {
       case 'login':
         return (
-          <LoginForm>
+          <></>
+        )
+      case 'request':
+        return (
+          <Form>
             <input
               required
               type="text"
-              value={username}
-              placeholder="Username"
-              onChange={event=>setUsername(event.target.value)}
-              />
+              value={name}
+              onChange={event=>setName(event.target.value)}
+              placeholder="Your name"/>
             <input
               required
-              type="password"
-              value={password}
-              placeholder="Password"
-              onChange={event=>setPassword(event.target.value)}
-              />
-            <button className="button-secondary">Login</button>
-          </LoginForm>
+              type="email"
+              value={email}
+              onChange={event=>setEmail(event.target.value)}
+              placeholder="youremail@place.com"/>
+            <input
+              required
+              type="text"
+              value={company}
+              onChange={event=>setCompany(event.target.value)}
+              placeholder="Your company"/>
+            <button className="button-secondary">Submit Request</button>
+          </Form>
         )
-      case 'request':
-        break;
       default: /* Keep React happy */ break;
     }
   }
@@ -72,6 +101,24 @@ export default function TradeLogin() {
     <Container>
 
       <FrontLanding title="Welcome to the Trade Portal"/>
+
+      <Form onSubmit={event=>login(event)}>
+        <input
+          required
+          type="text"
+          value={username}
+          placeholder="Username"
+          onChange={event=>setUsername(event.target.value)}
+          />
+        <input
+          required
+          type="password"
+          value={password}
+          placeholder="Password"
+          onChange={event=>setPassword(event.target.value)}
+          />
+        <button className="button-secondary">Login</button>
+      </Form>
 
       {renderForm()}
 

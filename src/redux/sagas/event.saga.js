@@ -6,7 +6,7 @@ function * getEvents (action) {
   yield put({type: 'SET_EVENTS', payload: response.data})
 }
 
-function * getEventsPublic (action) {
+function * getEventsPublic (action) { 
   const response = yield axios.get('/events/public');
   yield put({type: 'SET_EVENTS', payload: response.data})
 }
