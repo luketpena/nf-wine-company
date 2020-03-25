@@ -3,13 +3,21 @@ import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
 import Landing from './Landing/Landing';
+import fillBackground from '../background.jpg';
 
 const Section = styled.section`
-  
+  margin-bottom: 0;
 `;
 
 const GoButton = styled.a`
   
+`;
+
+const Filler = styled.div`
+  background-image: url(${fillBackground});
+  background-attachment: fixed;
+  background-size: cover;
+  height: 250px;
 `;
 
 
@@ -34,11 +42,15 @@ export default function Home() {
         <GoButton className="button-front" onClick={()=>navigate('/about')}>Learn More About Us</GoButton>
       </Section>
 
+      <Filler/>
+
       <Section className="sec-default">
         <h2>What We're Doing</h2>
         <p>"We don't just supply wine to x number of business - we also host events for, both here and around the Twin Cities."</p>
         <GoButton className="button-front" onClick={()=>navigate('/events')}>See Upcoming Events</GoButton>
       </Section>
+
+      <Filler/>
 
       <Section className="sec-default">
         <h2>Who We Work With</h2>
@@ -46,6 +58,8 @@ export default function Home() {
         <p>All of our imported wines are domaine-bottled, and we strive to work with producers who are the best at their craft.</p>
         <GoButton className="button-front" onClick={()=>navigate('/partners')}>View Our Partners</GoButton>
       </Section>
+
+      <Filler/>
 
     </main>
   )
