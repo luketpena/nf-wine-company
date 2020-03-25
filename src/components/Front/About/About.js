@@ -4,13 +4,9 @@ import {faHandshake, faWineBottle, faWineGlassAlt} from '@fortawesome/free-solid
 
 import ProcessCard from './ProcessCard';
 import TeamCard from './TeamCard';
+import FrontLanding from '../FrontLanding';
 
-const Container = styled.div`
-`;
-
-const Landing = styled.div`
-  padding: 128px 16px;
-`;
+const Container = styled.div``;
 
 const SecInfo = styled.section`
   display: grid;
@@ -116,9 +112,7 @@ export default function About() {
 
   return (
     <Container>
-      <Landing>
-        <h1>About Us</h1>
-      </Landing>
+      <FrontLanding title="About Us"/>
       <SecInfo className="sec-default">
         <img 
           src="https://www.cowgirlcontractcleaning.com/wp-content/uploads/sites/360/2018/05/placeholder-img-3.jpg"

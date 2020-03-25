@@ -13,6 +13,8 @@ import Events from './Events/Events';
 import Contact from './Contact/Contact';
 import Partners from './Partners/Partners';
 
+import Footer from '../GenUse/Footer/Footer';
+
 
 const Container = styled.div`
   
@@ -22,17 +24,6 @@ const Content = styled.div`
   display: grid;
   grid-template-rows: 1fr auto;
   min-height: 100vh;
-`;
-
-const Footer = styled.footer`
-  background-color: var(--col-primary);
-  color: white;
-  padding: 16px;
-  font-size: 1em;
-  text-align: center;
-  p {
-    margin: 4px;
-  }
 `;
 
 const Background = styled.div`
@@ -51,7 +42,7 @@ export default function Public() {
   const dispatch = useDispatch();
 
   useEffect(()=>{
-    dispatch({type: 'GET_EVENTS'});
+    dispatch({type: 'GET_EVENTS_PUBLIC'});
     dispatch({type: 'GET_COUNTRIES_FAVORITE'});
   },[dispatch]);
 
@@ -72,9 +63,7 @@ export default function Public() {
 
         </Switch>
 
-        <Footer>
-          <p>Copyright © {new Date().getFullYear()} New France Wine Company. All rights reserved.</p>
-        </Footer>
+        <Footer/>
       </Content>
     </Container>
   )

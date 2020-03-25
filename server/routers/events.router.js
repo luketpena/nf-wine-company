@@ -3,18 +3,42 @@ const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool.js');
 
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
+
 // ROUTES
 
-//Gets all of the events ordered by date
-router.get('/',(req,res)=>{
+//Get all events, trade and public
+router.get('/', rejectUnauthenticated,(req,res)=>{
   let queryString = 'SELECT * FROM events ORDER BY date, time ASC';
   pool.query(queryString).then(result=>{
     res.send(result.rows);
   }).catch(error=>{
     console.log('Error getting events from the database:',error);
     res.sendStatus(400);
-  })
-})
+  });
+});
+
+//>> Get only trade events
+router.get('/trade', rejectUnauthenticated,(req,res)=>{
+  let queryString = 'SELECT * FROM events WHERE trade=true ORDER BY date, time ASC';
+  pool.query(queryString).then(result=>{
+    res.send(result.rows);
+  }).catch(error=>{
+    console.log('Error getting events from the database:',error);
+    res.sendStatus(400);
+  });
+});
+
+//>> Get only trade events
+router.get('/public', (req,res)=>{
+  let queryString = 'SELECT * FROM events WHERE trade=false ORDER BY date, time ASC';
+  pool.query(queryString).then(result=>{
+    res.send(result.rows);
+  }).catch(error=>{
+    console.log('Error getting events from the database:',error);
+    res.sendStatus(400);
+  });
+});
 
 //Add a new event to the DB
 router.post('/',(req,res)=>{

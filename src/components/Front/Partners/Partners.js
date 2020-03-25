@@ -12,22 +12,7 @@ import ProducerList from './ProducerList';
 import FrontLanding from '../FrontLanding';
 
 
-const Container = styled.div`
-
-`;
-
-const Landing = styled.div`
-  padding: 128px 0;
-  color: white;
-  text-align: center;
-  text-shadow: 0 0 2px black;
-  div {
-    background-color: rgba(0,0,0,.5);
-    box-sizing: border-box;
-    padding: 16px;
-    backdrop-filter: blur(8px);
-  }
-`;
+const Container = styled.div``;
 
 const MapBox = styled.div`
   margin-bottom: 0;

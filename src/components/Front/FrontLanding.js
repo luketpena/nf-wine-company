@@ -6,6 +6,7 @@ const Landing = styled.div`
   color: white;
   text-align: center;
   text-shadow: 0 0 2px black;
+  width: 100%;
   
   div {
     background-color: rgba(0,0,0,.5);

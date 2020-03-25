@@ -110,7 +110,7 @@ const CardBox = styled.div`
   }
   @media only screen and (max-width: 600px) {
     div {
-      width: 80%;
+      width: 100%;
     }
   }
 `;
