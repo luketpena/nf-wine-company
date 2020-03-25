@@ -6,7 +6,10 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 
 import WorldMap from './WorldMap';
+
+//-----< Component Imports >-----\\
 import ProducerList from './ProducerList';
+import FrontLanding from '../FrontLanding';
 
 
 const Container = styled.div`
@@ -31,8 +34,14 @@ const MapBox = styled.div`
   padding: 0 48px;
   display: grid;
   grid-template-areas: "map back" "map list";
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 250px;
   grid-template-rows: auto 1fr;
+
+  @media only screen and (max-width: 800px) {
+    grid-template-areas: "map" "back" "list";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
 
   #world-map {
     height: max-content;
@@ -67,7 +76,6 @@ const MapBox = styled.div`
 
 const MapList = styled.div`
   background-color: #EEE;
-  width: 250px;
   height: ${props=>props.height}px;
   overflow-y: scroll;
   grid-area: list;
@@ -235,15 +243,12 @@ export default function Partners() {
   return (
     <Container>
 
-      <Landing>
-        <div>
-          <h1>Our Partners</h1>
-          <p>Insert a paragraph about the the qualities of the producers you work with.</p>
-        </div>
-      </Landing>
+      <FrontLanding 
+        title="Our Partners" 
+        text="Here you can place some text about who you work with and the qualities that they have."/>
 
       
-      <MapBox className="sec-default">
+      {/* <MapBox className="sec-default">
         
         <div id="world-map">
           <WorldMap countryList={populateCountryList()} hover={hover} select={countrySelect}/>   
@@ -256,7 +261,7 @@ export default function Partners() {
           {renderMapList()}
         </MapList> 
       
-      </MapBox>
+      </MapBox> */}
 
       {/* 
         Both the producer list and the partners page need access to all of the search parameters.
@@ -264,7 +269,7 @@ export default function Partners() {
 
         This is shared so they both can dispatch to get producers.
       */}
-      <ProducerList 
+      {/* <ProducerList 
         search={search}
         setSearch={setSearch}
         countryFilter={countryFilter} 
@@ -273,7 +278,7 @@ export default function Partners() {
         setSort={setSort} 
         setOrder={setOrder}
         sort={sort}
-        order={order}/>
+        order={order}/> */}
       
     </Container>
   )
