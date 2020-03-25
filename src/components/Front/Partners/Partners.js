@@ -6,33 +6,27 @@ import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faChevronLeft} from '@fortawesome/free-solid-svg-icons'
 
 import WorldMap from './WorldMap';
+
+//-----< Component Imports >-----\\
 import ProducerList from './ProducerList';
+import FrontLanding from '../FrontLanding';
 
 
-const Container = styled.div`
-
-`;
-
-const Landing = styled.div`
-  padding: 128px 0;
-  color: white;
-  text-align: center;
-  text-shadow: 0 0 2px black;
-  div {
-    background-color: rgba(0,0,0,.5);
-    box-sizing: border-box;
-    padding: 16px;
-    backdrop-filter: blur(8px);
-  }
-`;
+const Container = styled.div``;
 
 const MapBox = styled.div`
   margin-bottom: 0;
   padding: 0 48px;
   display: grid;
   grid-template-areas: "map back" "map list";
-  grid-template-columns: 1fr auto;
+  grid-template-columns: 1fr 250px;
   grid-template-rows: auto 1fr;
+
+  @media only screen and (max-width: 800px) {
+    grid-template-areas: "map" "back" "list";
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+  }
 
   #world-map {
     height: max-content;
@@ -67,10 +61,10 @@ const MapBox = styled.div`
 
 const MapList = styled.div`
   background-color: #EEE;
-  width: 250px;
   height: ${props=>props.height}px;
   overflow-y: scroll;
   grid-area: list;
+  position: relative;
 `;
 
 const MapListItem = styled.div`
@@ -235,12 +229,9 @@ export default function Partners() {
   return (
     <Container>
 
-      <Landing>
-        <div>
-          <h1>Our Partners</h1>
-          <p>Insert a paragraph about the the qualities of the producers you work with.</p>
-        </div>
-      </Landing>
+      <FrontLanding 
+        title="Our Partners" 
+        text="Here you can place some text about who you work with and the qualities that they have."/>
 
       
       <MapBox className="sec-default">
@@ -252,6 +243,7 @@ export default function Partners() {
         <div className="button-box">
           {renderBackButton()}
         </div>
+
         <MapList height={mapHeight}>
           {renderMapList()}
         </MapList> 

@@ -1,13 +1,9 @@
 import React, {useState} from 'react';
 import styled from 'styled-components';
 
-const Container = styled.div`
+import FrontLanding from '../FrontLanding';
 
-`;
-
-const Landing = styled.div`
-  padding: 128px 16px;
-`;
+const Container = styled.div``;
 
 const ContactBox = styled.div`
 
@@ -51,9 +47,9 @@ export default function Contact() {
 
   return (
     <Container>
-      <Landing>
-        <h1>Contact</h1>
-      </Landing>
+      <FrontLanding 
+        title="Contact Us"
+        text="We want to hear from you."/>
       <ContactBox className="sec-default">
         <form>
           <input
