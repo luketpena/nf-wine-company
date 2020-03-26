@@ -80,7 +80,7 @@ export default function RegionLanding() {
   let country_details = useSelector(state=>state.places.country_details);
   let producers = useSelector(state=>state.producers);
 
-  let [country, setCountry] = useState(198);
+  let [country, setCountry] = useState('');
   let [region, setRegion] = useState('');
   let [favoritesOnly, setFavoritesOnly] = useState(true);
 
