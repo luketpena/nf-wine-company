@@ -6,7 +6,8 @@ import {useHistory} from 'react-router-dom';
 const Container = styled.div`
   width: 100%;
   height: 64px;
-  background-color: rgba(165,42,42,.5);
+  background-color: rgba(165, 42, 42, .5);
+  backdrop-filter: blur(16px);
   display: grid;
   grid-template-areas: "nav control";
   grid-template-columns: 1fr auto;
@@ -18,7 +19,7 @@ const Container = styled.div`
   }
 `;
 
-const NavBox = styled.div`
+const NavBox = styled.nav`
   grid-area: nav;
   li {
     display: inline;

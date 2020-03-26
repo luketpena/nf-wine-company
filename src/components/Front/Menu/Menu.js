@@ -7,6 +7,7 @@ import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 /*-----< Styling >-----*/
 const ContainerDesktop = styled.nav`
   
+  font-family: var(--font-title);
   line-height: 64px;
   height: 64px;
   width: 100%;
@@ -18,7 +19,7 @@ const ContainerDesktop = styled.nav`
 
   background-color: rgba(165, 42, 42, ${props=>(props.scrollY>props.point? '.7' : '0')});
   backdrop-filter: blur(${props=>(props.scrollY>props.point? '16' : '0')}px);
-  font-family: var(--font-title);
+  
   overflow: hidden;
 
   transition: all .5s;
