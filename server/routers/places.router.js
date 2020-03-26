@@ -75,7 +75,7 @@ router.get('/regions/:country', async (req,res)=>{
 })
 
 router.post('/regions', (req,res)=>{
-  let queryString = `INSERT INTO region (country_id, name, region_code) VALUES ($1,$2,$3);`;
+  let queryString = `INSERT INTO region (country_id, name) VALUES ($1,$2);`;
   let queryParams = [req.body.country_id,req.body.name,req.body.region_code];
   
   pool.query(queryString,queryParams).then(result=>{
