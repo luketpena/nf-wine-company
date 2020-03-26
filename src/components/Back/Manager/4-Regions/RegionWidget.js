@@ -5,12 +5,20 @@ import styled from 'styled-components';
 import Modal from '../../../GenUse/Modal/Modal';
 
 const Container = styled.div`
-  border-bottom: 1px dotted #DDD;
   display: grid;
   grid-template-areas: "title title" "info buttons";
   grid-template-columns: 1fr auto; 
-  padding: 4px;
+  padding: 4px 16px;
+
+  border-left: 16px solid var(--col-secondary);
+  border-radius: 16px;
+  padding: 8px;
   box-sizing: border-box;
+  box-shadow: 0 4px 8px -2px rgba(0,0,0,.5);
+  
+  margin-bottom: 16px;
+
+  transition: background-color .3s;
 
   @media only screen and (max-width: 600px) {
     grid-template-areas: "title" "info" "buttons";
@@ -46,13 +54,11 @@ const InfoBox = styled.div`
   display: flex;
   align-items: center;
   
-  .code-in {
-    width: 48px;
-  }
   .info-text {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
+    font-size: 1.25em;
     width: 100%;
     @media only screen and (max-width: 600px) {
       align-items: center;
@@ -164,12 +170,12 @@ export default function RegionWidget(props) {
       </InfoBox>
 
       <ButtonBox>
-        <button className="button-default" onClick={toggleEdt}>Edit</button>
-        <button className="button-primary" onClick={deleteRegion}>Delete</button>
+        <button className="button-back-static" onClick={toggleEdt}>Edit</button>
+        <button className="button-back-static-negative" onClick={deleteRegion}>Delete</button>
       </ButtonBox>
 
       <Modal open={(edit && subregions)} handleClose={handleClose}>
-        <h2>{name}</h2>
+        <h4>{name}</h4>
         <form onSubmit={event=>submitSubregion(event)}>
           <input type="text" value={subregion_in} onChange={event=>setSubregion_in(event.target.value)}/> 
           <button>Add Subregion</button>
