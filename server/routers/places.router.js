@@ -51,21 +51,20 @@ router.get('/regions/:country', async (req,res)=>{
     LEFT JOIN producers p ON r.id=p.region_id
     WHERE r.country_id=$1
     GROUP BY r.id
-    ORDER BY LOWER(r.name) ASC;`
+    ORDER BY LOWER(r.name) ASC;`;
   let subregionQuery = `
     SELECT COUNT(s.region_id) as subregion_count FROM region r
     LEFT JOIN subregions s ON s.region_id=r.id
     WHERE r.country_id=$1
     GROUP BY r.id
-    ORDER BY LOWER(r.name) ASC;
-  `
+    ORDER BY LOWER(r.name) ASC;`;
 
   try {
     let result = await pool.query(queryString, [req.params.country]);
-    let subregion_count = await pool.query(subregionQuery, [req.params.country]);
+    //let subregion_count = await pool.query(subregionQuery, [req.params.country]);
 
     for (let i=0; i<result.rows.length; i++) {
-      result.rows[i].subregion_count = subregion_count.rows[i].subregion_count;
+      //result.rows[i].subregion_count = subregion_count.rows[i].subregion_count;
     }
     
     res.send(result.rows);
