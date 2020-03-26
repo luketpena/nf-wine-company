@@ -87,11 +87,8 @@ export default function SupplierLanding() {
     let copyArray = [...supplier];
     if (order==='DESC') {copyArray.reverse()}
     let returnArray = [];
-      console.log(supplier.length);
       for (let i=displayStart; i<Math.min(copyArray.length,displayStart+displayUnit); i++) {
-        let current = copyArray[i].name;
-        console.log('Current supplier:',current);
-        
+        let current = copyArray[i].name;        
         returnArray.push(<SupplierWidget supplier={copyArray[i]} key={i}/>)
       }
     return returnArray;
