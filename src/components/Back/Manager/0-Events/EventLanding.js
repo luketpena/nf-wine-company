@@ -3,10 +3,10 @@ import TravelButton from '../../../GenUse/TravelButton/TravelButton';
 import EventWidget from './EventWidget';
 import { useSelector } from 'react-redux';
 
+/*-----< Component Imports >-----*/
 import ManagerTitle from '../ManagerTitle';
 
-
-
+/*-----< Component Function >-----*/
 export default function EventLanding() {
 
   let events = useSelector(state=>state.event);
@@ -30,17 +30,21 @@ export default function EventLanding() {
   return (
     <div>
       <ManagerTitle title="Events" target="/manager" />
-      <section className="section-box">
+
+      <section>
         <TravelButton target="/manager/events/new" text="Create New Event" propClass="button-secondary center-block"/>
       </section>
+
       <section className="section-box">
         <h2>Upcoming Events</h2>
         {renderEvents('upcoming')}
       </section>
+
       <section className="section-box">
         <h2>Past Events</h2>
         {renderEvents('past')}
       </section>
+
     </div>
   )
 }
