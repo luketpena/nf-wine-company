@@ -4,11 +4,12 @@ import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import {faBars, faTimes} from '@fortawesome/free-solid-svg-icons';
 
+/*-----< Styling >-----*/
 const ContainerDesktop = styled.nav`
   
   line-height: 64px;
   height: 64px;
-  width: 100vw;
+  width: 100%;
   position: fixed;
   top: 0;
   left: 0; 
@@ -93,6 +94,8 @@ const MobileMenuItem = styled.a`
   text-overflow: ellipsis;
 `;
 
+
+/*-----< Static Variables >-----*/
 const menuList = [
   {name: 'Home', url: '/'},
   {name: 'About', url: '/about'},
@@ -102,7 +105,7 @@ const menuList = [
   {name: 'Trade Portal', url: '/tradeportal'}
 ]
 
-
+/*-----< Component Function >-----*/
 export default function Menu() {
 
   let [scrollY, setScrollY] = useState(0);
