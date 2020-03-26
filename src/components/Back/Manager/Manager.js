@@ -44,6 +44,7 @@ export default function Manager (props) {
   useEffect(()=>{
     dispatch({type: 'GET_EVENTS'});
     dispatch({type: 'GET_COUNTRIES_FAVORITE'});
+    dispatch({type: 'GET_SUPPLIERS'});
     dispatch({type: 'GET_PRODUCERS'});
   },[dispatch]);
   
