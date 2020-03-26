@@ -90,13 +90,11 @@ h1 {
   margin-right: 4px;
 }
 
-
 .btn-back {
   position: absolute;
   left: 0;
   top: 0;
 }
-
 
 @media (max-width: 850px) {
   .inputBox {
@@ -177,5 +175,11 @@ h1 {
   grid-area: form;
 }
 
-
-
+.back-search-bar input {
+  font-size: 1.25em;
+  padding: 8px;
+  text-align: center;
+  outline: none;
+  border: 1px solid #DDD;
+  border-radius: 4px;
+}

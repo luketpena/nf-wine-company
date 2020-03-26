@@ -127,11 +127,9 @@ export default function SupplierLanding() {
 
       <ManagerTitle title="Suppliers" target="/manager" />
       
-      <section className="section-box">
-        <TravelButton target="/manager/suppliers/new" text="Add Supplier" propClass="button-secondary center-block"/>
-      </section>
+      <TravelButton target="/manager/suppliers/new" text="Add Supplier" propClass="button-secondary center-block"/>
 
-      <SearchBar className="section-box">
+      <SearchBar className="section-box back-search-bar">
         <form onSubmit={submitSearch}>
           <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for supplier"/>         
           <button className="button-default">Search</button>

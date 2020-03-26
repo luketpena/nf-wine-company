@@ -56,7 +56,8 @@ const SelectBox = styled.div`
   display: flex;
   flex-wrap: true;
   select {
-    width: 50%;
+    width: 45%;
+    margin: 8px 2.5%;
   }
 
 `;
@@ -105,11 +106,8 @@ export default function ProducerLanding() {
     let copyArray = [...producer];
     if (order==='DESC') {copyArray.reverse()}
     let returnArray = [];
-      console.log(producer.length);
       for (let i=displayStart; i<Math.min(copyArray.length,displayStart+displayUnit); i++) {
-        let current = copyArray[i].name;
-        console.log('Current supplier:',current);
-        
+        let current = copyArray[i].name;        
         returnArray.push(<ProducerWidget supplier={copyArray[i]} key={i}/>)
       }
     return returnArray;
@@ -174,12 +172,10 @@ export default function ProducerLanding() {
     <div className="landingBox">
 
       <ManagerTitle title="Producers" target="/manager" />
-      
-      <section className="section-box">
-        <TravelButton target="/manager/producers/new" text="Add Producer" propClass="button-secondary center-block"/>
-      </section>
+    
+      <TravelButton target="/manager/producers/new" text="Add Producer" propClass="button-secondary center-block"/>
 
-      <SearchBar className="section-box">
+      <SearchBar className="section-box back-search-bar">
         <form onSubmit={submitSearch}>
 
           <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for producer"/>
