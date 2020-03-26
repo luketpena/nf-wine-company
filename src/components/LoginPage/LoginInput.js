@@ -14,12 +14,15 @@ const Container = styled.div`
     }
     input {
       display: block;
-      margin: 4px auto;
+      margin: 8px auto;
+      padding: 8px;
       width: 128px;
       border: none;
       outline: none;
       border-radius: 4px;
       text-align: center;
+      font-size: 1em;
+      background-color: #EEE;
     }
   }
 `;
@@ -71,7 +74,7 @@ export default function LoginInput() {
           onChange={(event)=>setPassword(event.target.value)}
         />
 
-        <Submit className="button-confirm">Submit</Submit>   
+        <Submit className="button-secondary">Submit</Submit>   
       </form>
     </Container>
   )
