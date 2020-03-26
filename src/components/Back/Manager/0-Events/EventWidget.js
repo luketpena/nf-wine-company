@@ -9,8 +9,15 @@ const Container = styled.div`
   align-items: center;
   justify-content: space-evenly;
   border-bottom: 2px dotted #EEE;
+  border-radius: 16px;
   padding: 8px;
   box-sizing: border-box;
+
+  transition: background-color .3s;
+
+  &:hover {
+    background-color: #EEE;
+  }
 
   h3 {
     font-size: 2em;
@@ -85,12 +92,12 @@ export default function EventWidget(props) {
       <div>
         <h3>{name}</h3>
         <ul>
-          <li>{date.split('T')[0]}</li>
-          <li>{time.substr(0,5)}</li>
-          <li>${price}</li>
-          <li>{(trade? 'Trade Event' : 'Public Event')}</li>
+          {(date && <li>{date.split('T')[0]}</li>)}
+          {(time && <li>{time.substr(0,5)}</li>)}
+          {(price && <li>${price}</li>)}
+          {(trade && <li>{(trade? 'Trade Event' : 'Public Event')}</li>)}
         </ul>
-        <p>{description}</p>
+        {(description && <p>{description}</p>)}
         {renderLinkButton()}
       </div>
       <div>
