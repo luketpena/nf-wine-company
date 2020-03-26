@@ -87,7 +87,7 @@ button, a {
 .button-default {background-color: var(--col-default);}
 .button-default:hover {background-color: var(--col-default-light);}
 
-.button-front, .button-front-static {
+.button-front, .button-front-static, .button-back-static, .button-back-static-negative {
   background: none;
   border: 1px solid var(--col-primary);
   color: var(--col-primary);
@@ -100,13 +100,27 @@ button, a {
   outline: none;
 }
 
+.button-back-static, .button-back-static-negative {
+  padding: 4px;
+}
+
+.button-back-static {
+  color: black;
+  border-color: black;
+}
+
 .button-front:hover {
   background-color: var(--col-primary);
   color: white;
   padding: 4px 32px;
 }
 
-.button-front-static:hover {
+.button-front-static:hover, .button-back-static-negative:hover {
   background-color: var(--col-primary);
+  color: white;
+}
+
+.button-back-static:hover  {
+  background-color: black;
   color: white;
 }
