@@ -8,10 +8,13 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-evenly;
-  border-bottom: 2px dotted #EEE;
+  border-left: 16px solid var(--col-secondary);
   border-radius: 16px;
   padding: 8px;
   box-sizing: border-box;
+  box-shadow: 0 4px 8px -2px rgba(0,0,0,.5);
+  
+  margin-bottom: 16px;
 
   transition: background-color .3s;
 
@@ -22,10 +25,12 @@ const Container = styled.div`
   h3 {
     font-size: 2em;
     margin: 0;
+    font-family: var(--font-title);
   }
 
   ul {
     padding: 0;
+    border-bottom: 1px solid gray;
   }
   li {
     display: inline;
@@ -75,7 +80,7 @@ export default function EventWidget(props) {
     if (link_url!=='' && link_url!==null) {
       return  (
         <a href={link_url} target="_blank" rel="noopener noreferrer">
-          <button className="button-default"> 
+          <button className="button-secondary"> 
             {( (link_text!=='' && link_text!==null)? link_text : 'Event Link')}
           </button>
         </a>
