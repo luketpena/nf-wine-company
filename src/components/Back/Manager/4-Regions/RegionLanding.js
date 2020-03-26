@@ -14,10 +14,35 @@ const RegionList = styled.div`
   text-align: center;
 
   h2 {
-    margin-bottom: 0;
+    font-size: 2em;
+    margin: 0 auto;
+    border-bottom: 1px solid #DDD;
   }
   p {
     margin-top: 0;
+  }
+`;
+
+const RegionFormBox = styled.div`
+  background-color: #EEE;
+  width: max-content;
+  padding: 16px;
+  border-radius: 16px;
+  margin: 16px auto;
+  h3 {
+    margin: 0 auto 16px auto;
+  }
+  input {
+    padding: 4px;
+    border: none;
+    outline: none;
+    display: block;
+    font-size: 1em;
+    text-align: center;
+  }
+  button {
+    font-size: 1em;
+    margin-top: 8px;
   }
 `;
 
@@ -42,6 +67,10 @@ const InputBox = styled.div`
   }
 `;
 
+const FavoriteButton = styled.button`
+  margin: 16px auto;
+`;
+
 export default function RegionLanding() {
 
   const dispatch = useDispatch();
@@ -51,7 +80,7 @@ export default function RegionLanding() {
   let country_details = useSelector(state=>state.places.country_details);
   let producers = useSelector(state=>state.producers);
 
-  let [country, setCountry] = useState('');
+  let [country, setCountry] = useState(198);
   let [region, setRegion] = useState('');
   let [favoritesOnly, setFavoritesOnly] = useState(true);
 
@@ -82,9 +111,11 @@ export default function RegionLanding() {
   }
 
   function renderRegions() {
-    return regions.map( (region,i)=>{
-      return <RegionWidget key={i+region.region_code} region={region}/>
-    })
+    if (regions) {
+      return regions.map( (region,i)=>{
+        return <RegionWidget key={i+region.region_code} region={region}/>
+      })
+    }
   }
 
   function renderRegionCount() {
@@ -120,10 +151,24 @@ export default function RegionLanding() {
   function renderFavoriteButton() {
     if (country_details && country) {
       if (country_details.favorite) {
-        return <button onClick={toggleFavorite} className="button-primary">Remove from Favorites</button>
+        return <FavoriteButton onClick={toggleFavorite} className="button-primary">Remove from Favorites</FavoriteButton>
       } else {
-        return <button onClick={toggleFavorite} className="button-confirm">Add to Favorites</button>
+        return <FavoriteButton onClick={toggleFavorite} className="button-confirm">Add to Favorites</FavoriteButton>
       }
+    }
+  }
+
+  function renderRegionSubmit() {
+    if (country_details && country) {
+      return (
+        <RegionFormBox>
+          <h3>Add a Region</h3>
+          <form onSubmit={submitRegion}>
+            <input required type="text" placeholder="Region Name" value={region} onChange={event=>setRegion(event.target.value)}/>
+            <button className="button-secondary">Submit</button>
+          </form>
+        </RegionFormBox>
+      )
     }
   }
 
@@ -144,17 +189,14 @@ export default function RegionLanding() {
           Show Favorites Only
         </label>
 
-        <h2>Add a Region</h2>
-        <form onSubmit={submitRegion}>
-          <input required type="text" placeholder="Region Name" value={region} onChange={event=>setRegion(event.target.value)}/>
-          <button>Submit</button>
-        </form>
+        
 
       </InputBox>
       <RegionList className="section-box">
         <h2>{(country_details? country_details.name : 'Select a Country')}</h2>
-        {renderFavoriteButton()}        
         {renderRegionCount()}
+        {renderFavoriteButton()}        
+        {renderRegionSubmit()}
         {renderRegions()}
       </RegionList>
     </Container>
