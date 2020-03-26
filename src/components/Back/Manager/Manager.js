@@ -25,10 +25,10 @@ import ManagerBar from './ManagerBar';
 import barrels from '../../../images/bkg-barrels.jpg';
 
 
-//-----< Styling >-----\\
+/*-----< Styling >-----*/
 const Container = styled.div`
   min-height: 100vh;
-  width: 100vw;
+  width: 100%;
   background-image: url(${barrels});
   background-size: cover;
   background-position: center;

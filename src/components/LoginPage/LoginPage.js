@@ -3,6 +3,7 @@ import {useSelector, useDispatch} from 'react-redux';
 import styled from 'styled-components';
 import LoginInput from './LoginInput';
 
+/* */
 import barrels from '../../images/bkg-barrels.jpg';
 
 import Modal from '../GenUse/Modal/Modal';
@@ -26,7 +27,7 @@ const InputBox = styled.div`
 `;
 
 const Container = styled.div`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
