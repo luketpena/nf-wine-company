@@ -40,9 +40,9 @@ export default function SupplierWidget(props) {
       <Data>{props.supplier.country_name}</Data>
       <Data>{props.supplier.region_name}</Data>
       <Data>{props.supplier.website_url}</Data>
-      <Data><button>Details</button></Data>
-      <Data><button onClick={clickEdit}>Edit</button></Data>
-      <Data><button onClick={deleteSupplier}>Delete</button></Data>
+      <Data><button className="button-back-static">Details</button></Data>
+      <Data><button className="button-back-static" onClick={clickEdit}>Edit</button></Data>
+      <Data><button className="button-back-static-negative" onClick={deleteSupplier}>Delete</button></Data>
     </Container>
   )
 }
