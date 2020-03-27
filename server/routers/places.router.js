@@ -54,7 +54,7 @@ router.get('/regions/:country', async (req,res)=>{
     ORDER BY LOWER(r.name) ASC;`;
   let subregionQuery = `
     SELECT COUNT(s.region_id) as subregion_count FROM region r
-    LEFT JOIN subregions s ON s.region_id=r.id
+    LEFT JOIN subregion s ON s.region_id=r.id
     WHERE r.country_id=$1
     GROUP BY r.id
     ORDER BY LOWER(r.name) ASC;`;
@@ -64,7 +64,7 @@ router.get('/regions/:country', async (req,res)=>{
     let subregion_count = await pool.query(subregionQuery, [req.params.country]);
 
     for (let i=0; i<result.rows.length; i++) {
-      //result.rows[i].subregion_count = subregion_count.rows[i].subregion_count;
+      result.rows[i].subregion_count = subregion_count.rows[i].subregion_count;
     }
     
     res.send(result.rows);
@@ -90,7 +90,7 @@ router.post('/subregions', (req,res)=>{
   let queryString = `INSERT INTO subregions (region_id, name) VALUES ($1,$2);`;
   let queryParams = [req.body.region_id, req.body.name];
   
-  pool.query(queryString,queryParams).then(result=>{
+  pool.query(queryString,queryParams).then(()=>{
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting new subregion:',error);
@@ -112,9 +112,9 @@ router.delete('/regions/:id', async (req,res)=>{
 })
 
 router.put('/regions/:id', (req,res)=>{
-  let queryString = `UPDATE region SET name=$2, region_code=$3 WHERE id=$1;`;
+  let queryString = `UPDATE region SET name=$2 WHERE id=$1;`;
 
-  pool.query(queryString, [req.params.id, req.body.name, req.body.region_code]).then(result=>{
+  pool.query(queryString, [req.params.id, req.body.name]).then(result=>{
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error updating region:',error);
