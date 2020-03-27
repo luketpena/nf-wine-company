@@ -61,7 +61,7 @@ router.get('/regions/:country', async (req,res)=>{
 
   try {
     let result = await pool.query(queryString, [req.params.country]);
-    //let subregion_count = await pool.query(subregionQuery, [req.params.country]);
+    let subregion_count = await pool.query(subregionQuery, [req.params.country]);
 
     for (let i=0; i<result.rows.length; i++) {
       //result.rows[i].subregion_count = subregion_count.rows[i].subregion_count;
@@ -75,8 +75,8 @@ router.get('/regions/:country', async (req,res)=>{
 })
 
 router.post('/regions', (req,res)=>{
-  let queryString = `INSERT INTO region (country_id, name) VALUES ($1,$2);`;
-  let queryParams = [req.body.country_id,req.body.name,req.body.region_code];
+  let queryString = `INSERT INTO region (name, country_id) VALUES ($1,$2);`;
+  let queryParams = [req.body.name,req.body.country_id];
   
   pool.query(queryString,queryParams).then(result=>{
     res.sendStatus(201);
