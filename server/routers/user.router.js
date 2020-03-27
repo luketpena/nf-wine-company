@@ -103,7 +103,7 @@ router.post('/register', async (req, res) => {
   } catch (error) {
     client.query('ROLLBACK');
     console.log('Error registering user:',error);
-    res.sendStatus(400);
+    res.send('Had an error:'+error);
   } finally {
     client.release();
   }
