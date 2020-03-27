@@ -87,7 +87,7 @@ router.post('/regions', (req,res)=>{
 });
 
 router.post('/subregions', (req,res)=>{
-  let queryString = `INSERT INTO subregions (region_id, name) VALUES ($1,$2);`;
+  let queryString = `INSERT INTO subregion (region_id, name) VALUES ($1,$2);`;
   let queryParams = [req.body.region_id, req.body.name];
   
   pool.query(queryString,queryParams).then(()=>{
@@ -124,7 +124,7 @@ router.put('/regions/:id', (req,res)=>{
 
 router.get('/subregions/:id', (req,res)=>{
   let queryString = `
-    SELECT s.*, COUNT(p.subregion_id) AS producer_count FROM subregions s
+    SELECT s.*, COUNT(p.subregion_id) AS producer_count FROM subregion s
     LEFT JOIN producers p ON p.subregion_id=s.id
     WHERE s.region_id=$1 
     GROUP BY s.id
@@ -138,7 +138,7 @@ router.get('/subregions/:id', (req,res)=>{
 });
 
 router.delete('/subregions/:id', async (req,res)=>{
-  let queryString = `DELETE FROM subregions WHERE id=$1;`;
+  let queryString = `DELETE FROM subregion WHERE id=$1;`;
   
   try {
     //>> Select and set all references to subregion to null
