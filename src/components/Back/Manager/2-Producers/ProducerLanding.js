@@ -106,8 +106,7 @@ export default function ProducerLanding() {
     let copyArray = [...producer];
     if (order==='DESC') {copyArray.reverse()}
     let returnArray = [];
-      for (let i=displayStart; i<Math.min(copyArray.length,displayStart+displayUnit); i++) {
-        let current = copyArray[i].name;        
+      for (let i=displayStart; i<Math.min(copyArray.length,displayStart+displayUnit); i++) {      
         returnArray.push(<ProducerWidget supplier={copyArray[i]} key={i}/>)
       }
     return returnArray;

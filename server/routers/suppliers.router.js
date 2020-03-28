@@ -29,9 +29,9 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/',(req,res)=>{
-  const {name,description,img,website} = req.body;
-  let queryString = 'INSERT INTO suppliers (name, description, img_url, website_url) VALUES ($1,$2,$3,$4);';
-  pool.query(queryString,[name,description,img,website]).then(result=>{   
+  const {name,description,website} = req.body;
+  let queryString = 'INSERT INTO suppliers (name, description, website_url) VALUES ($1,$2,$3);';
+  pool.query(queryString,[name,description,website]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);
@@ -40,15 +40,15 @@ router.post('/',(req,res)=>{
 });
 
 router.put('/edit',(req,res)=>{
-  const {name,description,img,website,id} = req.body;
+  const {name,description,website,id} = req.body;
   let queryString = `
     UPDATE suppliers
-    SET name=$1, description=$2, img_url=$3, website_url=$4
+    SET name=$1, description=$2, website_url=$3
     WHERE id=$5;
   `;
   console.log('Incoming edit:',req.body);
   
-  pool.query(queryString,[name,description,img,website,id]).then(result=>{   
+  pool.query(queryString,[name,description,website,id]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);

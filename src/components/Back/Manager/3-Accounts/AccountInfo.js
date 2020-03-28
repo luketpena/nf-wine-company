@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import styled from 'styled-components';
 import {useSelector, useDispatch} from 'react-redux';
 
+/*-----< Styling >-----*/
 const Container = styled.div`
   grid-area: info;
   width: 250px;
@@ -39,6 +40,7 @@ const Access = styled.p`
   text-align: center;
 `;
 
+/*-----< Component Function >-----*/
 export default function AccountInfo() {
 
   const dispatch = useDispatch();
@@ -85,9 +87,9 @@ export default function AccountInfo() {
             <form onSubmit={submitNewInfo}>
               <input type="text" value={username} onChange={(event)=>setUsername(event.target.value)}/>
               <input type="text" value={email} onChange={(event)=>setEmail(event.target.value)}/>
-              <button className="button-approve-mini">Confirm Changes</button>
+              <button className="button-back-static">Confirm Changes</button>
             </form>
-            <button className="button-default-mini" onClick={()=>setEdit('display')}>Cancel</button>
+            <button className="button-back-static-negative" onClick={()=>setEdit('display')}>Cancel</button>
           </div>
         )
 
@@ -97,8 +99,8 @@ export default function AccountInfo() {
             <Name>{user.username}</Name>
             <Email>{user.email}</Email>
             <Access>Access: {user.access}</Access>
-            <button className="button-default-mini" onClick={()=>toggleEdit('edit')}>Update Settings</button>
-            <button className="button-default-mini" onClick={()=>toggleEdit('password')}>Change Password</button>
+            <button className="button-back-static" onClick={()=>toggleEdit('edit')}>Update Settings</button>
+            <button className="button-back-static" onClick={()=>toggleEdit('password')}>Change Password</button>
           </>
         )
 
@@ -114,9 +116,9 @@ export default function AccountInfo() {
                 <p>Retype Password:</p>
                 <input type="password" value={passwordCheck} onChange={(event)=>setPasswordCheck(event.target.value)} />
               </label>
-              <button className="button-approve-mini">Confirm Changes</button>
+              <button className="button-back-static">Confirm Changes</button>
             </form>
-            <button className="button-default-mini" onClick={()=>setEdit('display')}>Cancel</button>
+            <button className="button-back-static-negative" onClick={()=>setEdit('display')}>Cancel</button>
           </div>
         )
 

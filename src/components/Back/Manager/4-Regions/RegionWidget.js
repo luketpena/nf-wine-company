@@ -178,7 +178,7 @@ export default function RegionWidget(props) {
         <h4>{name}</h4>
         <form onSubmit={event=>submitSubregion(event)}>
           <input type="text" value={subregion_in} onChange={event=>setSubregion_in(event.target.value)}/> 
-          <button>Add Subregion</button>
+          <button className="button-back-static">Add Subregion</button>
         </form>
 
         {renderSubregions()}

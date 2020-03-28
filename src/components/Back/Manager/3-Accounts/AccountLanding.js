@@ -1,15 +1,14 @@
 import React from 'react';
 import styled from 'styled-components';
 
+/*-----< Component Imports >-----*/
 import AccountInfo from './AccountInfo';
 import AccountUser from './AccountUser';
 import AccountRequest from './AccountRequest';
-
 import ManagerTitle from '../ManagerTitle';
 
-const Container = styled.div`
-  
-`;
+/*-----< Styling >-----*/
+const Container = styled.div``;
 
 const AccountBox = styled.div`
   display: grid;
@@ -23,6 +22,7 @@ const AccountBox = styled.div`
   }
 `;
 
+/*-----< Component Function >-----*/
 export default function AccountLanding() {
   return (
     <Container className="landingBox">

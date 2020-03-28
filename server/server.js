@@ -15,7 +15,6 @@ const requestsRouter = require('./routers/requests.router');
 
 const mailRouter = require('./routers/mail.router');
 
-
 /* ---------- MIDDLEWARE ---------- */
 app.use(bodyParser.json()); // needed for angular requests
 app.use(bodyParser.urlencoded({extended: true}));

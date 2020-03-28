@@ -27,8 +27,8 @@ export default function RequestRow(props) {
       <td>{name}</td>
       <td>{email}</td>
       <td>{note}</td>
-      <td><button className="button-approve-mini" onClick={clickApprove}>Approve</button></td>
-      <td><button className="button-reject-mini" onClick={clickReject}>Reject</button></td>
+      <td><button className="button-back-static" onClick={clickApprove}>Approve</button></td>
+      <td><button className="button-back-static-negative" onClick={clickReject}>Reject</button></td>
     </Container>
   )
 }

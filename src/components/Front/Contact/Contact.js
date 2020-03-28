@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 import FrontLanding from '../FrontLanding';
@@ -40,10 +41,18 @@ const ContactBox = styled.div`
 
 export default function Contact() {
 
+  const dispatch = useDispatch();
+
   let [name, setName] = useState('');
   let [subject, setSubject] = useState('');
   let [email, setEmail] = useState('');
   let [message, setMessage] = useState('');
+
+  function sendEmail(event) {
+    event.preventDefault();
+    const newEmail = {name,subject,email,message};
+    dispatch({type: "CONTACT_SEND_EMAIL", payload: newEmail});
+  }
 
   return (
     <Container>
@@ -51,7 +60,7 @@ export default function Contact() {
         title="Contact Us"
         text="We want to hear from you."/>
       <ContactBox className="sec-default">
-        <form>
+        <form onSubmit={event=>sendEmail(event)}>
           <input
             required
             type="text"

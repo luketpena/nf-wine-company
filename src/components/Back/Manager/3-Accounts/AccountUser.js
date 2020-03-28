@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from 'styled-components';
 import {useHistory} from 'react-router-dom';
 
-
+/*-----< Styling >-----*/
 const Container = styled.div`
   grid-area: user;
   height: 250px;
@@ -43,7 +43,7 @@ export default function AccountInfo() {
     <Container>
       <h2>Accounts</h2>
       <p>{(userInfo.length===1? 'There is 1 account.' : `There are ${userInfo.length} accounts.`)}.</p>
-      <button className="button-default-mini" onClick={clickModify}>Modify Accounts</button>
+      <button className="button-back-static" onClick={clickModify}>Modify Accounts</button>
     </Container>
   )
 }

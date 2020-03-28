@@ -8,9 +8,10 @@ const pool = require('../modules/pool.js');
 router.get('/',(req,res)=>{
 
   let queryString = `
-    SELECT p.*, c.name AS country_name, r.name AS region_name FROM producers p
+    SELECT p.*, c.name AS country_name, r.name AS region_name, s.name AS subregion_name FROM producers p
     LEFT JOIN country c ON p.country_id = c.id
     LEFT JOIN region r ON p.region_id = r.id   
+    LEFT JOIN subregion s on p.subregion_id = s.id
      `;
   let queryParams = [];
 
