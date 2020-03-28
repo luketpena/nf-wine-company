@@ -10,6 +10,7 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import userInfoSaga from './userInfo.saga';
 import requestSaga from './requests.saga';
+import contactSaga from './contact.saga';
 
 export default function* rootSaga() {
   yield all([
@@ -23,5 +24,6 @@ export default function* rootSaga() {
     userSaga(),
     userInfoSaga(),
     requestSaga(),
+    contactSaga(),
   ]);
 }

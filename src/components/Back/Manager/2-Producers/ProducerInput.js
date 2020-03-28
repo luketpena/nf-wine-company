@@ -28,7 +28,16 @@ export default function SupplierInput(props) {
   let [website,setWebsite] = useState( (action==='edit' && edit.website_url)? edit.website_url : '');
 
   useEffect(()=>{
-    dispatch({type: 'GET_COUNTRIES_FAVORITE'})
+    dispatch({type: 'GET_COUNTRIES_FAVORITE'});
+    if (action==='edit') {
+      if (edit.country_id) {
+        if (!edit.region_id) {
+          dispatch({type: 'GET_REGIONS', payload: edit.country_id});
+        } else if (!edit.subregion_id) {
+          dispatch({type: 'GET_SUBREGIONS', payload: edit.region_id});
+        }
+      }
+    }
   },[dispatch]);
 
   //>> Submits the new or edited event to the server

@@ -124,7 +124,7 @@ export default function ModifyAccounts() {
               </select>
             </InputColumn>
           </InputBox>
-          <button className="button-approve-mini">Submit</button>
+          <button className="button-secondary">Submit</button>
         </form>
       </CreateAccountBox>
 
