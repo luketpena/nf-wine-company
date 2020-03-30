@@ -37,12 +37,19 @@ p {
 
 /* Widespread Class Styling */
 .sec-default {
-  background-color: white;
-  padding: 16px 48px;
+  background-color: #EEE;
+  padding: 0;
   margin-bottom: 64px; 
 }
-.sec-default p {
+
+.sec-default-content {
+  background-color: white;
+  padding: 48px;
   max-width: 500px;
+  margin: 0 auto;
+}
+
+.sec-default p {
   margin: 16px auto;
 }
 
