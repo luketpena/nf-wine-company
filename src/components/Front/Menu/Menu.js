@@ -19,6 +19,7 @@ const ContainerDesktop = styled.nav`
 
   background-color: rgba(165, 42, 42, ${props=>(props.scrollY>props.point? '.7' : '0')});
   backdrop-filter: blur(${props=>(props.scrollY>props.point? '16' : '0')}px);
+  box-shadow: 0 4px 32px 2px rgba(0,0,0,${props=>(props.scrollY>props.point? '.3' : '0')});
   
   overflow: hidden;
 

@@ -14,13 +14,19 @@ import FrontLanding from '../FrontLanding';
 
 const Container = styled.div``;
 
+const MapBanner = styled.div`
+  margin-bottom: 24px;
+`;
+
 const MapBox = styled.div`
-  margin-bottom: 0;
-  padding: 0 48px;
+  padding: 16px 48px;
   display: grid;
   grid-template-areas: "map back" "map list";
   grid-template-columns: 1fr 250px;
   grid-template-rows: auto 1fr;
+
+  max-width: 1000px;
+  margin: 0 auto;
 
   @media only screen and (max-width: 800px) {
     grid-template-areas: "map" "back" "list";
@@ -29,6 +35,7 @@ const MapBox = styled.div`
   }
 
   #world-map {
+    
     height: max-content;
     grid-area: map;
   }
@@ -65,6 +72,11 @@ const MapList = styled.div`
   overflow-y: scroll;
   grid-area: list;
   position: relative;
+
+  box-shadow: 0 0 16px 0 rgba(0,0,0,.2);
+  border-radius: 16px;
+  overflow-x: hidden;
+  overflow-y: scroll;
 `;
 
 const MapListItem = styled.div`
@@ -233,22 +245,23 @@ export default function Partners() {
         title="Our Partners" 
         text="Here you can place some text about who you work with and the qualities that they have."/>
 
-      
-      <MapBox className="sec-default">
+      <MapBanner className="sec-default">
+        <MapBox className="sec-default-content">
+          
+          <div id="world-map">
+            <WorldMap countryList={populateCountryList()} hover={hover} select={countrySelect}/>   
+          </div>
+
+          <div className="button-box">
+            {renderBackButton()}
+          </div>
+
+          <MapList height={mapHeight}>
+            {renderMapList()}
+          </MapList> 
         
-        <div id="world-map">
-          <WorldMap countryList={populateCountryList()} hover={hover} select={countrySelect}/>   
-        </div>
-
-        <div className="button-box">
-          {renderBackButton()}
-        </div>
-
-        <MapList height={mapHeight}>
-          {renderMapList()}
-        </MapList> 
-      
-      </MapBox>
+        </MapBox>
+      </MapBanner>
 
       {/* 
         Both the producer list and the partners page need access to all of the search parameters.

@@ -69,6 +69,9 @@ const PaginationBox = styled.div`
   display: flex;
   justify-content: center;
   background-color: var(--col-primary);
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 0 32px 8px rgba(0,0,0,.1);
 `;
 
 const ProducerTable = styled.table`
@@ -112,6 +115,17 @@ const CardBox = styled.div`
     div {
       width: 100%;
     }
+  }
+`;
+
+const ProducerBox = styled.div`
+  background-color: #EEE;
+  overflow: hidden;
+  padding-bottom: 32px;
+  table {
+    max-width: 800px;
+    margin: 0 auto;
+    box-shadow: 0 0 32px 8px rgba(0,0,0,.1);
   }
 `;
 
@@ -203,17 +217,17 @@ export default function ProducerList(props) {
     if (windowWidth>700) {
       return (
         <ProducerTable>
-        <thead>
-          <tr>
-            <th className="sort"><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></th>
-            <th className="sort"><SortText onClick={()=>triggerFilter('country')}>Country</SortText></th>
-            <th className="sort"><SortText onClick={()=>triggerFilter('region')}>Region</SortText></th>
-            <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderProducers()}
-        </tbody>
+          <thead>
+            <tr>
+              <th className="sort"><SortText onClick={()=>triggerFilter('name')}>Producer</SortText></th>
+              <th className="sort"><SortText onClick={()=>triggerFilter('country')}>Country</SortText></th>
+              <th className="sort"><SortText onClick={()=>triggerFilter('region')}>Region</SortText></th>
+              <th><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></th>
+            </tr>
+          </thead>
+          <tbody>
+            {renderProducers()}
+          </tbody>
       </ProducerTable>
       )
     } else {
@@ -249,7 +263,9 @@ export default function ProducerList(props) {
         {renderPagination()}
       </PaginationBox>
 
-      {renderProducerList()}
+      <ProducerBox>
+        {renderProducerList()}
+      </ProducerBox>
 
       <Modal open={open} handleClose={()=>setOpen(false)}>
         <ModalContent>
