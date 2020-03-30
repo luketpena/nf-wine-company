@@ -1,4 +1,4 @@
-const customerAccounts = (state = {}, action) => {
+const customerAccounts = (state = [], action) => {
   switch (action.type) {
     case 'SET_CUSTOMER_ACCOUNTS':
       return action.payload;
