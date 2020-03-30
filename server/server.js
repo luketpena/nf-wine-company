@@ -37,5 +37,5 @@ app.use('/api/mail',mailRouter);
 
 /** ---------- START SERVER ---------- **/
 app.listen(PORT, () => {
-    console.log('Hey, listen!', PORT);    
+    console.log('Hey, listen!', PORT);  
 });

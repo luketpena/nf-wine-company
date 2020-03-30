@@ -1,20 +1,29 @@
 const express = require('express');
 const router = express.Router();
 const nodemailer = require("nodemailer");
-require('dotenv');
+const dotenv = require('dotenv');
+dotenv.config();
+
+const MAIL_KEY = process.env.SENDGRID_API_KEY;// || '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';
 
 const sgMail = require('@sendgrid/mail');
-sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+sgMail.setApiKey(MAIL_KEY);
 
 router.post('/contact', async (req,res)=>{   
   const {name,subject,email,message} = req.body;
+
+  console.log(name,subject,email,message);
+  
+
+  console.log('My key:',MAIL_KEY);
+  
 
   try {
     const msg = {
       to: 'luketpena@gmail.com',
       from: email,
       subject: `${subject} FROM ${name}`,
-      text: message,
+      text: 'Text area',
       html: `<strong>${message}</strong>`,
     };
     await sgMail.send(msg);
