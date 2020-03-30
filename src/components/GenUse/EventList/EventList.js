@@ -46,12 +46,16 @@ export default function EventList(props) {
   return (
     <Container>
       <div className="sec-default">
-        <h2>Upcoming Events</h2>
-        {renderEvents('upcoming')}
+        <div className="sec-default-content">
+          <h2>Upcoming Events</h2>
+          {renderEvents('upcoming')}
+        </div>
       </div>
       <div className="sec-default">
-        <h2>Past Events</h2>
-        {renderEvents('past')}
+        <div className="sec-default-content">
+          <h2>Past Events</h2>
+          {renderEvents('past')}
+        </div>
       </div>
     </Container>
   )

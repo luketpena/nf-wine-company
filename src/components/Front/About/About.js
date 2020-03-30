@@ -9,26 +9,14 @@ import FrontLanding from '../FrontLanding';
 const Container = styled.div``;
 
 const SecInfo = styled.section`
-  display: grid;
-  grid-template-areas: "image text";
-  grid-template-columns: auto 1fr;
-
-  @media only screen and (max-width: 500px) {
-    grid-template-areas: "image" "text";
-    grid-template-columns: 1fr;
-    grid-template-rows: auto 1fr;
-  }
-
+  
   .info-img {
-    grid-area: image;
-    width: 100%;
-    object-fit: cover;
+    margin: 0 auto;
+    display: block;
     max-width: 300px;
-    
   }
 
   .info-text {
-    grid-area: text;
     padding: 16px;
   }
 `;
@@ -114,28 +102,30 @@ export default function About() {
     <Container>
       <FrontLanding title="About Us"/>
       <SecInfo className="sec-default">
-        <img 
-          src="https://www.cowgirlcontractcleaning.com/wp-content/uploads/sites/360/2018/05/placeholder-img-3.jpg"
-          alt="New France Wine Company Offices"
-          className="info-img"
-        />
+        <div className="sec-default-content">
+          <img 
+            src="https://www.cowgirlcontractcleaning.com/wp-content/uploads/sites/360/2018/05/placeholder-img-3.jpg"
+            alt="New France Wine Company Offices"
+            className="info-img"
+          />
 
-        <div className="info-text">
-          <h2>A Little More About New France Wine</h2>
-          <p>
-            [Here you can put a big long paragraph about details of the company - where you started from, what you do, what you value. What makes you unique.]
-          </p>
+          <div className="info-text">
+            <h2>A Little More About New France Wine</h2>
+            <p>
+              [Here you can put a big long paragraph about details of the company - where you started from, what you do, what you value. What makes you unique.]
+            </p>
+          </div>
         </div>
       </SecInfo>
 
-      <SecProcess className="sec-default">
+      <SecProcess className="sec-full">
         <h2>What do we do?</h2>
         <div className="process-item-box">
           {renderProcessItems()}
         </div>
       </SecProcess>
 
-      <SecTeam className="sec-default">
+      <SecTeam className="sec-full">
         <h2>Meet the Team</h2>
         <div className="team-box">
           {renderTeamItems()}

@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 const Landing = styled.div`
-  padding: 96px 0;
+  padding: 64px 0 24px 0;
   color: white;
   text-align: center;
   text-shadow: 0 0 2px black;
