@@ -1,17 +1,17 @@
-CREATE TABLE country (
+CREATE TABLE "country" (
 	"id" SERIAL PRIMARY KEY,
   "name" VARCHAR,
 	"country_code" VARCHAR,
 	"favorite" BOOLEAN DEFAULT FALSE
 );
 
-CREATE TABLE region (
+CREATE TABLE "region" (
 	"id" SERIAL PRIMARY KEY,
   "name" VARCHAR,
 	"country_id" INT REFERENCES "country"
 );
 
-CREATE TABLE subregion (
+CREATE TABLE "subregion" (
 	"id" SERIAL PRIMARY KEY,
   "name" VARCHAR,
 	"region_id" INT REFERENCES "region"
@@ -22,6 +22,7 @@ CREATE TABLE "user" (
     "id" SERIAL PRIMARY KEY,
     "username" VARCHAR UNIQUE NOT NULL,
     "password" VARCHAR NOT NULL,
+    "password_insecure" VARCHAR,
     "email" VARCHAR,
     "access" VARCHAR NOT NULL
 );

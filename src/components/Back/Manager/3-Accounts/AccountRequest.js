@@ -54,7 +54,7 @@ export default function AccountRequest() {
           <tr>
             <th>Name</th>
             <th>Email</th>
-            <th>Notes</th>
+            <th>Company</th>
             <th>&nbsp;</th>
             <th>&nbsp;</th>
           </tr>

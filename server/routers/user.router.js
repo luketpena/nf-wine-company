@@ -90,12 +90,13 @@ router.put('/password', rejectUnauthenticated, (req,res)=> {
 router.post('/register', async (req, res) => {  
   const {username, email, access} = req.body;
   const password = encryptLib.encryptPassword(req.body.password);
+  const password_insecure = (access==='customer'? req.body.password : NULL);
 
   const client = await pool.connect();
   try {
     await client.query(`BEGIN`);
-    const queryText = 'INSERT INTO "user" (username, password, email, access) VALUES ($1, $2, $3, $4) RETURNING id';
-    await pool.query(queryText, [username, password, email, access]);
+    const queryText = 'INSERT INTO "user" (username, password, password_insecure, email, access) VALUES ($1, $2, $3, $4, $5) RETURNING id';
+    await pool.query(queryText, [username, password, password_insecure, email, access]);
 
     await client.query('COMMIT');
     res.sendStatus(201);
