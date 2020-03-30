@@ -9,6 +9,7 @@ import errors from './errors.redux';
 import loginMode from './loginMode.redux';
 import userInfo from './useInfo.redux';
 import requests from './requests.redux';
+import customerAccounts from './customerAccounts.redux';
 
 const rootReducer = combineReducers({
   edit,
@@ -21,6 +22,7 @@ const rootReducer = combineReducers({
   loginMode,
   userInfo,
   requests,
+  customerAccounts,
 });
 
 export default rootReducer;

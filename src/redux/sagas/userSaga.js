@@ -38,10 +38,16 @@ function * deleteUser(action) {
   yield put({type: 'GET_USER_INFO'});
 }
 
+function * getCustomerAccounts() {
+  const response = yield axios.get('/api/user/customers');
+  yield put({type: 'SET_CUSTOMER_ACCOUNTS', payload: response.data[0]});
+}
+
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_INFO',fetchUserInfo);
   yield takeLatest('DELETE_USER',deleteUser);
+  yield takeLatest('GET_CUSTOMER_ACCOUNTS',getCustomerAccounts);
 }
 
 export default userSaga;
