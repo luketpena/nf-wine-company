@@ -7,6 +7,10 @@ const Container = styled.div`
   grid-area: request;
   padding: 32px;
   box-sizing: border-box;
+  h2 {
+    font-size: 2em;
+    margin: 0 0 16px 0;
+  }
   table {
     width: 100%;
     border-collapse: collapse;
@@ -26,19 +30,34 @@ const Container = styled.div`
   }
 `;
 
+const AccountBox = styled.div`
+  max-width: 400px;
+  text-align: center;
+  margin: 16px auto;
+
+  label {
+    display: block;
+    color: gray;
+    margin-bottom: 16px;
+  }
+
+  select {
+    width: 50%;
+    min-width: max-content;
+  }
+`;
+
 export default function AccountRequest() {
 
   const dispatch = useDispatch();
 
   const requests = useSelector(state=>state.requests);
+  const customerAccounts = useSelector(state=>state.customerAccounts);
 
-  let [mount,setMount] = useState(false);
   useEffect(()=>{
-    if (!mount) {
-      setMount(true);
-      dispatch({type: 'GET_REQUESTS'});
-    }
-  },[mount,dispatch])
+    dispatch({type: 'GET_REQUESTS'});
+    dispatch({type: 'GET_CUSTOMER_ACCOUNTS'});
+  },[dispatch])
 
   function renderRequests() {
     return requests.map( (item,i)=> {
@@ -46,9 +65,23 @@ export default function AccountRequest() {
     })
   }
 
+  function renderAccountOptions() {
+    return customerAccounts.map( (account,i)=>{
+      return <option key={i}>{account.username}</option>
+    });
+  }
+
   return (
     <Container>
       <h2>Requests</h2>
+
+      <AccountBox>
+        <label>Select a customer account. The login details for that account will be forwarded to approved requests.</label>
+        <select>
+          {renderAccountOptions()}
+        </select>
+      </AccountBox>
+      
       <table>
         <thead>
           <tr>
