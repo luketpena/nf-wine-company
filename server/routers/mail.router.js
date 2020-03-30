@@ -11,13 +11,6 @@ sgMail.setApiKey(MAIL_KEY);
 
 router.post('/contact', async (req,res)=>{   
   const {name,subject,email,message} = req.body;
-
-  console.log(name,subject,email,message);
-  
-
-  console.log('My key:',MAIL_KEY);
-  
-
   try {
     const msg = {
       to: 'luketpena@gmail.com',
@@ -34,6 +27,27 @@ router.post('/contact', async (req,res)=>{
     res.sendStatus(400);
   }
 });
+
+router.post('/request', async (req,res)=>{   
+  const {name,subject,email,message} = req.body;
+  try {
+    const msg = {
+      to: 'luketpena@gmail.com',
+      from: email,
+      subject: `${subject} FROM ${name}`,
+      text: 'Text area',
+      html: `<strong>${message}</strong>`,
+    };
+    await sgMail.send(msg);
+    res.sendStatus(201);
+  } catch (error) {
+    console.log('Error sending contact email',error);
+    
+    res.sendStatus(400);
+  }
+});
+
+
 
 /*
 let transporter = nodemailer.createTransport({

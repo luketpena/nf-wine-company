@@ -8,7 +8,7 @@ const Container = styled.tr`
 export default function RequestRow(props) {
 
   const dispatch = useDispatch();
-  const {name, email, note, id} = props.request;
+  const {name, email, company, id} = props.request;
 
   function clickReject() {
     dispatch({type: 'REMOVE_REQUEST', payload: id})
@@ -26,7 +26,7 @@ export default function RequestRow(props) {
     <Container>
       <td>{name}</td>
       <td>{email}</td>
-      <td>{note}</td>
+      <td>{company}</td>
       <td><button className="button-back-static" onClick={clickApprove}>Approve</button></td>
       <td><button className="button-back-static-negative" onClick={clickReject}>Reject</button></td>
     </Container>
