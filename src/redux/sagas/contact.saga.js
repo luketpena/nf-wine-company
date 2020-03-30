@@ -2,7 +2,7 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function * contactSendEmail(action) {
-  yield axios.post('/api/mail/contact');
+  yield axios.post('/api/mail/contact',action.payload);
 }
 
 

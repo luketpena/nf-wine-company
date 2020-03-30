@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styled, {keyframes} from 'styled-components';
 import background from './vineyard.mp4';
 
@@ -25,7 +25,9 @@ const LandingTop = styled.section`
     position: fixed;
     top: 0;
     left: 0;
+    width: 100%;
     height: 100%;
+    object-fit: cover;
   }
 `;
 
@@ -45,10 +47,14 @@ const TitleBox = styled.div`
 
 export default function Landing() {
 
+  useEffect(()=>{
+    document.getElementById('bkg-vid').play();
+  },[]);
+
   return (
     <LandingTop>
       
-      <video autoPlay muted loop id="bkg-vid">
+      <video muted loop id="bkg-vid">
         <source src={background} type="video/mp4" />
       </video>
 
