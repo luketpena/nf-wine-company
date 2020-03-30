@@ -30,6 +30,22 @@ router.get('/info', rejectUnauthenticated, (req,res)=> {
   }
 })
 
+router.get('/customers', rejectUnauthenticated, async (req,res)=> {
+  try {
+    
+    const queryString = `
+      SELECT id, username FROM "user" 
+      WHERE "access" = 'customer';`;
+
+    const result = await pool.query(queryString);
+    res.send(result.rows);
+
+  } catch(error) {
+    console.log('Error retrieving customer accounts:', error);
+    res.sendStatus(400);
+  }
+});
+
 router.delete('/:id', rejectUnauthenticated, async (req,res)=> {
   if (req.user.access==='master' || req.user.access==='admin') {
     const client = await pool.connect();
@@ -90,7 +106,7 @@ router.put('/password', rejectUnauthenticated, (req,res)=> {
 router.post('/register', async (req, res) => {  
   const {username, email, access} = req.body;
   const password = encryptLib.encryptPassword(req.body.password);
-  const password_insecure = (access==='customer'? req.body.password : NULL);
+  const password_insecure = (access==='customer'? req.body.password : undefined);
 
   const client = await pool.connect();
   try {
@@ -108,7 +124,6 @@ router.post('/register', async (req, res) => {
   } finally {
     client.release();
   }
-  
 });
 
 // Handles login form authenticate/login POST
