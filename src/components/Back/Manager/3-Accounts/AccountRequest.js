@@ -13,23 +13,6 @@ const Container = styled.div`
     font-size: 2em;
     margin: 0 0 16px 0;
   }
-  table {
-    width: 100%;
-    border-collapse: collapse;
-  }
-  th {
-    background-color: var(--col-primary);
-    color: white;
-    height: 48px;
-  }
-  td {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    text-align: center;
-    padding: 12px 4px;
-    border-bottom: 1px dotted #DDD;
-  }
 `;
 
 const AccountBox = styled.div`
@@ -72,7 +55,7 @@ export default function AccountRequest() {
 
   function renderRequests() {
     return requests.map( (item,i)=> {
-      return <RequestRow key={i} request={item}/>
+      return <RequestRow key={i} request={item} selectedAccount={customerAccounts[selectedAccount]}/>
     })
   }
 
@@ -80,8 +63,7 @@ export default function AccountRequest() {
     return customerAccounts.map( (account,i)=>{
       return <option 
                 key={i} 
-                value={account.id} 
-                account={selectedAccount}>
+                value={i} >
                   {account.username}
                 </option>
     });

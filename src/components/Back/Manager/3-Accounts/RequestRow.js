@@ -6,6 +6,10 @@ import Modal from '../../../GenUse/Modal/Modal';
 
 const Container = styled.div``;
 
+const ModalButton = styled.button`
+  width: 100%;
+`;
+
 const Content = styled.div`
   background-color: white;
   display: flex;
@@ -35,18 +39,33 @@ export default function RequestRow(props) {
         return (
           <p>Please select an account to provide to this trade partner.</p>
         )
-    }
+      case 'confirm approve':
+        return (
+          <div>
+            <p>Send the account details for {props.selectedAccount.username} to {name}?</p>
+            <ModalButton className="button-back-static">Send</ModalButton>
+            <ModalButton className="button-back-static-negative" onClick={()=>setModalSelect('')}>Cancel</ModalButton>
+          </div>
+        )
+      case 'confirm reject':
+        return (
+          <div>
+            <p>Reject access to {name} from {company}?</p>
+            <ModalButton className="button-back-static">Confirm</ModalButton>
+            <ModalButton className="button-back-static-negative" onClick={()=>setModalSelect('')}>Cancel</ModalButton>
+          </div>
+        )
+    }//dispatch({type: 'APPROVE_ACCESS_REQUEST', payload});
   }
 
   function clickReject(id) {
-    dispatch({type: 'REMOVE_REQUEST', payload: id})
+    setModalSelect('confirm reject');
+    //dispatch({type: 'REMOVE_REQUEST', payload: id})
   }
   
-  function clickApprove(payload) {
-    console.log('CLICk');
-    
-    if (props.account) {
-      dispatch({type: 'APPROVE_ACCESS_REQUEST', payload});
+  function clickApprove(payload) {    
+    if (props.selectedAccount) {
+      setModalSelect('confirm approve')
     } else {
       setModalSelect('select account');
     }
