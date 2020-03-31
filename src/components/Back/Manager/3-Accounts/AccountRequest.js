@@ -49,6 +49,12 @@ const AccountBox = styled.div`
   }
 `;
 
+const RequestBox = styled.div`
+  background-color: #EEE;
+  padding: 8px;
+  border-radius: 4px;
+`;
+
 export default function AccountRequest() {
 
   const dispatch = useDispatch();
@@ -96,25 +102,10 @@ export default function AccountRequest() {
           {renderAccountOptions()}
         </select>
       </AccountBox>
-      
-      <table>
-        <thead>
-          <tr>
-            <th>Name</th>
-            <th>Email</th>
-            <th>Company</th>
-            <th>&nbsp;</th>
-            <th>&nbsp;</th>
-          </tr>
-        </thead>
-        <tbody>
-          {renderRequests()}
-        </tbody>
-      </table>
 
-
-      
-
+      <RequestBox>
+        {renderRequests()}
+      </RequestBox>
     </Container>
   )
 }
