@@ -4,8 +4,23 @@ import {useDispatch} from 'react-redux';
 
 import Modal from '../../../GenUse/Modal/Modal';
 
-const Container = styled.tr`
+const Container = styled.div``;
+
+const Content = styled.div`
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  box-shadow: 0 4px 4px -2px rgba(0,0,0,.25);
+  border-radius: 8px;
+  margin: 8px 0;
+
+  p, button {
+    display: block;
+    margin: 4px;
+  }
 `;
+
 
 export default function RequestRow(props) {
 
@@ -39,11 +54,14 @@ export default function RequestRow(props) {
   
   return (
     <Container>
-      <td>{name}</td>
-      <td>{email}</td>
-      <td>{company}</td>
-      <td><button className="button-back-static" onClick={clickApprove}>Approve</button></td>
-      <td><button className="button-back-static-negative" onClick={clickReject}>Reject</button></td>
+
+      <Content>
+        <p>{name}</p>
+        <p>{email}</p>
+        <p>{company}</p>
+        <button className="button-back-static" onClick={clickApprove}>Approve</button>
+        <button className="button-back-static-negative" onClick={clickReject}>Reject</button>
+      </Content>
 
       <Modal open={(modalSelect!=='')} handleClose={()=>setModalSelect('')}>
         {renderModal()}
