@@ -3,6 +3,8 @@ import styled from 'styled-components';
 import {useDispatch, useSelector} from 'react-redux';
 import RequestRow from './RequestRow';
 
+
+
 const Container = styled.div`
   grid-area: request;
   padding: 32px;
@@ -53,6 +55,9 @@ export default function AccountRequest() {
 
   const requests = useSelector(state=>state.requests);
   const customerAccounts = useSelector(state=>state.customerAccounts);
+  let [selectedAccount, setSelectedAccount] = useState('');
+  
+  
 
   useEffect(()=>{
     dispatch({type: 'GET_REQUESTS'});
@@ -67,9 +72,18 @@ export default function AccountRequest() {
 
   function renderAccountOptions() {
     return customerAccounts.map( (account,i)=>{
-      return <option key={i}>{account.username}</option>
+      return <option 
+                key={i} 
+                value={account.id} 
+                account={selectedAccount}>
+                  {account.username}
+                </option>
     });
   }
+
+  
+
+  
 
   return (
     <Container>
@@ -77,7 +91,8 @@ export default function AccountRequest() {
 
       <AccountBox>
         <label>Select a customer account. The login details for that account will be forwarded to approved requests.</label>
-        <select>
+        <select value={selectedAccount} onChange={event=>setSelectedAccount(event.target.value)}>
+          <option disabled value=''>Choose an Account</option>
           {renderAccountOptions()}
         </select>
       </AccountBox>
@@ -96,6 +111,10 @@ export default function AccountRequest() {
           {renderRequests()}
         </tbody>
       </table>
+
+
+      
+
     </Container>
   )
 }
