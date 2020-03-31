@@ -45,7 +45,7 @@ export default function RequestRow(props) {
         return (
           <div>
             <p>Send the account details for {props.selectedAccount.username} to {name}?</p>
-            <ModalButton className="button-back-static">Send</ModalButton>
+            <ModalButton className="button-back-static" onClick={approve}>Send</ModalButton>
             <ModalButton className="button-back-static-negative" onClick={()=>setModalSelect('')}>Cancel</ModalButton>
           </div>
         )
@@ -57,14 +57,14 @@ export default function RequestRow(props) {
             <ModalButton className="button-back-static-negative" onClick={()=>setModalSelect('')}>Cancel</ModalButton>
           </div>
         )
-    }//dispatch({type: 'APPROVE_ACCESS_REQUEST', payload});
+    }
   }
 
   function clickReject() {
     setModalSelect('confirm reject');  
   }
   
-  function clickApprove(payload) {    
+  function clickApprove() {    
     if (props.selectedAccount) {
       setModalSelect('confirm approve')
     } else {
@@ -74,6 +74,15 @@ export default function RequestRow(props) {
 
   function reject() {
     dispatch({type: 'REMOVE_REQUEST', payload: id})
+    setModalSelect('');
+  }
+
+  function approve() {
+    const requestPackage = {
+      request: props.request,
+      account_id: props.selectedAccount.id
+    }
+    dispatch({type: 'APPROVE_ACCESS_REQUEST', payload: requestPackage});
     setModalSelect('');
   }
   

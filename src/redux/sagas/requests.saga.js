@@ -12,8 +12,8 @@ function * removeRequest(action) {
 }
 
 function * approveAccessRequest(action) {
-  yield axios.post('/api/mail',action.payload);
-  yield put({type: 'REMOVE_REQUEST', payload: action.payload.id});
+  yield axios.post('/api/mail/access',action.payload);
+  yield put({type: 'REMOVE_REQUEST', payload: action.payload.request.id});
   yield put({type: 'GET_REQUESTS'});
 }
 
