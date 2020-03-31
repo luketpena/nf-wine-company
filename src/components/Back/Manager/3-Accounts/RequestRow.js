@@ -21,7 +21,9 @@ const Content = styled.div`
 
   p, button {
     display: block;
-    margin: 4px;
+    margin: 4px 1%;
+    width: 18%;
+    text-align: center;
   }
 `;
 
@@ -51,16 +53,15 @@ export default function RequestRow(props) {
         return (
           <div>
             <p>Reject access to {name} from {company}?</p>
-            <ModalButton className="button-back-static">Confirm</ModalButton>
+            <ModalButton className="button-back-static" onClick={reject}>Confirm</ModalButton>
             <ModalButton className="button-back-static-negative" onClick={()=>setModalSelect('')}>Cancel</ModalButton>
           </div>
         )
     }//dispatch({type: 'APPROVE_ACCESS_REQUEST', payload});
   }
 
-  function clickReject(id) {
-    setModalSelect('confirm reject');
-    //dispatch({type: 'REMOVE_REQUEST', payload: id})
+  function clickReject() {
+    setModalSelect('confirm reject');  
   }
   
   function clickApprove(payload) {    
@@ -69,6 +70,11 @@ export default function RequestRow(props) {
     } else {
       setModalSelect('select account');
     }
+  }
+
+  function reject() {
+    dispatch({type: 'REMOVE_REQUEST', payload: id})
+    setModalSelect('');
   }
   
   return (
