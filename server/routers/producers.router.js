@@ -58,11 +58,11 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/',(req,res)=>{
-  const {name,description,img,country,region,subregion,website} = req.body;
-  let queryString = 'INSERT INTO producers (name, description, img_url, country_id, region_id, subregion_id, website_url) VALUES ($1,$2,$3,$4,$5,$6,$7);';
+  const {name,description,country,region,subregion,website} = req.body;
+  let queryString = 'INSERT INTO producers (name, description, country_id, region_id, subregion_id, website_url) VALUES ($1,$2,$3,$4,$5,$6);';
   console.log('Posting new producer:',req.body);
   
-  pool.query(queryString,[name,description,img,country,region,subregion,website]).then(result=>{   
+  pool.query(queryString,[name,description,country,region,subregion,website]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);
