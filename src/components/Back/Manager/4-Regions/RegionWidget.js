@@ -133,7 +133,7 @@ export default function RegionWidget(props) {
                   <li key={i}>
                     <p>{item.name}</p>
                     <p>{(Number(item.producer_count)===0? '' : (Number(item.producer_count)===1? '1 Producer' : `${item.producer_count} Producers`))}</p>
-                    <button onClick={()=>deleteSubregion(item.id)}>Remove</button>
+                    <button className="button-back-static-negative" onClick={()=>deleteSubregion(item.id)}>Remove</button>
                   </li>
                 )
               })
