@@ -142,7 +142,7 @@ export default function SupplierInput(props) {
           </label>
         </div>
 
-        <textarea required className="in-description" placeholder="Producer Bio"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
+        <textarea className="in-description" placeholder="Producer Bio"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
         
         <button className="inputButton button-secondary center-block">Submit</button>
 
