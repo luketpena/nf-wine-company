@@ -12,6 +12,7 @@ const suppliersRouter = require('./routers/suppliers.router');
 const producersRouter = require('./routers/producers.router');
 const userRouter = require('./routers/user.router');
 const requestsRouter = require('./routers/requests.router');
+const pricingRouter = require('./routers/pricing.router');
 
 const mailRouter = require('./routers/mail.router');
 
@@ -33,6 +34,7 @@ app.use('/producers', producersRouter);
 app.use('/api/user', userRouter);
 app.use('/api/requests',requestsRouter);
 app.use('/api/mail',mailRouter);
+app.use('/api/pricing',pricingRouter)
 
 
 /** ---------- START SERVER ---------- **/
