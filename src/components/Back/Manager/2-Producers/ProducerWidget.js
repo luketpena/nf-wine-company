@@ -17,7 +17,7 @@ export default function SupplierWidget(props) {
 
   function clickEdit() {
     setReady(true)
-    dispatch({type: 'TRIGGER_SET_EDIT_INFO', payload: props.supplier});
+    dispatch({type: 'TRIGGER_SET_EDIT_INFO', payload: props.producer});
   }
 
   useEffect(()=>{
@@ -26,27 +26,27 @@ export default function SupplierWidget(props) {
     }
   });
 
-  function deleteSupplier() {
-    dispatch({type: 'DELETE_SUPPLIER', payload: props.supplier.id})
+  function deleteProducer() {
+    dispatch({type: 'DELETE_PRODUCER', payload: props.producer.id})
   }
 
   return (
     <>
       <tr>
-        <td>{props.supplier.name}</td>
-        <td>{props.supplier.country_name}</td>
-        <td>{props.supplier.region_name}</td>
-        <td>{props.supplier.website_url}</td>
+        <td>{props.producer.name}</td>
+        <td>{props.producer.country_name}</td>
+        <td>{props.producer.region_name}</td>
+        <td>{props.producer.website_url}</td>
         <td><button className="button-back-static" onClick={()=>setDetailsActive(true)}>Details</button></td>
         <td><button className="button-back-static" onClick={clickEdit}>Edit</button></td>
-        <td><button className="button-back-static-negative" onClick={deleteSupplier}>Delete</button></td>
+        <td><button className="button-back-static-negative" onClick={deleteProducer}>Delete</button></td>
       </tr>
       <Modal open={detailsActive} handleClose={()=>setDetailsActive(false)}>
-        <h3>{props.supplier.name}</h3>
+        <h3>{props.producer.name}</h3>
         <p>
-          {props.supplier.country_name && <span>{props.supplier.country_name}</span>}
-          {props.supplier.region_name && <span>{props.supplier.region_name}</span>}
-          {props.supplier.subregion_name && <span>{props.supplier.subregion_name}</span>}
+          {props.producer.country_name && <span>{props.producer.country_name}</span>}
+          {props.producer.region_name && <span>{props.producer.region_name}</span>}
+          {props.producer.subregion_name && <span>{props.producer.subregion_name}</span>}
         </p>
       </Modal>
     </>
