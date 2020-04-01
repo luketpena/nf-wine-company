@@ -10,6 +10,11 @@ const ContactBox = styled.div`
 
   margin-bottom: 128px;
 
+  h2 {
+    color: var(--col-primary);
+    font-size: 2em;
+  }
+
   form {
 
     max-width: 500px;
@@ -25,6 +30,7 @@ const ContactBox = styled.div`
       border-radius: 4px;
       padding: 8px;
       background-color: #EEE;
+      border: 1px solid #CCC;
     }
 
     textarea {
@@ -48,10 +54,60 @@ export default function Contact() {
   let [email, setEmail] = useState('');
   let [message, setMessage] = useState('');
 
+  let [sent, setSent] = useState(false);
+
   function sendEmail(event) {
     event.preventDefault();
     const newEmail = {name,subject,email,message};
     dispatch({type: "CONTACT_SEND_EMAIL", payload: newEmail});
+    setSent(true);
+  }
+
+  function renderContent() {
+    if (sent) {
+      return (
+        <div className="sec-default-content">
+          <h2>Thank you!</h2>
+        </div>
+      )
+
+    } else {
+      return (
+        <div className="sec-default-content">
+            <form onSubmit={event=>sendEmail(event)}>
+            <input
+              required
+              type="text"
+              placeholder="Name"
+              value={name}
+              onChange={event=>setName(event.target.value)}
+              />
+            <input
+              required
+              type="text"
+              placeholder="Subject"
+              value={subject}
+              onChange={event=>setSubject(event.target.value)}
+              />
+            <input
+              required
+              type="email"
+              placeholder="email@place.com"
+              value={email}
+              onChange={event=>setEmail(event.target.value)}
+              />
+            <textarea
+              required
+              placeholder="Message"
+              value={message}
+              onChange={event=>setMessage(event.target.value)}
+              />
+            <button className="button-front">Send</button>
+
+          </form>
+        </div>
+      )
+    }
   }
 
   return (
@@ -60,38 +116,7 @@ export default function Contact() {
         title="Contact Us"
         text="We want to hear from you."/>
       <ContactBox className="sec-default">
-        <form onSubmit={event=>sendEmail(event)}>
-          <input
-            required
-            type="text"
-            placeholder="Name"
-            value={name}
-            onChange={event=>setName(event.target.value)}
-            />
-          <input
-            required
-            type="text"
-            placeholder="Subject"
-            value={subject}
-            onChange={event=>setSubject(event.target.value)}
-            />
-          <input
-            required
-            type="email"
-            placeholder="email@place.com"
-            value={email}
-            onChange={event=>setEmail(event.target.value)}
-            />
-          <textarea
-            required
-            placeholder="Message"
-            value={message}
-            onChange={event=>setMessage(event.target.value)}
-            />
-          <button className="button-front">Send</button>
-
-        </form>
-
+        {renderContent()}
       </ContactBox>
     </Container>
   )
