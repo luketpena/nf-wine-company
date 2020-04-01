@@ -71,13 +71,13 @@ router.post('/',(req,res)=>{
 });
 
 router.put('/edit',(req,res)=>{
-  const {name,description,img,country,region,subregion,website,id} = req.body;
+  const {name,description,country,region,subregion,website,id} = req.body;
   let queryString = `
     UPDATE producers
-    SET name=$1, description=$2, img_url=$3, country_id=$4, region_id=$5, subregion_id=$6, website_url=$7
-    WHERE id=$8;
+    SET name=$1, description=$2, country_id=$3, region_id=$4, subregion_id=$5, website_url=$6
+    WHERE id=$7;
   `;
-  pool.query(queryString,[name,description,img,country,region,subregion,website,id]).then(result=>{   
+  pool.query(queryString,[name,description,country,region,subregion,website,id]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);
