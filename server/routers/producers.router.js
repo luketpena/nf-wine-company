@@ -86,11 +86,9 @@ router.put('/edit',(req,res)=>{
 });
 
 router.delete('/:id',(req,res)=>{
-  let queryString = `
-    DELETE FROM producers
-    WHERE id=$1;
-  `;
+  let queryString = `DELETE FROM producers WHERE id=$1;`;
   pool.query(queryString,[req.params.id]).then(result=>{
+   
     res.sendStatus(200);
   }).catch(error=>{
     console.log('Erorr deleting supplier from database:',error);
