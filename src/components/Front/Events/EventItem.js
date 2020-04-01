@@ -77,7 +77,7 @@ const Line = styled.div`
 
 export default function EventItem(props) {
 
-  const {name, description, time, date, location} = props.event;
+  const {name, description, time, date, location, link_url, link_text} = props.event;
 
   let [detailsActive, setDetailsActive] = useState(false);
 
@@ -141,6 +141,8 @@ export default function EventItem(props) {
           <h3>{name}</h3>
           <p></p>
           <p>{description}</p>
+          {(link_url && <button>Link!</button>)}
+          <p>{link_url}</p>
         </ModalContent>
       </Modal>
     </Container>

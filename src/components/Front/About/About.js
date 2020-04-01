@@ -118,17 +118,21 @@ export default function About() {
         </div>
       </SecInfo>
 
-      <SecProcess className="sec-full">
+      <SecProcess className="sec-default">
+        <div className="sec-default-content">
         <h2>What do we do?</h2>
         <div className="process-item-box">
           {renderProcessItems()}
         </div>
+        </div>
       </SecProcess>
 
-      <SecTeam className="sec-full">
-        <h2>Meet the Team</h2>
-        <div className="team-box">
-          {renderTeamItems()}
+      <SecTeam className="sec-default">
+        <div className="sec-default-content">
+          <h2>Meet the Team</h2>
+          <div className="team-box">
+            {renderTeamItems()}
+          </div>
         </div>
       </SecTeam>
     </Container>
