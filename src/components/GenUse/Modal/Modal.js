@@ -27,6 +27,8 @@ const TextBox = styled.div`
   z-index: 101;
   background-color: white;
   border-radius: 16px;
+  max-height: 90vh;
+  overflow-y: scroll;
   min-width: 320px;
   height: max-content;
   padding: 16px;
