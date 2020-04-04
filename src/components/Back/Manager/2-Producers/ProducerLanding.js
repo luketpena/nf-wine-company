@@ -52,6 +52,20 @@ const SearchBar = styled.section`
   }
 `;
 
+const QuickAdd = styled.div`
+  text-align: center;
+  form {
+    input {
+      font-size: 1em;
+      padding: 4px;
+    }
+    button {
+      display: block;
+      margin: 8px auto;
+    }
+  }
+`;
+
 const SelectBox = styled.div`
   display: flex;
   flex-wrap: true;
@@ -94,6 +108,8 @@ export default function ProducerLanding() {
   let [subregionFilter, setSubregionFilter] = useState('');
   let [sort, setSort] = useState('name');
   let [order,setOrder] = useState('ASC');
+
+  let [quickAddName, setQuickAddName] = useState('');
 
   let [displayStart,setDisplayStart] = useState(0);
   let [displayUnit] = useState(50);
@@ -216,6 +232,22 @@ export default function ProducerLanding() {
           <button className="button-default">Search</button>
         </form>
       </SearchBar>
+
+      <QuickAdd className="section-box">
+        <h2>Quick Add</h2>
+        <p>Add a producer to the currently selected country, region, and subregiion.</p>
+        <form>
+          <input 
+            required
+            type="text"
+            placeholder="Producer name"
+            value={quickAddName}
+            onChange={event=>setQuickAddName(event)}
+          />
+          <button className="button-secondary">Create</button>
+
+        </form>
+      </QuickAdd>
 
       <section className="section-box">
         <h2>Producers</h2>
