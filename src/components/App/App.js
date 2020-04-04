@@ -3,7 +3,7 @@ import React, {Component} from 'react';
 import './App.css';
 import {connect} from 'react-redux';
 //Navigation Imports
-import { BrowserRouter as Router, Route} from 'react-router-dom';
+import { HashRouter as Router, Route} from 'react-router-dom';
 import { Switch } from 'react-router';
 //Component imports
 import Manager from '../Back/Manager/Manager';
