@@ -21,6 +21,11 @@ function * newProducer (action) {
   yield put({type: 'GET_PRODUCERS'})
 }
 
+function * quickAddProducer (action) {
+  yield axios.post('/producer/quickadd', action.payload);
+  yield put({type: 'GET_PRODUCERS'});
+}
+
 function * editProducer (action) {
   yield axios.put('/producers/edit', action.payload);
   yield put({type: 'GET_PRODUCERS'});
@@ -31,5 +36,6 @@ export default function * eventSaga() {
   yield takeLatest('GET_PRODUCERS_FILTER', getProducersFilter);
   yield takeLatest('DELETE_PRODUCER', deleteProducer);
   yield takeLatest('NEW_PRODUCER', newProducer);
+  yield takeLatest('QUICK_ADD_PRODUCER', quickAddProducer);
   yield takeLatest('EDIT_PRODUCER', editProducer);
 }
