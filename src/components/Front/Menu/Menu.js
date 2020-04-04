@@ -102,7 +102,8 @@ const menuList = [
   {name: 'Home', url: '/'},
   {name: 'About', url: '/about'},
   {name: 'Events', url: '/events'},
-  {name: 'Producers and Suppliers', url: '/partners'},
+  {name: 'Producers', url: '/producers'},
+  {name: 'Suppliers', url: '/suppliers'},
   {name: 'Contact', url: '/contact'},
   {name: 'Trade Portal', url: '/tradeportal'}
 ]

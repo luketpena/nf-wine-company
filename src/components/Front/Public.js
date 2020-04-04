@@ -11,7 +11,7 @@ import Home from './Home/Home';
 import About from './About/About';
 import Events from './Events/Events';
 import Contact from './Contact/Contact';
-import Partners from './Partners/Partners';
+import Producers from './Producers/Producers';
 
 import Footer from '../GenUse/Footer/Footer';
 
@@ -59,7 +59,7 @@ export default function Public() {
           <Route exact path="/about" component={About}/>
           <Route exact path="/events" component={Events}/>
           <Route exact path="/contact" component={Contact}/>
-          <Route exact path="/partners" component={Partners}/>}
+          <Route exact path="/partners" component={Producers}/>}
 
         </Switch>
 
