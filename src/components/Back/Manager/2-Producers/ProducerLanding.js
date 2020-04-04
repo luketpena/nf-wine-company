@@ -200,6 +200,19 @@ export default function ProducerLanding() {
     setDisplaySelect(index+1);
   }
 
+  //Adds a producer to the database using the country/region selections and name input field
+  function quickAdd(event) {
+    event.preventDefault()
+    const newProducer = {
+      name: quickAddName,
+      country: (countryFilter!==''? countryFilter : null),
+      region: (regionFilter!==''? regionFilter : null),
+      subregion: (subregionFilter!==''? subregionFilter : null)
+    };
+    dispatch({type: 'QUICK_ADD_PRODUCER', payload: newProducer});
+    setQuickAddName('');
+  }
+
   return (
     <div className="landingBox">
 
@@ -236,13 +249,13 @@ export default function ProducerLanding() {
       <QuickAdd className="section-box">
         <h2>Quick Add</h2>
         <p>Add a producer to the currently selected country, region, and subregiion.</p>
-        <form>
+        <form onSubmit={event=>quickAdd(event)}>
           <input 
             required
             type="text"
             placeholder="Producer name"
             value={quickAddName}
-            onChange={event=>setQuickAddName(event)}
+            onChange={event=>setQuickAddName(event.target.value)}
           />
           <button className="button-secondary">Create</button>
 

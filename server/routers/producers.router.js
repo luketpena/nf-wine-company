@@ -79,7 +79,7 @@ router.post('/quickadd', async (req,res)=>{
   try {
     await pool.query(queryString, [name, country, region, subregion]);
     res.sendStatus(201);
-  } catch {
+  } catch(error) {
     console.log('Error quickAdding producer to database:',error);
     res.sendStatus(400);
   }
