@@ -7,24 +7,26 @@ import ManagerTitle from '../ManagerTitle';
 
 export default function SupplierInput(props) {
 
-  //>> Setup the tools
+  /*-----< Tools >-----*/
+  const history = useHistory();
+  const dispatch = useDispatch();
+
+  /*-----< Reducers >-----*/
   let edit = useSelector(state=>state.edit.editInfo);
   let countries = useSelector(state=>state.places.countries);
   let regions = useSelector(state=>state.places.regions);
   let subregions = useSelector(state=>state.places.subregions);
-  const history = useHistory();
-  const dispatch = useDispatch();
-
-  //>> Save the action for future use
+  
+  /*-----< Editting or Creating? >-----*/
   let action = props.match.params.action;
 
-  //>> Creating state
+  /*-----< Setting up State >-----*/
   let [name,setName] = useState( (action==='edit' && edit.name)? edit.name : '' );
   let [description,setDescription] = useState( (action==='edit' && edit.description)? edit.description : '' );
   let [img] = useState( (action==='edit' && edit.img)? edit.img : '' );
-  let [country,setCountry] = useState( (action==='edit' && edit.country_id)? edit.country_id : 'Select a country' );
-  let [region,setRegion] = useState( (action==='edit' && edit.region_id)? edit.region_id : 'Select a region' );
-  let [subregion,setSubregion] = useState( (action==='edit' && edit.subregion_id)? edit.subregion_id : 'Select a subregion' );
+  let [country,setCountry] = useState( (action==='edit' && edit.country_id)? edit.country_id : '' );
+  let [region,setRegion] = useState( (action==='edit' && edit.region_id)? edit.region_id : '' );
+  let [subregion,setSubregion] = useState( (action==='edit' && edit.subregion_id)? edit.subregion_id : '' );
   let [website,setWebsite] = useState( (action==='edit' && edit.website_url)? edit.website_url : '');
 
   useEffect(()=>{
@@ -49,9 +51,9 @@ export default function SupplierInput(props) {
       name,
       description,
       img,
-      country,
-      region,
-      subregion: (subregion==='Select a subregion'? null : subregion),
+      country: (country===''? null : country),
+      region: (region===''? null : region),
+      subregion: (subregion===''? null : subregion),
       website
     }
 
@@ -85,8 +87,8 @@ export default function SupplierInput(props) {
 
   //Fills the subregion select with options from the subregion list
   function populateSubregionSelect() {
-    let list = subregions.map( (item,i)=> {
-      return <option key={i} value={item.id}>{item.name}</option>
+    let list = subregions.map( (subregion,i)=> {
+      return <option key={i} value={subregion.id}>{subregion.name}</option>
     })
     return list;
   }
@@ -95,13 +97,14 @@ export default function SupplierInput(props) {
   function updateCountry(event) {
     setCountry(event.target.value);
     dispatch({type: 'GET_REGIONS', payload: event.target.value});
-    setRegion('Select a region');
+    setRegion('');
+    setSubregion('');
   }
 
   function updateRegion(event) {
     setRegion(event.target.value);
     dispatch({type: 'GET_SUBREGIONS', payload: event.target.value});
-    setSubregion('Select a subregion');
+    setSubregion('');
   }
   
   return (
@@ -116,14 +119,14 @@ export default function SupplierInput(props) {
           <label className="selectLabel">
             <span className="inputName">Country:</span>
             <select onChange={(event)=>updateCountry(event)} value={country}>
-              <option disabled>Select a country</option>
+              <option disabled value="">Select a country</option>
               {populateCountrySelect()}
             </select>
           </label>
           <label className="selectLabel">
             <span className="inputName">Region:</span>
             <select onChange={(event)=>updateRegion(event)} value={region}>
-              <option disabled>Select a region</option>
+              <option disabled value="">Select a region</option>
               {populateRegionSelect()}
             </select>
           </label>
@@ -131,7 +134,7 @@ export default function SupplierInput(props) {
           <label className="selectLabel">
             <span className="inputName">Subregion:</span>
             <select onChange={(event)=>setSubregion(event.target.value)} value={subregion}>
-              <option disabled>Select a subregion</option>
+              <option disabled value="">Select a subregion</option>
               {populateSubregionSelect()}
             </select>
           </label>
