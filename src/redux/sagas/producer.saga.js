@@ -22,7 +22,7 @@ function * newProducer (action) {
 }
 
 function * quickAddProducer (action) {
-  yield axios.post('/producer/quickadd', action.payload);
+  yield axios.post('/producers/quickadd', action.payload);
   yield put({type: 'GET_PRODUCERS'});
 }
 
