@@ -57,6 +57,7 @@ router.get('/',(req,res)=>{
   })
 })
 
+//Creates a new producer with all information
 router.post('/',(req,res)=>{
   const {name,description,country,region,subregion,website} = req.body;
   let queryString = 'INSERT INTO producers (name, description, country_id, region_id, subregion_id, website_url) VALUES ($1,$2,$3,$4,$5,$6);';
@@ -65,9 +66,23 @@ router.post('/',(req,res)=>{
   pool.query(queryString,[name,description,country,region,subregion,website]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
-    console.log('Error posting supplier to database:',error);
+    console.log('Error posting producer to database:',error);
     res.sendStatus(400);
   })
+});
+
+//Creates a new producer with only basic information
+router.post('/quickadd', async (req,res)=>{
+  const {name, country, region, subregion} = req.body;
+  const queryString = `INSERT INTO producers (name, country_id, region_id, subregion_id) VALUES ($1,$2,$3,$4)`;
+
+  try {
+    await pool.query(queryString, [name, country, region, subregion]);
+    res.sendStatus(201);
+  } catch {
+    console.log('Error quickAdding producer to database:',error);
+    res.sendStatus(400);
+  }
 });
 
 router.put('/edit',(req,res)=>{
