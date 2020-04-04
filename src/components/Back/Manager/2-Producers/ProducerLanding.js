@@ -86,10 +86,12 @@ export default function ProducerLanding() {
   let producer = useSelector(state=>state.producer);
   let countries = useSelector(state=>state.places.countries);
   let regions = useSelector(state=>state.places.regions);
+  let subregions = useSelector(state=>state.places.subregions);
   //>> Creating state
   let [search, setSearch] = useState('');
   let [countryFilter, setCountryFilter] = useState('');
   let [regionFilter, setRegionFilter] = useState('');
+  let [subregionFilter, setSubregionFilter] = useState('');
   let [sort, setSort] = useState('name');
   let [order,setOrder] = useState('ASC');
 
@@ -127,7 +129,7 @@ export default function ProducerLanding() {
   }
 
   //Dispatches the call to get regions for a country OR empties the regions
-  function updateCountry(event) {
+  function selectCountry(event) {
     setCountryFilter(event.target.value);
     if (event.target.value) {
       dispatch({type: 'GET_REGIONS', payload: event.target.value});
@@ -135,22 +137,37 @@ export default function ProducerLanding() {
       dispatch({type: 'SET_REGIONS', payload: []});
     }
     setRegionFilter('');
+    setSubregionFilter('');
+  }
+
+  function selectRegion(event) {
+    setRegionFilter(event.target.value);
+    if (event.target.value) {
+      dispatch({type: 'GET_SUBREGIONS', payload: event.target.value});
+    } else {
+      dispatch({type: 'SET_SUBREGIONS', payload: []});
+    }
+    setSubregionFilter('');
   }
 
   //Fills the select list for countries
   function populateCountrySelect() {
-    let list = countries.map( (country,i)=> {
+    return countries.map( (country,i)=> {
       return <option key={i} value={country.id}>{country.name}</option>
     })
-    return list;
   }
 
   //Fills select list for regions of a country
   function populateRegionSelect() {
-    let list = regions.map( (region,i)=> {
+    return regions.map( (region,i)=> {
       return <option key={i} value={region.id}>{region.name}</option>
     })
-    return list;
+  }
+
+  function populateSubregionSelect() {
+    return subregions.map( (subregion,i)=> {
+      return <option key={i} value={subregion.id}>{subregion.name}</option>
+    });
   }
 
   function renderDisplaySelect() {
@@ -180,14 +197,19 @@ export default function ProducerLanding() {
           <input type="text" value={search} onChange={event=>setSearch(event.target.value)} placeholder="Search for producer"/>
 
             <SelectBox>
-              <select onChange={(event)=>updateCountry(event)} value={countryFilter}>
+              <select onChange={event=>selectCountry(event)} value={countryFilter}>
                 <option value="">All countries</option>
                 {populateCountrySelect()}
               </select>
 
-              <select onChange={(event)=>setRegionFilter(event.target.value)} value={regionFilter}>
+              <select onChange={event=>selectRegion(event)} value={regionFilter}>
                 <option value="">All regions</option>
                 {populateRegionSelect()}
+              </select>
+
+              <select onChange={event=>setSubregionFilter(event)} value={subregionFilter}>
+                <option value="">All subregions</option>
+                {populateSubregionSelect()}
               </select>
             </SelectBox>
           
