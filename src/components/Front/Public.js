@@ -59,7 +59,7 @@ export default function Public() {
           <Route exact path="/about" component={About}/>
           <Route exact path="/events" component={Events}/>
           <Route exact path="/contact" component={Contact}/>
-          <Route exact path="/partners" component={Producers}/>}
+          <Route exact path="/producers" component={Producers}/>}
 
         </Switch>
 
