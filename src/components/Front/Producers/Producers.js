@@ -242,8 +242,8 @@ export default function Partners() {
     <Container>
 
       <FrontLanding 
-        title="Our Partners" 
-        text="Here you can place some text about who you work with and the qualities that they have."/>
+        title="Producers" 
+        text="[Here you can talk about where the wines are sources from and the qualities you look for.]"/>
 
       <MapBanner className="sec-default">
         <MapBox className="sec-default-content">
