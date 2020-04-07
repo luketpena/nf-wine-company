@@ -13,7 +13,6 @@ import CountryScraper from '../CountryScraper/CountryScraper';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
 
-
 //Change
 class App extends Component {
 
