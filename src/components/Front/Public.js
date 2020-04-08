@@ -4,21 +4,21 @@ import { Route } from 'react-router-dom';
 import { Switch } from 'react-router';
 import styled from 'styled-components';
 
+/*-----< Resource Imports >-----*/
 import background from './background.jpg';
 
+/*-----< Component Imports >-----*/
 import Menu from './Menu/Menu';
 import Home from './Home/Home';
 import About from './About/About';
 import Events from './Events/Events';
 import Contact from './Contact/Contact';
 import Producers from './Producers/Producers';
-
+import Suppliers from './Suppliers/Suppliers';
 import Footer from '../GenUse/Footer/Footer';
 
-
-const Container = styled.div`
-  
-`;
+/*-----< Styling >-----*/
+const Container = styled.div``;
 
 const Content = styled.div`
   display: grid;
@@ -60,6 +60,7 @@ export default function Public() {
           <Route exact path="/events" component={Events}/>
           <Route exact path="/contact" component={Contact}/>
           <Route exact path="/producers" component={Producers}/>}
+          <Route exact path="/suppliers" component={Suppliers}/>}
 
         </Switch>
 
