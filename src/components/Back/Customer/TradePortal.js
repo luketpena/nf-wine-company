@@ -33,7 +33,7 @@ export default function TradePortal(props) {
     if (user.id) {
       dispatch({type: 'GET_EVENTS_TRADE'});
     }
-  },[user]);
+  },[user, dispatch]);
 
   function renderContent() {
     if (user.id) {

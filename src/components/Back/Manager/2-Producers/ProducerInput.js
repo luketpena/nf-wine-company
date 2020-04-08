@@ -40,7 +40,7 @@ export default function SupplierInput(props) {
         }
       }
     }
-  },[dispatch]);
+  },[dispatch, edit.country_id, edit.region_id, edit.subregion_id, action]);
 
   //>> Submits the new or edited event to the server
   function handleSubmit(event) {
