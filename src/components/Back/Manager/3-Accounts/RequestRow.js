@@ -57,6 +57,7 @@ export default function RequestRow(props) {
             <ModalButton className="button-back-static-negative" onClick={()=>setModalSelect('')}>Cancel</ModalButton>
           </div>
         )
+      default: return <></>
     }
   }
 
