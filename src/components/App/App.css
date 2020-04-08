@@ -1,7 +1,13 @@
 @import url('https://fonts.googleapis.com/css?family=Cormorant|Playfair+Display+SC&display=swap');
+@font-face {
+  font-family: 'Annstone';
+  font-weight: 5;
+  src: local('Leafy'), url('../../fonts/AnnStone.ttf') format('truetype');
+}
 
 /* Global styles */
 :root {
+  --font-illustrated: 'Annstone', sans-serif;
   --font-main: 'Cormorant', serif;
   --font-title: 'Playfair Display SC', serif;
   --col-primary: brown;
