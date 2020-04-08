@@ -25,6 +25,7 @@ const SupplierUl = styled.ul`
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  padding-left: 32px;
   li {
     height: max-content;
     list-style-type: disc;
@@ -32,6 +33,8 @@ const SupplierUl = styled.ul`
     cursor: pointer;
     .name {
       transition: all .2s;
+      margin: 0;
+      text-align: left;
     }
     &:hover .name {
       color: var(--col-primary);
