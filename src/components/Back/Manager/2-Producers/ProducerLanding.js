@@ -130,8 +130,6 @@ export default function ProducerLanding() {
     return returnArray;
   }
           
-  
-
   //Sends the search parameters to the saga for getting the filtered supplier list
   function submitSearch(event) {
     event.preventDefault();
@@ -236,7 +234,7 @@ export default function ProducerLanding() {
                 {populateRegionSelect()}
               </select>
 
-              <select onChange={event=>setSubregionFilter(event)} value={subregionFilter}>
+              <select onChange={event=>setSubregionFilter(event.target.value)} value={subregionFilter}>
                 <option value="">All subregions</option>
                 {populateSubregionSelect()}
               </select>
