@@ -21,6 +21,11 @@ function * newSupplier (action) {
   yield put({type: 'GET_SUPPLIERS'})
 }
 
+function * quickAddSupplier (action) {
+  yield axios.post('/suppliers/quickadd', action.payload);
+  yield put({type: 'GET_SUPPLIERS'})
+}
+
 function * editSupplier (action) {
   console.log('Now editing supplier!');
   
@@ -33,5 +38,6 @@ export default function * eventSaga() {
   yield takeLatest('GET_SUPPLIERS_FILTER', getSuppliersFilter);
   yield takeLatest('DELETE_SUPPLIER', deleteSupplier);
   yield takeLatest('NEW_SUPPLIER', newSupplier);
+  yield takeLatest('QUICK_ADD_SUPPLIER', quickAddSupplier);
   yield takeLatest('EDIT_SUPPLIER', editSupplier);
 }

@@ -51,6 +51,20 @@ const SearchBar = styled.section`
   }
 `;
 
+const QuickAdd = styled.div`
+  text-align: center;
+  form {
+    input {
+      font-size: 1em;
+      padding: 4px;
+    }
+    button {
+      display: block;
+      margin: 8px auto;
+    }
+  }
+`;
+
 const DisplaySelect = styled.div`
   margin: 8px;
   text-align: center;
@@ -77,6 +91,7 @@ export default function SupplierLanding() {
   let [search, setSearch] = useState('');
   let [sort, setSort] = useState('name');
   let [order,setOrder] = useState('ASC');
+  let [quickAddName, setQuickAddName] = useState('');
 
   let [displayStart,setDisplayStart] = useState(0);
   let [displayUnit] = useState(50);
@@ -122,6 +137,16 @@ export default function SupplierLanding() {
     setDisplaySelect(index+1);
   }
 
+  //Adds a supplier to the database using the name input field
+  function quickAdd(event) {
+    event.preventDefault()
+    const newSupplier = {
+      name: quickAddName
+    };
+    dispatch({type: 'QUICK_ADD_SUPPLIER', payload: newSupplier});
+    setQuickAddName('');
+  }
+
   return (
     <div className="landingBox">
 
@@ -135,6 +160,22 @@ export default function SupplierLanding() {
           <button className="button-default">Search</button>
         </form>
       </SearchBar>
+
+      <QuickAdd className="section-box">
+        <h2>Quick Add</h2>
+        <p>Add a supplier with a name only.</p>
+        <form onSubmit={event=>quickAdd(event)}>
+          <input 
+            required
+            type="text"
+            placeholder="Supplier name"
+            value={quickAddName}
+            onChange={event=>setQuickAddName(event.target.value)}
+          />
+          <button className="button-secondary">Create</button>
+
+        </form>
+      </QuickAdd>
 
       <section className="section-box">
         <h2>Suppliers </h2>
