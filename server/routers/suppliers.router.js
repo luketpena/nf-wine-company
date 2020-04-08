@@ -39,6 +39,17 @@ router.post('/',(req,res)=>{
   })
 });
 
+router.post('/quickadd',(req,res)=>{
+  const {name} = req.body;
+  let queryString = 'INSERT INTO suppliers (name) VALUES ($1);';
+  pool.query(queryString,[name]).then(result=>{   
+    res.sendStatus(201);
+  }).catch(error=>{
+    console.log('Error quick adding supplier to database:',error);
+    res.sendStatus(400);
+  })
+});
+
 router.put('/edit',(req,res)=>{
   const {name,description,website,id} = req.body;
   let queryString = `
