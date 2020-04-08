@@ -1,6 +1,8 @@
 import React, {useState} from 'react';
 import {useSelector} from 'react-redux';
 
+import SupplierListSegment from './SupplierListSegment';
+
 const emptyAlphabet = {
   a: [],
   b: [],
@@ -36,26 +38,34 @@ export default function SupplierList() {
   const [alphabet, setAlphabet] = useState({});
 
   function renderSupplierList() {
-    const newAlphabet = {...alphabet};
-
+    //Start with an empty object
+    const newAlphabet = {};
+    
+    //Iterate through suppliers
     for (let supplier of suppliers) {
-      const firstLetter = supplier.name.charAt(0).toLowerCase();
-      
-
+      //Collect the first letter of their names
+      const firstLetter = supplier.name.charAt(0).toUpperCase();
+      //If a property to that letter hasn't be made, create it now as an empty array
       if (!newAlphabet.hasOwnProperty(firstLetter)) {
         newAlphabet[firstLetter] = [];
       }
-
-      newAlphabet[firstLetter].push(supplier);
+      //Push the supplier to that letter group array in the object
+      newAlphabet[firstLetter].push(supplier);   
     }
 
-    console.log('New alphabet:',newAlphabet);
-    
+    //Extract the letters into their own array
+    const letters = Object.keys(newAlphabet);
+    //Iterate through the letters while pointing to the alphabet object
+    return letters.map( (item,i)=>{
+      return <SupplierListSegment key={i} letter={item} suppliers={newAlphabet[item]}/>
+    });  
   }
 
   return (
-    <div>
+    <div className="sec-default">
+      <div className="sec-default-content">
       {renderSupplierList()}
+      </div>
     </div>
   )
 }
