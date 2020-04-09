@@ -3,13 +3,8 @@ import styled, {keyframes} from 'styled-components';
 import background from './vineyard.mp4';
 
 const fadeIn = keyframes`
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+  from {opacity: 0;}
+  to {opacity: 1;}
 `;
 
 const LandingTop = styled.section`
@@ -40,6 +35,9 @@ const TitleBox = styled.div`
   h1, p {
     margin: 0;
     font-family: var(--font-title);
+  }
+  h1 {
+    font-size: 2em;
   }
   animation-name: ${fadeIn};
   animation-duration: 4s;

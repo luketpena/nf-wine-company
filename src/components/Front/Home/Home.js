@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -33,6 +34,11 @@ const Divider = styled.div`
 export default function Home() {
 
   const history = useHistory();
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch({type: 'SET_PAGETOP', payload: window.innerHeight});
+  },[dispatch])
 
   function navigate(url) {
     history.push(url);

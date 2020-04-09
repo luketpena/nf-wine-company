@@ -19,7 +19,7 @@ router.get('/',(req,res)=>{
   if (req.query.search) {
     let prefix = (queryParams.length===0? 'WHERE ' : 'AND ');
     queryParams.push('%'+ req.query.search +'%');
-    queryString += prefix + `p.name ILIKE $${queryParams.length}`
+    queryString += prefix + `unaccent(p.name) ILIKE unaccent($${queryParams.length})`
   }
 
   if (req.query.country) {

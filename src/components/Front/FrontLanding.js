@@ -1,4 +1,5 @@
-import React from 'react';
+import React, {useEffect} from 'react';
+import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 const Landing = styled.div`
@@ -21,14 +22,19 @@ const Landing = styled.div`
 `;
 
 export default function FrontLanding(props) {
+
+  const dispatch = useDispatch();
+
+  useEffect(()=>{
+    dispatch({type: 'SET_PAGETOP', payload: document.getElementById('landing-top').offsetHeight});
+  },[dispatch])
+
   return (
-    <Landing>
-        <div>
-          <h1>{props.title}</h1>
-          {(props.text? <p>{props.text}</p> : <></>)}
-        </div>
-      </Landing>
-
+    <Landing id="landing-top">
+      <div>
+        <h1>{props.title}</h1>
+        {(props.text? <p>{props.text}</p> : <></>)}
+      </div>
+    </Landing>
   )
-
 }

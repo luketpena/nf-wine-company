@@ -10,6 +10,7 @@ import loginMode from './loginMode.redux';
 import userInfo from './useInfo.redux';
 import requests from './requests.redux';
 import customerAccounts from './customerAccounts.redux';
+import pagetop from './pagetop.redux';
 
 const rootReducer = combineReducers({
   edit,
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   userInfo,
   requests,
   customerAccounts,
+  pagetop,
 });
 
 export default rootReducer;
