@@ -32,6 +32,9 @@ const TextBox = styled.div`
   min-width: 320px;
   height: max-content;
   padding: 16px;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 `;
 
 const CloseButton = styled.button`

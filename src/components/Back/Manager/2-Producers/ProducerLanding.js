@@ -133,13 +133,13 @@ export default function ProducerLanding() {
   //Sends the search parameters to the saga for getting the filtered supplier list
   function submitSearch(event) {
     event.preventDefault();
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter,region: regionFilter,sort}})
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter,region: regionFilter, subregion: subregionFilter,sort}})
   }
 
   //Triggers a filtered search of suppliers with the current search parameters
   function triggerFilter(target) {
     setSort(target);
-    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter,region: regionFilter ,sort: target}});
+    dispatch({type: 'GET_PRODUCERS_FILTER', payload: {search,country: countryFilter,region: regionFilter, subregion: subregionFilter, sort: target}});
   }
 
   //Dispatches the call to get regions for a country OR empties the regions

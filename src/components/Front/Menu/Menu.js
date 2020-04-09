@@ -1,4 +1,5 @@
 import React, {useEffect, useState} from 'react';
+import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
 import styled from 'styled-components';
 import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
@@ -109,14 +110,16 @@ const menuList = [
 ]
 
 /*-----< Component Function >-----*/
-export default function Menu() {
+export default function Menu(props) {
+
+  const history = useHistory();
 
   let [scrollY, setScrollY] = useState(0);
   let [mount, setMount] = useState(false);
   let [screenWidth, setScreenWidth] = useState(window.innerWidth);
   let [menuActive, setMenuActive] = useState(false);
 
-  const history = useHistory();
+  const pagetop = useSelector(state=>state.pagetop);
 
   useEffect(()=>{
     if (!mount) {
@@ -149,7 +152,7 @@ export default function Menu() {
   }
 
   function renderMenu() {
-    if (screenWidth>500) {
+    if (screenWidth>700) {
       return (
         <ContainerDesktop id="menu" scrollY={scrollY} point={window.innerHeight*.1}>
           <nav>
@@ -164,7 +167,7 @@ export default function Menu() {
         <ContainerMobile 
           active={menuActive}
           scrollY={scrollY} 
-          point={window.innerHeight}
+          point={pagetop}
         >
           <FontAwesomeIcon 
             className="icon" 

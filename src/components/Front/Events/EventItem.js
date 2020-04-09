@@ -30,7 +30,7 @@ const Container = styled.div`
   .date {
     grid-area: date;
     margin: 0;
-    font-size: 1em;
+    font-size: 32px;
   }
 
   .point {

@@ -12,7 +12,7 @@ router.get('/',(req,res)=>{
   if (req.query.search) {
     let prefix = 'WHERE ';
     queryParams.push('%'+ req.query.search +'%');
-    queryString += prefix + `name ILIKE $${queryParams.length} `
+    queryString += prefix + `unaccent(name) ILIKE unaccent($${queryParams.length}) `
   }
   if (req.query.sort) {
     switch(req.query.sort) {
