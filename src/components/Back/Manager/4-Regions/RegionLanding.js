@@ -113,7 +113,7 @@ export default function RegionLanding() {
   function renderRegions() {
     if (regions) {
       return regions.map( (region,i)=>{
-        return <RegionWidget key={i+region.region_code} region={region}/>
+        return <RegionWidget key={i} region={region}/>
       })
     }
   }
