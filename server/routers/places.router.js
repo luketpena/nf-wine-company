@@ -103,6 +103,7 @@ router.delete('/regions/:id', async (req,res)=>{
     //>> Select and set all references to region to null
     await pool.query(`UPDATE producers SET region_id=NULL WHERE region_id=$1`,[req.params.id]);
     //>> Delete the region after removing references
+    await pool.query(`DELETE FROM subregion WHERE region_id=$1`,[req.params.id]);
     await pool.query(`DELETE FROM region WHERE id=$1;`, [req.params.id]);
     res.sendStatus(200);
   } catch(error) {
