@@ -38,6 +38,7 @@ export default function SupplierWidget(props) {
     <Container>
       <Data>{props.supplier.name}</Data>
       <Data>{props.supplier.website_url}</Data>
+      <Data>{(props.supplier.direct? 'Direct' : 'Independent')}</Data>
       <Data><button className="button-back-static">Details</button></Data>
       <Data><button onClick={clickEdit} className="button-back-static">Edit</button></Data>
       <Data><button onClick={deleteSupplier} className="button-back-static-negative">Delete</button></Data>

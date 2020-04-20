@@ -186,6 +186,7 @@ export default function SupplierLanding() {
             <tr>
               <SortHeader><SortText onClick={()=>triggerFilter('name')}>Supplier</SortText></SortHeader>
               <th>Website</th>
+              <th>Type</th>
               <ButtonHeader>&nbsp;</ButtonHeader>
               <ButtonHeader>&nbsp;</ButtonHeader>
               <ButtonHeader><SortText onClick={()=>setOrder((order==='ASC'? 'DESC' : 'ASC'))}>{(order==='ASC'? <FontAwesomeIcon icon={faCaretUp} /> : <FontAwesomeIcon icon={faCaretDown} />)}</SortText></ButtonHeader>

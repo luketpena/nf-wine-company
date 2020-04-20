@@ -6,7 +6,7 @@ const pool = require('../modules/pool.js');
 // ROUTES
 
 router.get('/',(req,res)=>{
-  let queryString = `SELECT * FROM suppliers ORDER BY UPPER("name") ASC`;
+  let queryString = `SELECT * FROM suppliers `;
   let queryParams = [];
 
   if (req.query.search) {
