@@ -29,9 +29,9 @@ router.get('/',(req,res)=>{
 })
 
 router.post('/',(req,res)=>{
-  const {name,description,website} = req.body;
+  const {name,description,website,direct} = req.body;
   let queryString = 'INSERT INTO suppliers (name, description, website_url, direct) VALUES ($1,$2,$3,$4);';
-  pool.query(queryString,[name,description,website]).then(result=>{   
+  pool.query(queryString,[name,description,website,direct]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);
@@ -40,9 +40,9 @@ router.post('/',(req,res)=>{
 });
 
 router.post('/quickadd',(req,res)=>{
-  const {name} = req.body;
+  const {name,direct} = req.body;
   let queryString = 'INSERT INTO suppliers (name,direct) VALUES ($1,$2);';
-  pool.query(queryString,[name]).then(result=>{   
+  pool.query(queryString,[name,direct]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error quick adding supplier to database:',error);
@@ -51,7 +51,7 @@ router.post('/quickadd',(req,res)=>{
 });
 
 router.put('/edit',(req,res)=>{
-  const {name,description,website,id} = req.body;
+  const {name,description,website,direct,id} = req.body;
   let queryString = `
     UPDATE suppliers
     SET name=$1, description=$2, website_url=$3, direct=$4
@@ -59,7 +59,7 @@ router.put('/edit',(req,res)=>{
   `;
   console.log('Incoming edit:',req.body);
   
-  pool.query(queryString,[name,description,website,id]).then(result=>{   
+  pool.query(queryString,[name,description,website,direct,id]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
     console.log('Error posting supplier to database:',error);
