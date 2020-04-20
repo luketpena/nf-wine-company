@@ -19,6 +19,8 @@ router.get('/',(req,res)=>{
       case 'name': queryString += `ORDER BY name ASC`; break;
       case 'type': queryString += `ORDER BY direct ASC;`; break;
     }
+  } else {
+    queryString += `ORDER BY name ASC`;
   }
 
   pool.query(queryString, queryParams).then(result=>{
