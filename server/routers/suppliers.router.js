@@ -17,6 +17,7 @@ router.get('/',(req,res)=>{
   if (req.query.sort) {
     switch(req.query.sort) {
       case 'name': queryString += `ORDER BY name ASC`; break;
+      case 'type': queryString += `ORDER BY direct ASC;`; break;
     }
   }
 
