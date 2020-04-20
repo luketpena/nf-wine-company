@@ -19,7 +19,8 @@ export default function Suppliers() {
         title="Suppliers" 
         text="[Here you can talk about the people you partner with to get your supply,]"/>
       
-      <SupplierList/>
+      <SupplierList type="direct"/>
+      <SupplierList type="independent"/>
     </div>
   )
 }
