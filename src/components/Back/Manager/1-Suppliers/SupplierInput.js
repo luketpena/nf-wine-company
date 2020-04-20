@@ -20,25 +20,27 @@ export default function SupplierInput(props) {
   let [description,setDescription] = useState( (action==='edit' && edit.description)? edit.description : '' );
   let [img] = useState( (action==='edit' && edit.img)? edit.img : '' );
   let [website,setWebsite] = useState( (action==='edit' && edit.website_url)? edit.website_url : '');
+  let [direct, setDirect] = useState( (action==='edit' && edit.direct)? edit.direct : false);
 
   //>> Submits the new or edited event to the server
   function handleSubmit(event) {
 
     event.preventDefault();
-    const newEvent = {
+    const newSupplier = {
       id: edit.id,
       name,
       description,
       img,
-      website
+      website,
+      direct
     }
 
     switch(action) {
       case 'new':
-        dispatch({type: 'NEW_SUPPLIER', payload: newEvent});
+        dispatch({type: 'NEW_SUPPLIER', payload: newSupplier});
         break;
       case 'edit':
-        dispatch({type: 'EDIT_SUPPLIER', payload: newEvent});
+        dispatch({type: 'EDIT_SUPPLIER', payload: newSupplier});
         break;
       default:
     }
@@ -58,9 +60,13 @@ export default function SupplierInput(props) {
             <span className="inputName">Website:</span>
             <input type="text" value={website} onChange={(event)=>setWebsite(event.target.value)}/>
           </label>
+          <label>
+            <span className="inputName">Direct:</span>
+            <input type="checkbox" checked={direct} onChange={(event)=>setDirect(event.target.checked)}/>
+          </label>
         </div>
 
-        <textarea required className="in-description" placeholder="Supplier Bio"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
+        <textarea className="in-description" placeholder="Supplier Bio"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
         
         <button className="inputButton button-secondary center-block">Submit</button>
 
