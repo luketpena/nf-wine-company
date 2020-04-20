@@ -62,6 +62,10 @@ const QuickAdd = styled.div`
       display: block;
       margin: 8px auto;
     }
+    label {
+      display: block;
+      margin: 8px;
+    }
   }
 `;
 
@@ -92,6 +96,7 @@ export default function SupplierLanding() {
   let [sort, setSort] = useState('name');
   let [order,setOrder] = useState('ASC');
   let [quickAddName, setQuickAddName] = useState('');
+  let [quickAddDirect, setQuickAddDirect] = useState(false);
 
   let [displayStart,setDisplayStart] = useState(0);
   let [displayUnit] = useState(50);
@@ -140,7 +145,8 @@ export default function SupplierLanding() {
   function quickAdd(event) {
     event.preventDefault()
     const newSupplier = {
-      name: quickAddName
+      name: quickAddName,
+      direct: quickAddDirect
     };
     dispatch({type: 'QUICK_ADD_SUPPLIER', payload: newSupplier});
     setQuickAddName('');
@@ -171,6 +177,14 @@ export default function SupplierLanding() {
             value={quickAddName}
             onChange={event=>setQuickAddName(event.target.value)}
           />
+          <label>
+            <span>Direct: </span>
+            <input 
+              type="checkbox"
+              checked={quickAddDirect}
+              onChange={event=>setQuickAddDirect(event.target.checked)}
+            />
+          </label>
           <button className="button-secondary">Create</button>
 
         </form>
