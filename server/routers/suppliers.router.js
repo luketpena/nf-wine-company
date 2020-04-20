@@ -30,7 +30,7 @@ router.get('/',(req,res)=>{
 
 router.post('/',(req,res)=>{
   const {name,description,website} = req.body;
-  let queryString = 'INSERT INTO suppliers (name, description, website_url) VALUES ($1,$2,$3);';
+  let queryString = 'INSERT INTO suppliers (name, description, website_url, direct) VALUES ($1,$2,$3,$4);';
   pool.query(queryString,[name,description,website]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
@@ -41,7 +41,7 @@ router.post('/',(req,res)=>{
 
 router.post('/quickadd',(req,res)=>{
   const {name} = req.body;
-  let queryString = 'INSERT INTO suppliers (name) VALUES ($1);';
+  let queryString = 'INSERT INTO suppliers (name,direct) VALUES ($1,$2);';
   pool.query(queryString,[name]).then(result=>{   
     res.sendStatus(201);
   }).catch(error=>{
@@ -54,7 +54,7 @@ router.put('/edit',(req,res)=>{
   const {name,description,website,id} = req.body;
   let queryString = `
     UPDATE suppliers
-    SET name=$1, description=$2, website_url=$3
+    SET name=$1, description=$2, website_url=$3, direct=$4
     WHERE id=$5;
   `;
   console.log('Incoming edit:',req.body);
