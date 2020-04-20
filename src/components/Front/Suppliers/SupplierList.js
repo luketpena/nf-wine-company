@@ -1,9 +1,16 @@
 import React from 'react';
+import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
 import SupplierListSegment from './SupplierListSegment';
 
-export default function SupplierList() {
+const TypeTitle = styled.h2`
+  font-size: 3em;
+  margin: 16px 0;
+`
+
+
+export default function SupplierList(props) {
 
   const suppliers = useSelector(state=>state.supplier);
   function renderSupplierList() {
@@ -12,14 +19,16 @@ export default function SupplierList() {
     
     //Iterate through suppliers
     for (let supplier of suppliers) {
-      //Collect the first letter of their names
-      const firstLetter = supplier.name.charAt(0).toUpperCase();
-      //If a property to that letter hasn't be made, create it now as an empty array
-      if (!groupedSuppliers.hasOwnProperty(firstLetter)) {
-        groupedSuppliers[firstLetter] = [];
+      if ( (props.type==="direct" && supplier.direct) || (props.type==="independent" && !supplier.direct)) {
+        //Collect the first letter of their names
+        const firstLetter = supplier.name.charAt(0).toUpperCase();
+        //If a property to that letter hasn't be made, create it now as an empty array
+        if (!groupedSuppliers.hasOwnProperty(firstLetter)) {
+          groupedSuppliers[firstLetter] = [];
+        }
+        //Push the supplier to that letter group array in the object
+        groupedSuppliers[firstLetter].push(supplier);
       }
-      //Push the supplier to that letter group array in the object
-      groupedSuppliers[firstLetter].push(supplier);   
     }
 
     //Extract the letters into their own array
@@ -33,7 +42,8 @@ export default function SupplierList() {
   return (
     <div className="sec-default">
       <div className="sec-default-content">
-      {renderSupplierList()}
+        <TypeTitle>{(props.type==="direct"? "Winery Direct" : "Independent")}</TypeTitle>
+        {renderSupplierList()}
       </div>
     </div>
   )
