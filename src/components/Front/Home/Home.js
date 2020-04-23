@@ -14,6 +14,9 @@ const Container = styled.main`
   .sec-default:last-child {
     margin-bottom: 128px;
   }
+  h2 {
+    font-size: 2em;
+  }
 `;
 
 const Section = styled.section`

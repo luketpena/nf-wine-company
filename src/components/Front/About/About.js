@@ -4,9 +4,10 @@ import {faHandshake, faWineBottle, faWineGlassAlt} from '@fortawesome/free-solid
 
 import ProcessCard from './ProcessCard';
 import TeamCard from './TeamCard';
-import FrontLanding from '../FrontLanding';
 
-const Container = styled.div``;
+const Container = styled.div`
+  margin-top: 256px;
+`;
 
 const SecInfo = styled.section`
   
@@ -100,7 +101,6 @@ export default function About() {
 
   return (
     <Container>
-      <FrontLanding title="About Us"/>
       <SecInfo className="sec-default">
         <div className="sec-default-content">
           <img 
