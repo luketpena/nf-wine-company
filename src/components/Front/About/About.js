@@ -5,6 +5,8 @@ import {faHandshake, faWineBottle, faWineGlassAlt} from '@fortawesome/free-solid
 import ProcessCard from './ProcessCard';
 import TeamCard from './TeamCard';
 
+const TeamList = require('./TeamList');
+
 const Container = styled.div`
   margin-top: 256px;
 `;
@@ -58,31 +60,6 @@ const ProcessList = [
     text: '[host local events and tastings]'
   }
 ]
-
-const TeamList = [
-  {
-    name: 'Eric Freeburg',
-    role: '[company role]',
-    img: '',
-  },
-  {
-    name: `Raistland O'Dell`,
-    role: '[company role]',
-    img: '',
-  },
-  {
-    name: 'Marvi Medower',
-    role: '[company role]',
-    img: '',
-  },
-  {
-    name: 'Erin Ungerman',
-    role: '[company role]',
-    img: '',
-  }
-  
-]
-
 
 export default function About() {
 
