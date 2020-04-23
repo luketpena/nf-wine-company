@@ -42,13 +42,13 @@ router.get('/public', (req,res)=>{
 
 //Add a new event to the DB
 router.post('/',(req,res)=>{
-  const {name,description,img,date,time,price,link_url,link_text,trade} = req.body;
-  const queryParams = [name,description,img,date,time,price,link_url,link_text,trade];
+  const {name,description,date,time,price,link_url,link_text,trade} = req.body;
+  const queryParams = [name,description,date,(time? time : null),(price? price : null),link_url,link_text,trade];
 
   console.log('Incoming event:',req.body);
   
   
-  let queryString = 'INSERT INTO events (name, description, img, date, time, price, link_url, link_text, trade) VALUES ($1,$2,$3,$4,$5,$6,$7,$8,$9);';
+  let queryString = 'INSERT INTO events (name, description, date, time, price, link_url, link_text, trade) VALUES ($1,$2,$3,$4,$5,$6,$7,$8);';
   pool.query(queryString,queryParams).then(result=>{
     res.sendStatus(201);
   }).catch(error=>{
@@ -58,12 +58,12 @@ router.post('/',(req,res)=>{
 })
 
 router.put('/edit',(req,res)=>{
-  const {id,name,description,img,date,time,price,link_url,link_text,trade} = req.body;
-  const queryParams = [id,name,description,img,date,time,price,link_url,link_text,trade];
+  const {id,name,description,date,time,price,link_url,link_text,trade} = req.body;
+  const queryParams = [id,name,description,date,(time? time : null),(price? price : null),link_url,link_text,trade];
   
   let queryString = `
     UPDATE events 
-    SET name=$2, description=$3, img=$4, date=$5, time=$6, price=$7, link_url=$8, link_text=$9, trade=$10
+    SET name=$2, description=$3, date=$4, time=$5, price=$6, link_url=$7, link_text=$8, trade=$9
     WHERE id=$1;`;
   
     pool.query(queryString,queryParams).then(result=>{

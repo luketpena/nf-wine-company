@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import styled from 'styled-components';
 import {useSelector} from 'react-redux';
 
@@ -21,30 +21,55 @@ const Container = styled.div`
 export default function EventList(props) {
 
   const events = useSelector(state=>state.event);
+  let [upcomingList, setUpcomingList] = useState([]);
+  let [pastList, setPastList] = useState([]);
 
-  //Renders events to the DOM based on whether they are 'upcoming' or 'past' (stored in timing arg)
-  function renderEvents(timing) {
+  useEffect(()=>{
 
-    if (events.length>0) {
-      //Get today's date
-      let dateNow = new Date();
-      let myEvents = events.map( (item,i) => {
-        //Get the date of the event...
-        let eventDate = new Date(item.date)
-        //...and only render if it meets requirements
-        if ( (eventDate<dateNow && timing==='past') || (eventDate>dateNow && timing==='upcoming') ) {
-          return <EventItem key={i} event={item} last={(events.length-1 === i)}/>
-        }
-        return false;
-      }).filter( item=>item!==false );
+    let dateNow = new Date();
+    let pastCollection = [];
+    let upcomingCollection = [];
 
-      if (myEvents.length>0) {
-        console.log('myEvents:',myEvents);
-        
-        return myEvents;
+    for (var event of events) {
+      let eventDate = new Date(event.date);
+      if (eventDate<dateNow) {
+        pastCollection.push(event);
       } else {
-        return <p className="no-events">There are no {timing} events.</p>
+        upcomingCollection.push(event);
       }
+    }
+
+    setUpcomingList(upcomingCollection);
+    setPastList(pastCollection);
+  },[setUpcomingList,setPastList,events]);
+
+
+  function renderUpcomingEvents() {
+    if (upcomingList.length>0) {
+      return upcomingList.map( (item,i)=>{
+        return <EventItem key={i} event={item} last={(events.length-1 === i)}/>
+      });
+    } else {
+      return <p className="no-events">There are no upcoming events.</p>;
+    }
+  }
+
+  function renderPastEvents() {
+    return pastList.map( (item,i)=>{
+      return <EventItem key={i} event={item} last={(events.length-1 === i)}/>
+    });
+  }
+
+  function renderPastEventList() {
+    if (pastList.length>0) {
+      return (
+        <div className="sec-default">
+          <div className="sec-default-content">
+            <h2>Past Events</h2>
+            {renderPastEvents()}
+          </div>
+      </div>
+      )
     }
   }
 
@@ -53,15 +78,10 @@ export default function EventList(props) {
       <div className="sec-default">
         <div className="sec-default-content">
           <h2>Upcoming Events</h2>
-          {renderEvents('upcoming')}
+          {renderUpcomingEvents()}
         </div>
       </div>
-      <div className="sec-default">
-        <div className="sec-default-content">
-          <h2>Past Events</h2>
-          {renderEvents('past')}
-        </div>
-      </div>
+      {renderPastEventList()}
     </Container>
   )
 }
