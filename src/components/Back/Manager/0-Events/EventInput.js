@@ -35,7 +35,6 @@ export default function EventInput(props) {
       id: edit.id,
       name,
       description,
-      img,
       date,
       time,
       price,
@@ -73,12 +72,12 @@ export default function EventInput(props) {
 
           <label>
             <span className="inputName">Time:</span>
-            <input required type="time" value={time} onChange={(event)=>setTime(event.target.value)}/>
+            <input type="time" value={time} onChange={(event)=>setTime(event.target.value)}/>
           </label>
 
           <label>
             <span className="inputName">$</span>
-            <input required className="in-price" type="number" value={price} onChange={(event)=>setPrice(event.target.value)}/>
+            <input className="in-price" type="number" value={price} onChange={(event)=>setPrice(event.target.value)}/>
           </label>
 
           <label>
@@ -98,7 +97,7 @@ export default function EventInput(props) {
           </label>
         </div>
 
-        <textarea required className="in-description" placeholder="Event Description"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
+        <textarea className="in-description" placeholder="Event Description"  value={description} onChange={(event)=>setDescription(event.target.value)}/>
         
         <button className="inputButton button-secondary center-block">Submit</button>
 
