@@ -31,6 +31,9 @@ const ContactBox = styled.div`
       padding: 8px;
       background-color: #EEE;
       border: 1px solid #CCC;
+
+      font-family: var(--font-paragraph);
+      font-size: 1em;
     }
 
     textarea {

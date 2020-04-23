@@ -15,6 +15,7 @@ const Container = styled.div`
     width: 200px;
     height: 200px;
     object-fit: cover;
+    box-shadow: 0 0 16px 0 rgba(0,0,0,.25);
   }
 `;
 
@@ -22,7 +23,7 @@ export default function TeamCard(props) {
   return (
     <Container>
       <img
-        src={(props.person.img? props.person.img : 'https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg')}
+        src={(props.person.photo? props.person.photo : 'https://journeypurebowlinggreen.com/wp-content/uploads/2018/05/placeholder-person.jpg')}
         alt={props.person.name}
       />
       <h3>{props.person.name}</h3>
