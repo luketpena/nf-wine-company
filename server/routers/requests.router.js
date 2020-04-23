@@ -14,6 +14,17 @@ router.get('/',(req,res)=>{
   })
 })
 
+router.post('/',(req,res)=>{
+  let queryString = `INSERT INTO requests (name, email, company) VALUES ($1,$2,$3);`;
+  const {name, email, company} = req.body;
+  pool.query(queryString,[name,email,company]).then(()=>{
+    res.sendStatus(201);
+  }).catch(error=>{
+    console.log('Error posting new request to server:',error);
+    res.sendStatus(400);    
+  })
+});
+
 router.delete('/:id', rejectUnauthenticated, (req,res)=>{
   pool.query('DELETE FROM requests WHERE id=$1',[req.params.id]).then(()=>{
     res.sendStatus(200);
