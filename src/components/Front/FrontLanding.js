@@ -8,6 +8,15 @@ const Landing = styled.div`
   text-align: center;
   text-shadow: 0 0 2px black;
   width: 100%;
+
+  .text {
+    max-width: 700px;
+    margin: 0 auto;
+    font-size: 1.1em;
+    font-family: var(--font-paragraph);
+    line-height: 1.2em;
+    margin-bottom: 32px;
+  }
   
   div {
     background-color: rgba(0,0,0,.5);
@@ -17,7 +26,8 @@ const Landing = styled.div`
   }
 
   h1 {
-    font-size: 2em;
+    font-size: 3em;
+    
   }
 `;
 
@@ -29,11 +39,19 @@ export default function FrontLanding(props) {
     dispatch({type: 'SET_PAGETOP', payload: document.getElementById('landing-top').offsetHeight});
   },[dispatch])
 
+  function renderText() {
+    if (props.text) {
+      return props.text.map( (item,i)=>{
+        return <p key={i} className="text">{item}</p>
+      })
+    }
+  }
+
   return (
     <Landing id="landing-top">
       <div>
         <h1>{props.title}</h1>
-        {(props.text? <p>{props.text}</p> : <></>)}
+        {renderText()}
       </div>
     </Landing>
   )

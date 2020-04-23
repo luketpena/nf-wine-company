@@ -4,12 +4,18 @@
   font-weight: 5;
   src: local('Leafy'), url('../../fonts/AnnStone.ttf') format('truetype');
 }
+@font-face {
+  font-family: 'Roboto';
+  font-weight: 5;
+  src: local('Roboto'), url('../../fonts/Roboto-Light.ttf') format('truetype');
+}
 
 /* Global styles */
 :root {
   --font-illustrated: 'Annstone', sans-serif;
   --font-main: 'Cormorant', serif;
   --font-title: 'Playfair Display SC', serif;
+  --font-paragraph: 'Roboto', sans-serif;
   --col-primary: brown;
   --col-primary-light: hsl(0, 65%, 50%);
   --col-primary-dark: #5E1212;
@@ -36,7 +42,7 @@ h1, h2 {
 }
 
 p {
-  font-family: var(--font-main);
+  font-family: var(--font-paragraph);
 }
 
 * {

@@ -10,6 +10,11 @@ const Container = styled.div`
   .no-events {
     text-align: center;
   }
+
+  h2 {
+    font-size: 2em;
+    margin-top: 0;
+  }
 `;
 
 //-----< Component Function >-----\\

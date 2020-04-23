@@ -42,7 +42,7 @@ export default function SupplierList(props) {
   return (
     <div className="sec-default">
       <div className="sec-default-content">
-        <TypeTitle>{(props.type==="direct"? "Winery Direct" : "Independent")}</TypeTitle>
+        <TypeTitle>{(props.type==="direct"? "Winery Direct" : "Our Suppliers")}</TypeTitle>
         {renderSupplierList()}
       </div>
     </div>
