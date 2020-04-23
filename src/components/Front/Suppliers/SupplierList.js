@@ -5,7 +5,7 @@ import {useSelector} from 'react-redux';
 import SupplierListSegment from './SupplierListSegment';
 
 const TypeTitle = styled.h2`
-  font-size: 3em;
+  font-size: 2em;
   margin: 16px 0;
 `
 

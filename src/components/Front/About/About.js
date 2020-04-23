@@ -9,10 +9,13 @@ const TeamList = require('./TeamList');
 
 const Container = styled.div`
   margin-top: 256px;
+
+  h2 {
+    font-size: 2em;
+  }
 `;
 
 const SecInfo = styled.section`
-  
   .info-img {
     margin: 0 auto;
     display: block;
