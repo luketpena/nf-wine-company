@@ -3,6 +3,7 @@ import {useDispatch} from 'react-redux';
 import styled from 'styled-components';
 
 import FrontLanding from '../../Front/FrontLanding';
+import Modal from '../../GenUse/Modal/Modal';
 
 const Container = styled.div`
   width: 100%;
@@ -46,6 +47,8 @@ export default function TradeLogin() {
   let [company, setCompany] = useState('');
   let [mode, setMode] = useState('login');
 
+  let [modalOpen, setModalOpen] = useState(false);
+
   function login(event) {
     event.preventDefault();
 
@@ -61,6 +64,17 @@ export default function TradeLogin() {
     } else {
       dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
+  }
+
+  function submitRequest(event) {
+    event.preventDefault();
+    const newRequest = {name, email, company};
+    dispatch({ type: 'SUBMIT_REQUEST', payload: newRequest});
+
+    setModalOpen(true);
+    setName('');
+    setEmail('');
+    setCompany('');
   }
 
   function renderForm() {
@@ -87,7 +101,7 @@ export default function TradeLogin() {
         )
       case 'request':
         return (
-          <Form>
+          <Form onSubmit={event=>submitRequest(event)}>
             <input
               required
               type="text"
@@ -115,11 +129,7 @@ export default function TradeLogin() {
 
   return (
     <Container>
-
       <FrontLanding title="Welcome to the Trade Portal"/>
-
-      
-
       {renderForm()}
 
       <button 
@@ -127,6 +137,10 @@ export default function TradeLogin() {
         onClick={()=>(mode==='login'? setMode('request') : setMode('login'))}>
           {(mode==='login'? 'Request Access' : 'Return to Login')}
       </button>
+
+      <Modal open={modalOpen} handleClose={()=>setModalOpen(false)}>
+        <p>Your request has been sent. If approved, you will receive your account information via email.</p>
+      </Modal>
     </Container>
   )
 }
