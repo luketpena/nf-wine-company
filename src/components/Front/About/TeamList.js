@@ -62,13 +62,13 @@ const TeamList = [
     photo: photo_erin
   },
   {
-    name: 'Robert Rudolf',
+    name: 'Robert Rudolph',
     position: 'Founder / Key Accounts Manager',
     photo: photo_rob
   },
   {
     name: `Ashley Nelson`,
-    position: 'Customer Relationship / Brand Manger',
+    position: 'Customer Relationship / Brand Manager',
     photo: photo_ashley
   },
   {
@@ -102,7 +102,7 @@ const TeamList = [
     photo: photo_tom
   },
   {
-    name: 'Marvi Meadower',
+    name: 'Marvi Medower',
     position: 'Compliance Manager / Office Guru',
     photo: photo_marvi
   },
