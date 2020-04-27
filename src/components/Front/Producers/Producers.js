@@ -152,11 +152,13 @@ export default function Partners() {
   //Extracting just the country_codes into an array
   function populateCountryList() {
     return countries.map((item,i)=>{
-      return item.country_code;
+      return item;
     });
   }
 
   function selectCountry(country) {
+    console.log('Selected Country: ',country);
+    
     setCountryFilter(country.id);
     setCountrySelect(country.country_code);
     setMode('region');
@@ -254,7 +256,7 @@ export default function Partners() {
         <MapBox className="sec-default-content">
           
           <div id="world-map">
-            <WorldMap countryList={populateCountryList()} hover={hover} select={countrySelect}/>   
+            <WorldMap countryList={populateCountryList()} hover={hover} select={countrySelect} setSelect={selectCountry}/>   
           </div>
 
           <div className="button-box">
@@ -268,12 +270,6 @@ export default function Partners() {
         </MapBox>
       </MapBanner>
 
-      {/* 
-        Both the producer list and the partners page need access to all of the search parameters.
-        Unless... maybe I should share just a search function? Nah, it still needs all of the stuff.
-
-        This is shared so they both can dispatch to get producers.
-      */}
       <ProducerList 
         search={search}
         setSearch={setSearch}
