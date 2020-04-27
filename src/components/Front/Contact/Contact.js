@@ -20,7 +20,7 @@ const ContactBox = styled.div`
     max-width: 500px;
     margin: 0 auto;
 
-    input, textarea {
+    input, textarea, select {
       display: block;
       width: 100%;
       resize: none;
@@ -56,12 +56,13 @@ export default function Contact() {
   let [subject, setSubject] = useState('');
   let [email, setEmail] = useState('');
   let [message, setMessage] = useState('');
+  let [type, setType] = useState(0);
 
   let [sent, setSent] = useState(false);
 
   function sendEmail(event) {
     event.preventDefault();
-    const newEmail = {name,subject,email,message};
+    const newEmail = {name,subject,email,type,message};
     dispatch({type: "CONTACT_SEND_EMAIL", payload: newEmail});
     setSent(true);
   }
@@ -99,6 +100,11 @@ export default function Contact() {
               value={email}
               onChange={event=>setEmail(event.target.value)}
               />
+            <select required value={type} onChange={event=>setType(event.target.value)}>
+              <option disabled value={0}>Select Customer Type</option>
+              <option value={1}>Trade Partner</option>
+              <option value={2}>Public</option>
+            </select>
             <textarea
               required
               placeholder="Message"
