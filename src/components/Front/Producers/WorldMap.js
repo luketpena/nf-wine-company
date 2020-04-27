@@ -1,4 +1,5 @@
 import React from 'react';
+import {useSelector} from 'react-redux';
 import styled from 'styled-components';
 import MapPaths from './MapPaths';
 
@@ -21,9 +22,12 @@ const MapPath = styled.path`
 
 export default function WorldMap(props) {
 
+  const countries = useSelector(state=>state.places.countries);
+
   function renderPaths() {
     return MapPaths.GetPaths().map( (item,i)=>{
-      let findIndex = props.countryList.findIndex(country_id=>country_id===item.id);   
+      
+      let findIndex = props.countryList.findIndex(country=>country.country_code===item.id);   
       
       return (
         <MapPath
@@ -33,12 +37,11 @@ export default function WorldMap(props) {
           country_id={item.id}
           select={props.select}
           hover={(props.hover===item.id)}
+          onClick={()=>props.setSelect(props.countryList[findIndex])}
         />
       )
-    });
-    
+    });  
   }
-
 
   //"-169.110266 83.600842 190.486279 -58.508473"
   return (
