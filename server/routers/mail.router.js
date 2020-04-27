@@ -11,12 +11,12 @@ const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(MAIL_KEY);
 
 router.post('/contact', async (req,res)=>{   
-  const {name,subject,email,message} = req.body;
+  const {name,subject,email,type,message} = req.body;
   try {
     const msg = {
       to: 'luketpena@gmail.com',
       from: email,
-      subject: `${subject} FROM ${name}`,
+      subject: `${type} - ${subject} FROM ${name}`,
       text: 'Text area',
       html: `<strong>${message}</strong>`,
     };
