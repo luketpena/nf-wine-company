@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {faHandshake, faWineBottle, faWineGlassAlt} from '@fortawesome/free-solid-svg-icons';
 
+import logo from '../../../images/logo.jpg';
+
 import ProcessCard from './ProcessCard';
 import TeamCard from './TeamCard';
 
@@ -50,17 +52,17 @@ const ProcessList = [
   {
     name: 'Collaborate',
     icon: faHandshake,
-    text: '[working with the best producers and suppliers]'
+    text: 'Working with family winemakers from around the world.'
   },
   {
     name: 'Supply',
     icon: faWineBottle,
-    text: '[supplying wine to fit the needs of your business]'
+    text: 'Sharing our thoughtfully curated portfolio throughout Minnesota.'
   },
   {
     name: 'Build Community',
     icon: faWineGlassAlt,
-    text: '[host local events and tastings]'
+    text: 'Creating avenues that connect great people with wine.'
   }
 ]
 
@@ -84,7 +86,7 @@ export default function About() {
       <SecInfo className="sec-default">
         <div className="sec-default-content">
           <img 
-            src="https://www.cowgirlcontractcleaning.com/wp-content/uploads/sites/360/2018/05/placeholder-img-3.jpg"
+            src={logo}
             alt="New France Wine Company Offices"
             className="info-img"
           />
@@ -92,7 +94,10 @@ export default function About() {
           <div className="info-text">
             <h2>A Little More About New France Wine</h2>
             <p>
-              [Here you can put a big long paragraph about details of the company - where you started from, what you do, what you value. What makes you unique.]
+              Minnesotans are a hardy, well-educated, well-traveled lot. New France Wine Company was founded in 1993 to connect that population with the great wineries of the world. We are a small business with a long-tenured and open-minded staff that views our wine as one of the pleasures of the table.
+            </p>
+            <p>
+              Our company's name pays homage to Minnesota history -- the state was "New France" when part of Napoleon's Louisiana Territory -- but today the world is our neighborhood, with a portfolio that represents 23 countries.  
             </p>
           </div>
         </div>
