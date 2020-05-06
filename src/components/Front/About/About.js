@@ -2,6 +2,8 @@ import React from 'react';
 import styled from 'styled-components';
 import {faHandshake, faWineBottle, faWineGlassAlt} from '@fortawesome/free-solid-svg-icons';
 
+import logo from '../../../images/logo.jpg';
+
 import ProcessCard from './ProcessCard';
 import TeamCard from './TeamCard';
 
@@ -84,7 +86,7 @@ export default function About() {
       <SecInfo className="sec-default">
         <div className="sec-default-content">
           <img 
-            src="https://www.cowgirlcontractcleaning.com/wp-content/uploads/sites/360/2018/05/placeholder-img-3.jpg"
+            src={logo}
             alt="New France Wine Company Offices"
             className="info-img"
           />
