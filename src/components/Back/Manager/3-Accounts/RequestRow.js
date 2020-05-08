@@ -14,16 +14,21 @@ const Content = styled.div`
   background-color: white;
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
   box-shadow: 0 4px 4px -2px rgba(0,0,0,.25);
   border-radius: 8px;
   margin: 8px 0;
+  padding: 8px;
 
   p, button {
     display: block;
     margin: 4px 1%;
-    width: 18%;
     text-align: center;
+  }
+
+  button {
+    width: 100%;
   }
 `;
 
@@ -94,8 +99,10 @@ export default function RequestRow(props) {
         <p>{name}</p>
         <p>{email}</p>
         <p>{company}</p>
-        <button className="button-back-static" onClick={clickApprove}>Approve</button>
-        <button className="button-back-static-negative" onClick={clickReject}>Reject</button>
+        <div>
+          <button className="button-back-static" onClick={clickApprove}>Approve</button>
+          <button className="button-back-static-negative" onClick={clickReject}>Reject</button>
+        </div>
       </Content>
 
       <Modal open={(modalSelect!=='')} handleClose={()=>setModalSelect('')}>
