@@ -107,11 +107,11 @@ export default function ModifyAccounts() {
         <form onSubmit={submitNewUser}>
           <InputBox>
             <LabelColumn> 
-              <label for="in-username">Username:</label>
-              <label for="in-email">Email:</label>
-              <label for="in-password">Password:</label>
-              <label for="in-passwordCheck">Confirm password:</label>
-              <label for="in-access">Access Level:</label>
+              <label htmlFor="in-username">Username:</label>
+              <label htmlFor="in-email">Email:</label>
+              <label htmlFor="in-password">Password:</label>
+              <label htmlFor="in-passwordCheck">Confirm password:</label>
+              <label htmlFor="in-access">Access Level:</label>
             </LabelColumn>
             <InputColumn>
               <input type="text" id="in-username" value={username} onChange={(event)=>setUsername(event.target.value)}/>

@@ -16,7 +16,7 @@ import rootSaga from './redux/sagas'; // imports ./redux/sagas/index.js
 const sagaMiddlware = createSagaMiddleware();
 const store = createStore (
   rootReducer,
-  applyMiddleware(sagaMiddlware, logger)
+  applyMiddleware(sagaMiddlware)
 )
 sagaMiddlware.run(rootSaga);
 
