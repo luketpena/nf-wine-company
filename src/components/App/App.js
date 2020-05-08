@@ -26,7 +26,7 @@ class App extends Component {
       <div>
         <Router>
           <Switch>
-            <Route path="/manager" component={Manager}/>
+            <ProtectedRoute path="/manager" component={Manager}/>
             <Route path="/tradeportal" component={TradePortal}/>
             <Route path="/" component={Public}/>
             <Route path="/scraper" component={CountryScraper}/>
