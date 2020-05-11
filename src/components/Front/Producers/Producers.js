@@ -94,7 +94,7 @@ const MapListItem = styled.div`
 `;
 
 const titleText = [
-  `Though spanning the globe, a common thread runs through the work of the family wineries we represent: a profound attachment and respect for the land they are on; a thoughtful and gentle hand in the cellar to create wines that speak of their place; and a passion for the art of winemaking despite all the risks involved.`,
+  `Though spanning the globe, a common thread runs through the work of the family wineries we represent: a profound attAchment and respect for the land they are on; a thoughtful and gentle hand in the cellar to create wines that speak of their place; and a passion for the art of winemaking despite all the risks involved.`,
   `We are honored to share the wine of these great winemakers.`
 ]
 
