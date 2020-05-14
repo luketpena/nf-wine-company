@@ -102,8 +102,8 @@ export default function Contact() {
               />
             <select required value={type} onChange={event=>setType(event.target.value)}>
               <option disabled value={0}>Select Customer Type</option>
-              <option value={1}>Trade Partner</option>
-              <option value={2}>Public</option>
+              <option value={"Trade Partner"}>Trade Partner</option>
+              <option value={"Public"}>Public</option>
             </select>
             <textarea
               required

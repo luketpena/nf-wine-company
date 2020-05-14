@@ -12,11 +12,13 @@ sgMail.setApiKey(MAIL_KEY);
 
 router.post('/contact', async (req,res)=>{   
   const {name,subject,email,type,message} = req.body;
+  console.log(EMAIL);
+  
   try {
     const msg = {
       to: EMAIL,
       from: email,
-      subject: `${type} - ${subject} FROM ${name}`,
+      subject: `${type} - ${subject} from ${name}`,
       text: 'Text area',
       html: `<strong>${message}</strong>`,
     };
