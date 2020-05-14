@@ -16,7 +16,7 @@ const Container = styled.div`
 const titleText = [
   `Not to toot our own horn, but we have some of the best wine events in Minnesota for our customers and consumers! Whether it's off-site at a restaurant, event space or in the brand new loft space of our warehouse, our staff deliver a truly worthwhile, educational (and fun!) experience.`,
   `In addition to our knowledgeable staff, our winery and supplier partners are able to enhance our offerings with seminars, staff trainings, online/webinar tastings and much more.`,
-  `Make sure to sign up for our email list to get up to date information on upcoming tastings, eVents and exclusive wine deals`
+  `Reach out to us on our contact page to get up to date information on upcoming tastings, eVents and exclusive wine deals`
 ];
 
 

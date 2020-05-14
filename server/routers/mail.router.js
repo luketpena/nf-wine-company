@@ -14,7 +14,7 @@ router.post('/contact', async (req,res)=>{
   const {name,subject,email,type,message} = req.body;
   try {
     const msg = {
-      to: 'luketpena@gmail.com',
+      to: EMAIL,
       from: email,
       subject: `${type} - ${subject} FROM ${name}`,
       text: 'Text area',
