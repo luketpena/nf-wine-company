@@ -85,7 +85,7 @@ export default function Home() {
         <div className="sec-default-content">
           <h2>Who We Work With</h2>
           <p>New France Wine Company has a large and eclectic portfolio, focusing on France, Italy, and Spain, but with an eyE toward value in all parts of the world, including domestic, Portugal, Australia, and elsewhere.</p>
-          <p>All of our imported wines are domaine-bottled, and we strive to work with producers who are the best at their craft.</p>
+          <p>We strive to work with the top estates in their respective regions.</p>
           <PartnerButtonBox>
             <button className="button-front" onClick={()=>navigate('/producers')}>View Our Producers</button>
             <button className="button-front" onClick={()=>navigate('/suppliers')}>View Our Suppliers</button>

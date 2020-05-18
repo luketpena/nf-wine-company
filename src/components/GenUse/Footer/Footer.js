@@ -33,7 +33,7 @@ export default function Footer() {
     <Container>
       <p>Copyright © {new Date().getFullYear()} New France Wine Company. All rights reserved.</p>
       <IconTray>
-        <a>
+        <a href="https://www.facebook.com/New-France-Wine-Company-1460691264186646/" target="_blank" rel="noopener noreferrer">
           <FontAwesomeIcon className="icon" icon={faFacebookSquare} />
         </a>
         <a href="https://www.instagram.com/newfrancewine/" target="_blank" rel="noopener noreferrer">
