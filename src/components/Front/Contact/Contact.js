@@ -62,9 +62,13 @@ export default function Contact() {
 
   function sendEmail(event) {
     event.preventDefault();
-    const newEmail = {name,subject,email,type,message};
-    dispatch({type: "CONTACT_SEND_EMAIL", payload: newEmail});
-    setSent(true);
+    if (type!==0) {
+      const newEmail = {name,subject,email,type,message};
+      dispatch({type: "CONTACT_SEND_EMAIL", payload: newEmail});
+      setSent(true);
+    } else {
+      alert('Please select a customer type.');
+    }
   }
 
   function renderContent() {
