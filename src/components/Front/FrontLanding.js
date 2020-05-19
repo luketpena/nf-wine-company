@@ -13,7 +13,7 @@ const Landing = styled.div`
     max-width: 700px;
     margin: 0 auto;
     font-size: 1.1em;
-    font-family: var(--font-paragraph);
+    font-family: serif;
     line-height: 1.2em;
     margin-bottom: 32px;
   }
