@@ -54,6 +54,17 @@ const AccountBox = styled.div`
   }
 `;
 
+const TableHead = styled.div`
+  background-color: var(--col-primary);
+  color: white;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 16px;
+  div {
+    width: 20%;
+  }
+`;
+
 export default function ModifyAccounts() {
 
   const dispatch = useDispatch();
@@ -130,20 +141,19 @@ export default function ModifyAccounts() {
 
       <AccountBox className="section-box">
         <h2>Accounts</h2>
-        <table>
-          <thead>
-            <tr>
-              <th>Username</th>
-              <th>Email</th>
-              <th>Access</th>
-              <th>&nbsp;</th>
-              <th>&nbsp;</th>
-            </tr>
-          </thead>
-          <tbody>
+        <div>
+          <TableHead>
+            <div>Username</div>
+            <div>Email</div>
+            <div>Access</div>
+            <div>&nbsp;</div>
+            <div>&nbsp;</div>
+          </TableHead>
+
+          <div>
             {renderAccounts()}
-          </tbody>
-        </table>
+          </div>
+        </div>
       </AccountBox>
 
     </Container>
