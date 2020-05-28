@@ -18,8 +18,14 @@ function * updatePassword (action) {
   yield put({type: 'FETCH_USER'});
 }
 
+function * updateCustomerPassword (action) {
+  yield axios.put('/api/user/password/customer',action.payload);  
+  yield put({type: 'GET_USER_INFO'});
+}
+
 export default function * userInfoSaga() {
   yield takeLatest('GET_USER_INFO', getUserInfo);
   yield takeLatest('UPDATE_USER_INFO', updateUserInfo);
   yield takeLatest('UPDATE_PASSWORD', updatePassword);
+  yield takeLatest('UPDATE_CUSTOMER_PASSWORD', updateCustomerPassword);
 }

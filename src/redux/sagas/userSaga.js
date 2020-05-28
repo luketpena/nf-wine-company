@@ -42,7 +42,6 @@ function * getCustomerAccounts() {
   const response = yield axios.get('/api/user/customers');
   yield put({type: 'SET_CUSTOMER_ACCOUNTS', payload: response.data});
 }
-
 function* userSaga() {
   yield takeLatest('FETCH_USER', fetchUser);
   yield takeLatest('FETCH_USER_INFO',fetchUserInfo);

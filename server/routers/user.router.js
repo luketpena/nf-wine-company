@@ -15,7 +15,7 @@ router.get('/', rejectUnauthenticated, (req, res) => {
 router.get('/info', rejectUnauthenticated, (req,res)=> {
   if (req.user.access==='master' || req.user.access==='admin') {
     const queryString = `
-      SELECT id, username, email, "access" FROM "user"
+      SELECT id, username, email, "access", "password_insecure" FROM "user"
       ORDER BY CASE 
         WHEN "access" = 'master' THEN '1'
         WHEN "access" = 'admin' THEN '2'
@@ -29,6 +29,7 @@ router.get('/info', rejectUnauthenticated, (req,res)=> {
     })
   }
 })
+
 
 router.get('/customers', rejectUnauthenticated, async (req,res)=> {
   try {
@@ -90,6 +91,24 @@ router.put('/password', rejectUnauthenticated, (req,res)=> {
   const password = encryptLib.encryptPassword(req.body.password);
   if (req.user.id === req.body.id) {
     pool.query('UPDATE "user" SET password=$1 WHERE id=$2',[password, req.user.id]).then(()=>{
+      res.sendStatus(200);
+    }).catch(error=>{
+      console.log('Error updating user information:',error);
+      res.sendStatus(400);
+    });
+  } else {
+    res.sendStatus(403);
+  }
+});
+
+router.put('/password/customer', rejectUnauthenticated, async (req,res)=> {
+  const password = encryptLib.encryptPassword(req.body.password);
+  const passwordInsecure = req.body.password;
+  if (req.user.access==='master' || req.user.access==='admin') {
+      
+    
+      await pool.query('UPDATE "user" SET password=$2, password_insecure=$3 WHERE id=$1',[req.body.id, password, passwordInsecure]).then(()=>{
+      console.log('MODIFYING ACCOUNT',passwordInsecure);
       res.sendStatus(200);
     }).catch(error=>{
       console.log('Error updating user information:',error);

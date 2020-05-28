@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import styled from 'styled-components';
 import {useDispatch} from 'react-redux';
 import Modal from '../../../GenUse/Modal/Modal';
@@ -25,8 +25,17 @@ export default function AccountRow(props) {
 
   const dispatch = useDispatch();
 
+  let [modifyActive, setModifyActive] = useState(false);
+  let [newPassword, setNewPassword] = useState('');
+
   function removeAccount() {
     dispatch({type: 'DELETE_USER', payload: props.account.id});
+  }
+
+  function handleSubmit(event) {
+     event.preventDefault();
+     dispatch({type: 'UPDATE_CUSTOMER_PASSWORD', payload: {id: props.account.id, password: newPassword}});
+     setNewPassword('');
   }
 
   return (
@@ -34,8 +43,17 @@ export default function AccountRow(props) {
       <InfoBox>{props.account.username}</InfoBox>
       <InfoBox>{props.account.email}</InfoBox>
       <InfoBox>{props.account.access}</InfoBox>
-      <InfoBox>{(props.account.access==='customer'? <button className="button-back-static">Modify</button> : <>&nbsp;</> )}</InfoBox>
+      <InfoBox>{(props.account.access==='customer'? <button className="button-back-static" onClick={()=>setModifyActive(true)}>Modify</button> : <>&nbsp;</> )}</InfoBox>
       <InfoBox>{(props.account.access!=='master'? <button className="button-back-static-negative" onClick={removeAccount}>Remove</button> : <>&nbsp;</> )}</InfoBox>
+      
+      <Modal open={modifyActive} handleClose={()=>setModifyActive(false)}>
+        <h3>{props.account.username}</h3>
+        <p>Current password: <strong>{props.account.password_insecure}</strong></p>
+        <form onSubmit={event=>handleSubmit(event)}>
+          <input required type="text" placeholder="New Password" value={newPassword} onChange={event=>setNewPassword(event.target.value)}/>
+          <button>Submit</button>
+        </form>
+      </Modal>
     </Container>
   )
 }
