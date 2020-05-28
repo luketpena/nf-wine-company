@@ -19,6 +19,7 @@ function * approveAccessRequest(action) {
 
 function * submitRequest(action) {
   yield axios.post('/api/requests', action.payload);
+  yield axios.post('/api/mail/request', action.payload)
   yield put({type: 'GET_REQUESTS'});
 }
 

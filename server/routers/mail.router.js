@@ -69,4 +69,23 @@ router.post('/access', async (req,res)=>{
   }
 });
 
+router.post('/request', async (req,res)=>{   
+  const {name, email, company} = req.body;
+  
+  try {
+    const msg = {
+      to: EMAIL,
+      from: email,
+      subject: `ACCESS REQUEST: ${name} from ${company}`,
+      text: 'Text area',
+      html: `<strong>${name} has requested trade portal access. You can view and approve their request from the Accounts page of the admin tools.</strong>`,
+    };
+    await sgMail.send(msg);
+    res.sendStatus(201);
+  } catch (error) {
+    console.log('Error sending contact email',error);
+    res.sendStatus(400);
+  }
+});
+
 module.exports = router;

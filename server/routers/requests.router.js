@@ -3,6 +3,7 @@ const router = express.Router();
 const pool = require('../modules/pool.js');
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
+
 //Gets all of the countries
 router.get('/',(req,res)=>{
   let queryString = 'SELECT * FROM requests';
