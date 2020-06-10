@@ -127,7 +127,7 @@ export default function Contact() {
     <Container>
       <FrontLanding 
         title="Contact Us"
-        text={["We waNt to hear from you."]}/>
+        text={["We want to hear from you."]}/>
       <ContactBox className="sec-default">
         {renderContent()}
       </ContactBox>
