@@ -121,7 +121,6 @@ const CardBox = styled.div`
 const ProducerBox = styled.div`
   background-color: #EEE;
   overflow: hidden;
-  padding-bottom: 32px;
   table {
     max-width: 800px;
     margin: 0 auto;
@@ -266,6 +265,10 @@ export default function ProducerList(props) {
       <ProducerBox>
         {renderProducerList()}
       </ProducerBox>
+
+      <PaginationBox>
+        {renderPagination()}
+      </PaginationBox>
 
       <Modal open={open} handleClose={()=>setOpen(false)}>
         <ModalContent>
