@@ -28,8 +28,7 @@ router.get('/info', rejectUnauthenticated, (req,res)=> {
       res.sendStatus(400);
     })
   }
-})
-
+});
 
 router.get('/customers', rejectUnauthenticated, async (req,res)=> {
   try {
@@ -153,7 +152,6 @@ router.post('/login', userStrategy.authenticate('local'), (req, res) => {
   console.log('LOGIN on server:',req.body);
   res.sendStatus(200);
 });
-
 
 
 // clear all server session information about this user

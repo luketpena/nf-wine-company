@@ -1,11 +1,12 @@
 import React, {useEffect} from 'react';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import './Manager.css';
 import { Switch } from 'react-router'; 
 import { Route } from 'react-router-dom';
 import styled from 'styled-components';
 
 //-----< Component Imports >-----\\
+import ManagerRejectCustomer from './ManagerRejectCustomer';
 import ManagerMenu from './ManagerMenu';
 
 import EventLanding from './0-Events/EventLanding';
@@ -47,6 +48,8 @@ export default function Manager (props) {
     dispatch({type: 'GET_SUPPLIERS'});
     dispatch({type: 'GET_PRODUCERS'});
   },[dispatch]);
+
+  const user = useSelector(state=>state.user);
   
 
   function renderBar() {
@@ -54,25 +57,42 @@ export default function Manager (props) {
       return <ManagerBar />
     }
   }
+
+  function renderContent() {
+    switch(user.access) {
+      case 'admin':
+      case 'master':
+          
+          
+          return (
+            <div>
+              {renderBar()}
+              <Switch>
+                <Route exact path="/manager" component={ManagerMenu}/>
+
+                <Route exact path="/manager/events" component={EventLanding} />
+                <Route exact path="/manager/suppliers" component={SupplierLanding} />
+                <Route exact path="/manager/producers" component={ProducerLanding} />
+                <Route exact path="/manager/regions" component={RegionLanding} />
+                <Route exact path="/manager/accounts" component={AccountLanding} />
+
+                <Route exact path="/manager/accounts/modify" component={ModifyAccounts} />
+                
+                <Route path="/manager/events/:action" component={EventInput} />
+                <Route path="/manager/suppliers/:action" component={SupplierInput} />
+                <Route path="/manager/producers/:action" component={ProducerInput} />
+              </Switch>
+            </div>
+          );
+      default:
+        console.log('ADMIN');
+         return <ManagerRejectCustomer />
+    }
+  }
   
   return (
     <Container>
-        {renderBar()}
-        <Switch>
-          <Route exact path="/manager" component={ManagerMenu}/>
-
-          <Route exact path="/manager/events" component={EventLanding} />
-          <Route exact path="/manager/suppliers" component={SupplierLanding} />
-          <Route exact path="/manager/producers" component={ProducerLanding} />
-          <Route exact path="/manager/regions" component={RegionLanding} />
-          <Route exact path="/manager/accounts" component={AccountLanding} />
-
-          <Route exact path="/manager/accounts/modify" component={ModifyAccounts} />
-          
-          <Route path="/manager/events/:action" component={EventInput} />
-          <Route path="/manager/suppliers/:action" component={SupplierInput} />
-          <Route path="/manager/producers/:action" component={ProducerInput} />
-        </Switch>
+        {renderContent()}
     </Container>
   )
 }

@@ -2,9 +2,10 @@ import { put, takeLatest } from 'redux-saga/effects';
 import axios from 'axios';
 
 function * getUserInfo (action) {
-  const response = yield axios.get('/api/user/info');
+  const response = yield axios.get('/api/user/info'); 
   yield put({type: 'SET_USER_INFO', payload: response.data});
 }
+
 
 function * updateUserInfo (action) {
   yield axios.put('/api/user/update',action.payload);
