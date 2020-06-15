@@ -8,7 +8,7 @@ function* loginUser(action) {
   try {
     // clear any existing error on the login page
     yield put({ type: 'CLEAR_LOGIN_ERROR' });
-    console.log('Made it to login error cleaing');
+    console.log('Made it to login error cleaning');
     
 
     const config = {

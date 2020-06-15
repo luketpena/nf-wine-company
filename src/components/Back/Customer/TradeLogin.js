@@ -54,6 +54,8 @@ export default function TradeLogin() {
 
     if (username && password) {
       dispatch({type: 'GET_EVENTS_PUBLIC'})
+      console.log('LOGIN on page');
+      
       dispatch({
         type: 'LOGIN',
         payload: {
