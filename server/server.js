@@ -39,5 +39,5 @@ app.use('/api/pricing',pricingRouter)
 
 /** ---------- START SERVER ---------- **/
 app.listen(PORT, () => {
-    console.log('Hey, listen!', PORT);  
+    console.log('Hey, listen!', PORT); 
 });
