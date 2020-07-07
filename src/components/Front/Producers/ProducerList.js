@@ -128,6 +128,10 @@ const ProducerBox = styled.div`
   }
 `;
 
+const ProducerDescription = styled.p`
+  white-space: pre-wrap; 
+`;
+
 export default function ProducerList(props) {
 
   const dispatch = useDispatch();
@@ -206,7 +210,7 @@ export default function ProducerList(props) {
           {(targetProducer.country_name && targetProducer.region_name? <span className="divide">-</span> : <></>)}
           {(targetProducer.region_name? <span>{targetProducer.region_name}</span> : <></>)}
         </p>
-        {(targetProducer.description? <p className="description">{targetProducer.description}</p> : <></>)}
+        {(targetProducer.description? <ProducerDescription className="description">{targetProducer.description}</ProducerDescription> : <></>)}
         {(targetProducer.website_url? <button className="button-front">Visit them online</button> : <></>)}
       </div>
     )
