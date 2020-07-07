@@ -72,11 +72,6 @@ const TeamList = [
     photo: photo_ashley
   },
   {
-    name: 'Bill Summerville',
-    position: 'Customer Relationship Manager',
-    photo: photo_bill
-  },
-  {
     name: 'Ginny McClure',
     position: 'Customer Relationship Manager',
     photo: photo_ginny
