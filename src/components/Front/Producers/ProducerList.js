@@ -202,6 +202,13 @@ export default function ProducerList(props) {
   }
   
   function renderModalContents() {
+
+    function clickVisit() {    
+      let url = targetProducer.website_url;
+      if (url.substring(0, 7) !== 'http://' && url.substring(0, 8) !== 'https://') url = '//' + url;
+      window.open(url, "_blank")
+    }
+
     return (
       <div>
         {(targetProducer.name? <h3>{targetProducer.name}</h3> : <></>)}
@@ -211,7 +218,7 @@ export default function ProducerList(props) {
           {(targetProducer.region_name? <span>{targetProducer.region_name}</span> : <></>)}
         </p>
         {(targetProducer.description? <ProducerDescription className="description">{targetProducer.description}</ProducerDescription> : <></>)}
-        {(targetProducer.website_url? <button className="button-front">Visit them online</button> : <></>)}
+        {(targetProducer.website_url? <button className="button-front" onClick={clickVisit}>Visit them online</button> : <></>)}
       </div>
     )
   }
