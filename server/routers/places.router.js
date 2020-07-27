@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const pool = require('../modules/pool.js');
+const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
 //Gets all of the countries
 router.get('/countries',(req,res)=>{
@@ -35,7 +36,8 @@ router.get('/countries/favorite',(req,res)=>{
   })
 })
 
-router.put('/countries/favorite/:id',(req,res)=>{
+//Update the favorite status of a country
+router.put('/countries/favorite/:id', rejectUnauthenticated,(req,res)=>{
   let queryString = `UPDATE country SET favorite=$2 WHERE id=$1`;
   pool.query(queryString, [req.params.id, req.body.value]).then(result=>{
     res.sendStatus(200);
@@ -74,7 +76,8 @@ router.get('/regions/:country', async (req,res)=>{
   }
 })
 
-router.post('/regions', (req,res)=>{
+//Add a new region to a country
+router.post('/regions',  rejectUnauthenticated,(req,res)=>{
   let queryString = `INSERT INTO region (name, country_id) VALUES ($1,$2);`;
   let queryParams = [req.body.name,req.body.country_id];
   
@@ -86,7 +89,8 @@ router.post('/regions', (req,res)=>{
   })
 });
 
-router.post('/subregions', (req,res)=>{
+//Add a new subregion to a region
+router.post('/subregions',  rejectUnauthenticated,(req,res)=>{
   let queryString = `INSERT INTO subregion (region_id, name) VALUES ($1,$2);`;
   let queryParams = [req.body.region_id, req.body.name];
   
@@ -98,7 +102,8 @@ router.post('/subregions', (req,res)=>{
   })
 });
 
-router.delete('/regions/:id', async (req,res)=>{
+//Remove a region
+router.delete('/regions/:id',  rejectUnauthenticated,async (req,res)=>{
   try {
     //>> Select and set all references to region to null
     await pool.query(`UPDATE producers SET region_id=NULL WHERE region_id=$1`,[req.params.id]);
@@ -112,7 +117,8 @@ router.delete('/regions/:id', async (req,res)=>{
   }
 })
 
-router.put('/regions/:id', (req,res)=>{
+//Update a region
+router.put('/regions/:id',  rejectUnauthenticated,(req,res)=>{
   let queryString = `UPDATE region SET name=$2 WHERE id=$1;`;
 
   pool.query(queryString, [req.params.id, req.body.name]).then(result=>{
@@ -123,7 +129,8 @@ router.put('/regions/:id', (req,res)=>{
   })
 });
 
-router.get('/subregions/:id', (req,res)=>{
+//Get subregion info + producer count within that subregion
+router.get('/subregions/:id',  rejectUnauthenticated,(req,res)=>{
   let queryString = `
     SELECT s.*, COUNT(p.subregion_id) AS producer_count FROM subregion s
     LEFT JOIN producers p ON p.subregion_id=s.id
@@ -138,7 +145,8 @@ router.get('/subregions/:id', (req,res)=>{
   })
 });
 
-router.delete('/subregions/:id', async (req,res)=>{
+//Remove a subregion
+router.delete('/subregions/:id',  rejectUnauthenticated,async (req,res)=>{
   let queryString = `DELETE FROM subregion WHERE id=$1;`;
   
   try {

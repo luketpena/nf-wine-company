@@ -18,7 +18,7 @@ router.get('/', rejectUnauthenticated,(req,res)=>{
   });
 });
 
-//>> Get only trade events
+//Get only trade events
 router.get('/trade', rejectUnauthenticated,(req,res)=>{
   let queryString = 'SELECT * FROM events WHERE trade=true ORDER BY date, time ASC';
   pool.query(queryString).then(result=>{
@@ -29,7 +29,7 @@ router.get('/trade', rejectUnauthenticated,(req,res)=>{
   });
 });
 
-//>> Get only trade events
+//Get only trade events
 router.get('/public', (req,res)=>{
   let queryString = 'SELECT * FROM events WHERE trade=false ORDER BY date, time ASC';
   pool.query(queryString).then(result=>{
@@ -57,6 +57,7 @@ router.post('/',(req,res)=>{
   })
 })
 
+//Modify an existing event
 router.put('/edit',(req,res)=>{
   const {id,name,description,date,time,price,link_url,link_text,trade} = req.body;
   const queryParams = [id,name,description,date,(time? time : null),(price? price : null),link_url,link_text,trade];
@@ -88,5 +89,4 @@ router.delete('/:id',(req,res)=>{
   });
 });
 
-// EXPORT THE ROUTES
 module.exports = router;

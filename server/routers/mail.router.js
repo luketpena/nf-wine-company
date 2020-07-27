@@ -10,6 +10,7 @@ const EMAIL = process.env.EMAIL;
 const sgMail = require('@sendgrid/mail');
 sgMail.setApiKey(MAIL_KEY);
 
+//Sending a contact email
 router.post('/contact', async (req,res)=>{   
   const {name,subject,email,type,message} = req.body;
   console.log(EMAIL);
@@ -31,27 +32,26 @@ router.post('/contact', async (req,res)=>{
   }
 });
 
+//Sending an access approval email with account info
 router.post('/access', async (req,res)=>{   
   const {request, account_id} = req.body;
   try {
 
     const queryString = `SELECT * FROM "user" WHERE id=$1`;
-    
     const result = await pool.query(queryString,[account_id]);
 
+    //Customer accounts have an exposed password to send to clients
     const account_name = result.rows[0].username;
     const account_pass = result.rows[0].password_insecure;
 
+    //Sending the message
     const message = `<div>
       <p>Your request for access to the Trade Portal at New France Wine has been approved.</p>
       <p>Here are the credentials for your account:</p>
 
       <p><strong>Username:</strong> ${account_name}</p>
       <p><strong>Password:</strong> ${account_pass}</p>
-    </div>`
-
-    //console.log('Access message:',message);
-    
+    </div>`;
 
     const msg = {
       to: request.email,
@@ -62,16 +62,16 @@ router.post('/access', async (req,res)=>{
     };
     await sgMail.send(msg);
     res.sendStatus(201);
+
   } catch (error) {
     console.log('Error sending contact email',error);
-    
     res.sendStatus(400);
   }
 });
 
+//Sending a notification email when a customer requests access
 router.post('/request', async (req,res)=>{   
   const {name, email, company} = req.body;
-  
   try {
     const msg = {
       to: EMAIL,
