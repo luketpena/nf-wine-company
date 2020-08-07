@@ -77,7 +77,7 @@ const TeamList = [
     photo: photo_ginny
   },
   {
-    name: 'Molly Westrum',
+    name: 'Molly Lynne Brennan',
     position: 'Customer Relationship Manager',
     photo: photo_molly
   },
@@ -135,11 +135,6 @@ const TeamList = [
     name: 'Tony Dircz',
     position: 'Warehouse / Driver',
     photo: photo_tony
-  },
-  {
-    name: 'Tyreece Rohr',
-    position: 'Warehouse / Driver',
-    photo: photo_ty
   },
 ]
 
