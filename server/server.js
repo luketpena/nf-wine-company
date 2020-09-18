@@ -13,6 +13,7 @@ const producersRouter = require('./routers/producers.router');
 const userRouter = require('./routers/user.router');
 const requestsRouter = require('./routers/requests.router');
 const pricingRouter = require('./routers/pricing.router');
+const awsRouter = require('./routers/aws.router');
 
 const mailRouter = require('./routers/mail.router');
 
