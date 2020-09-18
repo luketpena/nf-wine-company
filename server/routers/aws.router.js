@@ -15,10 +15,10 @@ const s3 = new AWS.S3({
   secretAccessKey: AWS_KEY
 });
 
-function uploadFile(file) {
+function uploadFile(file, fileName) {
   var uploadParams = {
     Bucket: 'ltpena-aws-spike',
-    Key: 'newfile.pdf',
+    Key: fileName,
     Body: file.data
   };
   s3.upload (uploadParams, function(err,data) {
@@ -34,7 +34,7 @@ router.post('/upload', async (req,res)=>{
   try {
     const incomingFile = req.files.file;
     console.log('Incoming file:',incomingFile);
-    uploadFile(incomingFile);
+    uploadFile(incomingFile, req.body.fileName);
     res.sendStatus(200);
   } catch(error) {
     console.log('Error uploading to S3:',error);
