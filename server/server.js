@@ -34,7 +34,8 @@ app.use('/producers', producersRouter);
 app.use('/api/user', userRouter);
 app.use('/api/requests',requestsRouter);
 app.use('/api/mail',mailRouter);
-app.use('/api/pricing',pricingRouter)
+app.use('/api/pricing',pricingRouter);
+app.use('/api/aws',awsRouter);
 
 
 /** ---------- START SERVER ---------- **/
