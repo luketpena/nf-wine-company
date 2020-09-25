@@ -1,6 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const dotenv = require('dotenv');
+
 dotenv.config();
 
 const AWS_KEY_ID = process.env.AWS_KEY_ID || null;
@@ -32,8 +33,8 @@ function uploadFile(file, fileName) {
 
 router.post('/upload', async (req,res)=>{
   try {
+    console.log('Incoming request:', req.files);
     const incomingFile = req.files.file;
-    console.log('Incoming file:',incomingFile);
     uploadFile(incomingFile, req.body.fileName);
     res.sendStatus(200);
   } catch(error) {

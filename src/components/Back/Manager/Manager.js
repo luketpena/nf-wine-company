@@ -14,6 +14,7 @@ import SupplierLanding from './1-Suppliers/SupplierLanding';
 import ProducerLanding from './2-Producers/ProducerLanding';
 import AccountLanding from './3-Accounts/AccountLanding';
 import RegionLanding from './4-Regions/RegionLanding';
+import FilesLanding from './5-Files/FilesLanding';
 
 import EventInput from './0-Events/EventInput';
 import SupplierInput from './1-Suppliers/SupplierInput';
@@ -75,6 +76,7 @@ export default function Manager (props) {
                 <Route exact path="/manager/producers" component={ProducerLanding} />
                 <Route exact path="/manager/regions" component={RegionLanding} />
                 <Route exact path="/manager/accounts" component={AccountLanding} />
+                <Route exact path="/manager/files" component={FilesLanding} />
 
                 <Route exact path="/manager/accounts/modify" component={ModifyAccounts} />
                 

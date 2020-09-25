@@ -1,4 +1,5 @@
 const express = require('express');
+const fileUpload = require('express-fileupload');
 const app = express();
 const bodyParser = require('body-parser');
 const PORT = process.env.PORT || 5000;
@@ -18,13 +19,14 @@ const awsRouter = require('./routers/aws.router');
 const mailRouter = require('./routers/mail.router');
 
 /* ---------- MIDDLEWARE ---------- */
-app.use(bodyParser.json()); // needed for angular requests
-app.use(bodyParser.urlencoded({extended: true}));
+app.use(bodyParser.json({limit: '50mb', extended: true})); // needed for angular requests
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.use(express.static('build'));
 
 app.use(sessionMiddleware);
 app.use(passport.initialize());
 app.use(passport.session());
+app.use(fileUpload());
 
 /** ---------- EXPRESS ROUTES ---------- **/
 app.use('/events', eventsRouter);

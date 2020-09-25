@@ -74,6 +74,7 @@ export default function ManagerBar(props) {
           <li onClick={()=>clickNav('/manager/producers')}>Producers</li>
           <li onClick={()=>clickNav('/manager/regions')}>Regions</li>
           <li onClick={()=>clickNav('/manager/accounts')}>Accounts</li>
+          <li onClick={()=>clickNav('/manager/files')}>Files</li>
         </ul>
       </NavBox>
       <ControlBox>
