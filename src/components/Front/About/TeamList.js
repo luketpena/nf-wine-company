@@ -113,7 +113,7 @@ const TeamList = [
   },
   {
     name: `Raistland O'Dell`,
-    position: 'F&R Wine / Community Manager',
+    position: 'Community / Brand Manager',
     photo: photo_ray
   },
   {
