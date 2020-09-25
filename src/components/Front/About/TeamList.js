@@ -31,7 +31,6 @@
 /*-----< Photo Imports >-----*/
 const photo_adam = require('./Headshots/Adam.jpg');
 const photo_ashley = require('./Headshots/Ashley.jpg');
-const photo_bill = require('./Headshots/Bill.jpg');
 const photo_eric = require('./Headshots/Eric.jpg');
 const photo_erin = require('./Headshots/Erin.jpg');
 const photo_ginny = require('./Headshots/Ginny.jpeg');
@@ -47,7 +46,8 @@ const photo_rolf = require('./Headshots/Rolf.jpg');
 const photo_steve = require('./Headshots/Steve.jpg');
 const photo_tom = require('./Headshots/Tom.jpg');
 const photo_tony = require('./Headshots/Tony.jpg');
-const photo_ty = require('./Headshots/Ty.jpg');
+const photo_david = require('./Headshots/David.jpg');
+const photo_kris = require('./Headshots/Kris.jpg');
 
 /*-----< The Team Array >-----*/
 const TeamList = [
@@ -117,6 +117,11 @@ const TeamList = [
     photo: photo_ray
   },
   {
+    name: 'Kris Barto',
+    position: 'Sales Manager',
+    photo: photo_kris
+  },
+  {
     name: 'Steven Thayer',
     position: 'Warehouse Manager',
     photo: photo_steve
@@ -136,6 +141,11 @@ const TeamList = [
     position: 'Warehouse / Driver',
     photo: photo_tony
   },
+  {
+    name: 'David Reed',
+    position: 'Warehouse / Driver',
+    photo: photo_david
+  }
 ]
 
 module.exports = TeamList;
