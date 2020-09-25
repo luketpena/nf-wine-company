@@ -1,10 +1,15 @@
 import React, {useRef, useState} from 'react';
+import PortfolioDownloadButton from '../../../GenUse/DownloadPortfolioButton/DownloadPortfolioButton';
 import styled from 'styled-components';
 import Axios from 'axios';
+import DownloadPortfolioButton from '../../../GenUse/DownloadPortfolioButton/DownloadPortfolioButton';
 
 const UploaderBox = styled.div`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  height: 200px;
 `;
 
 export default function FileUploader() {
@@ -45,26 +50,27 @@ export default function FileUploader() {
   function renderUploader() {
     switch(uploading) {
       case 'idle':
-        return <UploaderBox>
+        return <div>
           <input type="file" id="file-select" ref={inputRef} onChange={e=>handleInputChange(e)}/>
-        </UploaderBox>
+        </div>
       
       case 'uploading':
         return <p>Uploading...</p>
 
       case 'finished':
-        return <UploaderBox>
+        return <div>
           <p>{(success ? 'File successfully uploaded!' : 'File failed to upload.')}</p>
           <input type="file" id="file-select" ref={inputRef} onChange={e=>handleInputChange(e)}/>
-        </UploaderBox>
+        </div>
     }
   }
 
 
   return (
-    <div>
+    <UploaderBox>
       <h2>Upload portfolio</h2>
       {renderUploader()}
-    </div>
+      <DownloadPortfolioButton text="Download Current Portfolio"/>
+    </UploaderBox>
   )
 }
