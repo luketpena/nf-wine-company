@@ -14,16 +14,16 @@ import contactSaga from './contact.saga';
 
 export default function* rootSaga() {
   yield all([
-    eventSaga(),
-    editSaga(),
-    placesSaga(),
-    supplierSaga(),
-    producerSaga(),
-    loginSaga(),
-    registrationSaga(),
-    userSaga(),
-    userInfoSaga(),
-    requestSaga(),
-    contactSaga(),
+    // eventSaga(),
+    // editSaga(),
+    // placesSaga(),
+    // supplierSaga(),
+    // producerSaga(),
+    // loginSaga(),
+    // registrationSaga(),
+    // userSaga(),
+    // userInfoSaga(),
+    // requestSaga(),
+    // contactSaga(),
   ]);
 }
