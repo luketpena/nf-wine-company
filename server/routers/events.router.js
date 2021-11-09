@@ -32,7 +32,9 @@ router.get('/trade', rejectUnauthenticated,(req,res)=>{
 //Get only trade events
 router.get('/public', (req,res)=>{
   let queryString = 'SELECT * FROM events WHERE trade=false ORDER BY date, time ASC';
+  console.log('---------- attempting to get public events...');
   pool.query(queryString).then(result=>{
+    console.log('---------- got events!');
     res.send(result.rows);
   }).catch(error=>{
     console.log('Error getting events from the database:',error);
